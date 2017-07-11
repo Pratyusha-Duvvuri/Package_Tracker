@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PackageTwitter</string>
+    <string name="title_activity_transactions">TransactionsActivity</string>
 </resources>

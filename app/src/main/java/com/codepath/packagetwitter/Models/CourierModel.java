@@ -13,13 +13,13 @@ public class CourierModel  extends User{
     private String startAddress;
     private String endAddress;
 
-    public void CourierModel(float weight, int[] v, String sAddress, String eAddress){
+    public CourierModel(float weight, int[] v, String sAddress, String eAddress){
 
 
-        weightAvailable = weight;
-        volumeAvailable = v;
-        startAddress = sAddress;
-        endAddress = eAddress;
+        this.weightAvailable = weight;
+        this.volumeAvailable = v;
+        this.startAddress = sAddress;
+        this.endAddress = eAddress;
 
     }
 
