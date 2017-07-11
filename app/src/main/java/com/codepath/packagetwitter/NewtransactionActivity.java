@@ -6,18 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.codepath.packagetwitter.Models.User;
+
 public class NewtransactionActivity extends AppCompatActivity {
 
-    String user_handle;
+
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = getIntent().getParcelableExtra("user");
         setContentView(R.layout.activity_newtransaction);
         //make on click listeners for all of them
         //also get intent - user
         //make everything parcelable
         //create three buttons for sender receiver and carrier
-
         final Button btnSender = (Button) findViewById(R.id.ntbtSender);
         btnSender.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -53,7 +56,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, SenderActivity.class);
-        i.putExtra("receiver_handle",user_handle );
+        i.putExtra("receiver",user );
         startActivity(i);
     }
 
@@ -64,7 +67,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, ReceiverActivity.class);
-        i.putExtra("sender_handle",user_handle );
+        i.putExtra("sender",user );
 
         startActivity(i);
     }
@@ -76,7 +79,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, CourierActivity.class);
-        i.putExtra("courier_handle",user_handle );
+        i.putExtra("courier",user );
 
         startActivity(i);
     }

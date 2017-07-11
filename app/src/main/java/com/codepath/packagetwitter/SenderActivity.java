@@ -40,9 +40,6 @@ public class SenderActivity extends AppCompatActivity {
         //in the future get approval from the receiver also and then only proceed
         //package the two and send them to the new activity to post a package
 
-
-
-
         //EDIT VIEW
         //create package
         //post package

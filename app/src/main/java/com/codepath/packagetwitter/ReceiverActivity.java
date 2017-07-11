@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.codepath.packagetwitter.Models.Receiver;
+
 public class ReceiverActivity extends AppCompatActivity {
 
-    String receiver_handle;
+    Receiver receiver;
     String sender_handle;
     EditText mEditText;
     boolean exists;
@@ -18,7 +20,7 @@ public class ReceiverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sender);
         //get the sender from intent
-        receiver_handle = getIntent().getStringExtra("receiver_handle");
+        receiver = getIntent().getParcelableExtra("receiver");
         final Button btnSender = (Button) findViewById(R.id.btndone2);
         btnSender.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

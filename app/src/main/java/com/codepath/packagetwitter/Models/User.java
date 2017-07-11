@@ -14,6 +14,7 @@ public class User {
     String tripEnd;
     ArrayList <Transaction> transactions;
 
+    public User(){}
     public User (ArrayList<Transaction> transacts){
         transactions = transacts;
 

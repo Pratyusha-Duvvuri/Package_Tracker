@@ -11,7 +11,7 @@ public class Transaction {
     Sender sender; //-  Access to location, has received
     CourierModel courier;// - Access to most details
     int transactionState;//int that represents transaction state
-    long transactionID; //add a long, Prat/I added this but you guys can remove it lol
+    long transactionID; //add a long that is unique to each transaction
 
 //    States of transaction
 //            Sent

@@ -30,7 +30,8 @@
         <activity
             android:name=".PackageCreationActivity"
             android:label="@string/title_activity_package_creation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TimelineActivity"></activity>
     </application>
 
 </manifest>
