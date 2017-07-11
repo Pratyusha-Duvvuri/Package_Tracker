@@ -5,4 +5,10 @@ package com.codepath.packagetwitter.Models;
  */
 
 public class User {
+    String userName;
+    String userHandle;
+    String phoneNum;
+    String tripStart;
+    String tripEnd;
+
 }
