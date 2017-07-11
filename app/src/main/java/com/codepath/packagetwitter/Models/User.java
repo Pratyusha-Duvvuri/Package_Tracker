@@ -1,11 +1,14 @@
 package com.codepath.packagetwitter.Models;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
  * Created by michaunp on 7/11/17.
  */
 
+@Parcel
 public class User {
     String userName;
     String userHandle;
@@ -13,12 +16,6 @@ public class User {
     String tripStart;
     String tripEnd;
 
-
-    public User() {
-    }
-
-    public User(ArrayList<Transaction> transacts) {
-        transactions = transacts;
 
     public User(String name, String handle, int phone, String tripStart, String tripEnd){
             this.userHandle = handle;
@@ -29,8 +26,9 @@ public class User {
 
 
         }
+    public User(){}
 
-        public static ArrayList<Transaction> getTransactions () {
+        public static ArrayList<Transaction> getTransactions(){
             //in  future would get transactions from web
             CourierModel courier = CourierModel.getRandomCourrier();
             Sender sender = Sender.getRandomSender();

@@ -1,9 +1,12 @@
 package com.codepath.packagetwitter.Models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by rafasj6 on 7/11/17.
  */
 
+@Parcel
 public class CourierModel  extends User{
 
     private boolean hasPickedUp = false;
@@ -13,6 +16,7 @@ public class CourierModel  extends User{
     private String startAddress;
     private String endAddress;
 
+    public CourierModel(){}
     public CourierModel(String name, String handle, int phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
         super(  name,  handle,  phone, tripStart, tripEnd);
 

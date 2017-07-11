@@ -27,8 +27,6 @@ String sender_handle;
         int transactionState;//int that represents transaction state
 
 
-
-
     }
 
 }

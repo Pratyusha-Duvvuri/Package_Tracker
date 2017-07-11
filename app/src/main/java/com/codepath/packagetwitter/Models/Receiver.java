@@ -1,10 +1,12 @@
 package com.codepath.packagetwitter.Models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by pratyusha98 on 7/11/17.
  */
 
-
+@Parcel
 public class Receiver extends User {
 
 
@@ -17,8 +19,9 @@ public class Receiver extends User {
         this.location = location;
 
     }
+    public Receiver(){}
 
-    public static Receiver getRandomSender(){
+    public static Receiver getRandomReceiver(){
         Receiver receiver = new Receiver("Bob", "@bobby",911, "may 20th", "may 30th", false, 21.0);
         return receiver;
     }

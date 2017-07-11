@@ -8,57 +8,63 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.codepath.packagetwitter.Models.Receiver;
+import com.codepath.packagetwitter.Models.Sender;
+
+import org.parceler.Parcels;
 
 public class ReceiverActivity extends AppCompatActivity {
 
-    Receiver receiver;
-    String sender_handle;
-    EditText mEditText;
-    boolean exists;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sender);
-        //get the sender from intent
-        receiver = getIntent().getParcelableExtra("receiver");
-        final Button btnSender = (Button) findViewById(R.id.btndone2);
-        btnSender.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(exists) {
-                    sender_handle = mEditText.getText().toString();
 
-                    onCreationSuccess();
+    public class SenderActivity extends AppCompatActivity {
+
+        Receiver receiver;
+        Sender sender;
+        EditText mEditText;
+        boolean exists;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_sender);
+            //get the sender from intent
+            receiver = getIntent().getParcelableExtra("receiver");
+
+            final Button btnSender = (Button) findViewById(R.id.btndone2);
+            btnSender.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (exists) {
+                        sender = Sender.getRandomSender();
+
+                        onCreationSuccess();
+                    }
                 }
-            }
 
-        });
+            });
 
-        //get reciever handle -- populated by an autocomplete from the database
-        //change later
-        mEditText = (EditText) findViewById(R.id.et_get_sender_handle);
-        exists = true;
-
-
-        //in the future get approval from the receiver also and then only proceed
-        //package the two and send them to the new activity to post a package
+            //get receiver handle -- populated by an autocomplete from the database
+            //change later
+            mEditText = (EditText) findViewById(R.id.et_get_sender_handle);
+            exists = true;
 
 
+            //in the future get approval from the receiver also and then only proceed
+            //package the two and send them to the new activity to post a package
 
+            //EDIT VIEW
+            //create package
+            //post package
+        }
 
-        //EDIT VIEW
-        //create package
-        //post package
-    }
+        public void onCreationSuccess() {
 
-    public void onCreationSuccess() {
-
-        // Intent i = new Intent(this, PhotosActivity.class);
-        // startActivity(i);
-        //this is just to show that we have reached this point
-        //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, PackageCreationActivity.class);
-        i.putExtra("receiver_handle",receiver_handle);
-        i.putExtra("sender_handle",sender_handle);
-        startActivity(i);
+            // Intent i = new Intent(this, PhotosActivity.class);
+            // startActivity(i);
+            //this is just to show that we have reached this point
+            //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, PackageCreationActivity.class);
+            i.putExtra("receiver", Parcels.wrap(receiver));
+            i.putExtra("sender", Parcels.wrap(sender));
+            startActivity(i);
+        }
     }
 }
