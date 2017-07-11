@@ -31,8 +31,7 @@ public class TransactionsActivity extends AppCompatActivity {
         rvTransactions = (RecyclerView) findViewById(R.id.rvTransactions);
         rvTransactions.setLayoutManager(new LinearLayoutManager(this));
         rvTransactions.setAdapter(adapter);
-
-
-
     }
+
+
 }

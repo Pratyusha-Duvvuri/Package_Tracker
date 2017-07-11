@@ -21,4 +21,31 @@ public class Mail {
 
     }
 
+    public Bitmap getPicture() {
+        return picture;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int[] getVolume() {
+        return volume;
+    }
+
+    public boolean isFragile() {
+        return isFragile;
+    }
+
+    public String getSpecialRequirements() {
+        return specialRequirements;
+    }
 }

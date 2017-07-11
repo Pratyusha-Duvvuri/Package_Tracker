@@ -34,5 +34,23 @@ public class Transaction {
         return 0;// for now
     }
 
+    public Mail getMail() {
+        return mail;
+    }
 
+    public Receiver getReceiver() {
+        return receiver;
+    }
+
+    public Sender getSender() {
+        return sender;
+    }
+
+    public CourierModel getCourier() {
+        return courier;
+    }
+
+    public long getTransactionID() {
+        return transactionID;
+    }
 }
