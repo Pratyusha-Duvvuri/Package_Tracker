@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +23,7 @@
             android:name=".TransactionsActivity"
             android:label="@string/title_activity_transactions"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NewtransactionActivity"></activity>
     </application>
 
 </manifest>
