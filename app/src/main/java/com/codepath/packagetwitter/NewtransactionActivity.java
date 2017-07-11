@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class NewtransactionActivity extends AppCompatActivity {
 
+    String user_handle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, SenderActivity.class);
+        i.putExtra("receiver_handle",user_handle );
         startActivity(i);
     }
 
@@ -60,6 +62,8 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, ReceiverActivity.class);
+        i.putExtra("sender_handle",user_handle );
+
         startActivity(i);
     }
 
@@ -70,6 +74,8 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, CourierActivity.class);
+        i.putExtra("courier_handle",user_handle );
+
         startActivity(i);
    */
     }
