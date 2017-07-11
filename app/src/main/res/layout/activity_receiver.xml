@@ -7,9 +7,14 @@
     tools:context="com.codepath.packagetwitter.ReceiverActivity">
 
     <EditText
-        android:id="@+id/et_get_receiver_handle"
+        android:id="@+id/et_get_sender_handle"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:inputType="text"/>
+    <Button
+        android:id="@+id/btndone2"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Done" />
 
 </RelativeLayout>

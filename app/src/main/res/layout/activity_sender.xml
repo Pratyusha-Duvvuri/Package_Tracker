@@ -8,10 +8,14 @@
 
 
     <EditText
-        android:id="@+id/plain_text_input"
+        android:id="@+id/et_get_receiver_handle"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:inputType="text"/>
-
+    <Button
+        android:id="@+id/btndone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Done" />
 
 </android.support.constraint.ConstraintLayout>
