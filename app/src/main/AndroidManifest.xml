@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewtransactionActivity"></activity>
+        <activity android:name=".NewtransactionActivity" />
+        <activity android:name=".SenderActivity" />
+        <activity android:name=".ReceiverActivity" />
+        <activity android:name=".CourierActivity"></activity>
     </application>
 
 </manifest>
