@@ -1,7 +1,10 @@
 package com.codepath.packagetwitter;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.codepath.packagetwitter.Models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        User user = User.getRandomUser();
+        Intent i = new Intent(this, TransactionsActivity.class);
+        startActivity(i);
     }
 
 

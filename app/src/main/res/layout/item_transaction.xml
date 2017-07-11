@@ -51,7 +51,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvBoarding"
-        android:text="Arrival" />
+        android:text="Arrival"
+        android:layout_toRightOf="@+id/ivArriving"
+        android:layout_toEndOf="@+id/ivArriving" />
 
     <ImageView
         android:id="@+id/ivBoarding"
