@@ -18,12 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".TransactionDetailActivity" />
         <activity
             android:name=".TransactionsActivity"
             android:label="@string/title_activity_transactions"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NewtransactionActivity"></activity>
+
+        <activity android:name=".SenderActivity" />
+        <activity android:name=".ReceiverActivity" />
+        <activity android:name=".CourierActivity"></activity>
+
     </application>
 
 </manifest>
