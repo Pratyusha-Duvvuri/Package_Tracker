@@ -8,13 +8,13 @@ public class CourierModel  extends User{
 
     private boolean hasPickedUp = false;
     private boolean hasDelivered = false;
-    private float weightAvailable;
+    private double weightAvailable;
     private int[] volumeAvailable;
     private String startAddress;
     private String endAddress;
 
-    public CourierModel(float weight, int[] v, String sAddress, String eAddress){
-
+    public CourierModel(String name, String handle, int phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
+        super(  name,  handle,  phone, tripStart, tripEnd);
 
         this.weightAvailable = weight;
         this.volumeAvailable = v;
@@ -23,9 +23,11 @@ public class CourierModel  extends User{
 
     }
 
-    public void picked_up(){
-        hasPickedUp = true;
-
+    public static CourierModel getRandomCourrier(){
+        int[] volume = {2,3};
+        CourierModel courrier = new CourierModel("Bob", "@bobby",911, "may 20th", "may 30th", 15.0, volume, "here", "there");
+        return courrier;
     }
+
 
 }
