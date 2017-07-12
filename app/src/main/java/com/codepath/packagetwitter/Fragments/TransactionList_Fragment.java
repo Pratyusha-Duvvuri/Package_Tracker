@@ -1,15 +1,14 @@
 package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.packagetwitter.Models.Transaction;
-import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
 
@@ -20,8 +19,6 @@ import java.util.ArrayList;
  */
 
 public class TransactionList_Fragment extends android.support.v4.app.Fragment {
-
-
 
 
     TransactionAdapter transactionAdapter;
@@ -36,9 +33,8 @@ public class TransactionList_Fragment extends android.support.v4.app.Fragment {
     //inflation happens inside onCreateView
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout
         View v = inflater.inflate(R.layout.fragments_transactions_list, container, false);
 
@@ -58,11 +54,18 @@ public class TransactionList_Fragment extends android.support.v4.app.Fragment {
         //set the adapter
 
         rvTransactions.setAdapter(transactionAdapter);
-
-        transactions = User.getTransactions(getContext());
-        transactionAdapter.notifyDataSetChanged();
+        Log.d("Trans list frag", "on create view");
         return v;
     }
 
+    public void addItems(Transaction transaction) {
 
+        transactions = new ArrayList<>();
+
+
+        transactions.add(transaction);
+        transactionAdapter.notifyItemInserted(transactions.size() - 1);
+
+
+    }
 }
