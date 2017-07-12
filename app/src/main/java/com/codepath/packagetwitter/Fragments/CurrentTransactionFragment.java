@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codepath.packagetwitter.Models.User;
-
 /**
  * Created by pratyusha98 on 7/12/17.
  */
@@ -48,7 +46,7 @@ public class CurrentTransactionFragment extends TransactionList_Fragment {
 
 
     private void populateTimeline(){
-        transactions = User.getTransactions(getContext());
+
         transactionAdapter.notifyDataSetChanged();
         //     showProgressBar();
 

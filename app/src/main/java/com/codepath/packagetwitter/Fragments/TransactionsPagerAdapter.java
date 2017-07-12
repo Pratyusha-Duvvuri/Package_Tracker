@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.Toast;
 
 /**
  * Created by michaunp on 7/11/17.
@@ -23,10 +24,14 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
                 if (position == 0) {
-            return currentTransactionFragment;
+                    Toast.makeText(context, "Current", Toast.LENGTH_SHORT).show();
+
+                    return currentTransactionFragment;
         }
         else if (position == 1) {
-            return oldTransactionFragment;
+                    Toast.makeText(context, "Old", Toast.LENGTH_SHORT).show();
+
+                    return oldTransactionFragment;
         }
         else {
             return null;
