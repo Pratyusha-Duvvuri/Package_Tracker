@@ -25,7 +25,6 @@ public class Receiver extends User {
         super(name, handle, phone, tripStart, tripEnd);
         this.hasReceived = hasReceived;
         this.location = location;
-
     }
     public Receiver(){}
 

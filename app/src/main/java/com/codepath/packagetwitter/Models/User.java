@@ -19,9 +19,10 @@ import java.util.Random;
 public class User {
     String userName;
     String userHandle;
-    String phoneNum;
-    String tripStart;
-    String tripEnd;
+
+    public String phoneNum;
+    public String tripStart;
+    public String tripEnd;
 
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd){
