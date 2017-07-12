@@ -15,6 +15,7 @@ public class Transaction {
     int transactionState;//int that represents transaction state
     long transactionID; //add a long that is unique to each transaction
 
+
     public Transaction(){}
 //    States of transaction
 //            Sent

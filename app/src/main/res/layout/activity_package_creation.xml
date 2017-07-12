@@ -1,33 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.PackageCreationActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etDescription"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_package_creation" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/etSenderLocation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/etReceiverLocation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:inputType="text"/>
+    <ImageView
+        android:id="@+id/ivPackageImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginRight="43dp"
+        android:layout_marginTop="166dp"
+        app:srcCompat="@android:drawable/stat_sys_upload" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:layout_below="@+id/ivPackageImage" />
+
+    <TextView
+        android:id="@+id/tvLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvWeight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="151dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvBreadth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvLength"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_toEndOf="@+id/tvLength"
+        android:layout_toRightOf="@+id/tvLength"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivPackageImage"
+        android:layout_alignStart="@+id/ivPackageImage"
+        android:layout_alignTop="@+id/tvBreadth"
+        android:text="TextView" />
+
+    <RadioButton
+        android:id="@+id/rbIsFragile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvBreadth"
+        android:layout_alignRight="@+id/tvBreadth"
+        android:layout_below="@+id/tvLength"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="44dp"
+        android:text="RadioButton" />
+
+    <TextView
+        android:id="@+id/tvSpecialRequirements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rbIsFragile"
+        android:layout_alignStart="@+id/rbIsFragile"
+        android:layout_below="@+id/rbIsFragile"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="39dp"
+        android:text="TextView" />
+</RelativeLayout>
