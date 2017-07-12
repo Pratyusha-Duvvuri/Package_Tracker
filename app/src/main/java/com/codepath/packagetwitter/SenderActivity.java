@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,12 +25,13 @@ public class SenderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sender);
         //get the sender from intent
          sender =  getIntent().getParcelableExtra("sender");
+        final Context context = this;
 
         final Button btnSender = (Button) findViewById(R.id.btndone);
         btnSender.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(exists) {
-                    receiver = Receiver.getRandomReceiver();
+                    receiver = Receiver.getRandomReceiver(context);
 
                     onCreationSuccess();
                 }

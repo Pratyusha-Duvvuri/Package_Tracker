@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,18 +23,20 @@ public class ReceiverActivity extends AppCompatActivity {
         EditText mEditText;
         boolean exists;
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_sender);
             //get the sender from intent
             receiver = getIntent().getParcelableExtra("receiver");
+            final Context context = this;
 
             final Button btnSender = (Button) findViewById(R.id.btndone2);
             btnSender.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (exists) {
-                        sender = Sender.getRandomSender();
+                        sender = Sender.getRandomSender(context);
 
                         onCreationSuccess();
                     }
