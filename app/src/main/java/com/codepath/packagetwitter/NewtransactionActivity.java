@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.codepath.packagetwitter.Models.User;
 
+import org.parceler.Parcels;
+
 public class NewtransactionActivity extends AppCompatActivity {
 
 
@@ -58,7 +60,8 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, SenderActivity.class);
-        i.putExtra("receiver",user );
+
+        i.putExtra("receiver",Parcels.wrap(user) );
         startActivity(i);
     }
 
@@ -69,7 +72,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, ReceiverActivity.class);
-        i.putExtra("sender",user );
+        i.putExtra("sender", Parcels.wrap(user) );
 
         startActivity(i);
     }
@@ -81,11 +84,11 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, CourierActivity.class);
-        i.putExtra("courier",user);
+
+        i.putExtra("courier",Parcels.wrap(user) );
 
         startActivity(i);
 
     }
-
 
 }

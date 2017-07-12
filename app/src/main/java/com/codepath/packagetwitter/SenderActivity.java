@@ -7,10 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.codepath.packagetwitter.Models.Receiver;
+import com.codepath.packagetwitter.Models.Sender;
+
+import org.parceler.Parcels;
+
 public class SenderActivity extends AppCompatActivity {
 
-    String receiver_handle;
-    String sender_handle;
+    Receiver receiver;
+    Sender sender;
     EditText mEditText;
     boolean exists;
     @Override
@@ -18,12 +23,13 @@ public class SenderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sender);
         //get the sender from intent
-         sender_handle = getIntent().getStringExtra("sender_handle");
+         sender =  getIntent().getParcelableExtra("sender");
+
         final Button btnSender = (Button) findViewById(R.id.btndone);
         btnSender.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(exists) {
-                    receiver_handle = mEditText.getText().toString();
+                    receiver = Receiver.getRandomReceiver();
 
                     onCreationSuccess();
                 }
@@ -31,7 +37,7 @@ public class SenderActivity extends AppCompatActivity {
 
         });
 
-        //get reciever handle -- populated by an autocomplete from the database
+        //get receiver handle -- populated by an autocomplete from the database
         //change later
         mEditText = (EditText) findViewById(R.id.et_get_receiver_handle);
         exists = true;
@@ -52,8 +58,8 @@ public class SenderActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, PackageCreationActivity.class);
-        i.putExtra("receiver_handle",receiver_handle);
-        i.putExtra("sender_handle",sender_handle);
+        i.putExtra("receiver", Parcels.wrap(receiver));
+        i.putExtra("sender",Parcels.wrap(sender));
         startActivity(i);
     }
 }

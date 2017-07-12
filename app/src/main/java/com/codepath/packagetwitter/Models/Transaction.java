@@ -1,10 +1,12 @@
 package com.codepath.packagetwitter.Models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by rafasj6 on 7/11/17.
  */
 
-
+@Parcel
 public class Transaction {
     Mail mail;
     Receiver receiver;// - Access to location, has received
@@ -13,6 +15,7 @@ public class Transaction {
     int transactionState;//int that represents transaction state
     long transactionID; //add a long that is unique to each transaction
 
+    public Transaction(){}
 //    States of transaction
 //            Sent
 //    Received by Courier
