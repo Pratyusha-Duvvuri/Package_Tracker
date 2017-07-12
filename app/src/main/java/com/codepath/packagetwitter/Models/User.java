@@ -1,8 +1,15 @@
 package com.codepath.packagetwitter.Models;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+
+import com.codepath.packagetwitter.R;
+
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by michaunp on 7/11/17.
@@ -12,12 +19,12 @@ import java.util.ArrayList;
 public class User {
     String userName;
     String userHandle;
-    int phoneNum;
+    String phoneNum;
     String tripStart;
     String tripEnd;
 
 
-    public User(String name, String handle, int phone, String tripStart, String tripEnd){
+    public User(String name, String handle, String phone, String tripStart, String tripEnd){
             this.userHandle = handle;
             this.userName = name;
             this.phoneNum = phone;
@@ -28,11 +35,12 @@ public class User {
         }
     public User(){}
 
-        public static ArrayList<Transaction> getTransactions(){
+        public static ArrayList<Transaction> getTransactions(Context context){
             //in  future would get transactions from web
-            CourierModel courier = CourierModel.getRandomCourrier();
-            Sender sender = Sender.getRandomSender();
-            Receiver receiver = Receiver.getRandomReceiver();
+            Sender sender = Sender.getRandomSender(context);
+            CourierModel courier = CourierModel.getRandomCourrier(context);
+
+            Receiver receiver = Receiver.getRandomReceiver(context);
 
             ArrayList<Transaction> transactions = new ArrayList<>();
             Transaction transaction = new Transaction(receiver, sender, courier, new Mail());
@@ -43,8 +51,31 @@ public class User {
 
         }
 
-    public static User getRandomUser() {
-        User user = new User("Bob", "@bobby", 911, "may 20th", "may 30th");
+    public static User getRandomUser(Context context) {
+        Resources resources = context.getResources();
+
+        TypedArray contactNames = resources.obtainTypedArray(R.array.contact_names);
+        int name = (int) (Math.random() * contactNames.length());
+
+        TypedArray contactHandles = resources.obtainTypedArray(R.array.contact_handles);
+        int handle = (int) (Math.random() * contactNames.length());
+
+        TypedArray contactNumbers = resources.obtainTypedArray(R.array.contact_numbers);
+        int number = (int) (Math.random() * contactNumbers.length());
+
+        Random rand = new Random();
+        String startDay = String.valueOf(rand.nextInt(28));
+
+        String startMonth = String.valueOf(rand.nextInt(12));
+
+        String endDay = String.valueOf(rand.nextInt(28));
+
+        String endMonth = String.valueOf(rand.nextInt(12));
+
+
+
+        User user = new User(contactNames.getString(name), "@" + contactHandles.getString(handle), contactNumbers.getString(number),
+                startMonth+"/" + startDay ,endMonth + "/"+ endDay );
         return user;
     }
 
@@ -56,7 +87,7 @@ public class User {
         return userHandle;
     }
 
-    public int getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 

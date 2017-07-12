@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="contact_names">
+        <item>Alex</item>
+        <item>Charlie</item>
+        <item>Brooke</item>
+        <item>Piper</item>
+        <item>Skyler</item>
+        <item>Max</item>
+        <item>Toby</item>
+        <item>Terry</item>
+        <item>Bryce</item>
+        <item>Mikko</item>
+    </array>
+
+    <array name="contact_handles">
+        <item>bab3sjv</item>
+        <item>koas4o</item>
+        <item>3923nc</item>
+        <item>jnidsai01</item>
+        <item>Skyl01r</item>
+        <item>M0ox</item>
+        <item>T0bna</item>
+        <item>0230mcsa</item>
+        <item>cool123</item>
+        <item>heyya1</item>
+    </array>
+
+    <array name="locations">
+        <item>Tokyo</item>
+        <item>DC</item>
+        <item>Rio</item>
+        <item>Sao Paulo</item>
+        <item>Mumbai</item>
+        <item>New York</item>
+        <item>Paris</item>
+        <item>Jakarta</item>
+        <item>Seattle</item>
+        <item>Tel Aviv</item>
+    </array>
+
+
+
+    <array name="contact_numbers">
+        <item>4153708881</item>
+        <item>4153708882</item>
+        <item>4153708883</item>
+        <item>4153708884</item>
+        <item>4153708885</item>
+        <item>4153708886</item>
+        <item>4153708887</item>
+        <item>4153708888</item>
+        <item>4153708889</item>
+        <item>4153708890</item>
+    </array>
+</resources>

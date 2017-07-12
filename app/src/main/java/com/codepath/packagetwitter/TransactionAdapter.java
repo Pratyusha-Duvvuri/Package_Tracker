@@ -65,10 +65,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Transaction transaction = mTransactions.get(position);
 
 
-        holder.tvUsername.setText(String.valueOf(transaction.getMail().getType()));
+        holder.tvUsername.setText(String.valueOf(transaction.getCourier().getUserName()));
         holder.tvBoarding.setText(String.valueOf(transaction.getCourier().getTripStart()));
         holder.tvArrival.setText(String.valueOf(transaction.getCourier().getTripEnd()));
-        holder.tvWeight.setText(String.valueOf(transaction.getMail().getVolume()));
+        holder.tvWeight.setText(String.valueOf(transaction.getCourier().getEndAddress()));
         holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
 
