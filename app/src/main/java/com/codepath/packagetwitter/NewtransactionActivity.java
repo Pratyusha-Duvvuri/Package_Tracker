@@ -1,7 +1,10 @@
 package com.codepath.packagetwitter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.codepath.packagetwitter.Models.User;
 
@@ -18,10 +21,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //also get intent - user
         //make everything parcelable
         //create three buttons for sender receiver and carrier
-<<<<<<< HEAD
-=======
-/*
->>>>>>> 7cff96d638e5569fef8cf240deeec411649f686c
+
         final Button btnSender = (Button) findViewById(R.id.ntbtSender);
         btnSender.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -81,10 +81,10 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, CourierActivity.class);
-        i.putExtra("courier",user );
+        i.putExtra("courier",user);
 
         startActivity(i);
-   */
+
     }
 
 

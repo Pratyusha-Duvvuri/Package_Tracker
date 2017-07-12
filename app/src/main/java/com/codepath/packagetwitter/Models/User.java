@@ -14,11 +14,6 @@ public class User {
     String tripEnd;
 
 
-    public User() {
-    }
-
-    public User(ArrayList<Transaction> transacts) {
-        transactions = transacts;
 
     public User(String name, String handle, int phone, String tripStart, String tripEnd){
             this.userHandle = handle;
