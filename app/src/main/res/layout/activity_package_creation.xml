@@ -208,6 +208,15 @@
         android:layout_marginTop="39dp"
         android:text="TextView" />
 
+        <EditText
+            android:id="@+id/etSpecialRequirements"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
         <Button
             android:id="@+id/btnNext"
             android:layout_height="wrap_content"
