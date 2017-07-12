@@ -12,8 +12,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class TransactionsPagerAdapter extends FragmentPagerAdapter{
     private String tabTitles[] = new String[] {"Current", "Completed"};
     private Context context;
-    public Fragment currentTransactionsFragment = new CurrentTransactionsFragment();
-    public Fragment oldTransactionsFragment = new OldTransactionsFragment();
+    public Fragment currentTransactionFragment = new CurrentTransactionsFragment();
+    public Fragment oldTransactionFragment = new OldTransactionsFragment();
 
     public TransactionsPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
@@ -23,10 +23,10 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return currentTransactionsFragment;
+            return currentTransactionFragment;
         }
         else if (position == 1) {
-            return oldTransactionsFragment;
+            return oldTransactionFragment;
         }
         else {
             return null;
