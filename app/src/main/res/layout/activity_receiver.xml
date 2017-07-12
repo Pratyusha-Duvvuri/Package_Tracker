@@ -15,6 +15,9 @@
         android:id="@+id/btndone2"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Done" />
+        android:text="Done"
+        android:layout_alignBottom="@+id/et_get_sender_handle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

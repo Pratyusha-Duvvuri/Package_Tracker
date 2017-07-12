@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.PackageCreationActivity">
-<RelativeLayout
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id= "@+id/UserDetails">
@@ -23,19 +25,36 @@
             android:inputType="text"/>
 
     <TextView
-        android:id="@+id/tvReceiverLocation"
+        android:id="@+id/tvStartDate"
 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignEnd="@+id/tvSenderLocation"
         android:layout_alignRight="@+id/tvSenderLocation"
 
-        android:text="Receiver Location" />
+        android:text="Start Date" />
 
     <EditText
-        android:id="@+id/etReceiverLocation"
-        android:layout_alignBottom="@+id/tvReceiverLocation"
+        android:id="@+id/etStartDate"
+        android:layout_alignBottom="@+id/tvStartDate"
         android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"/>
+
+        <TextView
+            android:id="@+id/tvEndDate"
+
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignEnd="@+id/tvSenderLocation"
+            android:layout_alignRight="@+id/tvSenderLocation"
+
+            android:text="Start Date" />
+
+        <EditText
+            android:id="@+id/etEndDate"
+            android:layout_alignBottom="@+id/tvStartDate"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:inputType="text"/>
 
