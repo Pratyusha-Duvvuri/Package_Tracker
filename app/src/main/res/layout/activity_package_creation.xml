@@ -29,8 +29,9 @@
             android:id="@+id/etReceiverLocation"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:align_right ="@+id/etSenderLocation"
             android:inputType="text"/>
+    <!--android:align_right ="@+id/etSenderLocation"-->
+
     <TextView
         android:id="@+id/tvPackageDetailHeading"
         android:layout_height="wrap_content"
