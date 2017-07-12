@@ -62,6 +62,34 @@ public class Mail {
         return volume;
     }
 
+    public void setPicture(Bitmap picture) {
+        this.picture = picture;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public void setVolume(int[] volume) {
+        this.volume = volume;
+    }
+
+    public void setFragile(boolean fragile) {
+        isFragile = fragile;
+    }
+
+    public void setSpecialRequirements(String specialRequirements) {
+        this.specialRequirements = specialRequirements;
+    }
+
     public boolean isFragile() {
         return isFragile;
     }
