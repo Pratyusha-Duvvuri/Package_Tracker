@@ -1,5 +1,7 @@
 package com.codepath.packagetwitter.Models;
 
+import android.content.Context;
+
 import org.parceler.Parcel;
 
 /**
@@ -40,6 +42,20 @@ public class Transaction {
 
     public Mail getMail() {
         return mail;
+    }
+
+    public static   Transaction getRandomTransaction(Context context){
+        //in  future would get transactions from web
+        Sender sender = Sender.getRandomSender(context);
+        CourierModel courier = CourierModel.getRandomCourrier(context);
+
+        Receiver receiver = Receiver.getRandomReceiver(context);
+
+        Transaction transaction = new Transaction(receiver, sender, courier, new Mail());
+
+        return transaction;
+
+
     }
 
     public Receiver getReceiver() {
