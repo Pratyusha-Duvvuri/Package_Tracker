@@ -6,4 +6,7 @@ package com.codepath.packagetwitter.Fragments;
 
 //This is the confirmation page after all the details are entered for the package
 public class PackageConfirmation_Fragment {
+
+]
+
 }

@@ -19,6 +19,22 @@ public class Sender extends User{
     Double location;
     Boolean hasSent;
 
+    public Double getLocation() {
+        return location;
+    }
+
+    public Boolean getHasSent() {
+        return hasSent;
+    }
+
+    public void setLocation(Double location) {
+        this.location = location;
+    }
+
+    public void setHasSent(Boolean hasSent) {
+        this.hasSent = hasSent;
+    }
+
     public Sender(String name, String handle, String phone, String tripStart, String tripEnd, boolean hasSent, Double location) {
         super( name, handle, phone, tripStart, tripEnd);
         this.hasSent = hasSent;
