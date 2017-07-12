@@ -13,8 +13,8 @@ public class User {
     String userName;
     String userHandle;
     int phoneNum;
-    String tripStart;
-    String tripEnd;
+    public String tripStart;
+    public String tripEnd;
 
 
     public User(String name, String handle, int phone, String tripStart, String tripEnd){
