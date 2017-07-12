@@ -19,15 +19,16 @@
         </activity>
         <activity android:name=".TransactionDetailActivity" />
         <activity
-            android:name=".TransactionsActivity"
-           />
-        <activity android:name=".NewtransactionActivity" />
-        <activity android:name=".SenderActivity" />
+            android:name=".TransactionsActivity" />
+        <activity android:name=".NewtransactionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SenderActivity"
+            android:label="Create A New Package"/>
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".CourierActivity" />
         <activity
             android:name=".PackageCreationActivity"
-            android:label="@string/title_activity_package_creation"
+            android:label="Create A New Package"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TimelineActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
