@@ -33,5 +33,27 @@ public class CourierModel  extends User{
         return courrier;
     }
 
+    public boolean isHasPickedUp() {
+        return hasPickedUp;
+    }
 
+    public boolean isHasDelivered() {
+        return hasDelivered;
+    }
+
+    public double getWeightAvailable() {
+        return weightAvailable;
+    }
+
+    public int[] getVolumeAvailable() {
+        return volumeAvailable;
+    }
+
+    public String getStartAddress() {
+        return startAddress;
+    }
+
+    public String getEndAddress() {
+        return endAddress;
+    }
 }
