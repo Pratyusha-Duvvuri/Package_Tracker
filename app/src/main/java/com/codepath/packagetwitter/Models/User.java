@@ -32,7 +32,7 @@ public class User {
             //in  future would get transactions from web
             CourierModel courier = CourierModel.getRandomCourrier();
             Sender sender = Sender.getRandomSender();
-            Receiver receiver = Receiver.getRandomSender();
+            Receiver receiver = Receiver.getRandomReceiver();
 
             ArrayList<Transaction> transactions = new ArrayList<>();
             Transaction transaction = new Transaction(receiver, sender, courier, new Mail());
