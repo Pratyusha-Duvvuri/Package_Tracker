@@ -1,6 +1,5 @@
 package com.codepath.packagetwitter.Fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.packagetwitter.Models.Transaction;
+import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by pratyusha98 on 7/12/17.
  */
 
-public class TransactionList_Fragment extends Fragment {
+public class TransactionList_Fragment extends android.support.v4.app.Fragment {
 
 
 
@@ -59,7 +59,8 @@ public class TransactionList_Fragment extends Fragment {
 
         rvTransactions.setAdapter(transactionAdapter);
 
-
+        transactions = User.getTransactions(getContext());
+        transactionAdapter.notifyDataSetChanged();
         return v;
     }
 

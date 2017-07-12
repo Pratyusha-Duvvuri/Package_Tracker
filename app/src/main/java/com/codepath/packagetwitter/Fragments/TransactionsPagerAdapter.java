@@ -9,11 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by michaunp on 7/11/17.
  */
 
-public class TransactionsPagerAdapter extends FragmentPagerAdapter{
+public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[] {"Current", "Completed"};
     private Context context;
-    public Fragment currentTransactionFragment = new CurrentTransactionsFragment();
-    public Fragment oldTransactionFragment = new OldTransactionsFragment();
+    private CurrentTransactionFragment currentTransactionFragment = new CurrentTransactionFragment();
+    private OldTransactionFragment oldTransactionFragment = new OldTransactionFragment();
 
     public TransactionsPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
@@ -22,7 +22,7 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
+                if (position == 0) {
             return currentTransactionFragment;
         }
         else if (position == 1) {
@@ -32,6 +32,8 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter{
             return null;
         }
     }
+
+
     //return total # of fragments
     @Override
     public int getCount() {
