@@ -84,6 +84,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, CourierActivity.class);
+
         i.putExtra("courier",Parcels.wrap(user) );
 
         startActivity(i);

@@ -9,12 +9,12 @@ import org.parceler.Parcel;
 @Parcel
 public class CourierModel  extends User{
 
-    private boolean hasPickedUp = false;
-    private boolean hasDelivered = false;
-    private double weightAvailable;
-    private int[] volumeAvailable;
-    private String startAddress;
-    private String endAddress;
+    public boolean hasPickedUp = false;
+    public boolean hasDelivered = false;
+    public double weightAvailable;
+    public int[] volumeAvailable;
+    public String startAddress;
+    public String endAddress;
 
     public CourierModel(){}
     public CourierModel(String name, String handle, int phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
@@ -33,5 +33,27 @@ public class CourierModel  extends User{
         return courrier;
     }
 
+    public boolean isHasPickedUp() {
+        return hasPickedUp;
+    }
 
+    public boolean isHasDelivered() {
+        return hasDelivered;
+    }
+
+    public double getWeightAvailable() {
+        return weightAvailable;
+    }
+
+    public int[] getVolumeAvailable() {
+        return volumeAvailable;
+    }
+
+    public String getStartAddress() {
+        return startAddress;
+    }
+
+    public String getEndAddress() {
+        return endAddress;
+    }
 }

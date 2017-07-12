@@ -42,10 +42,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return viewHolder;
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
 
-    }
+
 
 
     //bind the valies based on pos of elemt in list
@@ -62,37 +60,20 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         notifyDataSetChanged();
     }
 
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position) {
-//        Transaction transaction = mTransactions.get(position);
-//
-//
-//        holder.tvUsername.setText(tweet.user.name);
-//        holder.tvBody.setText(tweet.body);
-//        holder.tvHandle.setText("@" + tweet.user.sreenName);
-//        holder.tvTimeStamp.setText( getRelativeTimeAgo(tweet.createdAt));
-//        holder.ivFavorite.setSelected(tweet.favorited);
-//        holder.ivRetweet.setSelected(tweet.retweeted);
-//        Log.d("Tweet media: ", String.valueOf(tweet.media));
-//
-//        if (tweet.media != "") {
-//            holder.ivMedia.setVisibility(View.VISIBLE);
-//
-//            Glide.with(context)
-//                    .load(tweet.media)
-//                    .into(holder.ivMedia);
-//        }
-//        else{
-//            holder.ivMedia.setVisibility(View.GONE);
-//
-//
-//        }
-//
-//
-//        Glide.with(context)
-//                .load(tweet.user.profileImageUrl)
-//                .into(holder.ivProfileImage);
-//    }
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Transaction transaction = mTransactions.get(position);
+
+
+        holder.tvUsername.setText(String.valueOf(transaction.getMail().getType()));
+        holder.tvBoarding.setText(String.valueOf(transaction.getCourier().getTripStart()));
+        holder.tvArrival.setText(String.valueOf(transaction.getCourier().getTripEnd()));
+        holder.tvWeight.setText(String.valueOf(transaction.getMail().getVolume()));
+        holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
+
+
+
+    }
 
     @Override
     public int getItemCount() {
@@ -103,20 +84,22 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView ivProfileImage;
+        public ImageView ivPackageImage;
         public TextView tvUsername;
-        public TextView tvBody;
-        public TextView tvTimeStamp;
-        public ImageView ibReply;
-        public TextView tvHandle;
-        public ImageView ivFavorite;
-        public ImageView ivRetweet;
-        public ImageView ivMedia;
+        public TextView tvArrival;
+        public TextView tvBoarding;
+        public TextView tvWeight;
 
         public  ViewHolder (View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
+            tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
+            tvArrival = (TextView) itemView.findViewById(R.id.tvArrival);
+            tvBoarding = (TextView) itemView.findViewById(R.id.tvBoarding);
+            tvWeight = (TextView) itemView.findViewById(R.id.tvWeight);
+
+            ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
 
 
         }
