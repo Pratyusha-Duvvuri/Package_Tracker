@@ -12,4 +12,5 @@ public class OldTransactions_Fragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
 
     }
+
 }
