@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter.Fragments;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.R;
+import com.codepath.packagetwitter.TimelineActivity;
 import com.codepath.packagetwitter.Utils;
 
 import java.util.regex.Matcher;
@@ -186,6 +188,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else
             Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
                     .show();
+
+            Intent i = new Intent(Login_Fragment.this.getContext(), TimelineActivity.class);
+            startActivity(i);
 
     }
 }

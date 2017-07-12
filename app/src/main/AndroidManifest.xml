@@ -29,7 +29,8 @@
             android:name=".PackageCreationActivity"
             android:label="@string/title_activity_package_creation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TimelineActivity"></activity>
+        <activity android:name=".TimelineActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity"></activity>
     </application>
 
