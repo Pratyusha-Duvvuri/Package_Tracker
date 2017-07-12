@@ -1,25 +1,13 @@
 package com.codepath.packagetwitter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toolbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
-
-import com.codepath.packagetwitter.Models.Transaction;
+import android.widget.Toolbar;
 
 public class TimelineActivity extends AppCompatActivity {
 
@@ -61,11 +49,6 @@ public class TimelineActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.timeline_menu, menu);
         return true;
     }
-
-
-
-
-
 
 
 }
