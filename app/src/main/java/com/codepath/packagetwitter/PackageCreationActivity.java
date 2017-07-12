@@ -17,7 +17,7 @@ String sender_handle;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_package_creation);
+        setContentView(R.layout.activi);
 
         receiver = getIntent().getParcelableExtra("receiver");
         sender = getIntent().getParcelableExtra("sender");
