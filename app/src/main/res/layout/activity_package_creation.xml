@@ -1,33 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.PackageCreationActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id= "@+id/UserDetails">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvSenderLocation"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:text="Sender Location" />
+        <EditText
+            android:layout_alignBottom="@+id/tvSenderLocation"
+            android:id="@+id/etSenderLocation"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:inputType="text"/>
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/tvReceiverLocation"
 
-    <include layout="@layout/content_package_creation" />
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignEnd="@+id/tvSenderLocation"
+        android:layout_alignRight="@+id/tvSenderLocation"
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:text="Receiver Location" />
+
+    <EditText
+        android:id="@+id/etReceiverLocation"
+        android:layout_alignBottom="@+id/tvReceiverLocation"
+        android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"/>
+
+    <!--android:align_right ="@+id/etSenderLocation"-->
+
+
+</RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvPackageDetailHeading"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/UserDetails"
+        android:text="Receiver Location" />
+
+    <RelativeLayout
+        android:id="@+id/left_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/spType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:text="TextView" />
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"/>
+        <TextView
+            android:id="@+id/tvFragile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWeight"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:text="TextView" />
+
+        <RadioButton
+            android:id="@+id/rbIsFragile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginTop="44dp"
+            android:text="RadioButton" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_alignRight="@+id/left_layout"
+        android:id="@+id/right_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvLength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvBreadth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvLength"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/tvLength"
+            android:layout_toRightOf="@+id/tvLength"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvBreadth"
+            android:text="TextView" />
+        <EditText
+            android:id="@+id/etLength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="151dp"
+            android:text="TextView" />
+
+        <EditText
+            android:id="@+id/etBreadth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvLength"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/tvLength"
+            android:layout_toRightOf="@+id/tvLength"
+            android:text="TextView" />
+
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvBreadth"
+            android:text="TextView" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/imageAndDescription"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-</android.support.design.widget.CoordinatorLayout>
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ivPackageImage"
+            android:layout_alignStart="@+id/ivPackageImage"
+            android:text="TextView" />
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/ivPackageImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="43dp"
+            android:layout_marginRight="43dp"
+            android:layout_marginTop="166dp"
+            app:srcCompat="@android:drawable/stat_sys_upload" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fab_margin"
+        android:layout_alignBottom="@id/imageAndDescription">
+
+
+    <TextView
+        android:id="@+id/tvSpecialRequirements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="39dp"
+        android:text="TextView" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="NEXT" />
+    </RelativeLayout>
+</RelativeLayout>
