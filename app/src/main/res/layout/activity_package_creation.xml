@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.PackageCreationActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id= "@+id/UserDetails">
 
     <TextView
         android:id="@+id/tvSenderLocation"
@@ -13,6 +16,7 @@
         android:layout_width="wrap_content"
         android:text="Sender Location" />
         <EditText
+            android:layout_alignBottom="@+id/tvSenderLocation"
             android:id="@+id/etSenderLocation"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -20,25 +24,30 @@
 
     <TextView
         android:id="@+id/tvReceiverLocation"
+
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_alignEnd="@+id/tvSenderLocation"
         android:layout_alignRight="@+id/tvSenderLocation"
+
         android:text="Receiver Location" />
 
     <EditText
-            android:id="@+id/etReceiverLocation"
-            android:layout_height="wrap_content"
+        android:id="@+id/etReceiverLocation"
+        android:layout_alignBottom="@+id/tvReceiverLocation"
+        android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:align_right ="@+id/etSenderLocation"
             android:inputType="text"/>
+</RelativeLayout>
     <TextView
         android:id="@+id/tvPackageDetailHeading"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_alignRight="@+id/tvSenderLocation"
+        android:layout_below="@+id/UserDetails"
         android:text="Receiver Location" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/left_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -51,7 +60,6 @@
             android:id="@+id/tvWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvWeight"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="151dp"
             android:text="TextView" />
@@ -73,16 +81,13 @@
             android:id="@+id/rbIsFragile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tvBreadth"
-            android:layout_alignRight="@+id/tvBreadth"
-            android:layout_below="@+id/tvLength"
             android:layout_marginEnd="11dp"
             android:layout_marginRight="11dp"
             android:layout_marginTop="44dp"
             android:text="RadioButton" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_alignRight="@id/left_layout"
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_alignRight="@+id/left_layout"
         android:id="@+id/right_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -92,7 +97,6 @@
             android:id="@+id/tvLength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvWeight"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="151dp"
             android:text="TextView" />
@@ -112,15 +116,12 @@
             android:id="@+id/tvHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ivPackageImage"
-            android:layout_alignStart="@+id/ivPackageImage"
             android:layout_alignTop="@+id/tvBreadth"
             android:text="TextView" />
         <EditText
             android:id="@+id/etLength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvWeight"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="151dp"
             android:text="TextView" />
@@ -140,14 +141,12 @@
             android:id="@+id/etHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ivPackageImage"
-            android:layout_alignStart="@+id/ivPackageImage"
             android:layout_alignTop="@+id/tvBreadth"
             android:text="TextView" />
 
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/imageAndDescription"
