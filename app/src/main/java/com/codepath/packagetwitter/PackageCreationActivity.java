@@ -1,8 +1,8 @@
 package com.codepath.packagetwitter;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,13 +11,14 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 
 import butterknife.BindView;
 
-public class PackageCreationActivity extends AppCompatActivity {
+public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener{
 
 String sender_handle;
     Receiver receiver;
@@ -72,21 +73,33 @@ String sender_handle;
                 mail.setVolume(Arr);
 
                 //Call the modal to verify information
-                //onVerifyAction
+                onVerifyAction();
             }
         });
 
 
 
                 }
-    public void onVerifyAction(MenuItem mi) {
+    public void onVerifyAction() {
         //setContentView(R.layout.fragment_edit_name);
         //Tweet tweet = new Tweet();
 
-//        FragmentManager fm = getSupportFragmentManager();
-//        PackageConfirmation_Fragment editNameDialogFragment = PackageCreationActivity.newInstance("Some Title",tweet);
-//       tweet editNameDialogFragment.show(fm, "fragment_edit_name");
+      //  FragmentManager fm = getSupportFragmentManager();
+
+      //  PackageConfirmation_Fragment editNameDialogFragment = PackageCreationActivity.newInstance("Some Title",);
+
+        FragmentManager fm = getSupportFragmentManager();
+        PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
+        frag.show(fm, "fragment_package_confirmation");
     }
+    public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
+
+//        frag = (HomeTimelineFragment) adapter.getItem(0);
+//        vpPager.setCurrentItem(0);
+//        frag.addTweet(tweet);
+
+    }
+
 
 
 }
