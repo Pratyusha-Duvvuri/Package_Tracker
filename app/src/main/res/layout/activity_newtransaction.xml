@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     tools:context="com.codepath.packagetwitter.NewtransactionActivity">
 
 
@@ -17,9 +17,9 @@
         android:text="Sender"
         android:textColor="@color/colorPrimaryLight"
         android:textSize="18sp"
+        android:layout_marginTop="155dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/ntbtReceiver"
@@ -30,7 +30,8 @@
         android:text="Receiver"
         android:textColor="@color/colorPrimaryLight"
         android:textSize="18sp"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/ntbtSender"
         android:layout_alignLeft="@+id/ntbtSender"
         android:layout_alignStart="@+id/ntbtSender" />
 
@@ -38,14 +39,14 @@
         android:id="@+id/ntbtCourier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ntbtSender"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/ntbtSender"
-        android:layout_marginBottom="50dp"
         android:background="@drawable/button_border"
         android:elevation="4dp"
         android:text="Courier"
         android:textColor="@color/colorPrimaryLight"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/ntbtReceiver"
+        android:layout_alignLeft="@+id/ntbtReceiver"
+        android:layout_alignStart="@+id/ntbtReceiver" />
 
 </RelativeLayout>

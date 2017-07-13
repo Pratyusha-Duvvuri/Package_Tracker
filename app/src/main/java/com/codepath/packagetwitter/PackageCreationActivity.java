@@ -2,20 +2,10 @@ package com.codepath.packagetwitter;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
-
-import butterknife.BindView;
 
 public class PackageCreationActivity extends AppCompatActivity {
 
@@ -23,28 +13,25 @@ String sender_handle;
     Receiver receiver;
     Sender sender;
     Mail mail;
+    /*
     @BindView(R.id.etWeight)EditText weight;
     @BindView(R.id.etLength)EditText lenght;
-    @BindView(R.id.etBreadth)EditText breadth;
+    @BindView(R.id.etWidth)EditText width;
     @BindView(R.id.etHeight)EditText height;
     @BindView(R.id.etDescription)EditText description;
-    @BindView(R.id.etSpecialRequirements)EditText specialRequirements;
     @BindView(R.id.etSenderLocation)EditText senderLocation;
     @BindView(R.id.etStartDate)EditText startDate;
     @BindView(R.id.etEndDate)EditText endDate;
-    @BindView(R.id.cbIsFragile)RadioButton isFragile;
-    @BindView(R.id.spType)Spinner type;
+    @BindView(R.id.rbFragile)RadioButton isFragile;
+    @BindView(R.id.rbFragile)RadioButton notFragile;
+    @BindView(R.id.spPackageType)Spinner type;
     @BindView(R.id.tvSenderLocation)TextView tvSenderLocation;
     @BindView(R.id.tvStartDate)TextView tvStartDate;
     @BindView(R.id.tvEndDate)TextView tvEndDate;
     @BindView(R.id.tvWeight)TextView tvWeight;
     @BindView(R.id.tvHeight)TextView tvHeight;
-    @BindView(R.id.tvBreadth)TextView tvBreadth;
-    @BindView(R.id.tvDescription)TextView tvDescription;
-    @BindView(R.id.tvSpecialRequirements)TextView tvSpecialRequirements;
-    @BindView(R.id.btnNext)Button btnNext;
-
-
+    @BindView(R.id.tvWidth)TextView tvWidth;
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +39,7 @@ String sender_handle;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_creation);
 
+        /*
         receiver = getIntent().getParcelableExtra("receiver");
         sender = getIntent().getParcelableExtra("sender");
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -78,8 +66,10 @@ String sender_handle;
         });
 
 
+        */
+    }
 
-                }
+    /*
     public void onVerifyAction(MenuItem mi) {
         //setContentView(R.layout.fragment_edit_name);
         //Tweet tweet = new Tweet();
@@ -88,8 +78,8 @@ String sender_handle;
 //        PackageConfirmation_Fragment editNameDialogFragment = PackageCreationActivity.newInstance("Some Title",tweet);
 //       tweet editNameDialogFragment.show(fm, "fragment_edit_name");
     }
+    */
 
-
-}
+    }
 
 

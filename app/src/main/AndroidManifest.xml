@@ -21,15 +21,14 @@
         <activity
             android:name=".TransactionsActivity" />
         <activity android:name=".NewtransactionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Start A New Transaction"/>
         <activity android:name=".SenderActivity"
             android:label="Create A New Package"/>
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".CourierActivity" />
         <activity
             android:name=".PackageCreationActivity"
-            android:label="Create A New Package"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Create A New Package" />
         <activity android:name=".TimelineActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity">

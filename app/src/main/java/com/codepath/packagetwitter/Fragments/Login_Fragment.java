@@ -185,12 +185,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             new CustomToast().Show_Toast(getActivity(), view,
                     "Your Email Id is Invalid.");
             // Else do login and do your stuff
-        else
+        else {
             Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
                     .show();
-
             Intent i = new Intent(Login_Fragment.this.getContext(), TimelineActivity.class);
             startActivity(i);
+        }
 
     }
 }
