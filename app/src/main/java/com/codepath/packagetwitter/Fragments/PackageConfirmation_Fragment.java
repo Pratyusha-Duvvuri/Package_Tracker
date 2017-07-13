@@ -29,10 +29,10 @@ public class PackageConfirmation_Fragment extends DialogFragment{
     Mail mail;
     Sender sender;
     Receiver receiver;
-        private final int RESULT_OK = 10;
-        private EditText mEditText;
-        public TextView characterCount;
-        public long num;
+    private final int RESULT_OK = 10;
+    private EditText mEditText;
+    public TextView characterCount;
+    public long num;
     public Button next;
     public Button back;
 
