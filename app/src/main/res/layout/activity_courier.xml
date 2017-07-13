@@ -10,7 +10,7 @@
         android:id="@+id/editText7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/tvInfo"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="42dp"
@@ -61,7 +61,7 @@
         android:layout_below="@+id/et_get_receiver_handle"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_toStartOf="@+id/textView"
+        android:layout_toStartOf="@+id/tvInfo"
         android:hint="Month"
         android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -142,7 +142,7 @@
         android:layout_toEndOf="@+id/imageView4" />
 `
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="/"
