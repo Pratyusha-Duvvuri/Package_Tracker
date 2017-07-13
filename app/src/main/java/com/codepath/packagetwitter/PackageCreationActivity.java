@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,6 +22,7 @@ import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener{
 
@@ -25,24 +31,37 @@ String sender_handle;
     Sender sender;
     Mail mail;
 
-    @BindView(R.id.etWeight)EditText weight;
-    @BindView(R.id.etWidth)EditText width;
-    @BindView(R.id.etLength)EditText length;
-    @BindView(R.id.etHeight)EditText height;
-    @BindView(R.id.etDescription)EditText description;
-    @BindView(R.id.etSenderLocation)EditText senderLocation;
-    @BindView(R.id.etStartDate)EditText startDate;
-    @BindView(R.id.etEndDate)EditText endDate;
-    @BindView(R.id.rbFragile)RadioButton isFragile;
-    @BindView(R.id.rbFragile)RadioButton notFragile;
-    @BindView(R.id.spPackageType)Spinner type;
     @BindView(R.id.tvSenderLocation)TextView tvSenderLocation;
     @BindView(R.id.tvStartDate)TextView tvStartDate;
     @BindView(R.id.tvEndDate)TextView tvEndDate;
+    @BindView(R.id.tvPackageDetailHeading)TextView tvPackageDetailHeading;
+    @BindView(R.id.tvPackageType)TextView tvPackageType;
     @BindView(R.id.tvWeight)TextView tvWeight;
-    @BindView(R.id.tvHeight)TextView tvHeight;
-    @BindView(R.id.fbConfirm)FloatingActionButton btnNext;
+    @BindView(R.id.tvFragile)TextView tvFragile;
+    @BindView(R.id.tvDimensionsHeading)TextView tvDimensionsHeading;
+    @BindView(R.id.tvLength)TextView tvLength;
     @BindView(R.id.tvWidth)TextView tvWidth;
+    @BindView(R.id.tvHeight)TextView tvHeight;
+    @BindView(R.id.tvConfirm)TextView tvConfirm;
+    @BindView(R.id.tvPackage)TextView tvPackage;
+    @BindView(R.id.etSenderLocation)EditText etSenderLocation;
+    @BindView(R.id.etStartDate)EditText etStartDate;
+    @BindView(R.id.etEndDate)EditText etEndDate;
+    @BindView(R.id.etWeight)EditText etWeight;
+    @BindView(R.id.etLength)EditText etLength;
+    @BindView(R.id.etWidth)EditText etWidth;
+    @BindView(R.id.etHeight)EditText etHeight;
+    @BindView(R.id.etDescription)EditText etDescription;
+    @BindView(R.id.rbFragile)RadioButton rbFragile;
+    @BindView(R.id.rbNotFragile)RadioButton rbNotFragile;
+    @BindView(R.id.spPackageType)Spinner spPackageType;
+    @BindView(R.id.ibUpload)ImageButton ibUpload;
+    @BindView(R.id.flFAB)FrameLayout flFAB;
+    @BindView(R.id.fbConfirm)FloatingActionButton fbConfirm;
+    @BindView(R.id.card_view)CardView CardView;
+    @BindView(R.id.llcardview)LinearLayout llCardView;
+    @BindView(R.id.ivPackage)ImageView ivPackage;
+
 
 
 
@@ -51,7 +70,7 @@ String sender_handle;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_creation);
-
+        ButterKnife.bind(this);
 
         receiver = getIntent().getParcelableExtra("receiver");
         sender = getIntent().getParcelableExtra("sender");
@@ -61,20 +80,20 @@ String sender_handle;
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        type.setAdapter(adapter);
+        spPackageType.setAdapter(adapter);
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        fbConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mail.setDescription(description.getText().toString());
+                mail.setDescription(etDescription.getText().toString());
                 mail.setFragile(true);//cbIsFragile.isChecked());
                 //have to set picture
-                mail.setWeight(Double.parseDouble(weight.getText().toString()));
-                mail.setType(type.getSelectedItem().toString());
-                int []Arr={Integer.parseInt(length.getText().toString()),Integer.parseInt(width.getText().toString()),Integer.parseInt(height.getText().toString())};
+                mail.setWeight(Double.parseDouble(etWeight.getText().toString()));
+                mail.setType(spPackageType.getSelectedItem().toString());
+                int []Arr={Integer.parseInt(etLength.getText().toString()),Integer.parseInt(etWidth.getText().toString()),Integer.parseInt(etHeight.getText().toString())};
                 mail.setVolume(Arr);
-                sender.setTripStart(startDate.getText().toString());
-                sender.setTripEnd(endDate.getText().toString());
-                sender.setLocation(Double.parseDouble(senderLocation.getText().toString()));
+                sender.setTripStart(etStartDate.getText().toString());
+                sender.setTripEnd(etEndDate.getText().toString());
+                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
 
                 //Call the modal to verify information
                 onVerifyAction();
@@ -82,6 +101,7 @@ String sender_handle;
         });
 
     }
+
 
 
     public void onVerifyAction() {
