@@ -64,9 +64,10 @@ public class PackageConfirmation_Fragment extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mail = getArguments().getParcelable("mail");
-        sender = getArguments().getParcelable("sender");
-        receiver = getArguments().getParcelable("receiver");
+        receiver =  Parcels.unwrap(getArguments().getParcelable("receiver"));
+        sender =  Parcels.unwrap(getArguments().getParcelable("sender"));
+        mail =  Parcels.unwrap(getArguments().getParcelable("mail"));
+
         return inflater.inflate(R.layout.fragment_package_confirmation, container, false);
     }
 
@@ -91,8 +92,8 @@ public class PackageConfirmation_Fragment extends DialogFragment{
 
             next.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    NextDialogListener listener = (NextDialogListener) getActivity();
-                    listener.onNextEditDialog(sender, receiver, mail);
+                    NextDialogListener listener2 = (NextDialogListener) getActivity();
+                    listener2.onNextEditDialog(sender, receiver, mail);
                     // Close the dialog and return back to the parent activity
                     dismiss();
                 }

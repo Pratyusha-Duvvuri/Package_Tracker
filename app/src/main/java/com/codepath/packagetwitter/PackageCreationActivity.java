@@ -21,6 +21,8 @@ import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -63,8 +65,6 @@ String sender_handle;
     @BindView(R.id.ivPackage)ImageView ivPackage;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,8 +72,10 @@ String sender_handle;
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
         mail =new Mail();
-        receiver = getIntent().getParcelableExtra("receiver");
-        sender = getIntent().getParcelableExtra("sender");
+        receiver = new Receiver();
+        sender = new Sender();
+        receiver =  Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        sender =  Parcels.unwrap(getIntent().getParcelableExtra("sender"));
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type_array, android.R.layout.simple_spinner_item);
@@ -84,16 +86,16 @@ String sender_handle;
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mail.setDescription(etDescription.getText().toString());
-                mail.setFragile(true);//cbIsFragile.isChecked());
-                //have to set picture
-                mail.setWeight(Double.parseDouble(etWeight.getText().toString()));
-               // mail.setType(spPackageType.getSelectedItem().toString());
-                int []Arr={Integer.parseInt(etLength.getText().toString()),Integer.parseInt(etWidth.getText().toString()),Integer.parseInt(etHeight.getText().toString())};
-                mail.setVolume(Arr);
-                sender.setTripStart(etStartDate.getText().toString());
-                sender.setTripEnd(etEndDate.getText().toString());
-                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
+//                mail.setDescription(etDescription.getText().toString());
+//                mail.setFragile(true);//cbIsFragile.isChecked());
+//                //have to set picture
+//                mail.setWeight(Double.parseDouble(etWeight.getText().toString()));
+//               // mail.setType(spPackageType.getSelectedItem().toString());
+//                int []Arr={Integer.parseInt(etLength.getText().toString()),Integer.parseInt(etWidth.getText().toString()),Integer.parseInt(etHeight.getText().toString())};
+//                mail.setVolume(Arr);
+//                sender.setTripStart(etStartDate.getText().toString());
+//                sender.setTripEnd(etEndDate.getText().toString());
+//                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
 
                 //Call the modal to verify information
                 onVerifyAction();
