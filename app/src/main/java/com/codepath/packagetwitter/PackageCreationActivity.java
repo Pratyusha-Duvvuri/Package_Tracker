@@ -17,7 +17,9 @@ String sender_handle;
     @BindView(R.id.etWeight)EditText weight;
     @BindView(R.id.etLength)EditText lenght;
     @BindView(R.id.etWidth)EditText width;
-    @BindView(R.id.etHeight)EditText height;
+    @BindView(R.id.etLength)EditText length;
+    @BindView(R.id.etBreadth)EditText breadth;
+   @BindView(R.id.etHeight)EditText height;
     @BindView(R.id.etDescription)EditText description;
     @BindView(R.id.etSenderLocation)EditText senderLocation;
     @BindView(R.id.etStartDate)EditText startDate;
@@ -30,8 +32,10 @@ String sender_handle;
     @BindView(R.id.tvEndDate)TextView tvEndDate;
     @BindView(R.id.tvWeight)TextView tvWeight;
     @BindView(R.id.tvHeight)TextView tvHeight;
+
     @BindView(R.id.tvWidth)TextView tvWidth;
     */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +56,17 @@ String sender_handle;
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                sender.setLocation(Double.parseDouble(senderLocation.getText().toString()));
                 mail.setDescription(description.getText().toString());
                 mail.setFragile(true);//cbIsFragile.isChecked());
                 //have to set picture
-                mail.setSpecialRequirements(specialRequirements.getText().toString());
                 mail.setWeight(Double.parseDouble(weight.getText().toString()));
                 mail.setType(type.getSelectedItem().toString());
+                int []Arr={Integer.parseInt(length.getText().toString()),Integer.parseInt(breadth.getText().toString()),Integer.parseInt(height.getText().toString())};
+                mail.setVolume(Arr);
 
                 //Call the modal to verify information
                 //onVerifyAction
-
             }
         });
 

@@ -12,4 +12,6 @@ public class CourierActivity extends AppCompatActivity {
         //enter start date, end date, weight that can be carried,
         //taken to match page once details are entered
     }
+
+
 }

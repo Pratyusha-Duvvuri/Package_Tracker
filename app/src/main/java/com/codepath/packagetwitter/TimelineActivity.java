@@ -17,8 +17,6 @@ public class TimelineActivity extends AppCompatActivity {
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //TODO when are the tabs actually created? like when is the first time the stuff is instantiated??

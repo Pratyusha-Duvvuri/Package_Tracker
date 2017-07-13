@@ -16,8 +16,6 @@ public class Mail {
     Double weight;// (number)
     int[] volume;// - L*B*H -- ints
     boolean isFragile;///Not fragile (boolean)
-    String specialRequirements;// (String)
-
     public Mail(){
 
 
@@ -30,7 +28,6 @@ public class Mail {
         this.weight = weight;
         this.volume = volume;
         this.isFragile = fragile;
-        this.specialRequirements = reqs;
 
     }
 
@@ -87,14 +84,10 @@ public class Mail {
     }
 
     public void setSpecialRequirements(String specialRequirements) {
-        this.specialRequirements = specialRequirements;
     }
 
     public boolean isFragile() {
         return isFragile;
     }
 
-    public String getSpecialRequirements() {
-        return specialRequirements;
-    }
 }
