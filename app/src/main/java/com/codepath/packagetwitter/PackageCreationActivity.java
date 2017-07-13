@@ -88,7 +88,7 @@ String sender_handle;
                 mail.setFragile(true);//cbIsFragile.isChecked());
                 //have to set picture
                 mail.setWeight(Double.parseDouble(etWeight.getText().toString()));
-                mail.setType(spPackageType.getSelectedItem().toString());
+               // mail.setType(spPackageType.getSelectedItem().toString());
                 int []Arr={Integer.parseInt(etLength.getText().toString()),Integer.parseInt(etWidth.getText().toString()),Integer.parseInt(etHeight.getText().toString())};
                 mail.setVolume(Arr);
                 sender.setTripStart(etStartDate.getText().toString());

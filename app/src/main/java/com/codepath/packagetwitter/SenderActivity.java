@@ -62,6 +62,7 @@ public class SenderActivity extends AppCompatActivity {
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, PackageCreationActivity.class);
         i.putExtra("receiver", Parcels.wrap(receiver));
+        sender= Sender.getRandomSender(getApplicationContext());
         i.putExtra("sender",Parcels.wrap(sender));
         startActivity(i);
     }

@@ -3,6 +3,7 @@ package com.codepath.packagetwitter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,10 +17,16 @@ import butterknife.BindView;
 
 public class AfterSenderConfirmation extends AppCompatActivity implements PackageConfirmation_Fragment.NextDialogListener{
 
+    Receiver receiver;
+    Sender sender;
+    Mail mail;
 
+    //News things that receiver has to enter
     @BindView(R.id.etReceiverLocation)EditText receiverLocation;
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
+
+    //Types from previous activity
     @BindView(R.id.tvFragile)TextView fragile;
     @BindView(R.id.tvRPackageType)TextView type;
     @BindView(R.id.tvSSenderLocation)TextView tvSenderLocation;
@@ -27,28 +34,70 @@ public class AfterSenderConfirmation extends AppCompatActivity implements Packag
     @BindView(R.id.tvSEndDate)TextView tvEndDate;
     @BindView(R.id.tvRWeight)TextView tvWeight;
     @BindView(R.id.tvRHeight)TextView tvHeight;
-    @BindView(R.id.fbRConfirm)FloatingActionButton btnNext;
     @BindView(R.id.tvRWidth)TextView tvWidth;
     @BindView(R.id.tvRLength)TextView tvLength;
     @BindView(R.id.tvRDescription)TextView tvDescription;
-    @BindView(R.id.ivPackageImage)ImageView ivImage;
 
+    @BindView(R.id.fbRConfirm)FloatingActionButton btnNext;
+    @BindView(R.id.ivPackageImage)ImageView ivImage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_sender_confirmation);
-        //set layout here for all the views
 
+        //set listener for confirmation
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                receiver.setTripStart(startDate.getText().toString());
+                receiver.setTripEnd(endDate.getText().toString());
+                receiver.setLocation(Double.parseDouble(receiverLocation.getText().toString()));
+
+                //Call the modal to verify information
+                onVerifyAction();
+
+            }
+        });
+    }
+    public void onVerifyAction(){
+//       Intent i = new Intent(this, PackageCreationActivity.class);
+//        i.putExtra("receiver", Parcels.wrap(receiver));
+//        i.putExtra("sender", Parcels.wrap(sender));
+//        i.putExtra("mail", Parcels.wrap(mail));
+//       startActivity(i);
 
     }
 
     @Override
-    public void onNextEditDialog(Sender sender, Receiver receiver, Mail mail) {
+    public void onNextEditDialog(Sender senderr, Receiver receiverr, Mail maill) {
         //Now populate stuff with this sender , receiver and mail
         //Get receiver location and start and end date and then send details for matching with appropriate courier
+        sender = senderr;
+        receiver = receiverr;
+        mail = maill;
+        //set layout here for all the views
+        onSetLayout();
 
 
     }
+
+
+    public void onSetLayout(){
+
+       fragile.setText(""+mail.isFragile());
+       type.setText(""+mail.getType());
+        tvSenderLocation.setText(""+sender.getLocation());
+        tvStartDate.setText(sender.getTripStart());
+        tvEndDate.setText(sender.getTripEnd());
+        tvWeight.setText(""+mail.getWeight());
+        tvHeight.setText(""+mail.getVolume()[2]);
+        tvWidth.setText(""+mail.getVolume()[1]);
+        tvLength.setText(""+mail.getVolume()[0]);
+        tvDescription.setText(""+mail.getDescription());
+        ivImage.setImageResource(R.drawable.ic_upload);
+    }
+
+
 }
