@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -26,43 +27,64 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener{
+public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener {
 
-String sender_handle;
+    String sender_handle;
     Receiver receiver;
     Sender sender;
     Mail mail;
 
-    @BindView(R.id.tvSenderLocation)TextView tvSenderLocation;
-    @BindView(R.id.tvStartDate)TextView tvStartDate;
-    @BindView(R.id.tvEndDate)TextView tvEndDate;
-    @BindView(R.id.tvPackageDetailHeading)TextView tvPackageDetailHeading;
-    @BindView(R.id.tvPackageType)TextView tvPackageType;
-    @BindView(R.id.tvWeight)TextView tvWeight;
-    @BindView(R.id.tvFragile)TextView tvFragile;
-    @BindView(R.id.tvDimensionsHeading)TextView tvDimensionsHeading;
-    @BindView(R.id.tvLength)TextView tvLength;
-    @BindView(R.id.tvWidth)TextView tvWidth;
-    @BindView(R.id.tvHeight)TextView tvHeight;
-    @BindView(R.id.tvConfirm)TextView tvConfirm;
-    @BindView(R.id.tvPackage)TextView tvPackage;
-    @BindView(R.id.etSenderLocation)EditText etSenderLocation;
-    @BindView(R.id.etStartDate)EditText etStartDate;
-    @BindView(R.id.etEndDate)EditText etEndDate;
-    @BindView(R.id.etWeight)EditText etWeight;
-    @BindView(R.id.etLength)EditText etLength;
-    @BindView(R.id.etWidth)EditText etWidth;
-    @BindView(R.id.etHeight)EditText etHeight;
-    @BindView(R.id.etDescription)EditText etDescription;
-    @BindView(R.id.rbFragile)RadioButton rbFragile;
-    @BindView(R.id.rbNotFragile)RadioButton rbNotFragile;
-    @BindView(R.id.spPackageType)Spinner spPackageType;
-    @BindView(R.id.ibUpload)ImageButton ibUpload;
-    @BindView(R.id.flFAB)FrameLayout flFAB;
-    @BindView(R.id.fbConfirm)FloatingActionButton fbConfirm;
-    @BindView(R.id.card_view)CardView CardView;
-    @BindView(R.id.llcardview)LinearLayout llCardView;
-    @BindView(R.id.ivPackage)ImageView ivPackage;
+    @BindView(R.id.tvSenderLocation) TextView tvSenderLocation;
+    @BindView(R.id.tvStartDate) TextView tvStartDate;
+    @BindView(R.id.tvEndDate) TextView tvEndDate;
+    @BindView(R.id.tvPackageDetailHeading) TextView tvPackageDetailHeading;
+    @BindView(R.id.tvPackageType) TextView tvPackageType;
+    @BindView(R.id.tvWeight) TextView tvWeight;
+    @BindView(R.id.tvFragile) TextView tvFragile;
+    @BindView(R.id.tvDimensionsHeading) TextView tvDimensionsHeading;
+    @BindView(R.id.tvLength) TextView tvLength;
+    @BindView(R.id.tvWidth)
+    TextView tvWidth;
+    @BindView(R.id.tvHeight)
+    TextView tvHeight;
+    @BindView(R.id.tvConfirm)
+    TextView tvConfirm;
+    @BindView(R.id.tvPackage)
+    TextView tvPackage;
+    @BindView(R.id.etSenderLocation)
+    EditText etSenderLocation;
+    @BindView(R.id.etStartDate)
+    EditText etStartDate;
+    @BindView(R.id.etEndDate)
+    EditText etEndDate;
+    @BindView(R.id.etWeight)
+    EditText etWeight;
+    @BindView(R.id.etLength)
+    EditText etLength;
+    @BindView(R.id.etWidth)
+    EditText etWidth;
+    @BindView(R.id.etHeight)
+    EditText etHeight;
+    @BindView(R.id.etDescription)
+    EditText etDescription;
+    @BindView(R.id.rbFragile)
+    RadioButton rbFragile;
+    @BindView(R.id.rbNotFragile)
+    RadioButton rbNotFragile;
+    @BindView(R.id.spPackageType)
+    Spinner spPackageType;
+    @BindView(R.id.ibUpload)
+    ImageButton ibUpload;
+    @BindView(R.id.flFAB)
+    FrameLayout flFAB;
+    @BindView(R.id.fbConfirm)
+    FloatingActionButton fbConfirm;
+    @BindView(R.id.card_view)
+    CardView CardView;
+    @BindView(R.id.llcardview)
+    LinearLayout llCardView;
+    @BindView(R.id.ivPackage)
+    ImageView ivPackage;
 
 
     @Override
@@ -71,9 +93,9 @@ String sender_handle;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
-        mail =new Mail();
-        receiver =  Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
-        sender =  Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+        mail = new Mail();
+        receiver = Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -104,18 +126,27 @@ String sender_handle;
     }
 
 
-
     public void onVerifyAction() {
 
         FragmentManager fm = getSupportFragmentManager();
-        PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
+        PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail, sender, receiver);
         frag.show(fm, "fragment_package_confirmation");
     }
-    public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
-        //reset information and check if listener is called
-    }
 
+    public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail, Boolean bool) {
+        //reset information and check if listener is called
+        if (bool) {
+            Intent i = new Intent(this, AfterSenderConfirmation.class);
+            i.putExtra("receiver", Parcels.wrap(receiver));
+            i.putExtra("sender", Parcels.wrap(sender));
+            i.putExtra("mail", Parcels.wrap(mail));
+            startActivity(i);
+        }
+
+    }
 }
+
+
 
 
 
