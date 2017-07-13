@@ -48,8 +48,8 @@
         android:hint="MM/DD/YYYY"
         android:inputType="text"
         android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvStartDate"
-        android:layout_alignBottom="@+id/tvStartDate"
+        android:layout_alignBaseline="@+id/tvSenderLocation"
+        android:layout_alignBottom="@+id/tvSenderLocation"
         android:layout_alignLeft="@+id/etEndDate"
         android:layout_alignStart="@+id/etEndDate" />
 
@@ -70,29 +70,32 @@
         android:inputType="text"
         android:textSize="14sp"
         android:id="@+id/etEndDate"
-        android:layout_alignBottom="@+id/tvEndDate"
+        android:layout_below="@+id/etStartDate"
         android:layout_toRightOf="@+id/tvEndDate"
-        android:layout_toEndOf="@+id/tvEndDate" />
+        android:layout_toEndOf="@+id/tvEndDate"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/tvPackageDetailHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etEndDate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
         android:text="Package Details"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/etSenderLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvPackageType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Package Type:"
+        android:layout_alignLeft="@+id/etSenderLocation"
+        android:layout_alignStart="@+id/etSenderLocation"
         android:layout_below="@+id/tvPackageDetailHeading"
-        android:layout_toLeftOf="@+id/tvPackageDetailHeading"
-        android:layout_toStartOf="@+id/tvPackageDetailHeading" />
+        android:layout_marginTop="34dp"
+        android:text="Package Type:" />
 
     <Spinner
         android:id="@+id/spPackageType"
@@ -105,10 +108,11 @@
         android:id="@+id/tvWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weight:"
-        android:layout_below="@+id/spPackageType"
         android:layout_alignLeft="@+id/tvPackageType"
-        android:layout_alignStart="@+id/tvPackageType" />
+        android:layout_alignStart="@+id/tvPackageType"
+        android:layout_below="@+id/spPackageType"
+        android:layout_marginTop="11dp"
+        android:text="Weight:" />
 
     <EditText
         android:id="@+id/etWeight"
@@ -128,20 +132,22 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvWeight"
         android:layout_alignStart="@+id/tvWeight"
-        android:text="Fragile?:"
-        android:layout_below="@+id/etWidth" />
+        android:layout_centerVertical="true"
+        android:text="Fragile?:" />
 
     <RadioButton
         android:id="@+id/rbFragile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etWeight"
+        android:layout_alignStart="@+id/etWeight"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
         android:text="Yes"
         android:textColorLink="@color/colorPrimaryLight"
         android:textSize="14sp"
-        android:buttonTint="@color/colorPrimaryLight"
-        android:layout_below="@+id/tvWidth"
-        android:layout_toRightOf="@+id/tvFragile"
-        android:layout_toEndOf="@+id/tvFragile" />
+        android:buttonTint="@color/colorPrimaryLight" />
 
     <RadioButton
         android:id="@+id/rbNotFragile"
@@ -159,19 +165,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dimensions"
+        android:layout_alignTop="@+id/spPackageType"
         android:layout_toRightOf="@+id/tvStartDate"
-        android:layout_toEndOf="@+id/tvStartDate"
-        android:layout_below="@+id/tvPackageDetailHeading" />
+        android:layout_toEndOf="@+id/tvStartDate" />
 
     <TextView
         android:id="@+id/tvLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Length:"
+        android:layout_alignBaseline="@+id/etLength"
         android:layout_alignBottom="@+id/etLength"
         android:layout_alignLeft="@+id/tvDimensionsHeading"
-        android:layout_alignStart="@+id/tvDimensionsHeading"
-        android:layout_below="@+id/spPackageType" />
+        android:layout_alignStart="@+id/tvDimensionsHeading" />
 
     <EditText
         android:id="@+id/etLength"
@@ -180,10 +186,10 @@
         android:hint="ex. 6in"
         android:inputType="text"
         android:textSize="14sp"
-        android:layout_alignBottom="@+id/etWeight"
+        android:layout_alignBottom="@+id/tvWeight"
         android:layout_toRightOf="@+id/tvLength"
-        android:layout_toEndOf="@+id/tvLength"
-        android:layout_below="@+id/tvDimensionsHeading" />
+        android:layout_alignRight="@+id/etWidth"
+        android:layout_alignEnd="@+id/etWidth" />
 
     <TextView
         android:id="@+id/tvWidth"
@@ -201,8 +207,7 @@
         android:hint="ex. 4in"
         android:inputType="text"
         android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvWidth"
-        android:layout_alignBottom="@+id/tvWidth"
+        android:layout_below="@+id/tvLength"
         android:layout_toRightOf="@+id/tvLength"
         android:layout_toEndOf="@+id/tvLength" />
 
@@ -212,11 +217,10 @@
         android:hint="ex. 3in"
         android:inputType="text"
         android:textSize="14sp"
-        android:id="@+id/etHeight"
-        android:layout_alignBaseline="@+id/rbFragile"
         android:layout_alignBottom="@+id/rbFragile"
         android:layout_alignLeft="@+id/etWidth"
-        android:layout_alignStart="@+id/etWidth" />
+        android:layout_alignStart="@+id/etWidth"
+        android:id="@+id/etHeight" />
 
     <TextView
         android:id="@+id/tvHeight"
@@ -229,11 +233,11 @@
 
     <EditText
         android:id="@+id/etDescription"
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/flFAB"
-        android:layout_alignLeft="@+id/card_view"
-        android:layout_alignStart="@+id/card_view"
+        android:layout_alignEnd="@+id/etEndDate"
+        android:layout_alignRight="@+id/etEndDate"
+        android:layout_below="@+id/etHeight"
         android:ems="10"
         android:hint="Describe the contents of your package along with any special requests..."
         android:inputType="textMultiLine"
@@ -246,18 +250,17 @@
         android:elevation="15dp"
         app:srcCompat="@drawable/ic_upload"
         android:layout_alignBottom="@+id/card_view"
-        android:layout_toRightOf="@+id/card_view"
-        android:layout_toEndOf="@+id/card_view" />
+        android:layout_alignLeft="@+id/etDescription"
+        android:layout_alignStart="@+id/etDescription" />
 
     <FrameLayout
         android:id="@+id/flFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/etEndDate"
-        android:layout_alignEnd="@+id/etEndDate"
-        android:layout_marginBottom="12dp">
+        android:layout_alignBottom="@+id/card_view"
+        android:layout_toRightOf="@+id/tvDimensionsHeading"
+        android:layout_toEndOf="@+id/tvDimensionsHeading">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fbConfirm"
@@ -280,17 +283,16 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvFragile"
-        android:layout_alignStart="@+id/tvFragile"
-        android:layout_below="@+id/rbNotFragile"
         android:layout_gravity="center"
-        android:layout_marginTop="11dp"
         app:cardBackgroundColor="#c3e5e2"
         app:cardCornerRadius="4dp"
         app:cardElevation="10dp"
-        app:contentPadding="13dp">
+        app:contentPadding="13dp"
+        android:layout_below="@+id/rbNotFragile"
+        android:layout_alignLeft="@+id/tvFragile"
+        android:layout_alignStart="@+id/tvFragile">
 
         <LinearLayout
             android:id="@+id/llcardview"
@@ -300,8 +302,8 @@
 
             <ImageView
                 android:id="@+id/ivPackage"
-                android:layout_width="300dp"
-                android:layout_height="168.75dp"
+                android:layout_width="173.33dp"
+                android:layout_height="130dp"
                 app:srcCompat="@color/colorPrimaryDark" />
 
             <TextView
@@ -310,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload your package photo"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

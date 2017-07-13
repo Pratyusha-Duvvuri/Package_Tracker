@@ -22,12 +22,10 @@
         </activity>
         <activity android:name=".TransactionDetailActivity" />
         <activity android:name=".TransactionsActivity" />
-        <activity
-            android:name=".NewtransactionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SenderActivity"
-            android:label="Create A New Package" />
+        <activity android:name=".NewtransactionActivity"
+            android:label="Start A New Transaction"/>
+        <activity android:name=".SenderActivity"
+            android:label="Create A New Package"/>
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".CourierActivity" />
         <activity
@@ -40,6 +38,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SenderToReceiver" />
         <activity android:name=".AfterSenderConfirmation"></activity>
+
     </application>
 
 </manifest>
