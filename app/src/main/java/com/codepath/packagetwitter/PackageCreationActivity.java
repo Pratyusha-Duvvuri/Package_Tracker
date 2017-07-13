@@ -72,10 +72,9 @@ String sender_handle;
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
         mail =new Mail();
-        receiver = new Receiver();
-        sender = new Sender();
         receiver =  Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
         sender =  Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type_array, android.R.layout.simple_spinner_item);
