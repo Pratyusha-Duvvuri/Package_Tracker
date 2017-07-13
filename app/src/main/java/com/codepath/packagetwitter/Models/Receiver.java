@@ -19,7 +19,6 @@ public class Receiver extends User {
 
 
     Boolean hasReceived;
-    Double location;
 
     public Receiver(String name, String handle, String phone, String tripStart, String tripEnd, boolean hasReceived, Double location) {
         super(name, handle, phone, tripStart, tripEnd);

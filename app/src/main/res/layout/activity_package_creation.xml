@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvWeight"
         android:layout_alignStart="@+id/tvWeight"
-        android:text="Fragile?:"
+        android:text="Fragile?"
         android:layout_below="@+id/etWidth" />
 
     <RadioButton

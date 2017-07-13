@@ -33,6 +33,7 @@ public class SenderActivity extends AppCompatActivity {
                 if(exists) {
                     receiver = Receiver.getRandomReceiver(context);
 
+
                     onCreationSuccess();
                 }
             }

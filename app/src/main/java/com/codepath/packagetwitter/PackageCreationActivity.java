@@ -26,11 +26,9 @@ String sender_handle;
     Mail mail;
 
     @BindView(R.id.etWeight)EditText weight;
-    @BindView(R.id.etLength)EditText lenght;
     @BindView(R.id.etWidth)EditText width;
     @BindView(R.id.etLength)EditText length;
-    @BindView(R.id.etBreadth)EditText breadth;
-   @BindView(R.id.etHeight)EditText height;
+    @BindView(R.id.etHeight)EditText height;
     @BindView(R.id.etDescription)EditText description;
     @BindView(R.id.etSenderLocation)EditText senderLocation;
     @BindView(R.id.etStartDate)EditText startDate;
@@ -44,7 +42,6 @@ String sender_handle;
     @BindView(R.id.tvWeight)TextView tvWeight;
     @BindView(R.id.tvHeight)TextView tvHeight;
     @BindView(R.id.fbConfirm)FloatingActionButton btnNext;
-
     @BindView(R.id.tvWidth)TextView tvWidth;
 
 
@@ -68,48 +65,34 @@ String sender_handle;
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                sender.setLocation(Double.parseDouble(senderLocation.getText().toString()));
                 mail.setDescription(description.getText().toString());
                 mail.setFragile(true);//cbIsFragile.isChecked());
                 //have to set picture
                 mail.setWeight(Double.parseDouble(weight.getText().toString()));
                 mail.setType(type.getSelectedItem().toString());
-                int []Arr={Integer.parseInt(length.getText().toString()),Integer.parseInt(breadth.getText().toString()),Integer.parseInt(height.getText().toString())};
+                int []Arr={Integer.parseInt(length.getText().toString()),Integer.parseInt(width.getText().toString()),Integer.parseInt(height.getText().toString())};
                 mail.setVolume(Arr);
+                sender.setTripStart(startDate.getText().toString());
+                sender.setTripEnd(endDate.getText().toString());
+                sender.setLocation(Double.parseDouble(senderLocation.getText().toString()));
 
                 //Call the modal to verify information
                 onVerifyAction();
             }
         });
 
-
-
     }
 
 
     public void onVerifyAction() {
-
-        //setContentView(R.layout.fragment_edit_name);
-        //Tweet tweet = new Tweet();
-
-      //  FragmentManager fm = getSupportFragmentManager();
-
-      //  PackageConfirmation_Fragment editNameDialogFragment = PackageCreationActivity.newInstance("Some Title",);
 
         FragmentManager fm = getSupportFragmentManager();
         PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
         frag.show(fm, "fragment_package_confirmation");
     }
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
-
-//        frag = (HomeTimelineFragment) adapter.getItem(0);
-//        vpPager.setCurrentItem(0);
-//        frag.addTweet(tweet);
-
+        //reset information and check if listener is called
     }
-
-
-
 
 }
 

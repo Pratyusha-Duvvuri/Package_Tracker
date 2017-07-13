@@ -23,6 +23,7 @@ public class User {
     public String phoneNum;
     public String tripStart;
     public String tripEnd;
+    public Double location;
 
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd){
@@ -94,6 +95,34 @@ public class User {
 
     public String getTripStart() {
         return tripStart;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUserHandle(String userHandle) {
+        this.userHandle = userHandle;
+    }
+
+    public void setLocation(Double location) {
+        this.location = location;
+    }
+
+    public Double getLocation() {
+        return location;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setTripStart(String tripStart) {
+        this.tripStart = tripStart;
+    }
+
+    public void setTripEnd(String tripEnd) {
+        this.tripEnd = tripEnd;
     }
 
     public String getTripEnd() {

@@ -21,5 +21,6 @@ public class AfterSenderConfirmation extends AppCompatActivity implements Packag
         //Now populate stuff with this sender , receiver and mail
         //Get receiver location and start and end date and then send details for matching with appropriate courier
 
+
     }
 }

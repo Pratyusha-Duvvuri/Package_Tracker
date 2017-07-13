@@ -16,12 +16,8 @@ import java.util.Random;
 @Parcel
 public class Sender extends User{
 
-    Double location;
     Boolean hasSent;
 
-    public Double getLocation() {
-        return location;
-    }
 
     public Boolean getHasSent() {
         return hasSent;
