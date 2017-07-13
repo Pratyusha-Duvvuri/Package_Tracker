@@ -22,9 +22,7 @@
         android:id="@+id/etReceiverLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvSenderLocation"
-        android:layout_alignStart="@+id/tvSenderLocation"
-        android:layout_below="@+id/tvSenderLocation"
+
         android:hint="Input Your Location"
         android:inputType="text"
         android:textSize="14sp" />
@@ -36,8 +34,7 @@
         android:layout_above="@+id/etSenderLocation"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
-        android:layout_toEndOf="@+id/etSenderLocation"
-        android:layout_toRightOf="@+id/etSenderLocation"
+
         android:text="Start Date:"
         android:textStyle="bold" />
 
@@ -47,19 +44,13 @@
         android:layout_height="wrap_content"
         android:hint="MM/DD/YYYY"
         android:inputType="text"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvStartDate"
-        android:layout_alignBottom="@+id/tvStartDate"
-        android:layout_alignLeft="@+id/etEndDate"
-        android:layout_alignStart="@+id/etEndDate" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvREndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etSenderLocation"
-        android:layout_alignLeft="@+id/tvStartDate"
-        android:layout_alignStart="@+id/tvStartDate"
+
         android:text="Delivery Date:"
         android:textStyle="bold" />
 
@@ -69,10 +60,7 @@
         android:hint="MM/DD/YYYY"
         android:inputType="text"
         android:textSize="14sp"
-        android:id="@+id/etREndDate"
-        android:layout_alignBottom="@+id/tvEndDate"
-        android:layout_toRightOf="@+id/tvEndDate"
-        android:layout_toEndOf="@+id/tvEndDate" />
+        android:id="@+id/etREndDate" />
 
     <TextView
         android:id="@+id/tvRPackageDetailHeading"
@@ -81,7 +69,6 @@
         android:text="Package Details"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_below="@+id/etSenderLocation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp" />
 
@@ -90,14 +77,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Package Type:"
-        android:layout_below="@+id/tvPackageDetailHeading"
-        android:layout_toLeftOf="@+id/tvPackageDetailHeading"
-        android:layout_toStartOf="@+id/tvPackageDetailHeading" />
+  />
 
 
 
     <TextView
-        android:id="@+id/RtvWeight"
+        android:id="@+id/tvRWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Weight:"
@@ -108,7 +93,7 @@
 
 
     <TextView
-        android:id="@+id/tvFragile"
+        android:id="@+id/tvRFragile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvWeight"
@@ -116,40 +101,15 @@
         android:text="Fragile?"
         android:layout_below="@+id/etWidth" />
 
-    <RadioButton
-        android:id="@+id/rbFragile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Yes"
-        android:textColorLink="@color/colorPrimaryLight"
-        android:textSize="14sp"
-        android:buttonTint="@color/colorPrimaryLight"
-        android:layout_below="@+id/tvWidth"
-        android:layout_toRightOf="@+id/tvFragile"
-        android:layout_toEndOf="@+id/tvFragile" />
-
-    <RadioButton
-        android:id="@+id/rbNotFragile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/rbFragile"
-        android:layout_alignStart="@+id/rbFragile"
-        android:layout_below="@+id/rbFragile"
-        android:text="No"
-        android:textColorLink="@color/colorPrimaryLight"
-        android:buttonTint="@color/colorPrimaryLight" />
 
     <TextView
         android:id="@+id/tvDimensionsHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dimensions"
-        android:layout_toRightOf="@+id/tvStartDate"
-        android:layout_toEndOf="@+id/tvStartDate"
-        android:layout_below="@+id/tvPackageDetailHeading" />
+        android:text="Dimensions" />
 
     <TextView
-        android:id="@+id/tvLength"
+        android:id="@+id/tvRLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Length:"
@@ -158,84 +118,45 @@
         android:layout_alignStart="@+id/tvDimensionsHeading"
         android:layout_below="@+id/spPackageType" />
 
-    <EditText
-        android:id="@+id/etLength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="ex. 6in"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:layout_alignBottom="@+id/etWeight"
-        android:layout_toRightOf="@+id/tvLength"
-        android:layout_toEndOf="@+id/tvLength"
-        android:layout_below="@+id/tvDimensionsHeading" />
+
 
     <TextView
-        android:id="@+id/tvWidth"
+        android:id="@+id/tvRWidth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Width:"
-        android:layout_alignLeft="@+id/tvLength"
-        android:layout_alignStart="@+id/tvLength"
-        android:layout_below="@+id/etLength" />
 
-    <EditText
-        android:id="@+id/etWidth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="ex. 4in"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvWidth"
-        android:layout_alignBottom="@+id/tvWidth"
-        android:layout_toRightOf="@+id/tvLength"
-        android:layout_toEndOf="@+id/tvLength" />
+      />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="ex. 3in"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:id="@+id/etHeight"
-        android:layout_alignBaseline="@+id/rbFragile"
-        android:layout_alignBottom="@+id/rbFragile"
-        android:layout_alignLeft="@+id/etWidth"
-        android:layout_alignStart="@+id/etWidth" />
+
+
 
     <TextView
-        android:id="@+id/tvHeight"
+        android:id="@+id/tvRHeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Height:"
-        android:layout_alignLeft="@+id/tvWidth"
-        android:layout_alignStart="@+id/tvWidth"
-        android:layout_alignTop="@+id/tvFragile" />
+        android:text="Height:" />
 
-    <EditText
-        android:id="@+id/etDescription"
+    <TextView
+        android:id="@+id/tvRDescription"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/flFAB"
-        android:layout_alignLeft="@+id/card_view"
-        android:layout_alignStart="@+id/card_view"
+
         android:ems="10"
         android:hint="Describe the contents of your package along with any special requests..."
         android:inputType="textMultiLine"
         android:textSize="14sp" />
 
-    <ImageButton
-        android:id="@+id/ibUpload"
+    <ImageView
+        android:id="@+id/ibRImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="15dp"
-        app:srcCompat="@drawable/ic_upload"
-        android:layout_alignBottom="@+id/card_view"
-        android:layout_toRightOf="@+id/card_view"
-        android:layout_toEndOf="@+id/card_view" />
+        app:srcCompat="@drawable/ic_upload" />
 
     <FrameLayout
-        android:id="@+id/flFAB"
+        android:id="@+id/flRFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -245,7 +166,7 @@
         android:layout_marginBottom="12dp">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbConfirm"
+            android:id="@+id/fbRConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:color/transparent"
@@ -253,7 +174,7 @@
             app:elevation="5dp" />
 
         <TextView
-            android:id="@+id/tvConfirm"
+            android:id="@+id/tvRConfirm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -267,9 +188,6 @@
         android:id="@+id/card_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvFragile"
-        android:layout_alignStart="@+id/tvFragile"
-        android:layout_below="@+id/rbNotFragile"
         android:layout_gravity="center"
         android:layout_marginTop="11dp"
         app:cardBackgroundColor="#c3e5e2"
@@ -282,20 +200,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/ivPackage"
-                android:layout_width="300dp"
-                android:layout_height="168.75dp"
-                app:srcCompat="@color/colorPrimaryDark" />
-
-            <TextView
-                android:id="@+id/tvPackage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload your package photo"
-                android:textSize="14sp"
-                android:textStyle="bold" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
