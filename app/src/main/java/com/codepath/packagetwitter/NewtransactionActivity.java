@@ -71,7 +71,7 @@ public class NewtransactionActivity extends AppCompatActivity {
         // startActivity(i);
         //this is just to show that we have reached this point
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, PackageCreationActivity.class);
+        Intent i = new Intent(this, SenderActivity.class);
         i.putExtra("sender", Parcels.wrap(user) );
         startActivity(i);
     }
