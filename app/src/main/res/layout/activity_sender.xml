@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,39 @@
 
 
     <EditText
-        android:id="@+id/etLocationStart"
+
+        android:id="@+id/et_get_receiver_handle"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:inputType="text"
-        tools:layout_editor_absoluteY="-1dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginRight="8dp"
+        android:hint="\@receiver_handle"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/tvInfo"
+        android:layout_alignEnd="@+id/btndone" />
     <Button
         android:id="@+id/btndone"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Done"
         tools:layout_editor_absoluteY="76dp"
-        tools:layout_editor_absoluteX="280dp" />
+        tools:layout_editor_absoluteX="280dp"
+        android:layout_below="@+id/et_get_receiver_handle"
+        android:layout_alignEnd="@+id/tvInfo" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Enter The Desired User's Handle"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
