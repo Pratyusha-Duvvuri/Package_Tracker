@@ -34,7 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
         tvUsername =  (TextView) findViewById(R.id.tvName);
-
         tvUsername.setText(user.getUserName());
 
 

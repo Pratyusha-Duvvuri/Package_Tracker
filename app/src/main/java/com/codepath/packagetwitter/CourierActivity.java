@@ -1,8 +1,8 @@
 package com.codepath.packagetwitter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -93,9 +93,12 @@ public class CourierActivity extends AppCompatActivity {
 
     public void onVerifyAction() {
 
-        FragmentManager fm = getSupportFragmentManager();
+        //FragmentManager fm = getSupportFragmentManager();
         //PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
         //frag.show(fm, "fragment_package_confirmation");
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("courier", Parcels.wrap(courier));
+        startActivity(i);
     }
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
         //reset information and check if listener is called

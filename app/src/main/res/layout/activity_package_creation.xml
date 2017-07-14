@@ -81,9 +81,9 @@
         android:text="Package Details"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:layout_marginTop="39dp"
         android:layout_below="@+id/etSenderLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        android:layout_alignEnd="@+id/tvWidth" />
 
     <TextView
         android:id="@+id/tvPackageType"
@@ -243,26 +243,23 @@
         android:id="@+id/tvReceiverHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etReceiverHandle"
+        android:layout_alignBottom="@+id/etReceiverHandle"
+        android:layout_alignStart="@+id/tvPackageType"
         android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="14dp"
-        android:text="Receiver Handle"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Receiver Handle:"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etReceiverHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvSenderLocation"
-        android:layout_alignStart="@+id/tvSenderLocation"
-        android:layout_below="@+id/tvSenderLocation"
         android:hint="Receiver handle"
         android:inputType="text"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_below="@+id/etSenderLocation"
+        android:layout_toEndOf="@+id/tvReceiverHandle" />
     <ImageButton
         android:id="@+id/ibUpload"
         android:layout_width="wrap_content"
