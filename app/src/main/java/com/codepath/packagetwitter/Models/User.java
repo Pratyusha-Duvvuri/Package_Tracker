@@ -26,6 +26,7 @@ public class User {
     public Double location;
 
 
+
     public User(String name, String handle, String phone, String tripStart, String tripEnd){
             this.userHandle = handle;
             this.userName = name;
