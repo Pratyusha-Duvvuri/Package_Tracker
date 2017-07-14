@@ -32,16 +32,6 @@ public class NewtransactionActivity extends AppCompatActivity {
 
         });
 
-
-        final Button btnReceiver = (Button) findViewById(R.id.ntbtReceiver);
-        btnReceiver.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onReceiverSuccess();
-            }
-
-        });
-
-
         final Button btnCourier = (Button) findViewById(R.id.ntbtCourier);
         btnCourier.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -50,20 +40,8 @@ public class NewtransactionActivity extends AppCompatActivity {
 
         });
 
-
     }
 
-    public void onReceiverSuccess() {
-
-        // Intent i = new Intent(this, PhotosActivity.class);
-        // startActivity(i);
-        //this is just to show that we have reached this point
-        //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, SenderActivity.class);
-
-        i.putExtra("receiver",Parcels.wrap(user) );
-        startActivity(i);
-    }
 
     public void onSenderSuccess() {
 

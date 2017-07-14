@@ -38,6 +38,14 @@ public class Sender extends User{
 
     }
 
+    public Sender(User user)
+    {
+        this.setUserHandle(user.getUserHandle());
+        this.setUserName(user.getUserName());
+        this.setPhoneNum(user.getPhoneNum());
+
+    }
+
     public Sender(){}
     public static Sender getRandomSender(Context context){
         Resources resources = context.getResources();

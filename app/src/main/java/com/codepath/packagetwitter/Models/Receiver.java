@@ -25,6 +25,13 @@ public class Receiver extends User {
         this.hasReceived = hasReceived;
         this.location = location;
     }
+    public Receiver(User user)
+    {
+        this.setUserHandle(user.getUserHandle());
+        this.setUserName(user.getUserName());
+        this.setPhoneNum(user.getPhoneNum());
+
+    }
     public Receiver(){}
 
     public static Receiver getRandomReceiver(Context context){

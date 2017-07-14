@@ -10,12 +10,14 @@ import android.widget.EditText;
 
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
+import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
 
 public class SenderActivity extends AppCompatActivity {
 
     Receiver receiver;
+    User user;
     Sender sender;
     EditText mEditText;
     boolean exists;
@@ -24,7 +26,8 @@ public class SenderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sender);
         //get the sender from intent
-         sender =  getIntent().getParcelableExtra("sender");
+        user = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+        sender = new Sender(user);
         final Context context = this;
 
         final Button btnSender = (Button) findViewById(R.id.btndone);
