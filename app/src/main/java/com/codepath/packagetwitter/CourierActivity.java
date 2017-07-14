@@ -72,7 +72,7 @@ public class CourierActivity extends AppCompatActivity {
                 courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes,  startAddress,  endAddress);
 
 
-                onVerifyAction();
+                //onVerifyAction();
             }
         });
 

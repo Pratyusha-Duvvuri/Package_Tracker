@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frameContainer, login_fragment);
         transaction.commit();
+
     }
 
 }
