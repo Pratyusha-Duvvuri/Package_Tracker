@@ -1,16 +1,10 @@
 package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-
-import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcel;
 
 import java.util.Random;
-
-import static com.codepath.packagetwitter.R.drawable.phone;
 
 /**
  * Created by pratyusha98 on 7/11/17.
@@ -26,6 +20,13 @@ public class Receiver extends User {
         super(u.getUserName(), u.getUserHandle(), u.getPhoneNum(), tripStart, tripEnd);
         this.hasReceived = hasReceived;
         this.location = location;
+    }
+    public Receiver(User user)
+    {
+        this.setUserHandle(user.getUserHandle());
+        this.setUserName(user.getUserName());
+        this.setPhoneNum(user.getPhoneNum());
+
     }
     public Receiver(){}
 

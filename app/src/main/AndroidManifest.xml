@@ -26,8 +26,6 @@
             android:label="Start A New Transaction"/>
         <activity android:name=".SenderActivity"
             android:label="Request Your Receiver"/>
-        <activity android:name=".ReceiverActivity"
-            android:label="Request Your Sender"/>
         <activity android:name=".CourierActivity" />
         <activity android:name=".ProfileActivity" />
         <activity

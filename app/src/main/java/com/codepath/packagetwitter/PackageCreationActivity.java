@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,7 @@ import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
+import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
 
@@ -30,10 +32,11 @@ import butterknife.ButterKnife;
 public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener {
 
     String sender_handle;
+    Context context;
     Receiver receiver;
     Sender sender;
     Mail mail;
-
+    User user;
 
     @BindView(R.id.tvSenderLocation) TextView tvSenderLocation;
     @BindView(R.id.tvStartDate) TextView tvStartDate;
@@ -44,48 +47,31 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     @BindView(R.id.tvFragile) TextView tvFragile;
     @BindView(R.id.tvDimensionsHeading) TextView tvDimensionsHeading;
     @BindView(R.id.tvLength) TextView tvLength;
-    @BindView(R.id.tvWidth)
-    TextView tvWidth;
-    @BindView(R.id.tvHeight)
-    TextView tvHeight;
-    @BindView(R.id.tvConfirm)
-    TextView tvConfirm;
-    @BindView(R.id.tvPackage)
-    TextView tvPackage;
-    @BindView(R.id.etSenderLocation)
-    EditText etSenderLocation;
-    @BindView(R.id.etStartDate)
-    EditText etStartDate;
-    @BindView(R.id.etEndDate)
-    EditText etEndDate;
-    @BindView(R.id.etWeight)
-    EditText etWeight;
-    @BindView(R.id.etLength)
-    EditText etLength;
-    @BindView(R.id.etWidth)
-    EditText etWidth;
-    @BindView(R.id.etHeight)
-    EditText etHeight;
-    @BindView(R.id.etDescription)
-    EditText etDescription;
-    @BindView(R.id.rbFragile)
-    RadioButton rbFragile;
-    @BindView(R.id.rbNotFragile)
-    RadioButton rbNotFragile;
-    @BindView(R.id.spPackageType)
-    Spinner spPackageType;
-    @BindView(R.id.ibUpload)
-    ImageButton ibUpload;
-    @BindView(R.id.flFAB)
-    FrameLayout flFAB;
-    @BindView(R.id.fbConfirm)
-    FloatingActionButton fbConfirm;
-    @BindView(R.id.card_view)
-    CardView CardView;
-    @BindView(R.id.llcardview)
-    LinearLayout llCardView;
-    @BindView(R.id.ivPackage)
-    ImageView ivPackage;
+    @BindView(R.id.tvWidth) TextView tvWidth;
+    @BindView(R.id.tvHeight) TextView tvHeight;
+    @BindView(R.id.tvConfirm) TextView tvConfirm;
+    @BindView(R.id.tvPackage) TextView tvPackage;
+    @BindView(R.id.tvReceiverHandle) TextView tvReceiverHandle;
+    @BindView(R.id.etSenderLocation) EditText etSenderLocation;
+    @BindView(R.id.etStartDate) EditText etStartDate;
+    @BindView(R.id.etEndDate) EditText etEndDate;
+    @BindView(R.id.etWeight) EditText etWeight;
+    @BindView(R.id.etLength) EditText etLength;
+    @BindView(R.id.etWidth) EditText etWidth;
+    @BindView(R.id.etHeight) EditText etHeight;
+    @BindView(R.id.etDescription) EditText etDescription;
+    @BindView(R.id.etReceiverHandle) TextView etReceiverHandle;
+    @BindView(R.id.rbFragile) RadioButton rbFragile;
+    @BindView(R.id.rbNotFragile) RadioButton rbNotFragile;
+    @BindView(R.id.spPackageType) Spinner spPackageType;
+    @BindView(R.id.ibUpload) ImageButton ibUpload;
+    @BindView(R.id.flFAB) FrameLayout flFAB;
+    @BindView(R.id.fbConfirm) FloatingActionButton fbConfirm;
+    @BindView(R.id.card_view) CardView CardView;
+    @BindView(R.id.llcardview) LinearLayout llCardView;
+    @BindView(R.id.ivPackage) ImageView ivPackage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -93,9 +79,10 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
         mail = new Mail();
-        receiver = Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
-        sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
-
+        context = this;
+        //receiver = Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        user = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+        sender = new Sender(user);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type_array, android.R.layout.simple_spinner_item);
@@ -116,7 +103,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 //                sender.setTripStart(etStartDate.getText().toString());
 //                sender.setTripEnd(etEndDate.getText().toString());
 //                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
-
+                receiver = Receiver.getRandomReceiver(context);
                 //Call the modal to verify information
                 onVerifyAction();
             }
@@ -144,8 +131,3 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
     }
 }
-
-
-
-
-
