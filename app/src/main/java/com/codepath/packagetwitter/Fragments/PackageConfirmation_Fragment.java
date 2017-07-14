@@ -32,10 +32,10 @@ public class PackageConfirmation_Fragment extends DialogFragment{
     Sender sender;
     Receiver receiver;
     Boolean proceed;
-        private final int RESULT_OK = 10;
-        private EditText mEditText;
-        public TextView characterCount;
-        public long num;
+    private final int RESULT_OK = 10;
+    private EditText mEditText;
+    public TextView characterCount;
+    public long num;
     public Button next;
     public Button back;
 
@@ -110,6 +110,7 @@ public class PackageConfirmation_Fragment extends DialogFragment{
         // Close the dialog and return back to the parent activity
         dismiss();
     }
+
 
     }
 
