@@ -2,8 +2,13 @@ package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcel;
+
+import java.util.Random;
 
 /**
  * Created by rafasj6 on 7/11/17.
@@ -32,6 +37,21 @@ public class Mail {
         this.volume = volume;
         this.isFragile = fragile;
 
+    }
+
+    public static Mail getRandomMail(Context context){
+        Mail mail;
+
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.trousers);
+
+        Random rand = new Random();
+
+        int[] volume = {rand.nextInt(2)+1,rand.nextInt(2)+1,rand.nextInt(2)+1};
+        Double weight = Math.random() * 50;
+        boolean isFragile =     rand.nextBoolean();
+
+        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume,isFragile );
+        return mail;
     }
 
 
@@ -96,19 +116,6 @@ public class Mail {
 
 
 
-    public static Mail getRandomMail(Context context){
 
-
-
-        //this.picture = pic;
-        String description = "Random description woohoo";
-        Double wt = 100.0;
-        Bitmap pic = null;
-        int[] volume = {1,2,3};// - L*B*H -- ints
-        Boolean fragile = false;
-        String type = "doggo";
-        Mail mail = new Mail(pic, type, description, wt,  volume, fragile);
-        return mail;
-    }
 
 }
