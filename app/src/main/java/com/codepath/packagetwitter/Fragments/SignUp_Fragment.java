@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter.Fragments;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -16,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
+import com.codepath.packagetwitter.Models.User;
+import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+
+import org.parceler.Parcels;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +38,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static Button signUpButton;
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
+    public User user;
 
     public SignUp_Fragment() {
 
@@ -112,6 +118,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
+        user = new User(getFullName, "@" + getFullName, getMobileNumber);
+
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(getEmailId);
@@ -147,6 +155,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         else
             Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
                     .show();
+        Intent i = new Intent(getContext(), ProfileActivity.class);
+        i.putExtra("USER", Parcels.wrap(user));
+        startActivity(i);
 
     }
 }

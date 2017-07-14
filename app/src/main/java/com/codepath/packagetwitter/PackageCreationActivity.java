@@ -80,7 +80,6 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         ButterKnife.bind(this);
         mail = new Mail();
         context = this;
-        //receiver = Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
         user = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
         sender = new Sender(user);
         // Create an ArrayAdapter using the string array and a default spinner layout

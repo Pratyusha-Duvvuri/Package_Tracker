@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.User;
@@ -22,6 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
     User user;
+    public TextView tvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,12 @@ public class ProfileActivity extends AppCompatActivity {
         FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
-        user = User.getRandomUser(this);
+        user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        tvUsername =  (TextView) findViewById(R.id.tvName);
+
+        tvUsername.setText(user.getUserName());
+
+
 
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
