@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Transaction;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 /**
@@ -118,16 +120,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 // create intent for the new activity
                 if (view == itemView) {
                     intent = new Intent(context, TransactionDetailActivity.class);
-                    // serialize the movie using parceler, use its short name as a key
-                  //  intent.putExtra("user", transaction.user.sreenName);
+                    intent.putExtra("transaction", Parcels.wrap(transaction));
+                     // serialize the movie using parceler, use its short name as a key
+                    //  intent.putExtra("user", transaction.user.sreenName);
                    // intent.putExtra("uid", String.valueOf(transaction.uid));
 
 
-                // show the activity
-                context.startActivity(intent);
+                    // show the activity
+                    context.startActivity(intent);
+                }
             }
         }
     }
-}
 
 }
