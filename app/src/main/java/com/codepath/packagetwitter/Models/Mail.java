@@ -1,8 +1,14 @@
 package com.codepath.packagetwitter.Models;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcel;
+
+import java.util.Random;
 
 /**
  * Created by rafasj6 on 7/11/17.
@@ -32,13 +38,20 @@ public class Mail {
 
     }
 
-  /*  public static Mail getRandomMail(){
+    public static Mail getRandomMail(Context context){
         Mail mail;
 
-        int [] v = {2,3,4};
-        mail = new Mail (R.drawable.trousers, "Clothes", "2 pants and a polo", 2.0,v,false,"dont rip it!!!" );
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.trousers);
+
+        Random rand = new Random();
+
+        int[] volume = {rand.nextInt(2)+1,rand.nextInt(2)+1,rand.nextInt(2)+1};
+        Double weight = Math.random() * 50;
+        boolean isFragile =     rand.nextBoolean();
+
+        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume,isFragile,"dont rip it!!!" );
         return mail;
-    }*/
+    }
 
     public Bitmap getPicture() {
         return picture;
