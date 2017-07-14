@@ -29,8 +29,9 @@ public class Mail {
 
     }
 
-    public Mail(Bitmap pic, String type, String description, double weight, int[] volume,boolean fragile, String reqs){
+    public Mail(Bitmap pic, String type, String description, double weight, int[] volume,boolean fragile){
         this.picture = pic;
+        this.type = type;
         this.description = description;
         this.weight = weight;
         this.volume = volume;
@@ -49,9 +50,10 @@ public class Mail {
         Double weight = Math.random() * 50;
         boolean isFragile =     rand.nextBoolean();
 
-        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume,isFragile,"dont rip it!!!" );
+        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume,isFragile );
         return mail;
     }
+
 
     public Bitmap getPicture() {
         return picture;
@@ -111,4 +113,9 @@ public class Mail {
     public void setReceiverAccepted(boolean receiverAccepted) {
         this.receiverAccepted = receiverAccepted;
     }
+
+
+
+
+
 }

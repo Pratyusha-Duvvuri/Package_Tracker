@@ -8,7 +8,7 @@
         android:id="@+id/lbl_your_name"
         android:layout_width="183dp"
         android:layout_height="31dp"
-        android:text="Compose a Tweet" />
+            android:text="YOU HAVE A PENDING REQUEST" />
 
     <EditText
         android:id="@+id/txt_your_name"
