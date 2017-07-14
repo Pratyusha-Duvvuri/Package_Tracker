@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView5"
+        android:layout_below="@+id/ivLanding"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="43dp"
@@ -112,11 +112,11 @@
         tools:layout_editor_absoluteY="-1dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivTakeOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvFirstDash"
-        android:layout_alignEnd="@+id/imageView5"
+        android:layout_alignEnd="@+id/ivLanding"
         android:layout_alignStart="@+id/etWeight"
         android:layout_alignTop="@+id/etLocationStart"
         android:backgroundTint="@color/background_color"
@@ -159,7 +159,7 @@
         android:layout_toEndOf="@+id/etMonthEnd" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ivLanding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvSecondDash"
@@ -202,16 +202,16 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView4"
+        android:layout_above="@+id/ivTakeOff"
+        android:layout_alignEnd="@+id/etLocationStart"
         android:layout_marginBottom="22dp"
         android:layout_toStartOf="@+id/flFAB"
         android:text="Courier Information"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textStyle="bold"
-        android:layout_alignEnd="@+id/etLocationStart" />
+        android:textStyle="bold" />
 </RelativeLayout>

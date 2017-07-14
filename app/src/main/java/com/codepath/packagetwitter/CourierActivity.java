@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.CourierModel;
@@ -14,7 +16,10 @@ import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CourierActivity extends AppCompatActivity {
 
@@ -30,6 +35,13 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.etMonthEnd)EditText endMonth;
     @BindView(R.id.etLocationEnd)TextView locationEnd;
     @BindView(R.id.fbConfirm)FloatingActionButton btnNext;
+    @BindView(R.id.ivTakeOff)ImageView ivTakeOff;
+    @BindView(R.id.tvFirstDash)TextView tvFirstDash;
+    @BindView(R.id.tvSecondDash)TextView tvSecondDash;
+    @BindView(R.id.ivLanding)ImageView ivLanding;
+    @BindView(R.id.flFAB)FrameLayout flFAB;
+    @BindView(R.id.tvConfirm)TextView tvConfirm;
+    @BindView(R.id.tvHeading)TextView tvHeading;
 
 
 
@@ -38,9 +50,9 @@ public class CourierActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courier);
-
+        ButterKnife.bind(this);
         courier = new CourierModel();
-        u = (User) getIntent().getParcelableExtra("USER");
+        u = Parcels.unwrap(getIntent().getParcelableExtra("courier"));
 
 
         // Apply the adapter to the spinner
@@ -72,7 +84,7 @@ public class CourierActivity extends AppCompatActivity {
                 courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes,  startAddress,  endAddress);
 
 
-                onVerifyAction();
+                //onVerifyAction();
             }
         });
 

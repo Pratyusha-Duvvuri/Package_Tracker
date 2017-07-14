@@ -25,9 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
+import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+
+import org.parceler.Parcels;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +48,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    public static SignUp_Fragment signUp_fragment;
 
     public Login_Fragment() {
 
@@ -56,7 +60,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         view = inflater.inflate(R.layout.login_layout, container, false);
         initViews();
         setListeners();
+        signUp_fragment = new SignUp_Fragment();
         return view;
+
     }
 
     // Initiate Views
@@ -155,7 +161,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new SignUp_Fragment(), SignUp_Fragment).commit();
+                        .replace(R.id.frameContainer, signUp_fragment, SignUp_Fragment).commit();
                 break;
         }
 
@@ -188,7 +194,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else {
             Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
                     .show();
+
+            User u = User.getRandomUser(getContext());
             Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
+            i.putExtra("USER", Parcels.wrap(u));
             startActivity(i);
         }
 
