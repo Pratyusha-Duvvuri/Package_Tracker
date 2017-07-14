@@ -25,6 +25,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     Sender sender;
     Mail mail;
     User receiverUser;
+    User USER;
 
 
     //News things that receiver has to enter
@@ -53,6 +54,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         receiverUser= Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        USER= Parcels.unwrap(getIntent().getParcelableExtra("USER"));
         receiver = new Receiver(receiverUser);
         sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
         mail = Parcels.unwrap(getIntent().getParcelableExtra("mail"));
@@ -86,6 +88,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         i.putExtra("receiver", Parcels.wrap(receiver));
         i.putExtra("sender", Parcels.wrap(sender));
         i.putExtra("mail", Parcels.wrap(mail));
+        i.putExtra("USER", Parcels.wrap(USER) );
        startActivity(i);
 
     }

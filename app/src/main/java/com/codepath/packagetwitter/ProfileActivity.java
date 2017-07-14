@@ -40,7 +40,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-        user.hasPendingRequests=true;
 
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
@@ -63,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 Intent i = new Intent( ProfileActivity.this,PackageCreationActivity.class);
                 i.putExtra("sender", Parcels.wrap(user) );
-                i.putExtra("mainUser", Parcels.wrap(user) );
+                i.putExtra("USER", Parcels.wrap(user) );
 
                 startActivity(i);
 
@@ -74,11 +73,14 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
 
                 i.putExtra("courier",Parcels.wrap(user) );
+                i.putExtra("USER", Parcels.wrap(user) );
 
                 startActivity(i);
             }
         });
-        if(user.hasPendingRequests){actOnRequests();}
+        if(user.hasPendingRequests){
+            user.hasPendingRequests= false;
+            actOnRequests();}
 
     }
 
@@ -104,6 +106,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         i.putExtra("receiver", Parcels.wrap(user));
         i.putExtra("sender", Parcels.wrap(senderr));
         i.putExtra("mail", Parcels.wrap(maill));
-        startActivity(i);}
+            i.putExtra("USER", Parcels.wrap(user) );
+
+            startActivity(i);}
     }
 }
