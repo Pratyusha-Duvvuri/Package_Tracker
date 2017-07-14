@@ -57,7 +57,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
-
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent( ProfileActivity.this,PackageCreationActivity.class);
