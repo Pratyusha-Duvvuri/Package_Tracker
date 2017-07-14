@@ -197,6 +197,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             User u = User.getRandomUser(getContext());
             Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
+            u.hasPendingRequests= true;
             i.putExtra("USER", Parcels.wrap(u));
             startActivity(i);
         }

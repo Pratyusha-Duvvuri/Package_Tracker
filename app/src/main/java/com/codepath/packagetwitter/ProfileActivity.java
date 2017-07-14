@@ -40,7 +40,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-        user.hasPendingRequests=true;
 
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
@@ -63,6 +62,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 Intent i = new Intent( ProfileActivity.this,PackageCreationActivity.class);
                 i.putExtra("sender", Parcels.wrap(user) );
+                i.putExtra("USER", Parcels.wrap(user) );
+
                 startActivity(i);
 
             }
@@ -72,17 +73,27 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
 
                 i.putExtra("courier",Parcels.wrap(user) );
+                i.putExtra("USER", Parcels.wrap(user) );
 
                 startActivity(i);
             }
         });
-        if(user.hasPendingRequests){actOnRequests();}
+        if(user.hasPendingRequests){
+            user.hasPendingRequests= false;
+            actOnRequests();}
 
     }
 
     public void actOnRequests(){
         FragmentManager fm = getSupportFragmentManager();
-        PendingRequest_Fragment pendingRequest_fragment = PendingRequest_Fragment.newInstance(mail,sender);
+        //creating random sender and mail object here and checking flow from this
+        // point till last activity before transaction activity creation.
+
+        sender = Sender.getRandomSender(this);
+        mail = Mail.getRandomMail(this);
+
+        PendingRequest_Fragment pendingRequest_fragment =
+                        PendingRequest_Fragment.newInstance(mail,sender);
         pendingRequest_fragment.show(fm,"fragment_pending_request");
 
     }
@@ -95,6 +106,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         i.putExtra("receiver", Parcels.wrap(user));
         i.putExtra("sender", Parcels.wrap(senderr));
         i.putExtra("mail", Parcels.wrap(maill));
-        startActivity(i);}
+            i.putExtra("USER", Parcels.wrap(user) );
+
+            startActivity(i);}
     }
 }

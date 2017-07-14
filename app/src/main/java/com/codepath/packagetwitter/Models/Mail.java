@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter.Models;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import org.parceler.Parcel;
@@ -23,8 +24,9 @@ public class Mail {
 
     }
 
-    public Mail(Bitmap pic, String type, String description, double weight, int[] volume,boolean fragile, String reqs){
+    public Mail(Bitmap pic, String type, String description, double weight, int[] volume,boolean fragile){
         this.picture = pic;
+        this.type = type;
         this.description = description;
         this.weight = weight;
         this.volume = volume;
@@ -32,13 +34,6 @@ public class Mail {
 
     }
 
-  /*  public static Mail getRandomMail(){
-        Mail mail;
-
-        int [] v = {2,3,4};
-        mail = new Mail (R.drawable.trousers, "Clothes", "2 pants and a polo", 2.0,v,false,"dont rip it!!!" );
-        return mail;
-    }*/
 
     public Bitmap getPicture() {
         return picture;
@@ -98,4 +93,22 @@ public class Mail {
     public void setReceiverAccepted(boolean receiverAccepted) {
         this.receiverAccepted = receiverAccepted;
     }
+
+
+
+    public static Mail getRandomMail(Context context){
+
+
+
+        //this.picture = pic;
+        String description = "Random description woohoo";
+        Double wt = 100.0;
+        Bitmap pic = null;
+        int[] volume = {1,2,3};// - L*B*H -- ints
+        Boolean fragile = false;
+        String type = "doggo";
+        Mail mail = new Mail(pic, type, description, wt,  volume, fragile);
+        return mail;
+    }
+
 }

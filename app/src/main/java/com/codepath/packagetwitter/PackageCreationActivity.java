@@ -37,6 +37,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     Sender sender;
     Mail mail;
     User user;
+    User USER;
 
     @BindView(R.id.tvSenderLocation) TextView tvSenderLocation;
     @BindView(R.id.tvStartDate) TextView tvStartDate;
@@ -80,8 +81,11 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         ButterKnife.bind(this);
         mail = new Mail();
         context = this;
+        USER = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+
         user = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
         sender = new Sender(user);
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.type_array, android.R.layout.simple_spinner_item);
@@ -121,10 +125,11 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail, Boolean bool) {
         //reset information and check if listener is called
         if (bool) {
-            Intent i = new Intent(this, AfterSenderConfirmation.class);
+            Intent i = new Intent(this, ProfileActivity.class);
             i.putExtra("receiver", Parcels.wrap(receiver));
             i.putExtra("sender", Parcels.wrap(sender));
             i.putExtra("mail", Parcels.wrap(mail));
+            i.putExtra("USER", Parcels.wrap(USER));
             startActivity(i);
         }
 
