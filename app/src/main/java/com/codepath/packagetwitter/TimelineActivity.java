@@ -1,6 +1,5 @@
 package com.codepath.packagetwitter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -55,8 +54,8 @@ public class TimelineActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.miAdd:
                 //Launch new Transaction activity
-                Intent i = new Intent(this, NewtransactionActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(this, NewtransactionActivity.class);
+//                startActivity(i);
 
             default:
                 return super.onOptionsItemSelected(item);

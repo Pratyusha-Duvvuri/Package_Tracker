@@ -25,16 +25,7 @@ public class User {
     public String tripEnd;
     public Double location;
 
-//
-//    public User(String name, String handle, String phone, String tripStart, String tripEnd){
-//        this.userHandle = handle;
-//        this.userName = name;
-//        this.phoneNum = phone;
-//        this.tripStart = tripStart;
-//        this.tripEnd = tripEnd;
-//
-//
-//    }
+
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd) {
         this.userHandle = handle;
@@ -42,14 +33,14 @@ public class User {
         this.phoneNum = phone;
         this.tripStart = tripStart;
         this.tripEnd = tripEnd;
-
-
     }
+
+
+
     public User(String name, String handle, String phone) {
         this.userHandle = handle;
         this.userName = name;
         this.phoneNum = phone;
-
 
 
     }
