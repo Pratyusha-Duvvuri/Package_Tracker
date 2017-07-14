@@ -38,9 +38,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
-        user = User.getRandomUser(this);
-        user.hasPendingRequests=true;
+        //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        user.hasPendingRequests=true;
+
         tvUsername =  (TextView) findViewById(R.id.tvName);
 
         tvUsername.setText(user.getUserName());
@@ -83,17 +84,18 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void actOnRequests(){
         FragmentManager fm = getSupportFragmentManager();
         PendingRequest_Fragment pendingRequest_fragment = PendingRequest_Fragment.newInstance(mail,sender);
-        //pendingRequest_fragment.show(fm,"fragment_pending_request");
+        pendingRequest_fragment.show(fm,"fragment_pending_request");
 
     }
 
 
     @Override
     public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
+        if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
         i.putExtra("receiver", Parcels.wrap(user));
         i.putExtra("sender", Parcels.wrap(senderr));
         i.putExtra("mail", Parcels.wrap(maill));
-        startActivity(i);
+        startActivity(i);}
     }
 }
