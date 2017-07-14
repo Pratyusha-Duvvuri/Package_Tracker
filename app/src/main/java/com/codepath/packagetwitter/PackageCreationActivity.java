@@ -34,7 +34,7 @@ String sender_handle;
     @BindView(R.id.etStartDate)EditText startDate;
     @BindView(R.id.etEndDate)EditText endDate;
     @BindView(R.id.rbFragile)RadioButton isFragile;
-    @BindView(R.id.rbFragile)RadioButton notFragile;
+    //@BindView(R.id.rbFragile)RadioButton notFragile;
     @BindView(R.id.spPackageType)Spinner type;
     @BindView(R.id.tvSenderLocation)TextView tvSenderLocation;
     @BindView(R.id.tvStartDate)TextView tvStartDate;

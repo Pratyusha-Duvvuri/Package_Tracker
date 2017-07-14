@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/et_get_receiver_handle"
+        android:id="@+id/etLocationStart"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:inputType="text"
