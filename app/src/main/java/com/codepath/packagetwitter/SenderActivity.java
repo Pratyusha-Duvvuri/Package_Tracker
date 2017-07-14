@@ -45,7 +45,7 @@ public class SenderActivity extends AppCompatActivity {
 
         //get receiver handle -- populated by an autocomplete from the database
         //change later
-        mEditText = (EditText) findViewById(R.id.et_get_receiver_handle);
+        mEditText = (EditText) findViewById(R.id.etLocationStart);
         exists = true;
 
 

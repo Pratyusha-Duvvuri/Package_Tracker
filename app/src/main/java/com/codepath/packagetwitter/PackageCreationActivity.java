@@ -131,8 +131,3 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
     }
 }
-
-
-
-
-

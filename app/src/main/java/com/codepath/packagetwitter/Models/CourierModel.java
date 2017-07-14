@@ -24,8 +24,10 @@ public class CourierModel  extends User{
     public String startAddress;
     public String endAddress;
 
-    public CourierModel(String name, String handle, String phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
-        super(  name,  handle,  phone, tripStart, tripEnd);
+
+
+    public CourierModel(User u, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
+        super( u.getUserName(),  u.getUserHandle(),  u.getPhoneNum(), tripStart, tripEnd);
 
         this.weightAvailable = weight;
         this.volumeAvailable = v;
@@ -37,15 +39,7 @@ public class CourierModel  extends User{
 
     public static CourierModel getRandomCourrier(Context context){
         Resources resources = context.getResources();
-
-        TypedArray contactNames = resources.obtainTypedArray(R.array.contact_names);
-        int name = (int) (Math.random() * contactNames.length());
-
-        TypedArray contactHandles = resources.obtainTypedArray(R.array.contact_handles);
-        int handle = (int) (Math.random() * contactHandles.length());
-
-        TypedArray contactNumbers = resources.obtainTypedArray(R.array.contact_numbers);
-        int number = (int) (Math.random() * contactNumbers.length());
+        User user = User.getRandomUser(context);
 
         TypedArray locations = resources.obtainTypedArray(R.array.locations);
         int startLocation = (int) (Math.random() * locations.length());
@@ -64,9 +58,8 @@ public class CourierModel  extends User{
         int[] volume = {rand.nextInt(2)+1,rand.nextInt(2)+1,rand.nextInt(2)+1};
         Double weight =  Math.random() * 50;
 
-        String numb =  contactNumbers.getString(number);
 
-        CourierModel courrier = new CourierModel(contactNames.getString(name), "@" + contactHandles.getString(handle), numb,
+        CourierModel courrier = new CourierModel(user,
                 startMonth+"/" + startDay ,endMonth + "/"+ endDay,weight, volume, locations.getString(startLocation), locations.getString(endLocation));
         return courrier;
     }

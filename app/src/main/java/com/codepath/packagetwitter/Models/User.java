@@ -27,15 +27,25 @@ public class User {
 
 
 
-    public User(String name, String handle, String phone, String tripStart, String tripEnd){
-            this.userHandle = handle;
-            this.userName = name;
-            this.phoneNum = phone;
-            this.tripStart = tripStart;
-            this.tripEnd = tripEnd;
+    public User(String name, String handle, String phone, String tripStart, String tripEnd) {
+        this.userHandle = handle;
+        this.userName = name;
+        this.phoneNum = phone;
+        this.tripStart = tripStart;
+        this.tripEnd = tripEnd;
+    }
 
 
-        }
+
+    public User(String name, String handle, String phone) {
+        this.userHandle = handle;
+        this.userName = name;
+        this.phoneNum = phone;
+
+
+    }
+
+
     public User(){}
 
         public static ArrayList<Transaction> getTransactions(Context context){
@@ -67,18 +77,8 @@ public class User {
         int number = (int) (Math.random() * contactNumbers.length());
 
         Random rand = new Random();
-        String startDay = String.valueOf(rand.nextInt(28));
 
-        String startMonth = String.valueOf(rand.nextInt(12));
-
-        String endDay = String.valueOf(rand.nextInt(28));
-
-        String endMonth = String.valueOf(rand.nextInt(12));
-
-
-
-        User user = new User(contactNames.getString(name), "@" + contactHandles.getString(handle), contactNumbers.getString(number),
-                startMonth+"/" + startDay ,endMonth + "/"+ endDay );
+        User user = new User(contactNames.getString(name), "@" + contactHandles.getString(handle), contactNumbers.getString(number));
         return user;
     }
 
