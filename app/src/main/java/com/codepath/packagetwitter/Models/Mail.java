@@ -16,6 +16,7 @@ public class Mail {
     Double weight;// (number)
     int[] volume;// - L*B*H -- ints
     boolean isFragile;///Not fragile (boolean)
+    boolean receiverAccepted;
     public Mail(){
 
 
@@ -90,4 +91,11 @@ public class Mail {
         return isFragile;
     }
 
+    public boolean isReceiverAccepted() {
+        return receiverAccepted;
+    }
+
+    public void setReceiverAccepted(boolean receiverAccepted) {
+        this.receiverAccepted = receiverAccepted;
+    }
 }

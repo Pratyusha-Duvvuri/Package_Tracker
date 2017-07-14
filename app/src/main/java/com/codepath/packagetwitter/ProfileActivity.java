@@ -3,12 +3,16 @@ package com.codepath.packagetwitter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
+import com.codepath.packagetwitter.Models.Mail;
+import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -18,11 +22,13 @@ import org.parceler.Parcels;
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener {
 
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
     User user;
+    Mail mail;
+    Sender sender;
     public TextView tvUsername;
 
     @Override
@@ -32,10 +38,12 @@ public class ProfileActivity extends AppCompatActivity {
         FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
+        //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        user.hasPendingRequests=true;
+
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
-
 
 
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
@@ -68,9 +76,25 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        if(user.hasPendingRequests){actOnRequests();}
+
+    }
+
+    public void actOnRequests(){
+        FragmentManager fm = getSupportFragmentManager();
+        PendingRequest_Fragment pendingRequest_fragment = PendingRequest_Fragment.newInstance(mail,sender);
+        pendingRequest_fragment.show(fm,"fragment_pending_request");
+
+    }
 
 
-
-
+    @Override
+    public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
+        if(proceed){
+        Intent i = new Intent(this, AfterSenderConfirmation.class);
+        i.putExtra("receiver", Parcels.wrap(user));
+        i.putExtra("sender", Parcels.wrap(senderr));
+        i.putExtra("mail", Parcels.wrap(maill));
+        startActivity(i);}
     }
 }

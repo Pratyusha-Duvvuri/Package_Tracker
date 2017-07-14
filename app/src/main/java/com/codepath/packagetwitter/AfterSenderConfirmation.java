@@ -1,7 +1,6 @@
 package com.codepath.packagetwitter;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
+import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
 
@@ -20,6 +20,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     Receiver receiver;
     Sender sender;
     Mail mail;
+    User receiverUser;
+
 
     //News things that receiver has to enter
     @BindView(R.id.etReceiverLocation)EditText receiverLocation;
@@ -38,14 +40,15 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.tvRLength)TextView tvLength;
     @BindView(R.id.tvRDescription)TextView tvDescription;
 
-    @BindView(R.id.fbRConfirm)FloatingActionButton btnNext;
+//    @BindView(R.id.fbRConfirm)FloatingActionButton btnNext;
     @BindView(R.id.ivPackageImage)ImageView ivImage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        receiver = Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        receiverUser= Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        receiver = new Receiver(receiverUser);
         sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
         mail = Parcels.unwrap(getIntent().getParcelableExtra("mail"));
         setContentView(R.layout.activity_after_sender_confirmation);

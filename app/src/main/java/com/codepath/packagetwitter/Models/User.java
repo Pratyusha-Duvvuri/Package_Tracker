@@ -25,6 +25,8 @@ public class User {
     public String tripEnd;
     public Double location;
 
+    public Boolean hasPendingRequests;
+
 
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd) {
@@ -33,6 +35,7 @@ public class User {
         this.phoneNum = phone;
         this.tripStart = tripStart;
         this.tripEnd = tripEnd;
+
     }
 
 
