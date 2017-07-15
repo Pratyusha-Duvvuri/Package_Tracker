@@ -1,8 +1,12 @@
 package com.codepath.packagetwitter;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -35,5 +39,20 @@ public class ParseApplication extends Application {
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
                 .clientBuilder(builder)
                 .server("https://packagetrackerr.herokuapp.com/parse/").build());
+
+
+        // New test creation of object below
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("ParseApplication", "Ok");
+                } else {
+                    Log.d("ParseApplication", "Error: " + e.toString());
+                }
+            }
+        });
     }
 }
