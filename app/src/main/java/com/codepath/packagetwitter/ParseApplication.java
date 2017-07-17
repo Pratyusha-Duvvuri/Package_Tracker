@@ -17,6 +17,11 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ParseObject.registerSubclass(Message.class);
+//        ParseObject.registerSubclass(Transaction.class);
+        // Add your initialization code here
+        Parse.initialize(this, "7zBztvyG4hYQ9XghgfqYxfRcL3SMBYWAj0GUL", "iZWhgJRu6yKm3iNMbTaguLcNCV3qedijWL");
+
+
 
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);

@@ -173,13 +173,16 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         ParseUser user = new ParseUser();
 // Set core properties
 
-        user.setUsername(fullName.getText().toString());
+        user.setUsername(emailId.getText().toString());
         user.setPassword(password.getText().toString());
         user.setEmail(emailId.getText().toString());
 // Set custom properties
+        user.put("userHandle",emailId.getText().toString());
         user.put("location", location.getText().toString());
         user.put("mobileNumber", mobileNumber.getText().toString());
         user.put("fullName",fullName.getText().toString());
+        user.put("hasPendingRequests",false);
+
 // Invoke signUpInBackground
     user.signUpInBackground(new SignUpCallback() {
         @Override

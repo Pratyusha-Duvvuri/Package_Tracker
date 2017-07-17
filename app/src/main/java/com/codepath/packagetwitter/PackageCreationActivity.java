@@ -22,6 +22,7 @@ import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
+import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
@@ -130,6 +131,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
             i.putExtra("sender", Parcels.wrap(sender));
             i.putExtra("mail", Parcels.wrap(mail));
             i.putExtra("USER", Parcels.wrap(USER));
+            i.putExtra("Transaction", Parcels.wrap(Transaction.getRandomTransaction(this)));
             startActivity(i);
         }
 

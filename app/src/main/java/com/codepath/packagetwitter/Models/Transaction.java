@@ -2,6 +2,8 @@ package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
 
+import com.parse.ParseObject;
+
 import org.parceler.Parcel;
 
 /**
@@ -9,7 +11,8 @@ import org.parceler.Parcel;
  */
 
 @Parcel
-public class Transaction {
+//@ParseClassName("Transaction")
+public class Transaction extends ParseObject{
     Mail mail;
     Receiver receiver;// - Access to location, has received
     Sender sender; //-  Access to location, has received
