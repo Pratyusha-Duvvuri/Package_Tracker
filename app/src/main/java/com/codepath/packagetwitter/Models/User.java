@@ -25,7 +25,7 @@ public class User {
     public String tripEnd;
     public Double location;
 
-    public Boolean hasPendingRequests;
+    public Boolean hasPendingRequests = false;
 
 
 
@@ -35,7 +35,6 @@ public class User {
         this.phoneNum = phone;
         this.tripStart = tripStart;
         this.tripEnd = tripEnd;
-
     }
 
 
@@ -44,6 +43,7 @@ public class User {
         this.userHandle = handle;
         this.userName = name;
         this.phoneNum = phone;
+
 
 
     }
