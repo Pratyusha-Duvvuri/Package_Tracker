@@ -20,7 +20,7 @@ import java.util.Date;
 public class Algorithm {
 
     public static ArrayList<Transaction> getPossibleMatches(Context context, Sender sender, Mail  mail){
-        //returns a list of random transactions, all of wich are possible matches
+        //returns a list of random transactions, all of which are possible matches
         ArrayList<Transaction> transactions = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
             CourierModel courier = CourierModel.getRandomCourrier(context);
@@ -35,7 +35,7 @@ public class Algorithm {
     }
 
     public static ArrayList<Transaction> getPossibleMatches(Context context, Receiver receiver){
-        //returns a list of random transactions, all of wich are possible matches
+        //returns a list of random transactions, all of which are possible matches
 
         ArrayList<Transaction> transactions = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
@@ -52,7 +52,7 @@ public class Algorithm {
     }
 
     public static ArrayList<Transaction> getPossibleMatches(Context context, CourierModel courier){
-        //returns a list of random transactions, all of wich are possible matches
+        //returns a list of random transactions, all of which are possible matches
 
         ArrayList<Transaction> transactions = new ArrayList<>();
         for(int i = 0; i < 20; i++) {

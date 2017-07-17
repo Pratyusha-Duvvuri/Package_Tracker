@@ -51,7 +51,9 @@ public class Transaction {
 
         Receiver receiver = Receiver.getRandomReceiver(context);
 
-        Transaction transaction = new Transaction(receiver, sender, courier, new Mail());
+        Mail mail = Mail.getRandomMail(context);
+
+        Transaction transaction = new Transaction(receiver, sender, courier, mail);
 
         return transaction;
 
