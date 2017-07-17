@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -13,12 +14,16 @@ import android.widget.Toast;
 public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[] {"Current", "Completed"};
     private Context context;
-    private CurrentTransactionFragment currentTransactionFragment = new CurrentTransactionFragment();
-    private OldTransactionFragment oldTransactionFragment = new OldTransactionFragment();
+    public CurrentTransactionFragment currentTransactionFragment;
+    public OldTransactionFragment oldTransactionFragment;
 
     public TransactionsPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
         this.context = context;
+        Log.d("Transaction PagerAdap", "COnstruct");
+
+        currentTransactionFragment = new CurrentTransactionFragment();
+        oldTransactionFragment = new OldTransactionFragment();
     }
 
     @Override

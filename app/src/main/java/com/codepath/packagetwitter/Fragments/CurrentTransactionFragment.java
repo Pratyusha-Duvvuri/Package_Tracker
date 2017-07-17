@@ -1,6 +1,8 @@
 package com.codepath.packagetwitter.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +25,27 @@ import java.util.ArrayList;
 public class CurrentTransactionFragment extends Fragment {
 
     TransactionAdapter transactionAdapter;
-    ArrayList<Transaction> transactions;
+    public ArrayList<Transaction> transactions;
     RecyclerView rvTransactions;
     //SwipeRefreshLayout swipeContainer;
     //TwitterClient client;
     public static int page;
+    public Context context;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        transactions = new ArrayList<>();
+        // init the array list (data source)
+        //construct the adapter form this datasource
+        transactionAdapter = new TransactionAdapter(transactions);
+
+        this.context = context;
+        populateTimeline();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,15 +53,7 @@ public class CurrentTransactionFragment extends Fragment {
 
         Log.d("on create", "in current");
         View v = inflater.inflate(R.layout.fragments_transactions_list, container, false);
-
-
-        //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
-        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
-        transactions = new ArrayList<>();
-        // init the array list (data source)
-        //construct the adapter form this datasource
-        transactionAdapter = new TransactionAdapter(transactions);
         //RecyclerView setup ( layout manager, use adapter)
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
@@ -52,7 +62,10 @@ public class CurrentTransactionFragment extends Fragment {
         //set the adapter
 
         rvTransactions.setAdapter(transactionAdapter);
-        populateTimeline();
+
+
+        //find the recycler view and swipe containerview
+
 
         return v;
     }
@@ -76,46 +89,7 @@ public class CurrentTransactionFragment extends Fragment {
     private void populateTimeline(){
 
 
-        transactionAdapter.notifyDataSetChanged();
-        Transaction transaction = Transaction.getRandomTransaction(getContext());
-        addItems(transaction);
 
-        Transaction transaction2 = Transaction.getRandomTransaction(getContext());
-        addItems(transaction2);
-        Transaction transaction3 = Transaction.getRandomTransaction(getContext());
-        addItems(transaction3);
-        //     showProgressBar();
-
-//        client.getHomeTimeline( new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                //Log.d("TwitterClient", response.toString() )    ;
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//
-//                addItems(response);
-//
-//            }
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                Log.d("TwitterClient", responseString )    ;
-//                throwable.printStackTrace();
-//            }
-//
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                Log.d("TwitterClient", errorResponse.toString() )    ;
-//                throwable.printStackTrace();            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-//                Log.d("TwitterClient", errorResponse.toString() )    ;
-//                throwable.printStackTrace();             }
-//        });
-//        //  hideProgressBar();
 
     }
     public void addItems(Transaction transaction) {

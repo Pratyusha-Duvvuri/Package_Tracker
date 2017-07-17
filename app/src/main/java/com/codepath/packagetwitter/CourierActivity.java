@@ -21,6 +21,8 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.codepath.packagetwitter.ProfileActivity.COURIER_KEY;
+
 public class CourierActivity extends AppCompatActivity {
 
     CourierModel courier;
@@ -84,7 +86,7 @@ public class CourierActivity extends AppCompatActivity {
                 courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes,  startAddress,  endAddress);
 
 
-                //onVerifyAction();
+                onVerifyAction();
             }
         });
 
@@ -97,8 +99,9 @@ public class CourierActivity extends AppCompatActivity {
         //PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
         //frag.show(fm, "fragment_package_confirmation");
         Intent i = new Intent(this, ProfileActivity.class);
-        i.putExtra("courier", Parcels.wrap(courier));
-        startActivity(i);
+        i.putExtra(COURIER_KEY, Parcels.wrap(courier));
+        setResult(RESULT_OK, i); // set result code and bundle data for response
+        finish(); // closes the activity, pass data to parent
     }
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
         //reset information and check if listener is called
