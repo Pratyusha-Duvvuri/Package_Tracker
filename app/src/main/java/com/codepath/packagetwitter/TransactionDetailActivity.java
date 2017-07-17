@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,8 @@ import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.codepath.packagetwitter.R.drawable.user;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
@@ -57,10 +60,11 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 startActivity(i);
 
             }
-        });
+        });*/
+
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
+                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
 
                 i.putExtra("courier",Parcels.wrap(user) );
                 i.putExtra("USER", Parcels.wrap(user) );
@@ -68,6 +72,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        */
+
     }
 }

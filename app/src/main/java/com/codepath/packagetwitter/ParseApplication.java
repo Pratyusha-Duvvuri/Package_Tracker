@@ -1,12 +1,9 @@
 package com.codepath.packagetwitter;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.SaveCallback;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -19,6 +16,7 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ParseObject.registerSubclass(Message.class);
 
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
@@ -42,17 +40,17 @@ public class ParseApplication extends Application {
 
 
         // New test creation of object below
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("ParseApplication", "Ok");
-                } else {
-                    Log.d("ParseApplication", "Error: " + e.toString());
-                }
-            }
-        });
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("foo", "bar");
+//        testObject.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    Log.d("ParseApplication", "Ok");
+//                } else {
+//                    Log.d("ParseApplication", "Error: " + e.toString());
+//                }
+//            }
+//        });
     }
 }
