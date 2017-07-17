@@ -39,8 +39,6 @@ public class ChatActivity extends AppCompatActivity {
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +78,6 @@ public class ChatActivity extends AppCompatActivity {
                         });
                     }
                 });
-
-
     }
 
     // Get the userId from the cached currentUser object
@@ -92,6 +88,7 @@ public class ChatActivity extends AppCompatActivity {
         ParseAnonymousUtils.logIn(new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
+                //you want e to be null
                 if (e != null) {
                     Log.e(TAG, "Anonymous login failed: ", e);
                 } else {
@@ -177,10 +174,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
 
 }

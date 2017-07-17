@@ -23,7 +23,7 @@ public class User {
     public String phoneNum;
     public String tripStart;
     public String tripEnd;
-    public Double location;
+    public String location;
 
     public Boolean hasPendingRequests;
 
@@ -109,11 +109,11 @@ public class User {
         this.userHandle = userHandle;
     }
 
-    public void setLocation(Double location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Double getLocation() {
+    public String getLocation() {
         return location;
     }
 
