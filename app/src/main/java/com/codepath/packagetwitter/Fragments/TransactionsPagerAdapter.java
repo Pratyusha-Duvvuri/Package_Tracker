@@ -12,8 +12,9 @@ import android.widget.Toast;
  */
 
 public class TransactionsPagerAdapter extends FragmentPagerAdapter {
-    private String tabTitles[] = new String[] {"Current", "Completed"};
+    private String tabTitles[] = new String[] {"Pending","Current", "Completed"};
     private Context context;
+    public PendingTransactionFragment pendingTransactionFragment;
     public CurrentTransactionFragment currentTransactionFragment;
     public OldTransactionFragment oldTransactionFragment;
 
@@ -21,23 +22,27 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.context = context;
         Log.d("Transaction PagerAdap", "COnstruct");
-
+        pendingTransactionFragment = new PendingTransactionFragment();
         currentTransactionFragment = new CurrentTransactionFragment();
         oldTransactionFragment = new OldTransactionFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
-                if (position == 0) {
-                    Toast.makeText(context, "Current", Toast.LENGTH_SHORT).show();
+        if (position == 0) {
+            Toast.makeText(context, "Current", Toast.LENGTH_SHORT).show();
 
-                    return currentTransactionFragment;
+            return pendingTransactionFragment;
         }
         else if (position == 1) {
-                    Toast.makeText(context, "Old", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Old", Toast.LENGTH_SHORT).show();
 
-                    return oldTransactionFragment;
+            return currentTransactionFragment;
         }
+        else if (position == 2) {
+             return oldTransactionFragment;
+        }
+
         else {
             return null;
         }
@@ -47,7 +52,7 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     //return total # of fragments
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     //return title based on item position
