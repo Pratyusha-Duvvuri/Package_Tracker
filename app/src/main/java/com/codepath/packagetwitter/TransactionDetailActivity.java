@@ -27,6 +27,10 @@ public class TransactionDetailActivity extends AppCompatActivity {
     @BindView(R.id.Type) TextView Type;
     @BindView(R.id.Weight) TextView tvWeight;
     @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
+    @BindView(R.id.tvFrom) TextView tvFrom;
+    @BindView(R.id.tvTo) TextView tvTo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,9 @@ public class TransactionDetailActivity extends AppCompatActivity {
         tvLength.setText(String.valueOf(volume[0]));
         tvWidth.setText(String.valueOf(volume[1]));
         tvHeight.setText(String.valueOf(volume[2]));
+        tvTo.setText(transaction.getSender().getUserName());
+        tvFrom.setText("From: " + transaction.getSender().getLocation());
+
         if (transaction.getCourier().equals(null)) {
             materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
             chatButton.setVisibility(View.GONE);

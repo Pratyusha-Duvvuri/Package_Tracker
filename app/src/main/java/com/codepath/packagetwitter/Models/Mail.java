@@ -20,7 +20,7 @@ public class Mail {
     String type;// ( from a list of types)
     String description;// (String )
     Double weight;// (number)
-    int[] volume;// - L*B*H -- ints
+    public int[] volume;// - L*B*H -- ints
     boolean isFragile;///Not fragile (boolean)
     boolean receiverAccepted;
     public Mail(){

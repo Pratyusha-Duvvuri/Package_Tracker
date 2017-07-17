@@ -105,7 +105,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 //                mail.setVolume(Arr);
 //                sender.setTripStart(etStartDate.getText().toString());
 //                sender.setTripEnd(etEndDate.getText().toString());
-//                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
+//                sender.setLocation((etSenderLocation.getText().toString()));
 //                receiver = Receiver.getRandomReceiver(context);
 //                //Call the modal to verify information
 //                onVerifyAction();
