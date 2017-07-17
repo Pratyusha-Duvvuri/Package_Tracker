@@ -123,7 +123,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/editText"
         app:srcCompat="@drawable/airplane_taking_off"
-        android:backgroundTint="@color/background_color"/>
+        />
 
     <EditText
         android:id="@+id/et_get_receiver_handle"
@@ -168,5 +168,5 @@
         app:srcCompat="@drawable/airplane_landing"
         android:layout_alignBottom="@+id/textView3"
         android:layout_toStartOf="@+id/editText6"
-        android:backgroundTint="@color/background_color"/>
+     />
 </RelativeLayout>
