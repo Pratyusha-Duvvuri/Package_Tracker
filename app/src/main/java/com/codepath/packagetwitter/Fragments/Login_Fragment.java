@@ -29,6 +29,9 @@ import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -194,13 +197,26 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else {
             Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
                     .show();
-
+            getUserFromDatabase();
             User u = User.getRandomUser(getContext());
             Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
             i.putExtra("USER", Parcels.wrap(u));
             startActivity(i);
         }
 
+    }
+    void getUserFromDatabase(){
+
+        ParseUser.logInInBackground("joestevens", "secret123", new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (user != null) {
+                    // Hooray! The user is logged in.
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                }
+            }
+        });
     }
 }
 
