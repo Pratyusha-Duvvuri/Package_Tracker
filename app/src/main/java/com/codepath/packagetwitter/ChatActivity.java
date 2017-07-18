@@ -88,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
         ParseAnonymousUtils.logIn(new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                //you want e to be null
+                //you want e to BE null
                 if (e != null) {
                     Log.e(TAG, "Anonymous login failed: ", e);
                 } else {
@@ -110,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
         rvChat = (RecyclerView) findViewById(R.id.rvChat);
         mMessages = new ArrayList<>();
         mFirstLoad = true;
-        final String userId = ParseUser.getCurrentUser().getObjectId();
+        final String userId = ProfileActivity.parseUser.getObjectId();
         mAdapter = new ChatAdapter(ChatActivity.this, userId, mMessages);
         rvChat.setAdapter(mAdapter);
 
@@ -132,13 +132,19 @@ public class ChatActivity extends AppCompatActivity {
                 // Using new `Message` Parse-backed model now
                 Message message = new Message();
                 message.setBody(data);
-                message.setUserId(ParseUser.getCurrentUser().getObjectId());
+                message.setUserId(ProfileActivity.parseUser.getObjectId());
+//                message.setUserId(ParseUser.getCurrentUser().getObjectId());
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
+                        if(e==null){
                         Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
                                 Toast.LENGTH_SHORT).show();
-                        refreshMessages();
+                        refreshMessages();}
+                        else{
+                            Log.d("Message", " error");
+
+                            }
                     }
                 });
                 etMessage.setText(null);

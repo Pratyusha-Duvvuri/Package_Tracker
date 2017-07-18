@@ -1,6 +1,10 @@
 package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+
+import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcel;
 
@@ -32,6 +36,10 @@ public class Receiver extends User {
 
     public static Receiver getRandomReceiver(Context context){
         User u = User.getRandomUser(context);
+        Resources resources = context.getResources();
+        TypedArray locations = resources.obtainTypedArray(R.array.locations);
+        int location = (int) (Math.random() * locations.length());
+
 
         Random rand = new Random();
         String startDay = String.valueOf(rand.nextInt(28));
@@ -42,10 +50,10 @@ public class Receiver extends User {
 
         String endMonth = String.valueOf(rand.nextInt(12));
 
-        String location = "Seattle";
 
 
-        Receiver receiver = new Receiver(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, location);
+        Receiver receiver = new Receiver(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, locations.getString(location));
+
 
         return receiver;
     }

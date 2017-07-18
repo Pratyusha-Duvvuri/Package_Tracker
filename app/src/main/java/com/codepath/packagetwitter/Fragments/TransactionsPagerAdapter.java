@@ -20,10 +20,11 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     public TransactionsPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
         this.context = context;
-        Log.d("Transaction PagerAdap", "COnstruct");
+        Log.d("Transaction PagerAdap", "Construct");
         pendingTransactionFragment = new PendingTransactionFragment();
         currentTransactionFragment = new CurrentTransactionFragment();
         oldTransactionFragment = new OldTransactionFragment();
+
     }
 
     @Override

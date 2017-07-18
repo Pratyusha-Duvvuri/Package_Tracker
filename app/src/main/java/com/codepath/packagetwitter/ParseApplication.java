@@ -19,7 +19,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Message.class);
 //        ParseObject.registerSubclass(Transaction.class);
         // Add your initialization code here
-        Parse.initialize(this, "7zBztvyG4hYQ9XghgfqYxfRcL3SMBYWAj0GUL", "iZWhgJRu6yKm3iNMbTaguLcNCV3qedijWL");
+      //  Parse.initialize(this, "7zBztvyG4hYQ9XghgfqYxfRcL3SMBYWAj0GUL", "iZWhgJRu6yKm3iNMbTaguLcNCV3qedijWL");
 
 
 
