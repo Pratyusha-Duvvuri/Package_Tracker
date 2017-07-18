@@ -22,7 +22,6 @@ import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder>{
 
-    //pass tweet array to constructor
     Context context;
     public List<Transaction> mTransactions;
     public ParseUser parseUser;
@@ -30,9 +29,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     {
         mTransactions = transactions;
     }
-
-    //TwitterClient client = TwitterApp.getRestClient();
-
 
 
     @Override
