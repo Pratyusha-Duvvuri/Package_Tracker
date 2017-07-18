@@ -2,12 +2,14 @@ package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
@@ -23,7 +25,7 @@ public class PendingTransactionFragment extends Fragment {
     TransactionAdapter transactionAdapter;
     ArrayList<Transaction> transactions;
     RecyclerView rvTransactions;
-    //SwipeRefreshLayout swipeContainer;
+    SwipeRefreshLayout swipeContainer;
     public static int page;
 
     @Override
@@ -36,7 +38,7 @@ public class PendingTransactionFragment extends Fragment {
 
         //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
-        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         transactions = new ArrayList<>();
         // init the array list (data source)
         //construct the adapter form this datasource
@@ -45,11 +47,19 @@ public class PendingTransactionFragment extends Fragment {
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvTransactions.setLayoutManager(llayout);
-
         //set the adapter
-
         rvTransactions.setAdapter(transactionAdapter);
+
         populateTimeline();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeContainer.setRefreshing(true);
+                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
+                swipeContainer.setRefreshing(false);
+            }
+        });
 
         return v;
     }
