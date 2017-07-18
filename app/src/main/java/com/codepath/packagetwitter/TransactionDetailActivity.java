@@ -57,26 +57,28 @@ public class TransactionDetailActivity extends AppCompatActivity {
         if (transaction.getCourier().equals(null)) {
             materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
             chatButton.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
             matchButton.setVisibility(View.GONE);
         }
 
-        matchButton.setOnClickListener(new View.OnClickListener() {
+        /*matchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(TransactionDetailActivity.this, MatchActivity.class);
-                i.putExtra("sender", Parcels.wrap(user) );
-                i.putExtra("USER", Parcels.wrap(user) );
+                i.putExtra("sender", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
 
                 startActivity(i);
 
             }
-        });
+        });*/
+    }
+}
         /*
+>>>>>>> b3208e1da63a38dab14fcbe5ccc982bbf7b71a45
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
+                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
 
                 i.putExtra("courier",Parcels.wrap(user) );
                 i.putExtra("USER", Parcels.wrap(user) );
@@ -84,6 +86,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        */
+
     }
 }
+*/

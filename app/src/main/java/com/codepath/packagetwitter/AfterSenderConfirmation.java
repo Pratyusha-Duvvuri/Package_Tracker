@@ -75,6 +75,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                 receiver.setTripEnd(endDate.getText().toString());
                 receiver.setLocation((receiverLocation.getText().toString()));
 
+
                 //Call the modal to verify information
                 onVerifyAction();
 

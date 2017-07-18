@@ -47,7 +47,6 @@ public class Algorithm {
 
             }
         }
-
         return  transactions;
     }
 

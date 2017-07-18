@@ -6,6 +6,7 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,10 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
+import com.codepath.packagetwitter.LoginActivity;
 import com.codepath.packagetwitter.Models.User;
-import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import org.parceler.Parcels;
 
@@ -38,7 +42,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static Button signUpButton;
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
-    public User user;
+    public User userr;
 
     public SignUp_Fragment() {
 
@@ -118,7 +122,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
-        user = new User(getFullName, "@" + getFullName, getMobileNumber);
+//        userr = new User(getFullName, "@" + getFullName, getMobileNumber);
 
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
@@ -155,9 +159,46 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         else
             Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
                     .show();
-        Intent i = new Intent(getContext(), ProfileActivity.class);
-        i.putExtra("USER", Parcels.wrap(user));
+
+        createNewParseUser();
+        Intent i = new Intent(getContext(), LoginActivity.class);
+        userr = User.getRandomUser(getContext());
+        userr.hasPendingRequests= false;
+        i.putExtra("USER", Parcels.wrap(userr));
         startActivity(i);
+
+    }
+
+    void createNewParseUser() {
+        ParseUser user = new ParseUser();
+// Set core properties
+
+        user.setUsername(emailId.getText().toString());
+        user.setPassword(password.getText().toString());
+        user.setEmail(emailId.getText().toString());
+// Set custom properties
+        user.put("userHandle",emailId.getText().toString());
+        user.put("location", location.getText().toString());
+        user.put("mobileNumber", mobileNumber.getText().toString());
+        user.put("fullName",fullName.getText().toString());
+        user.put("hasPendingRequests",false);
+
+// Invoke signUpInBackground
+    user.signUpInBackground(new SignUpCallback() {
+        @Override
+        public void done(ParseException e) {
+            if (e == null) {
+                Log.d("ParseApplication", "Sign-UP succesful");
+
+                // Hooray! Let them use the app now.
+            } else {
+                    Log.d("ParseApplication", "Error: " + e.toString());
+                // Sign up didn't succeed. Look at the ParseException
+                // to figure out what went wrong
+            }
+        }
+    });
+
 
     }
 }

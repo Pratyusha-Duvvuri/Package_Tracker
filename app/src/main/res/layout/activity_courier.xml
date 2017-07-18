@@ -115,21 +115,19 @@
         android:id="@+id/ivTakeOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_alignBottom="@+id/tvFirstDash"
         android:layout_alignEnd="@+id/ivLanding"
         android:layout_alignStart="@+id/etWeight"
         android:layout_alignTop="@+id/etLocationStart"
         android:backgroundTint="@color/background_color"
         app:srcCompat="@drawable/plane_taking_off" />
-=======
         android:layout_alignBottom="@+id/editText"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/editText"
         app:srcCompat="@drawable/airplane_taking_off"
         />
->>>>>>> Rafael
+
 
     <EditText
         android:id="@+id/etLocationStart"
@@ -174,7 +172,6 @@
         android:layout_alignBottom="@+id/tvSecondDash"
         android:layout_alignEnd="@+id/etWeight"
         android:layout_alignParentStart="true"
-<<<<<<< HEAD
         android:layout_alignTop="@+id/etLocationEnd"
         android:layout_toStartOf="@+id/etMonthStart"
         android:backgroundTint="@color/background_color"
@@ -224,11 +221,6 @@
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textStyle="bold" />
-=======
-        android:layout_alignTop="@+id/editText7"
-        app:srcCompat="@drawable/airplane_landing"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toStartOf="@+id/editText6"
-     />
->>>>>>> Rafael
+
+
 </RelativeLayout>

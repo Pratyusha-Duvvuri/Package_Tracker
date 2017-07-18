@@ -137,6 +137,8 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
             i.putExtra("receiver", Parcels.wrap(receiver));
             i.putExtra("sender", Parcels.wrap(sender));
             i.putExtra("mail", Parcels.wrap(mail));
+            i.putExtra("USER", Parcels.wrap(USER));
+            startActivity(i);
             setResult(RESULT_OK, i); // set result code and bundle data for response
             finish(); // closes the activity, pass data to parent
         }

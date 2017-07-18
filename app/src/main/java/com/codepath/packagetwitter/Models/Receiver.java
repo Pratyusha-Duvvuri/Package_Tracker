@@ -50,10 +50,10 @@ public class Receiver extends User {
 
         String endMonth = String.valueOf(rand.nextInt(12));
 
-        Double weight = Math.random() * 50;
 
 
         Receiver receiver = new Receiver(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, locations.getString(location));
+
 
         return receiver;
     }

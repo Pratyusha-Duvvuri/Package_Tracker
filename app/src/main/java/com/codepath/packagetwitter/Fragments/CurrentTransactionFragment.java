@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
@@ -27,7 +29,7 @@ public class CurrentTransactionFragment extends Fragment {
     TransactionAdapter transactionAdapter;
     public ArrayList<Transaction> transactions;
     RecyclerView rvTransactions;
-    //SwipeRefreshLayout swipeContainer;
+    SwipeRefreshLayout swipeContainer;
     //TwitterClient client;
     public static int page;
     public Context context;
@@ -36,7 +38,6 @@ public class CurrentTransactionFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
         transactions = new ArrayList<>();
         // init the array list (data source)
         //construct the adapter form this datasource
@@ -54,17 +55,25 @@ public class CurrentTransactionFragment extends Fragment {
         Log.d("on create", "in current");
         View v = inflater.inflate(R.layout.fragments_transactions_list, container, false);
         rvTransactions =  v.findViewById(R.id.rvTransactions);
+        //find swipe containerview
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvTransactions.setLayoutManager(llayout);
 
         //set the adapter
-
         rvTransactions.setAdapter(transactionAdapter);
 
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeContainer.setRefreshing(true);
+                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
+                swipeContainer.setRefreshing(false);
+            }
+        });
 
-        //find the recycler view and swipe containerview
 
 
         return v;

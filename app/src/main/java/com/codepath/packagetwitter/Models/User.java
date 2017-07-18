@@ -14,9 +14,12 @@ import java.util.Random;
 /**
  * Created by michaunp on 7/11/17.
  */
+//@ParseClassName("User")
+
 
 @Parcel
-public class User {
+//public class User extends ParseObject {
+public class User{
     String userName;
     String userHandle;
 
@@ -26,8 +29,6 @@ public class User {
     public String location;
 
     public Boolean hasPendingRequests = false;
-
-
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd) {
         this.userHandle = handle;

@@ -66,6 +66,7 @@ public class Sender extends User{
 
 
         Sender sender = new Sender(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, locations.getString(location));
+
         return sender;
     }
 
