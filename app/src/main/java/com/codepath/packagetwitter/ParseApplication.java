@@ -2,6 +2,7 @@ package com.codepath.packagetwitter;
 
 import android.app.Application;
 
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -17,6 +18,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ParseObject.registerSubclass(Message.class);
+        ParseObject.registerSubclass(ParselTransaction.class);
 //        ParseObject.registerSubclass(Transaction.class);
         // Add your initialization code here
       //  Parse.initialize(this, "7zBztvyG4hYQ9XghgfqYxfRcL3SMBYWAj0GUL", "iZWhgJRu6yKm3iNMbTaguLcNCV3qedijWL");

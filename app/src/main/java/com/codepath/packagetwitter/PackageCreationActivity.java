@@ -20,11 +20,16 @@ import android.widget.TextView;
 
 import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
 import com.codepath.packagetwitter.Models.Mail;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,21 +52,19 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     @BindView(R.id.tvWeight) TextView tvWeight;
     @BindView(R.id.tvFragile) TextView tvFragile;
     @BindView(R.id.tvDimensionsHeading) TextView tvDimensionsHeading;
-    @BindView(R.id.tvLength) TextView tvLength;
-    @BindView(R.id.tvWidth) TextView tvWidth;
-    @BindView(R.id.tvHeight) TextView tvHeight;
     @BindView(R.id.tvConfirm) TextView tvConfirm;
     @BindView(R.id.tvPackage) TextView tvPackage;
     @BindView(R.id.tvReceiverHandle) TextView tvReceiverHandle;
     @BindView(R.id.etSenderLocation) EditText etSenderLocation;
-    @BindView(R.id.etStartDate) EditText etStartDate;
-    @BindView(R.id.etEndDate) EditText etEndDate;
+    @BindView(R.id.etStartDateMonth) EditText etStartDateMonth;
+    @BindView(R.id.etStartDateDay) EditText etStartDateDay;
+    @BindView(R.id.etEndDateMonth) EditText etEndDateMonth;
+    @BindView(R.id.etEndDateDay) EditText etEndDateDay;
     @BindView(R.id.etWeight) EditText etWeight;
-    @BindView(R.id.etLength) EditText etLength;
-    @BindView(R.id.etWidth) EditText etWidth;
-    @BindView(R.id.etHeight) EditText etHeight;
+    @BindView(R.id.etVolume) EditText etVolume;
     @BindView(R.id.etDescription) EditText etDescription;
-    @BindView(R.id.etReceiverHandle) TextView etReceiverHandle;
+    @BindView(R.id.etReceiverHandle) EditText etReceiverHandle;
+    @BindView(R.id.etReceiverLoc) EditText etReceiverLoc;
     @BindView(R.id.rbFragile) RadioButton rbFragile;
     @BindView(R.id.rbNotFragile) RadioButton rbNotFragile;
     @BindView(R.id.spPackageType) Spinner spPackageType;
@@ -95,7 +98,31 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onVerifyAction();
+
+                String sendStart = etStartDateMonth.getText().toString() + "/" + etStartDateDay.getText().toString();
+                String sendEnd = etEndDateMonth.getText().toString() + "/" + etEndDateDay.getText().toString();
+                Date senderStartDate = null;
+                Date senderEndDate = null;
+                try {
+                    senderStartDate = new SimpleDateFormat("MM/dd").parse(sendStart);
+                    senderEndDate = new SimpleDateFormat("MM/dd").parse(sendEnd);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                //creating new transaction parse object
+                ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
+                        USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
+                        senderEndDate, etReceiverLoc.getText().toString(), spPackageType.getSelectedItem().toString(),
+                        etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
+                        Integer.parseInt(etVolume.getText().toString()));
+                transaction.saveEventually();
+
+                //Intent i = new Intent(context, ProfileActivity.class);
+                //startActivity(i);
+
+
+
+ //               onVerifyAction();
 //                mail.setDescription(etDescription.getText().toString());
 //                mail.setFragile(true);//cbIsFragile.isChecked());
 //                //have to set picture
@@ -116,7 +143,6 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
     public void onVerifyAction() {
-        fake();
         FragmentManager fm = getSupportFragmentManager();
         PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail, sender, receiver);
         frag.show(fm, "fragment_package_confirmation");
