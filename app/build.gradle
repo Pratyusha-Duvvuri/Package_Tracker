@@ -12,6 +12,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
+
     }
     buildTypes {
         release {
@@ -22,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -31,14 +33,10 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     // for logging API calls to LogCat
-
-
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // for logging API calls to LogCat
     compile 'com.github.bumptech.glide:glide:3.8.0'
     // for Parse Live Queries
-
-
     compile 'com.github.clans:fab:1.6.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:8.4.0'
@@ -57,4 +55,18 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'com.lorentzos.swipecards:library:1.0.9'
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
+////    compile 'com.android.support:appcompat-v7:23.0.0'
+//    compile 'org.apache.httpcomponents:httpclient:4.5'
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/commons-codec-1.9.jar')
+//        compile 'org.apache.httpcomponents:httpclient:4.5.3'
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/commons-logging-1.2.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/fluent-hc-4.5.3.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-4.5.3.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-cache-4.5.3.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-win-4.5.3.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpcore-4.4.6.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpmime-4.5.3.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/jna-4.1.0.jar')
+//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/jna-platform-4.1.0.jar')
 }

@@ -220,7 +220,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
                     u.hasPendingRequests= true;
                     i.putExtra("USER", Parcels.wrap(u));
-                    i.putExtra("PARSEUSER", Parcels.wrap(parseUser));
+                    i.putExtra("PARSEUSER", parseUser.getObjectId());
                     startActivity(i);
 
                 } else {
