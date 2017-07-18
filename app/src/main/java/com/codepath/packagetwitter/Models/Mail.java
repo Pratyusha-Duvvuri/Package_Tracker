@@ -20,7 +20,7 @@ public class Mail {
     String type;// ( from a list of types)
     String description;// (String )
     Double weight;// (number)
-    public int[] volume;// - L*B*H -- ints
+    public int volume;// - L*B*H -- ints
     boolean isFragile;///Not fragile (boolean)
     boolean receiverAccepted;
     public Mail(){
@@ -29,7 +29,7 @@ public class Mail {
 
     }
 
-    public Mail(Bitmap pic, String type, String description, double weight, int[] volume,boolean fragile){
+    public Mail(Bitmap pic, String type, String description, double weight, int volume,boolean fragile){
         this.picture = pic;
         this.type = type;
         this.description = description;
@@ -50,7 +50,7 @@ public class Mail {
         Double weight = Math.random() * 50;
         boolean isFragile =     rand.nextBoolean();
 
-        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume,isFragile );
+        mail = new Mail (icon, "Clothes", "2 pants and 1 polo", weight,volume[0],isFragile );
         return mail;
     }
 
@@ -71,7 +71,7 @@ public class Mail {
         return weight;
     }
 
-    public int[] getVolume() {
+    public int getVolume() {
         return volume;
     }
 
@@ -91,7 +91,7 @@ public class Mail {
         this.weight = weight;
     }
 
-    public void setVolume(int[] volume) {
+    public void setVolume(int volume) {
         this.volume = volume;
     }
 

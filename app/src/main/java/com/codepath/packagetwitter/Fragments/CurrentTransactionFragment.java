@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
 
 import java.util.ArrayList;
+
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/12/17.
@@ -97,7 +100,17 @@ public class CurrentTransactionFragment extends Fragment {
 
     private void populateTimeline(){
 
+        ArrayList<ParselTransaction> pendingTransactions;
+        if (parseUser != null) {
+            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("currentTransactions");//gets the list of pending transactions
+            if (pendingTransactions != null){
 
+            for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
+
+                //transofrms the ParseTransaction into transaction and adds to the adapter
+                addItems(new Transaction(pendingTransactions.get(i)));
+            }}
+        }
 
 
     }

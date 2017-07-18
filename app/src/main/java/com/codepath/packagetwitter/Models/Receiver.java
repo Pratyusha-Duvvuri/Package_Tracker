@@ -25,6 +25,12 @@ public class Receiver extends User {
         this.hasReceived = hasReceived;
         this.location = location;
     }
+
+    public Receiver(User u, String tripStart, String tripEnd, String location) {
+        super(u.getUserName(), u.getUserHandle(), u.getPhoneNum(), tripStart, tripEnd);
+        this.location = location;
+    }
+
     public Receiver(User user)
     {
         this.setUserHandle(user.getUserHandle());

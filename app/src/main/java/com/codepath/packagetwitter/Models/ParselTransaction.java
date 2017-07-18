@@ -30,7 +30,7 @@ public class ParselTransaction extends ParseObject{
         setSenderEnd(sendEnd);
         setReceiverLoc(receiverLoc);
         setReceiverStart(receiverStart);
-        setReceiverEnd(receiverEnd)
+        setReceiverEnd(receiverEnd);
         setMailType(type);
         setMailDescription(description);
         setWeight(weight);
@@ -155,6 +155,15 @@ public class ParselTransaction extends ParseObject{
     public String getMailType() {
         return getString("mailType");
     }
+
+    public boolean getIsFragile() {
+        return getBoolean("isFragile");
+    }
+
+    public void setIsFragile(boolean fragile) {
+         put("isFragile", fragile);
+    }
+
 
     public String getMailDescription() {
         return getString("mailDescription");

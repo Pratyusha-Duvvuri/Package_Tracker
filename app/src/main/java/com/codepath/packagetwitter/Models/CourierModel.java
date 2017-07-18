@@ -20,13 +20,13 @@ public class CourierModel  extends User{
     public boolean hasPickedUp = false;
     public boolean hasDelivered = false;
     public double weightAvailable;
-    public int[] volumeAvailable;
+    public int volumeAvailable;
     public String startAddress;
     public String endAddress;
 
 
 
-    public CourierModel(User u, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress){
+    public CourierModel(User u, String tripStart, String tripEnd, double weight, int v, String sAddress, String eAddress){
         super( u.getUserName(),  u.getUserHandle(),  u.getPhoneNum(), tripStart, tripEnd);
 
         this.weightAvailable = weight;
@@ -60,7 +60,7 @@ public class CourierModel  extends User{
 
 
         CourierModel courrier = new CourierModel(user,
-                startMonth+"/" + startDay ,endMonth + "/"+ endDay,weight, volume, locations.getString(startLocation), locations.getString(endLocation));
+                startMonth+"/" + startDay ,endMonth + "/"+ endDay,weight, volume[0], locations.getString(startLocation), locations.getString(endLocation));
         return courrier;
     }
 
@@ -76,7 +76,7 @@ public class CourierModel  extends User{
         return weightAvailable;
     }
 
-    public int[] getVolumeAvailable() {
+    public int getVolumeAvailable() {
         return volumeAvailable;
     }
 

@@ -41,8 +41,8 @@ public class User{
 
 
     public User(String name, String handle, String phone) {
-        this.userHandle = handle;
         this.userName = name;
+        this.userHandle = handle;
         this.phoneNum = phone;
 
 
