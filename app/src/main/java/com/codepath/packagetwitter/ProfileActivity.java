@@ -2,12 +2,15 @@ package com.codepath.packagetwitter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
@@ -18,6 +21,9 @@ import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -34,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     Mail mail;
     Sender sender;
     public TextView tvUsername;
-    public ParseUser parseUser;
+    public static ParseUser parseUser;
     public String meh;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
@@ -42,17 +48,48 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
     public final static String RECEIVER_KEY = "receiver";
+    public FloatingActionButton floatingActionButton1;
+    public FloatingActionButton floatingActionButton2;
+    public com.github.clans.fab.FloatingActionButton floatingActionButton3;
+    public Boolean ignore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ignore = true;
         setContentView(R.layout.activity_profile);
         FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-        parseUser = Parcels.unwrap(getIntent().getParcelableExtra("PARSEUSER"));
+
+        String parseUserId = getIntent().getStringExtra("PARSEUSER");
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+// First try to find from the cache and only then go to network
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+// Execute the query to find the object with ID
+        query.getInBackground(parseUserId, new GetCallback<ParseUser>() {
+            @Override
+                    public void done(ParseUser item, ParseException e) {
+                         parseUser = item;
+                        if (e == null) {
+                            Toast.makeText(ProfileActivity.this,"HALP"+parseUser.getString("email"),
+                                    Toast.LENGTH_SHORT).show();
+                            ignore = false;
+                            setListenersLater();
+                        }
+                        else{
+                            Toast.makeText(ProfileActivity.this,"NOPE",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.d("ParseApplicationError",e.toString());
+                        }
+                    }
+            });
+
+
+
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
 
@@ -71,39 +108,58 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
+        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
 
 
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
 
-
+        if (user.hasPendingRequests) {
+            user.hasPendingRequests = false;
+            actOnRequests();
+        }
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(!ignore){
 
                 Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
                 i.putExtra("sender", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
+//                i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
-                startActivityForResult(i, SENDER_REQUEST_CODE);
+                startActivityForResult(i, SENDER_REQUEST_CODE);}
 
             }
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(!ignore){
                 Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
 
                 i.putExtra("courier", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
 
-                startActivityForResult(i, COURRIER_REQUEST_CODE);
+                startActivityForResult(i, COURRIER_REQUEST_CODE);}
             }
         });
-        if (user.hasPendingRequests) {
-            user.hasPendingRequests = false;
-            actOnRequests();
-        }
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                    Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
+//
+//                    i.putExtra("courier", Parcels.wrap(user));
+//                    i.putExtra("USER", Parcels.wrap(user));
+
+                    startActivity(i);
+            }
+        });
 
     }
+
+
+    public void setListenersLater(){}
+
+
+
 
     public void actOnRequests() {
         FragmentManager fm = getSupportFragmentManager();

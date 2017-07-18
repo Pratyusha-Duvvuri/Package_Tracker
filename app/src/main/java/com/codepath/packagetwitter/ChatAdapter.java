@@ -68,6 +68,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             final byte[] hash = digest.digest(userId.getBytes());
             final BigInteger bigInt = new BigInteger(hash);
             hex = bigInt.abs().toString(16);
+//            hex = (""+ProfileActivity.parseUser.getObjectId()).toString(16);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

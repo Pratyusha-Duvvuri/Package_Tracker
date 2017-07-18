@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Transaction;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -24,7 +25,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     //pass tweet array to constructor
     Context context;
     public List<Transaction> mTransactions;
-
+    public ParseUser parseUser;
     public TransactionAdapter(List<Transaction> transactions)
     {
         mTransactions = transactions;
@@ -116,10 +117,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
                 Transaction transaction = mTransactions.get(position);
-
+//                parseUser = Parcels.unwrap(((ProfileActivity) context).getIntent().getParcelableExtra("PARSEUSER"));
+//                Log.d("WORK","mew"+parseUser.getString("userName"));
                 // create intent for the new activity
                 if (view == itemView) {
                     intent = new Intent(context, TransactionDetailActivity.class);
+//                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
+
                     intent.putExtra("transaction", Parcels.wrap(transaction));
                      // serialize the movie using parceler, use its short name as a key
                     //  intent.putExtra("user", transaction.user.sreenName);

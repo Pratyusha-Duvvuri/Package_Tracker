@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Transaction;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -19,6 +20,7 @@ import static com.codepath.packagetwitter.R.drawable.user;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
+    public ParseUser parseUser;
 
     @BindView(R.id.tvDescription)
     TextView tvDescription;
@@ -73,10 +75,23 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
+
+                i.putExtra("courier", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
+                i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
+
+                startActivity(i);
+
+            }
+        });
+
     }
 }
         /*
->>>>>>> b3208e1da63a38dab14fcbe5ccc982bbf7b71a45
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
