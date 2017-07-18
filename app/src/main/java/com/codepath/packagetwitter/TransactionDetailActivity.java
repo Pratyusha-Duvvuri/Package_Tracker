@@ -72,7 +72,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 startActivity(i);
 
             }
-<<<<<<<HEAD
         });
     }
 }
@@ -91,3 +90,4 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
     }
 }
+*/
