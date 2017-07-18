@@ -104,9 +104,9 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         tvStartDate.setText(sender.getTripStart());
         tvEndDate.setText(sender.getTripEnd());
         tvWeight.setText(""+mail.getWeight());
-        tvHeight.setText(""+mail.getVolume()[2]);
-        tvWidth.setText(""+mail.getVolume()[1]);
-        tvLength.setText(""+mail.getVolume()[0]);
+        tvHeight.setText(""+mail.getVolume());
+        tvWidth.setText(""+mail.getVolume());
+        tvLength.setText(""+mail.getVolume());
         tvDescription.setText(""+mail.getDescription());
         ivPackage.setImageResource(R.drawable.ic_upload);
 

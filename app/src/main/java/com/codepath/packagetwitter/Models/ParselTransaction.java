@@ -156,6 +156,15 @@ public class ParselTransaction extends ParseObject{
         return getString("mailType");
     }
 
+    public boolean getIsFragile() {
+        return getBoolean("isFragile");
+    }
+
+    public void setIsFragile(boolean fragile) {
+         put("isFragile", fragile);
+    }
+
+
     public String getMailDescription() {
         return getString("mailDescription");
     }

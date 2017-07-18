@@ -183,6 +183,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.put("fullName",fullName.getText().toString());
         user.put("hasPendingRequests",false);
 
+
 // Invoke signUpInBackground
     user.signUpInBackground(new SignUpCallback() {
         @Override

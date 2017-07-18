@@ -2,7 +2,14 @@ package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import org.parceler.Parcel;
+
+import java.util.List;
 
 /**
  * Created by rafasj6 on 7/11/17.
@@ -16,7 +23,8 @@ public class Transaction {
     Sender sender; //-  Access to location, has received
     CourierModel courier;// - Access to most details
     int transactionState;//int that represents transaction state
-    long transactionID; //add a long that is unique to each transaction
+    String transactionID; //add a String that is unique to each transaction
+
 
 
     public Transaction(){}
@@ -33,6 +41,60 @@ public class Transaction {
         this.sender = s;
         this.courier = c;
         this.transactionState = getTransactionState();
+    }
+
+    public Transaction(final ParselTransaction parselTransaction){
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", parselTransaction.getReceiver());
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
+                     receiver = new Receiver(u,String.valueOf(parselTransaction.getReceiverStart()),
+                            String.valueOf(parselTransaction.getReceiverEnd()),
+                            parselTransaction.getReceiverLoc());
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });//
+
+        query = ParseUser.getQuery();
+        query.whereEqualTo("username", parselTransaction.getSender());
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
+                     sender = new Sender(u,String.valueOf(parselTransaction.getSenderStart()),
+                            String.valueOf(parselTransaction.getSenderEnd()),
+                            parselTransaction.getSenderLoc());
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });//
+
+        query = ParseUser.getQuery();
+        query.whereEqualTo("username", parselTransaction.getCourier());
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
+                     courier = new CourierModel(u,String.valueOf(parselTransaction.getCourierStart()),
+                            String.valueOf(parselTransaction.getCourierEnd()),
+                            parselTransaction.getWeight(), parselTransaction.getVolume(),parselTransaction.getSenderLoc(), parselTransaction.getReceiverLoc());
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });//
+
+        mail = new Mail(null, parselTransaction.getMailType(),
+                parselTransaction.getMailDescription(),parselTransaction.getWeight(),
+                parselTransaction.getVolume(), parselTransaction.getIsFragile());
+
+        transactionID = parselTransaction.getObjectId();
+
     }
 
 
@@ -73,7 +135,7 @@ public class Transaction {
         return courier;
     }
 
-    public long getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
 }

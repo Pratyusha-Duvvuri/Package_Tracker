@@ -83,7 +83,7 @@ public class CourierActivity extends AppCompatActivity {
 
                 String endAddress =  locationEnd.getText().toString();
 
-                courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes,  startAddress,  endAddress);
+                courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes[0],  startAddress,  endAddress);
 
 
                 onVerifyAction();

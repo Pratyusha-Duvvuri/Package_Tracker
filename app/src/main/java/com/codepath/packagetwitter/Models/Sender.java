@@ -38,6 +38,12 @@ public class Sender extends User{
 
     }
 
+    public Sender(User user, String tripStart, String tripEnd, String location) {
+        super(user.getUserName(), user.getUserHandle(), user.getPhoneNum(), tripStart, tripEnd);
+        this.location = location;
+
+    }
+
     public Sender(User user)
     {
         this.setUserHandle(user.getUserHandle());
