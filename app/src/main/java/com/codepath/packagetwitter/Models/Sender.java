@@ -19,7 +19,7 @@ public class Sender extends User{
         return hasSent;
     }
 
-    public void setLocation(Double location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -27,7 +27,7 @@ public class Sender extends User{
         this.hasSent = hasSent;
     }
 
-    public Sender(User user, String tripStart, String tripEnd, boolean hasSent, Double location) {
+    public Sender(User user, String tripStart, String tripEnd, boolean hasSent, String location) {
         super(user.getUserName(), user.getUserHandle(), user.getPhoneNum(), tripStart, tripEnd);
         this.hasSent = hasSent;
         this.location = location;
@@ -55,10 +55,10 @@ public class Sender extends User{
 
         String endMonth = String.valueOf(rand.nextInt(12));
 
-        Double weight = Math.random() * 50;
+        String location = "San Francisco";
 
 
-        Sender sender = new Sender(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, weight);
+        Sender sender = new Sender(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, location);
         return sender;
     }
 

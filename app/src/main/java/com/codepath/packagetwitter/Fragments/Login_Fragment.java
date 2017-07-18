@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,9 @@ import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -49,6 +53,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
     public static SignUp_Fragment signUp_fragment;
+    public ParseUser parseUser;
 
     public Login_Fragment() {
 
@@ -194,14 +199,39 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else {
             Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
                     .show();
+            //get parse user from database, now the default username is the same as the email id of the person
+            getUserFromDatabase();
 
-            User u = User.getRandomUser(getContext());
-            Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
-            u.hasPendingRequests= true;
-            i.putExtra("USER", Parcels.wrap(u));
-            startActivity(i);
         }
 
     }
+    void getUserFromDatabase(){
+
+        ParseUser.logInInBackground(emailid.getText().toString(),password.getText().toString() , new LogInCallback() {
+            @Override
+            public void done(ParseUser userrr, ParseException e) {
+                if (userrr != null) {
+                    Log.d("ParseApplication","bwahahaha");
+
+                    Log.d("ParseApplication","Logged in successfully");
+                    // Hooray! The user is logged in.
+                    parseUser = userrr;
+                    User u = User.getRandomUser(getContext());
+                    Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
+                    u.hasPendingRequests= true;
+                    i.putExtra("USER", Parcels.wrap(u));
+                    i.putExtra("PARSEUSER", Parcels.wrap(parseUser));
+                    startActivity(i);
+
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                    Log.d("ParseApplication", "Error: " + e.toString());
+
+                }
+            }
+        });
+
+    }
+
 }
 

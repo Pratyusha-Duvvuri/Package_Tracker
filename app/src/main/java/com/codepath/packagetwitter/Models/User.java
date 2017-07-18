@@ -15,19 +15,19 @@ import java.util.Random;
  * Created by michaunp on 7/11/17.
  */
 
+//@ParseClassName("User")
 @Parcel
-public class User {
+//public class User extends ParseObject {
+public class User{
     String userName;
     String userHandle;
 
     public String phoneNum;
     public String tripStart;
     public String tripEnd;
-    public Double location;
+    public String location;
 
     public Boolean hasPendingRequests = false;
-
-
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd) {
         this.userHandle = handle;
@@ -109,11 +109,11 @@ public class User {
         this.userHandle = userHandle;
     }
 
-    public void setLocation(Double location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Double getLocation() {
+    public String getLocation() {
         return location;
     }
 

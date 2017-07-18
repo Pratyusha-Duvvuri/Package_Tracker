@@ -16,7 +16,7 @@ public class Receiver extends User {
 
     Boolean hasReceived;
 
-    public Receiver(User u, String tripStart, String tripEnd, boolean hasReceived, Double location) {
+    public Receiver(User u, String tripStart, String tripEnd, boolean hasReceived, String location) {
         super(u.getUserName(), u.getUserHandle(), u.getPhoneNum(), tripStart, tripEnd);
         this.hasReceived = hasReceived;
         this.location = location;
@@ -42,10 +42,10 @@ public class Receiver extends User {
 
         String endMonth = String.valueOf(rand.nextInt(12));
 
-        Double weight = Math.random() * 50;
+        String location = "Seattle";
 
 
-        Receiver receiver = new Receiver(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, weight);
+        Receiver receiver = new Receiver(u, startMonth+"/" + startDay ,endMonth + "/"+ endDay , false, location);
 
         return receiver;
     }

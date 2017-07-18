@@ -18,6 +18,7 @@ import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -33,6 +34,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     Mail mail;
     Sender sender;
     public TextView tvUsername;
+    public ParseUser parseUser;
+    public String meh;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
     public final static String COURIER_KEY = "courier";
@@ -48,9 +51,12 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
+        user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        parseUser = Parcels.unwrap(getIntent().getParcelableExtra("PARSEUSER"));
+        tvUsername =  (TextView) findViewById(R.id.tvName);
+        tvUsername.setText(user.getUserName());
 
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-
 
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
@@ -73,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
                 i.putExtra("sender", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
@@ -112,18 +119,16 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     }
 
-
     @Override
     public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
-        if (proceed) {
-            Intent i = new Intent(this, AfterSenderConfirmation.class);
-            i.putExtra("receiver", Parcels.wrap(user));
-            i.putExtra("sender", Parcels.wrap(senderr));
-            i.putExtra("mail", Parcels.wrap(maill));
-            i.putExtra("USER", Parcels.wrap(user));
+        if(proceed){
+        Intent i = new Intent(this, AfterSenderConfirmation.class);
+        i.putExtra("receiver", Parcels.wrap(user));
+        i.putExtra("sender", Parcels.wrap(senderr));
+        i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
+            i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
+            startActivity(i);}
 
-            startActivity(i);
-        }
     }
 
 
@@ -150,7 +155,5 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             pagerAdapter.currentTransactionFragment.addItems(transaction);
         }
     }
-
-
 
 }
