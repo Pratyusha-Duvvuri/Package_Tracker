@@ -42,16 +42,15 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etStartDate"
+        android:id="@+id/etStartDateMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="MM/DD/YYYY"
+        android:hint="MM"
         android:inputType="text"
         android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvStartDate"
-        android:layout_alignBottom="@+id/tvStartDate"
-        android:layout_alignLeft="@+id/etEndDate"
-        android:layout_alignStart="@+id/etEndDate" />
+        android:layout_alignBaseline="@+id/etStartDateDay"
+        android:layout_alignBottom="@+id/etStartDateDay"
+        android:layout_toEndOf="@+id/tvStartDate" />
 
     <TextView
         android:id="@+id/tvEndDate"
@@ -64,15 +63,15 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/etEndDateMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="MM/DD/YYYY"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:id="@+id/etEndDate"
         android:layout_alignBottom="@+id/tvEndDate"
+        android:layout_toEndOf="@+id/tvEndDate"
         android:layout_toRightOf="@+id/tvEndDate"
-        android:layout_toEndOf="@+id/tvEndDate" />
+        android:hint="MM"
+        android:inputType="text"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvPackageDetailHeading"
@@ -81,9 +80,9 @@
         android:text="Package Details"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/etSenderLocation"
-        android:layout_alignEnd="@+id/tvWidth" />
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/etReceiverHandle"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvPackageType"
@@ -126,10 +125,9 @@
         android:id="@+id/tvFragile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvWeight"
-        android:layout_alignStart="@+id/tvWeight"
         android:text="Fragile?"
-        android:layout_below="@+id/etWidth" />
+        android:layout_above="@+id/tvStartDate"
+        android:layout_alignStart="@+id/tvSenderLocation" />
 
     <RadioButton
         android:id="@+id/rbFragile"
@@ -163,81 +161,34 @@
         android:layout_toEndOf="@+id/tvStartDate"
         android:layout_below="@+id/tvPackageDetailHeading" />
 
-    <TextView
-        android:id="@+id/tvLength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Length:"
-        android:layout_alignBottom="@+id/etLength"
-        android:layout_alignLeft="@+id/tvDimensionsHeading"
-        android:layout_alignStart="@+id/tvDimensionsHeading"
-        android:layout_below="@+id/spPackageType" />
-
     <EditText
-        android:id="@+id/etLength"
+        android:id="@+id/etVolume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="ex. 6in"
-        android:inputType="text"
+        android:hint="ex. 6"
+        android:inputType="text|number"
         android:textSize="14sp"
-        android:layout_alignBottom="@+id/etWeight"
-        android:layout_toRightOf="@+id/tvLength"
-        android:layout_toEndOf="@+id/tvLength"
-        android:layout_below="@+id/tvDimensionsHeading" />
+        android:layout_above="@+id/ibUpload"
+        android:layout_toEndOf="@+id/etReceiverLoc" />
 
     <TextView
-        android:id="@+id/tvWidth"
+        android:id="@+id/tvVolume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Width:"
-        android:layout_alignLeft="@+id/tvLength"
-        android:layout_alignStart="@+id/tvLength"
-        android:layout_below="@+id/etLength" />
-
-    <EditText
-        android:id="@+id/etWidth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="ex. 4in"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/tvWidth"
-        android:layout_alignBottom="@+id/tvWidth"
-        android:layout_toRightOf="@+id/tvLength"
-        android:layout_toEndOf="@+id/tvLength" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="ex. 3in"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:id="@+id/etHeight"
-        android:layout_alignBaseline="@+id/rbFragile"
-        android:layout_alignBottom="@+id/rbFragile"
-        android:layout_alignLeft="@+id/etWidth"
-        android:layout_alignStart="@+id/etWidth" />
-
-    <TextView
-        android:id="@+id/tvHeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height:"
-        android:layout_alignLeft="@+id/tvWidth"
-        android:layout_alignStart="@+id/tvWidth"
-        android:layout_alignTop="@+id/tvFragile" />
+        android:layout_toStartOf="@+id/tvDimensionsHeading"
+        android:text="Volume:"
+        android:layout_below="@+id/tvWeight" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/flFAB"
-        android:layout_alignLeft="@+id/card_view"
-        android:layout_alignStart="@+id/card_view"
         android:ems="10"
         android:hint="Describe the contents of your package along with any special requests..."
         android:inputType="textMultiLine"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_alignBottom="@+id/flFAB"
+        android:layout_toEndOf="@+id/flFAB" />
 
     <TextView
         android:id="@+id/tvReceiverHandle"
@@ -260,6 +211,27 @@
         android:textSize="14sp"
         android:layout_below="@+id/etSenderLocation"
         android:layout_toEndOf="@+id/tvReceiverHandle" />
+
+    <TextView
+        android:id="@+id/tvReceiverLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etReceiverHandle"
+        android:layout_toStartOf="@+id/etReceiverHandle"
+        android:text="Receiver Location:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etReceiverLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvReceiverLoc"
+        android:layout_alignBottom="@+id/tvReceiverLoc"
+        android:layout_toEndOf="@+id/tvReceiverHandle"
+        android:hint="Receiver Location"
+        android:inputType="text"
+        android:textSize="14sp" />
+
     <ImageButton
         android:id="@+id/ibUpload"
         android:layout_width="wrap_content"
@@ -303,15 +275,13 @@
         android:id="@+id/card_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvFragile"
-        android:layout_alignStart="@+id/tvFragile"
-        android:layout_below="@+id/rbNotFragile"
         android:layout_gravity="center"
-        android:layout_marginTop="11dp"
         app:cardBackgroundColor="#c3e5e2"
         app:cardCornerRadius="4dp"
         app:cardElevation="10dp"
-        app:contentPadding="13dp">
+        app:contentPadding="13dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:id="@+id/llcardview"
@@ -319,20 +289,73 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivPackage"
-                android:layout_width="300dp"
-                android:layout_height="168.75dp"
-                app:srcCompat="@color/colorPrimaryDark" />
-
-            <TextView
-                android:id="@+id/tvPackage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload your package photo"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPackage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/rbNotFragile"
+            android:layout_below="@+id/etWeight"
+            android:text="Upload your package photo"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/isFragile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fragile?:"
+        android:layout_alignBaseline="@+id/rbFragile"
+        android:layout_alignBottom="@+id/rbFragile"
+        android:layout_alignStart="@+id/tvWeight" />
+
+    <TextView
+        android:id="@+id/slash1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:layout_above="@+id/etEndDateMonth"
+        android:layout_alignEnd="@+id/etLength" />
+
+    <TextView
+        android:id="@+id/slash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/etEndDateMonth"
+        android:layout_alignBottom="@+id/etEndDateMonth"
+        android:layout_toEndOf="@+id/etEndDateMonth" />
+
+
+    <EditText
+        android:id="@+id/etStartDateDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="dd"
+        android:inputType="text"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_toEndOf="@+id/tvPackageDetailHeading" />
+
+    <EditText
+        android:id="@+id/etEndDateDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etEndDateMonth"
+        android:layout_toEndOf="@+id/slash2"
+        android:hint="dd"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ivPackage"
+        android:layout_width="300dp"
+        android:layout_height="168.75dp"
+        android:layout_above="@+id/etDescription"
+        android:layout_alignStart="@+id/etDescription"
+        app:srcCompat="@color/colorPrimaryDark" />
+
 </RelativeLayout>

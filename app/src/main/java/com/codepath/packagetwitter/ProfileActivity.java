@@ -67,9 +67,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
-// First try to find from the cache and only then go to network
+        // First try to find from the cache and only then go to network
         query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-// Execute the query to find the object with ID
+        // Execute the query to find the object with ID
         query.getInBackground(parseUserId, new GetCallback<ParseUser>() {
             @Override
                     public void done(ParseUser item, ParseException e) {
@@ -86,9 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                             Log.d("ParseApplicationError",e.toString());
                         }
                     }
-            });
-
-
+        });
 
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
