@@ -148,6 +148,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //
 //                    i.putExtra("courier", Parcels.wrap(user));
 //                    i.putExtra("USER", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
 
                     startActivity(i);
             }
