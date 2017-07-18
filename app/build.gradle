@@ -5,9 +5,13 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.codepath.packagetwitter"
+<<<<<<< HEAD
 
         minSdkVersion 23
 
+=======
+        minSdkVersion 23
+>>>>>>> Rafael
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
