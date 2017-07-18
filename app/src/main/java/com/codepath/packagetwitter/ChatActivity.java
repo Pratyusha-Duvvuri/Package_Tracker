@@ -23,6 +23,8 @@ import com.parse.SubscriptionHandling;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
+
 public class ChatActivity extends AppCompatActivity {
     static final String TAG = ChatActivity.class.getSimpleName();
     static final String USER_ID_KEY = "userId";
@@ -32,16 +34,18 @@ public class ChatActivity extends AppCompatActivity {
 
     static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
-
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
+    String transactionid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+         transactionid = getIntent().getStringExtra("transactionid");
+
         setContentView(R.layout.activity_chat);
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -53,9 +57,12 @@ public class ChatActivity extends AppCompatActivity {
         // Make sure the Parse server is setup to configured for live queries
         // URL for server is determined by Parse.initialize() call.
         ParseLiveQueryClient parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient();
-
+// Define the class we would like to query
         ParseQuery<Message> parseQuery = ParseQuery.getQuery(Message.class);
         // This query can even be more granular (i.e. only refresh if the entry was added by some other user)
+//        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, currentTransactionId);
+        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
+
         // parseQuery.whereNotEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
 
         // Connect to Parse server
@@ -133,7 +140,10 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = new Message();
                 message.setBody(data);
                 message.setUserId(ProfileActivity.parseUser.getObjectId());
-//                message.setUserId(ParseUser.getCurrentUser().getObjectId());
+                message.setUserName(ProfileActivity.parseUser.getString("username"));
+                message.setPicture(ProfileActivity.parseUser.getParseFile("ImageFile"));
+                message.setTransactionId(transactionid);
+//              message.setUserId(ParseUser.getCurrentUser().getObjectId());
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

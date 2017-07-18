@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -9,9 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.CourierModel;
@@ -23,6 +26,7 @@ import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -40,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     Mail mail;
     Sender sender;
     public TextView tvUsername;
+    public ImageView ivProfileImage;
     public static ParseUser parseUser;
     public String meh;
     public final int COURRIER_REQUEST_CODE = 20;
@@ -51,14 +56,19 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public FloatingActionButton floatingActionButton1;
     public FloatingActionButton floatingActionButton2;
     public com.github.clans.fab.FloatingActionButton floatingActionButton3;
+    public com.github.clans.fab.FloatingActionButton floatingActionButton4;
     public Boolean ignore;
+    public Boolean reload;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ignore = true;
         setContentView(R.layout.activity_profile);
+        ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+
         FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
@@ -77,8 +87,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         if (e == null) {
                             Toast.makeText(ProfileActivity.this,"HALP"+parseUser.getString("email"),
                                     Toast.LENGTH_SHORT).show();
+
                             ignore = false;
-                            setListenersLater();
+                            reload = true;
+                            setParametersOfView();
                         }
                         else{
                             Toast.makeText(ProfileActivity.this,"NOPE",
@@ -88,7 +100,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     }
         });
 
-        tvUsername =  (TextView) findViewById(R.id.tvName);
+
+
+        tvUsername =(TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
 
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
@@ -107,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
+        floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_receive_image);
 
 
         tvUsername = (TextView) findViewById(R.id.tvName);
@@ -120,7 +135,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 if(!ignore){
 
-                Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
+
+                    Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
                 i.putExtra("sender", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
 //                i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
@@ -142,19 +158,44 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         });
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
+                Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
 //
 //                    i.putExtra("courier", Parcels.wrap(user));
 //                    i.putExtra("USER", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
 
-                    startActivity(i);
+                startActivity(i);
+            }
+        });
+        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, TestDownloadActivity.class);
+//
+//                    i.putExtra("courier", Parcels.wrap(user));
+//                    i.putExtra("USER", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
+
+                startActivity(i);
             }
         });
 
     }
 
 
-    public void setListenersLater(){}
+    public void setParametersOfView(){
+        ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
+        if(postImage!=null) {
+            String imageUrl = postImage.getUrl();//live url
+            Uri imageUri = Uri.parse(imageUrl);
+
+            Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
+        }
+        else {
+            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
+        }
+            tvUsername.setText(parseUser.getString("fullName"));
+
+    }
 
 
 

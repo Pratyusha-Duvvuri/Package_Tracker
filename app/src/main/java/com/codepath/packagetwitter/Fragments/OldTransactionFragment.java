@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
 
 import java.util.ArrayList;
+
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/12/17.
@@ -84,47 +87,22 @@ public class OldTransactionFragment extends Fragment {
 
 
     private void populateTimeline(){
-        Transaction transaction = Transaction.getRandomTransaction(getContext());
-        addItems(transaction);
+        ArrayList<ParselTransaction> pendingTransactions;
+        if (parseUser != null) {
+            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("oldTransactions");//gets the list of pending transactions
+            if (pendingTransactions != null){
+                for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
 
-        Transaction transaction2 = Transaction.getRandomTransaction(getContext());
-        addItems(transaction2);
-        Transaction transaction3 = Transaction.getRandomTransaction(getContext());
-        addItems(transaction3);
-        //     showProgressBar();
+                    //transofrms the ParseTransaction into transaction and adds to the adapter
+                    addItems(new Transaction(pendingTransactions.get(i)));
+                }
+            }
+        }
 
-//        client.getHomeTimeline( new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                //Log.d("TwitterClient", response.toString() )    ;
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//
-//                addItems(response);
-//
-//            }
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                Log.d("TwitterClient", responseString )    ;
-//                throwable.printStackTrace();
-//            }
-//
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                Log.d("TwitterClient", errorResponse.toString() )    ;
-//                throwable.printStackTrace();            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-//                Log.d("TwitterClient", errorResponse.toString() )    ;
-//                throwable.printStackTrace();             }
-//        });
-//        //  hideProgressBar();
 
-    }
+
+
+}
     public void addItems(Transaction transaction) {
 
 

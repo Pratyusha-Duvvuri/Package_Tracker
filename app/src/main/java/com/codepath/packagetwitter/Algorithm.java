@@ -104,7 +104,7 @@ public class Algorithm {
 
         if(courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
             && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
-                && mail.getWeight() <= courier.getWeightAvailable() && mail.getVolume()[0] <= courier.getVolumeAvailable()[0]) {//TODO change volume into 0-5
+                && mail.getWeight() <= courier.getWeightAvailable() && mail.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
 
 
             return true; // if everything is in order, returns true

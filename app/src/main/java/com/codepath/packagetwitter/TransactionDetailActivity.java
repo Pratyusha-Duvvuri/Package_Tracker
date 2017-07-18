@@ -45,14 +45,15 @@ public class TransactionDetailActivity extends AppCompatActivity {
         matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
         Transaction transaction = Parcels.unwrap(getIntent().getParcelableExtra("transaction"));
-        int[] volume = transaction.getMail().getVolume().clone();
+        //int[] volume = transaction.getMail().getVolume().clone();
+        int volume = transaction.getMail().getVolume();
         ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
         tvDescription.setText(transaction.getMail().getDescription());
         Type.setText(transaction.getMail().getType());
         tvWeight.setText(String.valueOf(transaction.getMail().getWeight()));
-        tvLength.setText(String.valueOf(volume[0]));
-        tvWidth.setText(String.valueOf(volume[1]));
-        tvHeight.setText(String.valueOf(volume[2]));
+        tvLength.setText(String.valueOf(volume));
+        tvWidth.setText(String.valueOf(volume));
+        tvHeight.setText(String.valueOf(volume));
         tvTo.setText(transaction.getSender().getUserName());
         tvFrom.setText("From: " + transaction.getSender().getLocation());
 
@@ -70,7 +71,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
-
+                i.putExtra("transactionid","1234");
                 i.putExtra("courier", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
