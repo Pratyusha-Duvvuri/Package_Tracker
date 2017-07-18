@@ -142,8 +142,9 @@ public class ChatActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         refreshMessages();}
                         else{
-                            Log.d("parseApplicationError",e.toString());
-                        }
+                            Log.d("Message", " error");
+
+                            }
                     }
                 });
                 etMessage.setText(null);

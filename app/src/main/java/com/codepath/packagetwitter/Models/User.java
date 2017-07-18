@@ -14,8 +14,9 @@ import java.util.Random;
 /**
  * Created by michaunp on 7/11/17.
  */
-
 //@ParseClassName("User")
+
+
 @Parcel
 //public class User extends ParseObject {
 public class User{

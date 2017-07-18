@@ -12,9 +12,9 @@
         android:id="@+id/ivPackageImage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@android:color/black" />
+        app:srcCompat="@android:color/black"
+        android:layout_below="@+id/tvFrom"
+        android:layout_alignParentStart="true" />
 
     <ScrollView
         android:id="@+id/svDetailScroll"
@@ -293,4 +293,20 @@
             fab:fab_label="Chat To Arrange Your Transaction"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
+
+    <TextView
+        android:id="@+id/tvFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tvTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/material_design_android_floating_action_menu"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
 </RelativeLayout>

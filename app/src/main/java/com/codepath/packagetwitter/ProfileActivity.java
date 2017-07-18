@@ -196,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
             //add the new (incomplete) transaction to current transactions
             Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
-            pagerAdapter.currentTransactionFragment.addItems(transaction);
+            pagerAdapter.pendingTransactionFragment.addItems(transaction);
         }
 
         if (requestCode == SENDER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
@@ -208,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
             //add the new (incomplete) transaction to current transactions
             Transaction transaction = new Transaction(receiver, sender, new CourierModel(), mail);
-            pagerAdapter.currentTransactionFragment.addItems(transaction);
+            pagerAdapter.pendingTransactionFragment.addItems(transaction);
         }
     }
 

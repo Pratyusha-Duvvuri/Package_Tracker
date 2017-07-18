@@ -22,7 +22,6 @@ import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
-import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
@@ -106,7 +105,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 //                mail.setVolume(Arr);
 //                sender.setTripStart(etStartDate.getText().toString());
 //                sender.setTripEnd(etEndDate.getText().toString());
-//                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
+//                sender.setLocation((etSenderLocation.getText().toString()));
 //                receiver = Receiver.getRandomReceiver(context);
 //                //Call the modal to verify information
 //                onVerifyAction();

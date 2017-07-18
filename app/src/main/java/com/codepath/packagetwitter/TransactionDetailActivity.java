@@ -22,20 +22,16 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
     public ParseUser parseUser;
 
-    @BindView(R.id.tvDescription)
-    TextView tvDescription;
-    @BindView(R.id.tvLength)
-    TextView tvLength;
-    @BindView(R.id.tvWidth)
-    TextView tvWidth;
-    @BindView(R.id.tvHeight)
-    TextView tvHeight;
-    @BindView(R.id.Type)
-    TextView Type;
-    @BindView(R.id.Weight)
-    TextView tvWeight;
-    @BindView(R.id.ivPackageImage)
-    ImageView ivPackageImage;
+    @BindView(R.id.tvDescription) TextView tvDescription;
+    @BindView(R.id.tvLength) TextView tvLength;
+    @BindView(R.id.tvWidth) TextView tvWidth;
+    @BindView(R.id.tvHeight) TextView tvHeight;
+    @BindView(R.id.Type) TextView Type;
+    @BindView(R.id.Weight) TextView tvWeight;
+    @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
+    @BindView(R.id.tvFrom) TextView tvFrom;
+    @BindView(R.id.tvTo) TextView tvTo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +53,9 @@ public class TransactionDetailActivity extends AppCompatActivity {
         tvLength.setText(String.valueOf(volume[0]));
         tvWidth.setText(String.valueOf(volume[1]));
         tvHeight.setText(String.valueOf(volume[2]));
+        tvTo.setText(transaction.getSender().getUserName());
+        tvFrom.setText("From: " + transaction.getSender().getLocation());
+
         if (transaction.getCourier().equals(null)) {
             materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
             chatButton.setVisibility(View.GONE);
@@ -65,16 +64,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
             matchButton.setVisibility(View.GONE);
         }
 
-        matchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, MatchActivity.class);
-                i.putExtra("sender", Parcels.wrap(user));
-                i.putExtra("USER", Parcels.wrap(user));
 
-                startActivity(i);
 
-            }
-        });
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -91,18 +82,3 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
     }
 }
-        /*
-        chatButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
-
-                i.putExtra("courier",Parcels.wrap(user) );
-                i.putExtra("USER", Parcels.wrap(user) );
-
-                startActivity(i);
-            }
-        });
-
-    }
-}
-*/
