@@ -42,7 +42,7 @@ public class Mail {
     public static Mail getRandomMail(Context context){
         Mail mail;
 
-        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.trousers);
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.error);
 
         Random rand = new Random();
 

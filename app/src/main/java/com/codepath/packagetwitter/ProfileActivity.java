@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
+import com.codepath.packagetwitter.Models.CourierModel;
 import com.codepath.packagetwitter.Models.Mail;
+import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
+import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
 import com.parse.ParseUser;
@@ -33,6 +36,12 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public TextView tvUsername;
     public ParseUser parseUser;
     public String meh;
+    public final int COURRIER_REQUEST_CODE = 20;
+    public final int SENDER_REQUEST_CODE = 30;
+    public final static String COURIER_KEY = "courier";
+    public final static String SENDER_KEY = "sender";
+    public final static String MAIL_KEY = "mail";
+    public final static String RECEIVER_KEY = "receiver";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvUsername =  (TextView) findViewById(R.id.tvName);
         tvUsername.setText(user.getUserName());
 
+        user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
         vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -56,15 +67,24 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
+
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
+
+
+        tvUsername = (TextView) findViewById(R.id.tvName);
+        tvUsername.setText(user.getUserName());
+
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent( ProfileActivity.this,PackageCreationActivity.class);
-                i.putExtra("sender", Parcels.wrap(user) );
-                i.putExtra("USER", Parcels.wrap(user) );
-                startActivity(i);
+
+                Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
+                i.putExtra("sender", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
+
+                startActivityForResult(i, SENDER_REQUEST_CODE);
 
             }
         });
@@ -72,19 +92,20 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
 
-                i.putExtra("courier",Parcels.wrap(user) );
-                i.putExtra("USER", Parcels.wrap(user) );
+                i.putExtra("courier", Parcels.wrap(user));
+                i.putExtra("USER", Parcels.wrap(user));
 
-                startActivity(i);
+                startActivityForResult(i, COURRIER_REQUEST_CODE);
             }
         });
-        if(user.hasPendingRequests){
-            user.hasPendingRequests= false;
-            actOnRequests();}
+        if (user.hasPendingRequests) {
+            user.hasPendingRequests = false;
+            actOnRequests();
+        }
 
     }
 
-    public void actOnRequests(){
+    public void actOnRequests() {
         FragmentManager fm = getSupportFragmentManager();
         //creating random sender and mail object here and checking flow from this
         // point till last activity before transaction activity creation.
@@ -93,8 +114,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         mail = Mail.getRandomMail(this);
 
         PendingRequest_Fragment pendingRequest_fragment =
-                        PendingRequest_Fragment.newInstance(mail,sender);
-        pendingRequest_fragment.show(fm,"fragment_pending_request");
+                PendingRequest_Fragment.newInstance(mail, sender);
+        pendingRequest_fragment.show(fm, "fragment_pending_request");
 
     }
 
@@ -107,5 +128,32 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
             i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
             startActivity(i);}
+
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
+        {
+
+            CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
+            //add the new (incomplete) transaction to current transactions
+            Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
+            pagerAdapter.currentTransactionFragment.addItems(transaction);
+        }
+
+        if (requestCode == SENDER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
+        {
+
+            Sender sender =  Parcels.unwrap(data.getParcelableExtra(SENDER_KEY));
+            Mail mail =  Parcels.unwrap(data.getParcelableExtra(MAIL_KEY));
+            Receiver receiver =  Parcels.unwrap(data.getParcelableExtra(RECEIVER_KEY));
+
+            //add the new (incomplete) transaction to current transactions
+            Transaction transaction = new Transaction(receiver, sender, new CourierModel(), mail);
+            pagerAdapter.currentTransactionFragment.addItems(transaction);
+        }
+    }
+
 }

@@ -76,7 +76,6 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
@@ -97,6 +96,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                onVerifyAction();
 //                mail.setDescription(etDescription.getText().toString());
 //                mail.setFragile(true);//cbIsFragile.isChecked());
 //                //have to set picture
@@ -107,9 +107,9 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 //                sender.setTripStart(etStartDate.getText().toString());
 //                sender.setTripEnd(etEndDate.getText().toString());
 //                sender.setLocation(Double.parseDouble(etSenderLocation.getText().toString()));
-                receiver = Receiver.getRandomReceiver(context);
-                //Call the modal to verify information
-                onVerifyAction();
+//                receiver = Receiver.getRandomReceiver(context);
+//                //Call the modal to verify information
+//                onVerifyAction();
             }
         });
 
@@ -117,12 +117,20 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
     public void onVerifyAction() {
-
+        fake();
         FragmentManager fm = getSupportFragmentManager();
         PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail, sender, receiver);
         frag.show(fm, "fragment_package_confirmation");
     }
 
+    public void fake(){
+        sender = Sender.getRandomSender(this);
+        receiver=Receiver.getRandomReceiver(this);
+        mail = Mail.getRandomMail(this);
+
+    }
+
+    @Override
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail, Boolean bool) {
         //reset information and check if listener is called
         if (bool) {
@@ -131,8 +139,9 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
             i.putExtra("sender", Parcels.wrap(sender));
             i.putExtra("mail", Parcels.wrap(mail));
             i.putExtra("USER", Parcels.wrap(USER));
-            i.putExtra("Transaction", Parcels.wrap(Transaction.getRandomTransaction(this)));
             startActivity(i);
+            setResult(RESULT_OK, i); // set result code and bundle data for response
+            finish(); // closes the activity, pass data to parent
         }
 
     }
