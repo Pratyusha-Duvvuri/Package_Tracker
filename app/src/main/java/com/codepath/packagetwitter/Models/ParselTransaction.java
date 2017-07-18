@@ -5,4 +5,5 @@ package com.codepath.packagetwitter.Models;
  */
 
 public class ParselTransaction {
+
 }
