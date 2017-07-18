@@ -23,8 +23,6 @@ import com.parse.SubscriptionHandling;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
-
 public class ChatActivity extends AppCompatActivity {
     static final String TAG = ChatActivity.class.getSimpleName();
     static final String USER_ID_KEY = "userId";
@@ -60,10 +58,7 @@ public class ChatActivity extends AppCompatActivity {
 // Define the class we would like to query
         ParseQuery<Message> parseQuery = ParseQuery.getQuery(Message.class);
         // This query can even be more granular (i.e. only refresh if the entry was added by some other user)
-//        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, currentTransactionId);
-        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
-
-        // parseQuery.whereNotEqualTo(USER_ID_KEY, ParseUser.getCurrentUser().getObjectId());
+//        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
         // Connect to Parse server
         SubscriptionHandling<Message> subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery);
