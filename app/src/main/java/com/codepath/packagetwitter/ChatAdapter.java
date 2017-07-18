@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -44,21 +46,30 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = mMessages.get(position);
         final boolean isMe = message.getUserId() != null && message.getUserId().equals(mUserId);
-
+        ParseFile postImage = message.getParseFile("picture");
+        Uri imageUri;
         if (isMe) {
             holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            String imageUrl = postImage.getUrl();//live url
+             imageUri = Uri.parse(imageUrl);
+
+            //put my image from parse user
         } else {
             holder.imageOther.setVisibility(View.VISIBLE);
             holder.imageMe.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            //load image from messages
+            String imageUrl = postImage.getUrl();//live url
+             imageUri = Uri.parse(imageUrl);
         }
-
+        //change this code to reflect user now
         final ImageView profileView = isMe ? holder.imageMe : holder.imageOther;
-        Glide.with(mContext).load(getProfileUrl(message.getUserId())).into(profileView);
+        Glide.with(mContext).load(imageUri.toString()).into(profileView);
         holder.body.setText(message.getBody());
     }
+
 
     // Create a gravatar image based on the hash value obtained from userId
     private static String getProfileUrl(final String userId) {

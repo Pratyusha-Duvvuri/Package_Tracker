@@ -70,7 +70,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
-
+                i.putExtra("transactionid","1234");
                 i.putExtra("courier", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );

@@ -58,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public com.github.clans.fab.FloatingActionButton floatingActionButton3;
     public com.github.clans.fab.FloatingActionButton floatingActionButton4;
     public Boolean ignore;
+    public Boolean reload;
 
 
     @Override
@@ -86,13 +87,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         if (e == null) {
                             Toast.makeText(ProfileActivity.this,"HALP"+parseUser.getString("email"),
                                     Toast.LENGTH_SHORT).show();
-                            ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
-                            String imageUrl = postImage.getUrl() ;//live url
-                            Uri imageUri = Uri.parse(imageUrl);
-                            Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
 
                             ignore = false;
-                            setListenersLater();
+                            reload = true;
+                            setParametersOfView();
                         }
                         else{
                             Toast.makeText(ProfileActivity.this,"NOPE",
@@ -101,7 +99,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         }
                     }
             });
-
 
 
         tvUsername =  (TextView) findViewById(R.id.tvName);
@@ -184,7 +181,20 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
 
 
-    public void setListenersLater(){}
+    public void setParametersOfView(){
+        ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
+        if(postImage!=null) {
+            String imageUrl = postImage.getUrl();//live url
+            Uri imageUri = Uri.parse(imageUrl);
+
+            Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
+        }
+        else {
+            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
+        }
+            tvUsername.setText(parseUser.getString("fullName"));
+
+    }
 
 
 
