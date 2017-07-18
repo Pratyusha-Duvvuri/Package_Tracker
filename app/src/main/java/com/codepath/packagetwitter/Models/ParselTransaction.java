@@ -2,6 +2,7 @@ package com.codepath.packagetwitter.Models;
 
 import android.graphics.Bitmap;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 /**
  * Created by rafasj6 on 7/17/17.
  */
-
+@ParseClassName("ParselTransaction")
 public class ParselTransaction extends ParseObject{
 
 
@@ -19,7 +20,7 @@ public class ParselTransaction extends ParseObject{
     }
 
     public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd,
-                             String receiverLoc, Date receiverStart, Date receiverEnd,String type, String description, Double weight,
+                             String receiverLoc, String type, String description, Double weight,
                              int volume) {
         //for when sender creates package
         super();
@@ -29,8 +30,6 @@ public class ParselTransaction extends ParseObject{
         setSenderStart(sendStart);
         setSenderEnd(sendEnd);
         setReceiverLoc(receiverLoc);
-        setReceiverStart(receiverStart);
-        setReceiverEnd(receiverEnd);
         setMailType(type);
         setMailDescription(description);
         setWeight(weight);
@@ -39,6 +38,11 @@ public class ParselTransaction extends ParseObject{
 
     }
 
+    public void addReceiverInfo(String receiverId, Date receiverStart, Date receiverEnd){
+        setReceiverStart(receiverStart);
+        setReceiverEnd(receiverEnd);
+        setTransactionState(1);
+    }
     public void addCourierInfo(String courierId, Date courierStart, Date courierEnd){
         setCourier(courierId);
         setCourierStart(courierStart);

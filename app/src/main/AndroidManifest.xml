@@ -46,6 +46,7 @@
         <activity android:name=".AfterSenderConfirmation" />
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".FileUploadActivity"></activity>
+        <activity android:name=".TestDownloadActivity"></activity>
     </application>
 
 </manifest>
