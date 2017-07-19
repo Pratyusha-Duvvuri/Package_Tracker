@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -54,7 +55,7 @@ public class Transaction {
                             String.valueOf(parselTransaction.getReceiverEnd()),
                             parselTransaction.getReceiverLoc());
                 } else {
-                    // Something went wrong.
+                    Log.e("Parse application error", "Couldn't log to background");
                 }
             }
         });//
@@ -79,7 +80,14 @@ public class Transaction {
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
-                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
+                    User u = null;
+                    try {
+                        u = new User(objects.get(0).fetchIfNeeded().getString("username"),objects.get(0).fetchIfNeeded().getString("userHandle"), objects.get(0).getString("mobileNumber"));
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
+
+//                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
                      courier = new CourierModel(u,String.valueOf(parselTransaction.getCourierStart()),
                             String.valueOf(parselTransaction.getCourierEnd()),
                             parselTransaction.getWeight(), parselTransaction.getVolume(),parselTransaction.getSenderLoc(), parselTransaction.getReceiverLoc());

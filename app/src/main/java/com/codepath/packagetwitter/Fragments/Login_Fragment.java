@@ -3,6 +3,8 @@ package com.codepath.packagetwitter.Fragments;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,10 +34,12 @@ import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
+import java.io.ByteArrayOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -211,11 +215,34 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             @Override
             public void done(ParseUser userrr, ParseException e) {
                 if (userrr != null) {
+
+
+                    parseUser = userrr;
+                    if(parseUser.getParseFile("ImageFile")==null) {
+
+
+                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                                R.drawable.error);
+                        // Convert it to byte
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        // Compress image to lower quality scale 1 - 100
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byte[] image = stream.toByteArray();
+
+                        ParseFile file = new ParseFile("Default", image);
+                        file.saveInBackground();
+
+                        parseUser.put("ImageFile", file);
+
+                        parseUser.saveInBackground();
+
+                    }
+
+
                     Log.d("ParseApplication","bwahahaha");
 
                     Log.d("ParseApplication","Logged in successfully");
                     // Hooray! The user is logged in.
-                    parseUser = userrr;
                     User u = User.getRandomUser(getContext());
                     Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
                     u.hasPendingRequests= true;
