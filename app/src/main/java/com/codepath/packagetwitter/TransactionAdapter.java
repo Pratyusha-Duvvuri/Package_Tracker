@@ -57,7 +57,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         ParselTransaction transaction = mTransactions.get(position);
 
 
-        holder.tvUsername.setText(String.valueOf(transaction.getString("sender")));
+        holder.tvUsername.setText(String.valueOf(transaction.getSender()));
         holder.tvBoarding.setText(String.valueOf(transaction.getString("senderEnd")));
         holder.tvArrival.setText(String.valueOf(transaction.getString("senderEnd")));
         holder.tvWeight.setText(String.valueOf(transaction.getString("receiverLoc")));

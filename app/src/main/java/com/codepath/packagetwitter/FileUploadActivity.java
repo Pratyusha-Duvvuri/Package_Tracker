@@ -115,7 +115,8 @@ public class FileUploadActivity extends Activity {
                 u.hasPendingRequests= true;
                 i.putExtra("USER", Parcels.wrap(u));
                 i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
-                startActivity(i);
+                setResult(RESULT_OK, i); // set result code and bundle data for response
+                finish(); // closes the activity, pass data to parent
 
             }
         });

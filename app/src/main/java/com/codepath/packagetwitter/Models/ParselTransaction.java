@@ -199,12 +199,6 @@ public class ParselTransaction extends ParseObject{
 
 
 
-    // Add a constructor that contains core properties
-//    public TodoItem(String body) {
-//        super();
-//        setBody(body);
-//    }
-
     // Use getString and others to access fields
     public String getBody() {
         return getString("body");
