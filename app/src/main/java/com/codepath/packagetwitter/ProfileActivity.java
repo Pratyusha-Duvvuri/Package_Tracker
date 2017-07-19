@@ -76,7 +76,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
-        user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
         tvUsername = (TextView) findViewById(R.id.tvName);
 
 
@@ -93,6 +92,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     ignore = false;
                     reload = true;
                     setParametersOfView();
+                    if (parseUser.getBoolean("hasPendingRequests") ){
+                        parseUser.put("hasPendingRequests", false);
+                        actOnRequests();
+                    }
                 } else {
                     Toast.makeText(ProfileActivity.this, "Can't access user",
                             Toast.LENGTH_SHORT).show();
@@ -100,7 +103,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 }
             }
         });
-
 
 
         //this code is to set up the transactions for the three tabs
@@ -121,10 +123,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
 
         //modal code (work on later)
-        if (user.hasPendingRequests) {
-            user.hasPendingRequests = false;
-            actOnRequests();
-        }
+
         //FOR SENDER
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
