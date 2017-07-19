@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Transaction;
+import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
 
@@ -33,7 +34,6 @@ public class CurrentTransactionFragment extends Fragment {
     public ArrayList<Transaction> transactions;
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
-    //TwitterClient client;
     public static int page;
     public Context context;
 
@@ -45,8 +45,7 @@ public class CurrentTransactionFragment extends Fragment {
         // init the array list (data source)
         //construct the adapter form this datasource
         transactionAdapter = new TransactionAdapter(transactions);
-
-        this.context = context;
+//        this.context = context;
         populateTimeline();
     }
 
@@ -83,7 +82,7 @@ public class CurrentTransactionFragment extends Fragment {
     }
 
 
-    //    //this is for the intermediate progress bar
+        //this is for the intermediate progress bar
     MenuItem miActionProgressItem;
    // ProgressBar v;
 
@@ -101,25 +100,22 @@ public class CurrentTransactionFragment extends Fragment {
     private void populateTimeline(){
 
         ArrayList<ParselTransaction> pendingTransactions;
-        if (parseUser != null) {
+        if (ProfileActivity.parseUser != null) {
             pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("currentTransactions");//gets the list of pending transactions
             if (pendingTransactions != null){
 
             for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
 
-                //transofrms the ParseTransaction into transaction and adds to the adapter
+                //transforms the ParseTransaction into transaction and adds to the adapter
                 addItems(new Transaction(pendingTransactions.get(i)));
             }}
         }
 
-
     }
     public void addItems(Transaction transaction) {
 
-
         transactions.add(transaction);
         transactionAdapter.notifyItemInserted(transactions.size() - 1);
-
 
     }
 

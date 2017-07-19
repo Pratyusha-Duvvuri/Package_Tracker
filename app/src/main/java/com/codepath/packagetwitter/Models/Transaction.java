@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter.Models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -46,6 +47,7 @@ public class Transaction {
     public Transaction(final ParselTransaction parselTransaction){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", parselTransaction.getReceiver());
+        //Todo or sender?
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
@@ -54,7 +56,7 @@ public class Transaction {
                             String.valueOf(parselTransaction.getReceiverEnd()),
                             parselTransaction.getReceiverLoc());
                 } else {
-                    // Something went wrong.
+                    Log.e("Parse application error", "Couldn't log to background");
                 }
             }
         });//

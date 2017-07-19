@@ -239,9 +239,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     }
 
 
-
-
-
                     Log.d("ParseApplication","bwahahaha");
 
                     Log.d("ParseApplication","Logged in successfully");

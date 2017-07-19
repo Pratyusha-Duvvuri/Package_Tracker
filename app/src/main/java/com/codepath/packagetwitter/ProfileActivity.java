@@ -39,7 +39,7 @@ import org.parceler.Parcels;
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener{
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener {
 
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
@@ -77,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        tvUsername = (TextView) findViewById(R.id.tvName);
+
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -85,30 +87,23 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         // Execute the query to find the object with ID
         query.getInBackground(parseUserId, new GetCallback<ParseUser>() {
             @Override
-                    public void done(ParseUser item, ParseException e) {
-                         parseUser = item;
-                        if (e == null) {
-                            Toast.makeText(ProfileActivity.this,"HALP"+parseUser.getString("email"),
-                                    Toast.LENGTH_SHORT).show();
-
-                            ignore = false;
-                            reload = true;
-                            setParametersOfView();
-                        }
-                        else{
-                            Toast.makeText(ProfileActivity.this,"NOPE",
-                                    Toast.LENGTH_SHORT).show();
-                            Log.d("ParseApplicationError",e.toString());
-                        }
-                    }
+            public void done(ParseUser item, ParseException e) {
+                parseUser = item;
+                if (e == null) {
+                    ignore = false;
+                    reload = true;
+                    setParametersOfView();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Can't access user",
+                            Toast.LENGTH_SHORT).show();
+                    Log.d("ParseApplicationError", e.toString());
+                }
+            }
         });
 
 
 
-        tvUsername =(TextView) findViewById(R.id.tvName);
-        //tvUsername.setText(user.getUserName());
-
-
+        //this code is to set up the transactions for the three tabs
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
         vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -119,42 +114,44 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tabLayout.setupWithViewPager(vpPager);
 
 
+        //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
         floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_receive_image);
 
-
+        //modal code (work on later)
         if (user.hasPendingRequests) {
             user.hasPendingRequests = false;
             actOnRequests();
         }
+        //FOR SENDER
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!ignore){
-
-
+                if (!ignore) {
                     Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
-                i.putExtra("sender", Parcels.wrap(user));
-                i.putExtra("USER", Parcels.wrap(user));
-//                i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
-
-                startActivityForResult(i, SENDER_REQUEST_CODE);}
+                    i.putExtra("sender", Parcels.wrap(user));
+                    i.putExtra("USER", Parcels.wrap(user));
+                    startActivityForResult(i, SENDER_REQUEST_CODE);
+                }
 
             }
         });
+        //For Courier
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!ignore){
-                Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
+                if (!ignore) {
+                    Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
 
-                i.putExtra("courier", Parcels.wrap(user));
-                i.putExtra("USER", Parcels.wrap(user));
+                    i.putExtra("courier", Parcels.wrap(user));
+                    i.putExtra("USER", Parcels.wrap(user));
 
-                startActivityForResult(i, COURRIER_REQUEST_CODE);}
+                    startActivityForResult(i, COURRIER_REQUEST_CODE);
+                }
             }
         });
+        //For image profie view
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
@@ -166,39 +163,27 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 startActivity(i);
             }
         });
-        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, TestDownloadActivity.class);
-//
-//                    i.putExtra("courier", Parcels.wrap(user));
-//                    i.putExtra("USER", Parcels.wrap(user));
-                i.putExtra("USER", Parcels.wrap(user));
-
-                startActivity(i);
-            }
-        });
 
     }
 
 
-    public void setParametersOfView(){
+    public void setParametersOfView() {
         ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
-        if(postImage!=null) {
-            String imageUrl = postImage.getUrl();//live url
-            Uri imageUri = Uri.parse(imageUrl);
+//        if(postImage!=null) {
+        String imageUrl = postImage.getUrl();//live url
+        Uri imageUri = Uri.parse(imageUrl);
 
-            Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
-        }
-        else {
-            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
-        }
-            tvUsername.setText(parseUser.getString("fullName"));
+        Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
+//    }
+//        else {
+//            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
+//        }
+//            tvUsername.setText(parseUser.getString("fullName"));
 
     }
 
 
-
-
+//if the person has any pending requests
     public void actOnRequests() {
         FragmentManager fm = getSupportFragmentManager();
         //creating random sender and mail object here and checking flow from this
@@ -222,12 +207,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
             i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
             startActivity(i);}
-
     }
 
     public void onFinishEditDialog(){
         ParseUser.logOut();
-        ParseUser currentUser = ParseUser.getCurrentUser();
         Intent i= new Intent(this, LoginActivity.class);
         startActivity(i);
 
