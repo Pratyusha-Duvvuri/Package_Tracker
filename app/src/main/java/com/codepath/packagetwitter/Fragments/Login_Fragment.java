@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
-import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
@@ -36,8 +35,6 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-
-import org.parceler.Parcels;
 
 import java.io.ByteArrayOutputStream;
 import java.util.regex.Matcher;
@@ -231,23 +228,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                         ParseFile file = new ParseFile("Default", image);
                         file.saveInBackground();
-
                         parseUser.put("ImageFile", file);
-
                         parseUser.saveInBackground();
 
                     }
 
-
-                    Log.d("ParseApplication","bwahahaha");
-
                     Log.d("ParseApplication","Logged in successfully");
                     // Hooray! The user is logged in.
-                    User u = User.getRandomUser(getContext());
                     Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
-                    u.hasPendingRequests= true;
-                    i.putExtra("USER", Parcels.wrap(u));
-                    i.putExtra("CallingActivity", "LoginFragment");
                     i.putExtra("PARSEUSER", parseUser.getObjectId());
                     startActivity(i);
 

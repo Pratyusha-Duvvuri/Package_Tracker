@@ -26,8 +26,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import org.parceler.Parcels;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -122,8 +120,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
-//        userr = new User(getFullName, "@" + getFullName, getMobileNumber);
-
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(getEmailId);
@@ -162,9 +158,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
         createNewParseUser();
         Intent i = new Intent(getContext(), LoginActivity.class);
-        userr = User.getRandomUser(getContext());
-        userr.hasPendingRequests= false;
-        i.putExtra("USER", Parcels.wrap(userr));
         startActivity(i);
 
     }
@@ -194,8 +187,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                         "SIGNNN.");
                 // Hooray! Let them use the app now.
             } else {
-
-
                 e.printStackTrace();                // Sign up didn't succeed. Look at the ParseException
                 // to figure out what went wrong
             }

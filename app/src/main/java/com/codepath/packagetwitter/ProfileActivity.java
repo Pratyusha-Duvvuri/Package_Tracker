@@ -52,7 +52,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public String meh;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
-    public final int UPLOAD_IMAGE_REQUEST_CODE = 40;
     public final static String COURIER_KEY = "courier";
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
@@ -106,7 +105,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         //this code is to set up the transactions for the three tabs
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
-
         //get the View pager
         vpPager = (ViewPager) findViewById(R.id.viewpager);
         //set the adapter for the pager
@@ -161,7 +159,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //                    i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
 
-                startActivityForResult(i,UPLOAD_IMAGE_REQUEST_CODE);
+                startActivity(i);
             }
         });
 
@@ -179,7 +177,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        else {
 //            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
 //        }
-            tvUsername.setText(parseUser.getString("fullName"));
+//            tvUsername.setText(parseUser.getString("fullName"));
 
     }
 
@@ -220,8 +218,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        pagerAdapter.pendingTransactionFragment.populateTimeline();
-
         if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
         {
 

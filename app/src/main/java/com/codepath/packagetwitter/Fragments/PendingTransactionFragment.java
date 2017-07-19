@@ -75,33 +75,30 @@ public class PendingTransactionFragment extends Fragment {
         ArrayList<ParselTransaction> pendingTransactions;
         parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
-<<<<<<< HEAD
             pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions
-            if (pendingTransactions != null){
+            if (pendingTransactions != null) {
                 Log.d("pendingTransactions", pendingTransactions.get(0).toString());
-=======
->>>>>>> 39708a770e3a96ba11cf0a4a59e09b68d2f41936
 
-            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-            // Define our query conditions
-            query.whereEqualTo("sender", parseUser.getUsername());
-            // Execute the find asynchronously
-            query.findInBackground(new FindCallback<ParselTransaction>() {
-                @Override
-                public void done(List<ParselTransaction> issueList, ParseException e) {
-                    if (e == null) {
-                        transactions.clear();
-                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
-                        for (int i = 0; i < issueList.size(); i++) {
-                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
-                            addItems(trans);
+                ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+                // Define our query conditions
+                query.whereEqualTo("sender", parseUser.getUsername());
+                // Execute the find asynchronously
+                query.findInBackground(new FindCallback<ParselTransaction>() {
+                    @Override
+                    public void done(List<ParselTransaction> issueList, ParseException e) {
+                        if (e == null) {
+                            transactions.clear();
+                            Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                            for (int i = 0; i < issueList.size(); i++) {
+                                ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                                addItems(trans);
+                            }
+
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
                         }
-
-                    } else {
-                        Log.d("score", "Error: " + e.getMessage());
                     }
-                }
-            });
+                });
             }
 //            if (pendingTransactions != null){
 //
@@ -112,7 +109,7 @@ public class PendingTransactionFragment extends Fragment {
 //                addItems(trans);
 //            }
 //        }}
-    }
+        }}
 
     public void addItems(ParselTransaction transaction) {
         transactions.add(transaction);

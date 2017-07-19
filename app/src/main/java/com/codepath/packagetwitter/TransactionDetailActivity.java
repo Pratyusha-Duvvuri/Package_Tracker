@@ -60,14 +60,15 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             tvTo.setText("To: " + transaction.getReceiverLoc());
                             tvWeight.setText(String.valueOf(transaction.getWeight()));
                             Volume.setText(String.valueOf(transaction.getVolume()));
-
-                            if (transaction.getCourier() == null) {
-                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
-                                chatButton.setVisibility(View.GONE);
-                            } else {
-                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
                                 matchButton.setVisibility(View.GONE);
-                            }
+
+//                            if (transaction.getCourier() == null) {
+//                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
+//                                chatButton.setVisibility(View.GONE);
+//                            } else {
+//                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
+//                                matchButton.setVisibility(View.GONE);
+//                            }
                         }
                     }
         });
