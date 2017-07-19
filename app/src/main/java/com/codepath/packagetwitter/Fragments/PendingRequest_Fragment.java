@@ -1,8 +1,8 @@
 package com.codepath.packagetwitter.Fragments;
 
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +16,6 @@ import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcels;
-
-import static org.parceler.Parcels.unwrap;
 
 /**
  * Created by pratyusha98 on 7/14/17.
@@ -64,8 +62,8 @@ public class PendingRequest_Fragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        sender =  unwrap(getArguments().getParcelable("sender"));
-        mail =  unwrap(getArguments().getParcelable("mail"));
+//        sender =  unwrap(getArguments().getParcelable("sender"));
+//        mail =  unwrap(getArguments().getParcelable("mail"));
 
         return inflater.inflate(R.layout.fragment_pending_request, container, false);
     }
