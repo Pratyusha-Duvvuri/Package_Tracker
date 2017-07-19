@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.CourierModel;
-import com.codepath.packagetwitter.Models.Mail;
-import com.codepath.packagetwitter.Models.Receiver;
-import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 
 import org.parceler.Parcels;
@@ -94,17 +91,39 @@ public class CourierActivity extends AppCompatActivity {
 
 
     public void onVerifyAction() {
+        //queries all pending transactions
+//        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+//        query.whereEqualTo("transactionState", 1); //pending transaction state
+//        query.findInBackground(new FindCallback<ParselTransaction>() {
+//            public void done(List<ParselTransaction> itemList, ParseException e) {
+//                if (e == null) {
+//                    //access parsel transactions here
+//                    for (int i = 0; i < itemList.size(); i++){
+//                        //for every parsel transaction
+//                        ParselTransaction parselTransaction = itemList.get(i)
+//                        Transaction transaction = new Transaction(parselTransaction);
+//                        transaction.setCourier(courier);//adds the courrier to transaction
+//                        if (Algorithm.isPossibleMatch(transaction)){
+//                            //if its a match
+//                            parselTransaction.addCourierInfo(parseUser.getObjectId(), courier.getTripStart(), courier.getTripEnd());
+//
+//
+//                        }
+//
+//                    }
+//
+//                } else {
+//                    // something went wrong
+//                }
+//            }
+//        });
 
-        //FragmentManager fm = getSupportFragmentManager();
-        //PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail,sender,receiver);
-        //frag.show(fm, "fragment_package_confirmation");
         Intent i = new Intent(this, ProfileActivity.class);
         i.putExtra(COURIER_KEY, Parcels.wrap(courier));
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
-    }
-    public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail){
-        //reset information and check if listener is called
+
+
     }
 
 }

@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.packagetwitter.Models.Transaction;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.ParseUser;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -23,9 +21,9 @@ import java.util.List;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder>{
 
     Context context;
-    public List<Transaction> mTransactions;
+    public List<ParselTransaction> mTransactions;
     public ParseUser parseUser;
-    public TransactionAdapter(List<Transaction> transactions)
+    public TransactionAdapter(List<ParselTransaction> transactions)
     {
         mTransactions = transactions;
     }
@@ -35,17 +33,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View tweetView = inflater.inflate(R.layout.item_transaction,parent, false);
-
-        ViewHolder viewHolder = new ViewHolder(tweetView);
+        View transactionView = inflater.inflate(R.layout.item_transaction,parent, false);
+        ViewHolder viewHolder = new ViewHolder(transactionView);
         return viewHolder;
     }
 
-
-
-
-
-    //bind the valies based on pos of elemt in list
+    //bind the values based on pos of elemt in list
 
 
     public void clear() {
@@ -54,23 +47,21 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<Transaction> list) {
+    public void addAll(List<ParselTransaction> list) {
         mTransactions.addAll(list);
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Transaction transaction = mTransactions.get(position);
+        ParselTransaction transaction = mTransactions.get(position);
 
 
-        holder.tvUsername.setText(String.valueOf(transaction.getSender().getUserName()));
-        holder.tvBoarding.setText(String.valueOf(transaction.getSender().getTripStart()));
-        holder.tvArrival.setText(String.valueOf(transaction.getSender().getTripEnd()));
-        //holder.tvWeight.setText(String.valueOf(transaction.getSender().getEndAddress()));
+        holder.tvUsername.setText(String.valueOf(transaction.getString("sender")));
+        holder.tvBoarding.setText(String.valueOf(transaction.getString("senderEnd")));
+        holder.tvArrival.setText(String.valueOf(transaction.getString("senderEnd")));
+        holder.tvWeight.setText(String.valueOf(transaction.getString("receiverLoc")));
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
-
-
 
     }
 
@@ -97,11 +88,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvArrival = (TextView) itemView.findViewById(R.id.tvArrival);
             tvBoarding = (TextView) itemView.findViewById(R.id.tvBoarding);
             tvWeight = (TextView) itemView.findViewById(R.id.tvWeight);
-
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
-
         }
-
 
 
         @Override
@@ -112,7 +100,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
-                Transaction transaction = mTransactions.get(position);
+                ParselTransaction transaction = mTransactions.get(position);
 //                parseUser = Parcels.unwrap(((ProfileActivity) context).getIntent().getParcelableExtra("PARSEUSER"));
 //                Log.d("WORK","mew"+parseUser.getString("userName"));
                 // create intent for the new activity
@@ -120,7 +108,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                     intent = new Intent(context, TransactionDetailActivity.class);
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
-                    intent.putExtra("transaction", Parcels.wrap(transaction));
+                    intent.putExtra("ParselTransactionId", transaction.getObjectId());
                      // serialize the movie using parceler, use its short name as a key
                     //  intent.putExtra("user", transaction.user.sreenName);
                    // intent.putExtra("uid", String.valueOf(transaction.uid));

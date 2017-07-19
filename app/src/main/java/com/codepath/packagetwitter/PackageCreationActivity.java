@@ -96,9 +96,10 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         // Apply the adapter to the spinner
         spPackageType.setAdapter(adapter);
 
+
+
         fbConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 String sendStart = etStartDateMonth.getText().toString() + "/" + etStartDateDay.getText().toString();
                 String sendEnd = etEndDateMonth.getText().toString() + "/" + etEndDateDay.getText().toString();
                 Date senderStartDate = null;
@@ -109,6 +110,9 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+
+
                 //creating new transaction parse object
                 ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
                         USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
@@ -122,7 +126,8 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
                 setResult(RESULT_OK, i);
                 finish();
 
-
+//
+//
 
  //               onVerifyAction();
 //                mail.setDescription(etDescription.getText().toString());
@@ -145,6 +150,36 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
     public void onVerifyAction() {
+//        mail = Mail.getRandomMail(context);
+//        sender = Sender.getRandomSender(context);
+//
+//        String sendStart = etStartDateMonth.getText().toString() + "/" + etStartDateDay.getText().toString();
+//        String sendEnd = etEndDateMonth.getText().toString() + "/" + etEndDateDay.getText().toString();
+//        Date senderStartDate = null;
+//        Date senderEndDate = null;
+//        try {
+//            senderStartDate = new SimpleDateFormat("MM/dd").parse(sender.getTripStart());
+//            senderEndDate = new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//        //creating new transaction parse object
+//        ParselTransaction transaction = new ParselTransaction("rafael.jacobovitz@gmail.com",
+//                USER.getUserHandle(), sender.getLocation(), senderStartDate,
+//                senderEndDate, sender.getLocation(), mail.getType(),
+//                mail.getDescription(), mail.getWeight(),
+//                mail.getVolume());
+//
+//        transaction.saveEventually();
+//        ProfileActivity.parseUser.add("pendingTransactions", transaction);
+//        ProfileActivity.parseUser.saveEventually();
+//        Intent i = new Intent(context, ProfileActivity.class);
+//        setResult(RESULT_OK, i);
+//        finish();
+
         FragmentManager fm = getSupportFragmentManager();
         PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail, sender, receiver);
         frag.show(fm, "fragment_package_confirmation");
