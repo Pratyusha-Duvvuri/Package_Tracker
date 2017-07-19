@@ -99,15 +99,15 @@ public class CurrentTransactionFragment extends Fragment {
 
     private void populateTimeline(){
 
-        ArrayList<ParselTransaction> pendingTransactions;
+        ArrayList<ParselTransaction> currentTransactions;
         if (ProfileActivity.parseUser != null) {
-            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("currentTransactions");//gets the list of pending transactions
-            if (pendingTransactions != null){
+            currentTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of current transactions
+            if (currentTransactions != null){
 
-            for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
+            for (int i = 0; i < currentTransactions.size(); i++) { //for every pending transaction
 
                 //transforms the ParseTransaction into transaction and adds to the adapter
-                addItems(new Transaction(pendingTransactions.get(i)));
+                addItems(new Transaction(currentTransactions.get(i)));
             }}
         }
 

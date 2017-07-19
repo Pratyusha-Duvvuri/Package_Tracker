@@ -76,7 +76,8 @@ public class PendingTransactionFragment extends Fragment {
             for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
 
                 //transofrms the ParseTransaction into transaction and adds to the adapter
-                addItems(new Transaction(pendingTransactions.get(i)));
+                Transaction trans = new Transaction(pendingTransactions.get(i));
+                addItems(trans);
             }
         }}
     }

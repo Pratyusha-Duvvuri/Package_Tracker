@@ -47,7 +47,6 @@ public class Transaction {
     public Transaction(final ParselTransaction parselTransaction){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", parselTransaction.getReceiver());
-        //Todo or sender?
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
@@ -81,7 +80,14 @@ public class Transaction {
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
-                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
+                    User u = null;
+                    try {
+                        u = new User(objects.get(0).fetchIfNeeded().getString("username"),objects.get(0).fetchIfNeeded().getString("userHandle"), objects.get(0).getString("mobileNumber"));
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
+
+//                    User u = new User(objects.get(0).getUsername(),objects.get(0).getString("handle"), objects.get(0).getString("phone"));
                      courier = new CourierModel(u,String.valueOf(parselTransaction.getCourierStart()),
                             String.valueOf(parselTransaction.getCourierEnd()),
                             parselTransaction.getWeight(), parselTransaction.getVolume(),parselTransaction.getSenderLoc(), parselTransaction.getReceiverLoc());
