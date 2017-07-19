@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.packagetwitter.Models.Transaction;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -23,9 +26,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     public ParseUser parseUser;
 
     @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.tvLength) TextView tvLength;
-    @BindView(R.id.tvWidth) TextView tvWidth;
-    @BindView(R.id.tvHeight) TextView tvHeight;
+    @BindView(R.id.Volume) TextView Volume;
     @BindView(R.id.Type) TextView Type;
     @BindView(R.id.Weight) TextView tvWeight;
     @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
@@ -37,36 +38,42 @@ public class TransactionDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_detail);
-        FloatingActionMenu materialDesignFAM;
-        com.github.clans.fab.FloatingActionButton matchButton;
-        com.github.clans.fab.FloatingActionButton chatButton;
+        final FloatingActionMenu materialDesignFAM;
+        final com.github.clans.fab.FloatingActionButton matchButton;
+        final com.github.clans.fab.FloatingActionButton chatButton;
         ButterKnife.bind(this);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
-        Transaction transaction = Parcels.unwrap(getIntent().getParcelableExtra("transaction"));
-        //int[] volume = transaction.getMail().getVolume().clone();
-        int volume = transaction.getMail().getVolume();
-        ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
-        tvDescription.setText(transaction.getMail().getDescription());
-        Type.setText(transaction.getMail().getType());
-        tvWeight.setText(String.valueOf(transaction.getMail().getWeight()));
-        tvLength.setText(String.valueOf(volume));
-        tvWidth.setText(String.valueOf(volume));
-        tvHeight.setText(String.valueOf(volume));
-        tvTo.setText(transaction.getSender().getUserName());
-        tvFrom.setText("From: " + transaction.getSender().getLocation());
+        String ParselTransactionId = getIntent().getStringExtra("ParselTransactionId");
+        ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
+        // First try to find from the cache and only then go to network
+        transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+        // Execute the query to find the object with ID
+        transactionQuery.getInBackground(ParselTransactionId, new GetCallback<ParselTransaction>() {
+                    public void done(ParselTransaction transaction, ParseException e) {
+                        if (e == null) {
+                            // item was found
+                            tvDescription.setText(transaction.getMailDescription());
+                            Type.setText(transaction.getMailType());
+                            tvFrom.setText("From: " + transaction.getSenderLoc());
+                            tvTo.setText("To: " + transaction.getReceiverLoc());
+                            tvWeight.setText(String.valueOf(transaction.getWeight()));
+                            Volume.setText(String.valueOf(transaction.getVolume()));
 
-        if (transaction.getCourier().equals(null)) {
-            materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
-            chatButton.setVisibility(View.GONE);
-        } else {
-            materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
-            matchButton.setVisibility(View.GONE);
-        }
+                            if (transaction.getCourier().equals(null)) {
+                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
+                                chatButton.setVisibility(View.GONE);
+                            } else {
+                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
+                                matchButton.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+        });
 
-
-
+        //Transaction transaction = Parcels.unwrap(getIntent().getParcelableExtra("transaction"));
+        //ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
