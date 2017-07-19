@@ -1,26 +1,12 @@
 package com.codepath.packagetwitter.Fragments;
 
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.codepath.packagetwitter.Models.Transaction;
-import com.codepath.packagetwitter.R;
-import com.codepath.packagetwitter.TransactionAdapter;
-
-import java.util.ArrayList;
-
 /**
  * Created by pratyusha98 on 7/12/17.
  */
 
 public class TransactionList_Fragment extends android.support.v4.app.Fragment {
 
-
+/*
     TransactionAdapter transactionAdapter;
     ArrayList<Transaction> transactions;
     RecyclerView rvTransactions;
@@ -68,4 +54,5 @@ public class TransactionList_Fragment extends android.support.v4.app.Fragment {
 
 
     }
+    */
 }

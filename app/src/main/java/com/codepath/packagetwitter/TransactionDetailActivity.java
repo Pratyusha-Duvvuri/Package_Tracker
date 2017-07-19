@@ -61,7 +61,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             tvWeight.setText(String.valueOf(transaction.getWeight()));
                             Volume.setText(String.valueOf(transaction.getVolume()));
 
-                            if (transaction.getCourier().equals(null)) {
+                            if (transaction.getCourier() ==null) {
                                 materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
                                 chatButton.setVisibility(View.GONE);
                             } else {

@@ -1,26 +1,13 @@
 package com.codepath.packagetwitter;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-
-import com.codepath.packagetwitter.Models.CourierModel;
-import com.codepath.packagetwitter.Models.Sender;
-import com.codepath.packagetwitter.Models.Transaction;
-import com.codepath.packagetwitter.Models.User;
-import com.lorentzos.flingswipe.SwipeFlingAdapterView;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
 
 /**
  * Created by michaunp on 7/14/17.
  */
 
 public class MatchActivity extends AppCompatActivity{
+    /*
 
     User user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
     Sender sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
@@ -59,4 +46,5 @@ public class MatchActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState, persistentState);
     }
+    */
 }
