@@ -91,7 +91,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
         }
 
-
         @Override
         public void onClick(View view) {
             // gets item position

@@ -26,27 +26,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".TransactionDetailActivity" />
-        <activity android:name=".TransactionsActivity" />
-        <activity
-            android:name=".NewtransactionActivity"
-            android:label="Start A New Transaction" />
-        <activity
-            android:name=".SenderActivity"
-            android:label="Request Your Receiver" />
         <activity android:name=".CourierActivity" />
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".PackageCreationActivity"
             android:label="Create A New Package"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".TimelineActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".AfterSenderConfirmation" />
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".FileUploadActivity"></activity>
-        <activity android:name=".TestDownloadActivity"></activity>
     </application>
 
 </manifest>

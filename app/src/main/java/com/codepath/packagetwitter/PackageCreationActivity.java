@@ -150,7 +150,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
     }
 
-
+//generating a random package
     public void onVerifyAction() {
         mail = Mail.getRandomMail(context);
         sender = Sender.getRandomSender(context);

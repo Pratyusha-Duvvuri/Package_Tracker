@@ -190,11 +190,13 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         public void done(ParseException e) {
             if (e == null) {
                 Log.d("ParseApplication", "Sign-UP succesful");
-
+                new CustomToast().Show_Toast(getActivity(), view,
+                        "SIGNNN.");
                 // Hooray! Let them use the app now.
             } else {
-                    Log.d("ParseApplication", "Error: " + e.toString());
-                // Sign up didn't succeed. Look at the ParseException
+
+
+                e.printStackTrace();                // Sign up didn't succeed. Look at the ParseException
                 // to figure out what went wrong
             }
         }
