@@ -131,6 +131,10 @@ public class Transaction {
 
     }
 
+    public void setCourier(CourierModel courier) {
+        this.courier = courier;
+    }
+
     public Receiver getReceiver() {
         return receiver;
     }

@@ -28,7 +28,7 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 public class OldTransactionFragment extends Fragment {
 
     TransactionAdapter transactionAdapter;
-    ArrayList<Transaction> transactions;
+    ArrayList<ParselTransaction> transactions;
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
     //TwitterClient client;
@@ -94,7 +94,7 @@ public class OldTransactionFragment extends Fragment {
                 for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
 
                     //transofrms the ParseTransaction into transaction and adds to the adapter
-                    addItems(new Transaction(pendingTransactions.get(i)));
+                    addItems(pendingTransactions.get(i));
                 }
             }
         }
@@ -103,7 +103,7 @@ public class OldTransactionFragment extends Fragment {
 
 
 }
-    public void addItems(Transaction transaction) {
+    public void addItems(ParselTransaction transaction) {
 
 
         transactions.add(transaction);

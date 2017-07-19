@@ -88,11 +88,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvArrival = (TextView) itemView.findViewById(R.id.tvArrival);
             tvBoarding = (TextView) itemView.findViewById(R.id.tvBoarding);
             tvWeight = (TextView) itemView.findViewById(R.id.tvWeight);
-
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
-
         }
-
 
 
         @Override
