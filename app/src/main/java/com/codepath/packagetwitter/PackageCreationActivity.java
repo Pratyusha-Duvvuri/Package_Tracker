@@ -116,9 +116,11 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
                         etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
                         Integer.parseInt(etVolume.getText().toString()));
                 transaction.saveEventually();
-
-                //Intent i = new Intent(context, ProfileActivity.class);
-                //startActivity(i);
+                ProfileActivity.parseUser.add("pendingTransactions", transaction);
+                ProfileActivity.parseUser.saveEventually();
+                Intent i = new Intent(context, ProfileActivity.class);
+                setResult(RESULT_OK, i);
+                finish();
 
 
 
@@ -164,7 +166,6 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
             i.putExtra("sender", Parcels.wrap(sender));
             i.putExtra("mail", Parcels.wrap(mail));
             i.putExtra("USER", Parcels.wrap(USER));
-            startActivity(i);
             setResult(RESULT_OK, i); // set result code and bundle data for response
             finish(); // closes the activity, pass data to parent
         }
