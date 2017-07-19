@@ -39,7 +39,7 @@ import org.parceler.Parcels;
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener{
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener{
 
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
@@ -226,6 +226,14 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
             i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
             startActivity(i);}
+
+    }
+
+    public void onFinishEditDialog(){
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Intent i= new Intent(this, LoginActivity.class);
+        startActivity(i);
 
     }
 
