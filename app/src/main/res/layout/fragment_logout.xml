@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_edit_name.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_name"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_gravity="center" android:orientation="vertical"  >
+
+    <TextView
+        android:id="@+id/lbl_your_name"
+        android:layout_width="183dp"
+        android:layout_height="31dp"
+        android:text="You have successfully logged out" />
+
+    <Button
+        android:id="@+id/acceptLogout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="OKAY" />
+
+
+
+</LinearLayout>

@@ -9,12 +9,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.codepath.packagetwitter.Fragments.LogoutFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.CourierModel;
@@ -36,7 +39,7 @@ import org.parceler.Parcels;
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener {
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener{
 
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
@@ -249,6 +252,20 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             Transaction transaction = new Transaction(receiver, sender, new CourierModel(), mail);
             pagerAdapter.pendingTransactionFragment.addItems(transaction);
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.timeline_menu, menu);
+        return true;
+    }
+
+    public void onLogoutAction(MenuItem mi) {
+
+
+        FragmentManager fm = getSupportFragmentManager();
+        LogoutFragment logoutFragment = LogoutFragment.newInstance();
+        logoutFragment.show(fm, "fragment_logout");
     }
 
 }

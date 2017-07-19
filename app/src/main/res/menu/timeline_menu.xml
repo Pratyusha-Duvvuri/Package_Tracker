@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miAdd"
-        android:icon="@drawable/ic_add"
-        android:title="Transaction"
-        app:showAsAction="always"></item>
+        android:icon="@drawable/trousers"
+        android:title="Logout"
+        android:onClick="onLogoutAction"
+        app:showAsAction="always">
+    </item>
+
 </menu>
