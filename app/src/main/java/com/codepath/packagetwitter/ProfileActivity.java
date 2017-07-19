@@ -103,9 +103,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
         tvUsername =(TextView) findViewById(R.id.tvName);
-        tvUsername.setText(user.getUserName());
+        //tvUsername.setText(user.getUserName());
 
-        user = Parcels.unwrap(getIntent().getParcelableExtra("USER"));
 
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
@@ -123,9 +122,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
         floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_receive_image);
 
-
-        tvUsername = (TextView) findViewById(R.id.tvName);
-        tvUsername.setText(user.getUserName());
 
         if (user.hasPendingRequests) {
             user.hasPendingRequests = false;
@@ -235,7 +231,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
             //add the new (incomplete) transaction to current transactions
             Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
-            pagerAdapter.pendingTransactionFragment.addItems(transaction);
+            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
         }
 
         if (requestCode == SENDER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
@@ -247,7 +243,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
             //add the new (incomplete) transaction to current transactions
             Transaction transaction = new Transaction(receiver, sender, new CourierModel(), mail);
-            pagerAdapter.pendingTransactionFragment.addItems(transaction);
+            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
+            pagerAdapter.pendingTransactionFragment.populateTimeline();
         }
     }
 
