@@ -34,6 +34,8 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
+
 public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener {
 
     String sender_handle;
@@ -95,7 +97,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spPackageType.setAdapter(adapter);
-
+        onVerifyAction();
 
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
@@ -120,8 +122,8 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
                         etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
                         Integer.parseInt(etVolume.getText().toString()));
                 transaction.saveEventually();
-                ProfileActivity.parseUser.add("pendingTransactions", transaction);
-                ProfileActivity.parseUser.saveEventually();
+                parseUser.add("pendingTransactions", transaction);
+                parseUser.saveEventually();
                 Intent i = new Intent(context, ProfileActivity.class);
                 setResult(RESULT_OK, i);
                 finish();
@@ -150,35 +152,35 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
     public void onVerifyAction() {
-//        mail = Mail.getRandomMail(context);
-//        sender = Sender.getRandomSender(context);
-//
-//        String sendStart = etStartDateMonth.getText().toString() + "/" + etStartDateDay.getText().toString();
-//        String sendEnd = etEndDateMonth.getText().toString() + "/" + etEndDateDay.getText().toString();
-//        Date senderStartDate = null;
-//        Date senderEndDate = null;
-//        try {
-//            senderStartDate = new SimpleDateFormat("MM/dd").parse(sender.getTripStart());
-//            senderEndDate = new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//
-//        //creating new transaction parse object
-//        ParselTransaction transaction = new ParselTransaction("rafael.jacobovitz@gmail.com",
-//                USER.getUserHandle(), sender.getLocation(), senderStartDate,
-//                senderEndDate, sender.getLocation(), mail.getType(),
-//                mail.getDescription(), mail.getWeight(),
-//                mail.getVolume());
-//
-//        transaction.saveEventually();
-//        ProfileActivity.parseUser.add("pendingTransactions", transaction);
-//        ProfileActivity.parseUser.saveEventually();
-//        Intent i = new Intent(context, ProfileActivity.class);
-//        setResult(RESULT_OK, i);
-//        finish();
+        mail = Mail.getRandomMail(context);
+        sender = Sender.getRandomSender(context);
+
+        String sendStart = etStartDateMonth.getText().toString() + "/" + etStartDateDay.getText().toString();
+        String sendEnd = etEndDateMonth.getText().toString() + "/" + etEndDateDay.getText().toString();
+        Date senderStartDate = null;
+        Date senderEndDate = null;
+        try {
+            senderStartDate = new SimpleDateFormat("MM/dd").parse(sender.getTripStart());
+            senderEndDate = new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        //creating new transaction parse object
+        ParselTransaction transaction = new ParselTransaction("prm@fb.com",
+                parseUser.getUsername(), sender.getLocation(), senderStartDate,
+                senderEndDate, sender.getLocation(), mail.getType(),
+                mail.getDescription(), mail.getWeight(),
+                mail.getVolume());
+
+        transaction.saveEventually();
+        parseUser.add("pendingTransactions", transaction);
+        parseUser.saveEventually();
+        Intent i = new Intent(context, ProfileActivity.class);
+        setResult(RESULT_OK, i);
+        finish();
 
         FragmentManager fm = getSupportFragmentManager();
         PackageConfirmation_Fragment frag = PackageConfirmation_Fragment.newInstance(mail, sender, receiver);

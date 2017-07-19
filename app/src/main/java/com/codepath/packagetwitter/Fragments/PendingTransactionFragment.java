@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
@@ -50,7 +54,7 @@ public class PendingTransactionFragment extends Fragment {
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvTransactions.setLayoutManager(llayout);
-        //set the adapter
+        //set got the adapter
         rvTransactions.setAdapter(transactionAdapter);
 
         populateTimeline();
@@ -69,22 +73,44 @@ public class PendingTransactionFragment extends Fragment {
 
     public void populateTimeline() {
         ArrayList<ParselTransaction> pendingTransactions;
+        parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
-            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions
-            Log.d("pendingTransactions", pendingTransactions.get(0).toString());
-            if (pendingTransactions != null){
 
-            for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
+            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query.whereEqualTo("sender", parseUser.getUsername());
+            // Execute the find asynchronously
+            query.findInBackground(new FindCallback<ParselTransaction>() {
+                @Override
+                public void done(List<ParselTransaction> issueList, ParseException e) {
+                    if (e == null) {
+                        transactions.clear();
+                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                        for (int i = 0; i < issueList.size(); i++) {
+                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                            addItems(trans);
+                        }
 
-                //transofrms the ParseTransaction into transaction and adds to the adapter
-                ParselTransaction trans =pendingTransactions.get(i); //gets current parsel transaction
-                addItems(trans);
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
             }
-        }}
+//            if (pendingTransactions != null){
+//
+//            for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
+//
+//                //transofrms the ParseTransaction into transaction and adds to the adapter
+//                ParselTransaction trans =pendingTransactions.get(i); //gets current parsel transaction
+//                addItems(trans);
+//            }
+//        }}
     }
 
     public void addItems(ParselTransaction transaction) {
         transactions.add(transaction);
         transactionAdapter.notifyItemInserted(transactions.size() - 1);
+        transactionAdapter.notifyDataSetChanged();
     }
 }
