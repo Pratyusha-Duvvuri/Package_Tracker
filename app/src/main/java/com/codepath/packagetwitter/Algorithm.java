@@ -84,6 +84,10 @@ public class Algorithm {
     }
 
 
+    public static boolean isPossibleMatch(Transaction transaction) {
+        return isPossibleMatch(transaction.getSender(),transaction.getReceiver(),transaction.getCourier(),transaction.getMail());
+    }
+
     public static boolean isPossibleMatch(Sender sender, Receiver receiver, CourierModel courier, Mail mail) {
         Date senderStartDate = null;
         Date senderEndDate = null;
