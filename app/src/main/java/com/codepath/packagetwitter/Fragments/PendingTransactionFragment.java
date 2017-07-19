@@ -71,6 +71,7 @@ public class PendingTransactionFragment extends Fragment {
         ArrayList<ParselTransaction> pendingTransactions;
         if (parseUser != null) {
             pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions
+            Log.d("pendingTransactions", pendingTransactions.get(0).toString());
             if (pendingTransactions != null){
 
             for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
