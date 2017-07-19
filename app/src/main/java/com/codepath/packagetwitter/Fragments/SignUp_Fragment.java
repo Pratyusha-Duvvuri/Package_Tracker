@@ -26,8 +26,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import org.parceler.Parcels;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -162,9 +160,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
         createNewParseUser();
         Intent i = new Intent(getContext(), LoginActivity.class);
-        userr = User.getRandomUser(getContext());
-        userr.hasPendingRequests= false;
-        i.putExtra("USER", Parcels.wrap(userr));
+//        userr = User.getRandomUser(getContext());
+//        userr.hasPendingRequests= false;
+//        i.putExtra("USER", Parcels.wrap(userr));
         startActivity(i);
 
     }
