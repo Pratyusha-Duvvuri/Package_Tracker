@@ -2,11 +2,15 @@ package com.codepath.packagetwitter.Models;
 
 import android.graphics.Bitmap;
 
+import com.parse.FindCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rafasj6 on 7/17/17.
@@ -35,10 +39,25 @@ public class ParselTransaction extends ParseObject{
         setWeight(weight);
         setVolume(volume);
         setTransactionState(0);
+        //the following finds the receiver and sets its hasPendingRequests as true
 
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereGreaterThan("username", receiver); // find adults
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    // The query was successful.
+                    objects.get(0).put("hasPendingRequests", true);//sets hasPendingRequests as true
+                    objects.get(0).saveEventually();
+                } else {
+                    // Something went wrong.
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    public void addReceiverInfo(String receiverId, Date receiverStart, Date receiverEnd){
+    public void addReceiverInfo(Date receiverStart, Date receiverEnd){
         setReceiverStart(receiverStart);
         setReceiverEnd(receiverEnd);
         setTransactionState(1);
@@ -63,6 +82,7 @@ public class ParselTransaction extends ParseObject{
         put("courierEnd",courierEnd);
 
     }
+
 
     public void setSenderLoc(String senderLoc) {
         put("senderLoc",senderLoc);

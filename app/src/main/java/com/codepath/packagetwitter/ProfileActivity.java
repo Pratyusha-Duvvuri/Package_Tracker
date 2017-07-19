@@ -187,11 +187,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //creating random sender and mail object here and checking flow from this
         // point till last activity before transaction activity creation.
 
-        sender = Sender.getRandomSender(this);
-        mail = Mail.getRandomMail(this);
+//        sender = Sender.getRandomSender(this);
+//        mail = Mail.getRandomMail(this);
 
-        PendingRequest_Fragment pendingRequest_fragment =
-                PendingRequest_Fragment.newInstance(mail, sender);
+        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
         pendingRequest_fragment.show(fm, "fragment_pending_request");
 
     }
@@ -200,10 +199,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
         if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
-        i.putExtra("receiver", Parcels.wrap(user));
-        i.putExtra("sender", Parcels.wrap(senderr));
-        i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
-            i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
+//        i.putExtra("receiver", Parcels.wrap(user));
+//        i.putExtra("sender", Parcels.wrap(senderr));
+//        i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
+//            i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
             startActivity(i);}
     }
 

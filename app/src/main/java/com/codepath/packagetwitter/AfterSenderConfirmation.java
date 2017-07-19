@@ -4,17 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Mail;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
-import org.parceler.Parcels;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,22 +54,42 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
+    ParselTransaction transaction;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        receiverUser= Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
-        USER= Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-        receiver = new Receiver(receiverUser);
-        sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
-        mail = Parcels.unwrap(getIntent().getParcelableExtra("mail"));
+        //receiverUser= Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
+        //USER= Parcels.unwrap(getIntent().getParcelableExtra("USER"));
+        //receiver = new Receiver(receiverUser);
+        //sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
+        //mail = Parcels.unwrap(getIntent().getParcelableExtra("mail"));
 //        sender = Sender.getRandomSender(this);
 //        mail = Mail.getRandomMail(this);
         setContentView(R.layout.activity_after_sender_confirmation);
 
         ButterKnife.bind(this);
         onSetLayout();
+        ParseUser parseUser = ParseUser.getCurrentUser();
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        // Define our query conditions
+        query.whereEqualTo("receiver", parseUser.getUsername());
+        query.whereEqualTo("transactionState", 0);
+
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            @Override
+            public void done(List<ParselTransaction> issueList, ParseException e) {
+                if (e == null) {
+                    transaction =  issueList.get(0);
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
 
 
         //set listener for confirmation
@@ -71,11 +97,11 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         fabOkay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                receiver.setTripStart(startDate.getText().toString());
-                receiver.setTripEnd(endDate.getText().toString());
-                receiver.setLocation((receiverLocation.getText().toString()));
+//                receiver.setTripStart(startDate.getText().toString());
+//                receiver.setTripEnd(endDate.getText().toString());
+//                receiver.setLocation((receiverLocation.getText().toString()));
 
-
+                transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd());
                 //Call the modal to verify information
                 onVerifyAction();
 
@@ -86,10 +112,10 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         //either pass to another activity or put in database
 
        Intent i = new Intent(this, ProfileActivity.class);
-        i.putExtra("receiver", Parcels.wrap(receiver));
-        i.putExtra("sender", Parcels.wrap(sender));
-        i.putExtra("mail", Parcels.wrap(mail));
-        i.putExtra("USER", Parcels.wrap(USER) );
+//        i.putExtra("receiver", Parcels.wrap(receiver));
+//        i.putExtra("sender", Parcels.wrap(sender));
+//        i.putExtra("mail", Parcels.wrap(mail));
+//        i.putExtra("USER", Parcels.wrap(USER) );
        startActivity(i);
 
     }
@@ -98,16 +124,16 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
     public void onSetLayout(){
 
-       fragile.setText(""+mail.isFragile());
-       type.setText(""+mail.getType());
-        tvSenderLocation.setText(""+sender.getLocation());
-        tvStartDate.setText(sender.getTripStart());
-        tvEndDate.setText(sender.getTripEnd());
-        tvWeight.setText(""+mail.getWeight());
-        tvHeight.setText(""+mail.getVolume());
-        tvWidth.setText(""+mail.getVolume());
-        tvLength.setText(""+mail.getVolume());
-        tvDescription.setText(""+mail.getDescription());
+       fragile.setText(""+transaction.getIsFragile());
+       type.setText(""+transaction.getMailType());
+        tvSenderLocation.setText(""+transaction.getSenderLoc());
+        tvStartDate.setText(""+transaction.getSenderStart());
+        tvEndDate.setText(""+transaction.getSenderEnd());
+        tvWeight.setText(""+transaction.getWeight());
+        tvHeight.setText(""+transaction.getVolume());
+        tvWidth.setText(""+transaction.getVolume());
+        tvLength.setText(""+transaction.getVolume());
+        tvDescription.setText(""+transaction.getMailDescription());
         ivPackage.setImageResource(R.drawable.ic_upload);
 
 

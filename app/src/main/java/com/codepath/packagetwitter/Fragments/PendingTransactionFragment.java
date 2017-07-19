@@ -63,6 +63,7 @@ public class PendingTransactionFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeContainer.setRefreshing(true);
+                populateTimeline();
                 Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
                 swipeContainer.setRefreshing(false);
             }
