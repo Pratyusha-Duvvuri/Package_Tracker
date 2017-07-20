@@ -26,13 +26,13 @@ import permissions.dispatcher.RuntimePermissions;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
-@RuntimePermissions
-
 /**
- * Created by pratyusha98 on 7/18/17.
+ * Created by pratyusha98 on 7/19/17.
  */
 
-public class FileUploadActivity extends Activity {
+@RuntimePermissions
+
+public class UploadPackageImageActivity extends Activity {
     Button button;
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -57,6 +57,8 @@ public class FileUploadActivity extends Activity {
         caption = (EditText) findViewById(R.id.et_imagecaption);
         GoBack = (Button) findViewById(R.id.btnBackToProfile);
 
+
+
         btnUploadson.setOnClickListener(new OnClickListener() {
 
             public void onClick(View view) {
@@ -71,7 +73,7 @@ public class FileUploadActivity extends Activity {
 
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi
-                Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
+                Intent i = new Intent(UploadPackageImageActivity.this, ProfileActivity.class);
                 u.hasPendingRequests= true;
                 i.putExtra("USER", Parcels.wrap(u));
                 i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
@@ -109,7 +111,7 @@ public class FileUploadActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-               Bundle extras = data.getExtras();
+                Bundle extras = data.getExtras();
                 Bitmap bitmap = (Bitmap) extras.get("data");
                 ivPreview.setImageBitmap(bitmap);
 
@@ -137,65 +139,11 @@ public class FileUploadActivity extends Activity {
                 parseUser.saveInBackground();
 
                 // Show a simple toast message
-                Toast.makeText(FileUploadActivity.this, "Image Uploaded",
+                Toast.makeText(UploadPackageImageActivity.this, "Image Uploaded",
                         Toast.LENGTH_SHORT).show();
 
             }
-
-
-
-
-
-        }
+     }
     }
-
-//    // Returns the Uri for a photo stored on disk given the fileName
-//    public Uri getPhotoFileUri(String fileName) {
-//        // Only continue if the SD Card is mounted
-//        if (isExternalStorageAvailable()) {
-//            // Get safe storage directory for photos
-//            // Use `getExternalFilesDir` on Context to access package-specific directories.
-//            // This way, we don't need to request external read/write runtime permissions.
-//            File mediaStorageDir = new File(
-//                    getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-//
-//            // Create the storage directory if it does not exist
-//            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-//                Log.d(APP_TAG, "failed to create directory");
-//            }
-//
-//            // Return the file target for the photo based on filename
-//            File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-//
-//            // wrap File object into a content provider
-//            // required for API >= 24
-//            // See https://guides.codepath.com/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-//            return FileProvider.getUriForFile(FileUploadActivity.this, "com.codepath.fileprovider", file);
-//        }
-//        return null;
-//    }
-//
-//    // Returns true if external storage for photos is available
-//    private boolean isExternalStorageAvailable() {
-//        String state = Environment.getExternalStorageState();
-//        return state.equals(Environment.MEDIA_MOUNTED);
-//    }
-
-//
-//    private File createImageFile() throws IOException {
-//        // Create an image file name
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                storageDir      /* directory */
-//        );
-//
-//        // Save a file: path for use with ACTION_VIEW intents
-//        mCurrentPhotoPath = image.getAbsolutePath();
-//        return image;
-//    }
 
 }

@@ -28,6 +28,7 @@
         <activity android:name=".TransactionDetailActivity" />
         <activity android:name=".CourierActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".UploadPackageImageActivity" />
         <activity
             android:name=".PackageCreationActivity"
             android:label="Create A New Package"

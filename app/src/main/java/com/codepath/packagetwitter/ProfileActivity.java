@@ -49,7 +49,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public TextView tvUsername;
     public ImageView ivProfileImage;
     public static ParseUser parseUser;
-    public String meh;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
     public final static String COURIER_KEY = "courier";
@@ -77,7 +76,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         tvUsername = (TextView) findViewById(R.id.tvName);
-
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -129,8 +127,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 if (!ignore) {
                     Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
-                    i.putExtra("sender", Parcels.wrap(user));
-                    i.putExtra("USER", Parcels.wrap(user));
                     startActivityForResult(i, SENDER_REQUEST_CODE);
                 }
 
@@ -153,9 +149,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
-//
-//                    i.putExtra("courier", Parcels.wrap(user));
-//                    i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
 
                 startActivity(i);
@@ -167,16 +160,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     public void setParametersOfView() {
         ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
-//        if(postImage!=null) {
         String imageUrl = postImage.getUrl();//live url
         Uri imageUri = Uri.parse(imageUrl);
 
         Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
-//    }
-//        else {
-//            Glide.with(ProfileActivity.this).load("http://www.clipartpanda.com/clipart_images/happy-face-clip-art-1573801").into(ivProfileImage);
-//        }
-//            tvUsername.setText(parseUser.getString("fullName"));
 
     }
 
@@ -187,9 +174,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //creating random sender and mail object here and checking flow from this
         // point till last activity before transaction activity creation.
 
-//        sender = Sender.getRandomSender(this);
-//        mail = Mail.getRandomMail(this);
-
         PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
         pendingRequest_fragment.show(fm, "fragment_pending_request");
 
@@ -199,10 +183,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
         if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
-//        i.putExtra("receiver", Parcels.wrap(user));
-//        i.putExtra("sender", Parcels.wrap(senderr));
-//        i.putExtra("mail", Parcels.wrap(maill));i.putExtra("USER", Parcels.wrap(user) );
-//            i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
             startActivity(i);}
     }
 
