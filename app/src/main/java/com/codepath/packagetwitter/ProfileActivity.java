@@ -44,8 +44,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
     User user;
-    Mail mail;
-    Sender sender;
     public TextView tvUsername;
     public ImageView ivProfileImage;
     public static ParseUser parseUser;
@@ -149,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
-                i.putExtra("USER", Parcels.wrap(user));
+                //i.putExtra("USER", Parcels.wrap(user));
 
                 startActivity(i);
             }
@@ -176,14 +174,14 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
         pendingRequest_fragment.show(fm, "fragment_pending_request");
-
     }
 
     @Override
     public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
         if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
-            startActivity(i);}
+            startActivity(i);
+        }
     }
 
     public void onFinishEditDialog(){
@@ -207,7 +205,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         if (requestCode == SENDER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
         {
-
             Sender sender =  Parcels.unwrap(data.getParcelableExtra(SENDER_KEY));
             Mail mail =  Parcels.unwrap(data.getParcelableExtra(MAIL_KEY));
             Receiver receiver =  Parcels.unwrap(data.getParcelableExtra(RECEIVER_KEY));
@@ -220,14 +217,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.timeline_menu, menu);
         return true;
     }
 
     public void onLogoutAction(MenuItem mi) {
-
-
         FragmentManager fm = getSupportFragmentManager();
         LogoutFragment logoutFragment = LogoutFragment.newInstance();
         logoutFragment.show(fm, "fragment_logout");

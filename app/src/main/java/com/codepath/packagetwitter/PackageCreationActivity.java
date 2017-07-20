@@ -85,10 +85,9 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         ButterKnife.bind(this);
         mail = new Mail();
         context = this;
-//        USER = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
-//
-//        user = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
-//        sender = new Sender(user);
+        USER = User.getRandomUser(context);
+
+        sender = Sender.getRandomSender(context);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -187,12 +186,6 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         frag.show(fm, "fragment_package_confirmation");
     }
 
-    public void fake(){
-        sender = Sender.getRandomSender(this);
-        receiver=Receiver.getRandomReceiver(this);
-        mail = Mail.getRandomMail(this);
-
-    }
 
     @Override
     public void onFinishEditDialog(Sender sender, Receiver receiver, Mail mail, Boolean bool) {

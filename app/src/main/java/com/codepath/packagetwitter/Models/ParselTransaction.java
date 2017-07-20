@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.codepath.packagetwitter.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -13,6 +14,8 @@ import com.parse.ParseUser;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.parse.ParseUser.logIn;
 
 /**
  * Created by rafasj6 on 7/17/17.
@@ -56,12 +59,17 @@ public class ParselTransaction extends ParseObject{
                     Log.d("yolo",objects.get(0).getString("username"));
                     ParseUser userr = null;
                     try {
-                        userr = ParseUser.logIn(objects.get(0).getString("username"), "x");
+                        userr = logIn(objects.get(0).getString("username"), "x");
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
                     userr.put("hasPendingRequests", true); // attempt to change username
                     userr.saveInBackground();
+                    try {
+                        userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
                 }
 
                 else {
