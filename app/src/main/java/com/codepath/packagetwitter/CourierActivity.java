@@ -11,14 +11,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.CourierModel;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.User;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import org.parceler.Parcels;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.codepath.packagetwitter.ProfileActivity.COURIER_KEY;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class CourierActivity extends AppCompatActivity {
 
@@ -92,31 +101,43 @@ public class CourierActivity extends AppCompatActivity {
 
     public void onVerifyAction() {
         //queries all pending transactions
-//        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-//        query.whereEqualTo("transactionState", 1); //pending transaction state
-//        query.findInBackground(new FindCallback<ParselTransaction>() {
-//            public void done(List<ParselTransaction> itemList, ParseException e) {
-//                if (e == null) {
-//                    //access parsel transactions here
-//                    for (int i = 0; i < itemList.size(); i++){
-//                        //for every parsel transaction
-//                        ParselTransaction parselTransaction = itemList.get(i)
-//                        Transaction transaction = new Transaction(parselTransaction);
-//                        transaction.setCourier(courier);//adds the courrier to transaction
-//                        if (Algorithm.isPossibleMatch(transaction)){
-//                            //if its a match
-//                            parselTransaction.addCourierInfo(parseUser.getObjectId(), courier.getTripStart(), courier.getTripEnd());
-//
-//
-//                        }
-//
-//                    }
-//
-//                } else {
-//                    // something went wrong
-//                }
-//            }
-//        });
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        query.whereEqualTo("transactionState", 1); //pending transaction state
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            public void done(List<ParselTransaction> itemList, ParseException e) {
+                if (e == null) {
+                    //access parsel transactions here
+                    for (int i = 0; i < itemList.size(); i++){
+                        //for every parsel transaction
+                        ParselTransaction parselTransaction = itemList.get(i);
+                        if (Algorithm.isPossibleMatch(parselTransaction, courier)){
+                            Date courierEndDate= null;
+
+                            Date courierStartDate = null;
+
+                            try {
+                                courierStartDate = new SimpleDateFormat("MM/dd").parse(courier.getTripStart());
+                                courierEndDate = new SimpleDateFormat("MM/dd").parse((courier.getTripEnd()));
+
+                            } catch (java.text.ParseException e1) {
+                                e1.printStackTrace();
+                            }
+
+
+
+                            //if its a match
+                            parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
+
+
+                        }
+
+                    }
+
+                } else {
+                    // something went wrong
+                }
+            }
+        });
 
         Intent i = new Intent(this, ProfileActivity.class);
         i.putExtra(COURIER_KEY, Parcels.wrap(courier));

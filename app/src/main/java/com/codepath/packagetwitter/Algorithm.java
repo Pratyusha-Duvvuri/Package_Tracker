@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.codepath.packagetwitter.Models.CourierModel;
 import com.codepath.packagetwitter.Models.Mail;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.Transaction;
@@ -84,8 +85,34 @@ public class Algorithm {
     }
 
 
-    public static boolean isPossibleMatch(Transaction transaction) {
-        return isPossibleMatch(transaction.getSender(),transaction.getReceiver(),transaction.getCourier(),transaction.getMail());
+    public static boolean isPossibleMatch(ParselTransaction transaction, CourierModel courier) {
+
+            Date senderStartDate = (transaction.getSenderStart());
+            Date senderEndDate = transaction.getSenderEnd();//new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+        Date courierEndDate= null;
+
+        Date courierStartDate = null;
+        try {
+            courierStartDate = new SimpleDateFormat("MM/dd").parse(courier.getTripStart());
+            courierEndDate = new SimpleDateFormat("MM/dd").parse((courier.getTripEnd()));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
+            Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
+
+
+        if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
+                && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
+                && transaction.getWeight() <= courier.getWeightAvailable() && transaction.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
+
+
+            return true; // if everything is in order, returns true
+        } else {
+            return false; //o
+        }
     }
 
     public static boolean isPossibleMatch(Sender sender, Receiver receiver, CourierModel courier, Mail mail) {
