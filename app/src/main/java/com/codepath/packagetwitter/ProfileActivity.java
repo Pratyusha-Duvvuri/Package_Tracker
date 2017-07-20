@@ -147,7 +147,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
-                //i.putExtra("USER", Parcels.wrap(user));
 
                 startActivity(i);
             }
