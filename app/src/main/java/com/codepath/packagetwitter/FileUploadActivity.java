@@ -192,7 +192,6 @@ public class FileUploadActivity extends Activity {
                             Log.d("FOR THE LOVE OF GOD","yass");
                             Toast.makeText(FileUploadActivity.this, "Image Uploaded",
                                     Toast.LENGTH_SHORT).show();
-
                         } else {
                             Log.d("UMM","THEFISH");
                             Log.d("ParseApplicationError",e1.toString());

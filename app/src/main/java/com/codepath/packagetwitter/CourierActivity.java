@@ -68,17 +68,17 @@ public class CourierActivity extends AppCompatActivity {
             //(String name, String handle, String phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress);
 
 
-//                weightAvailable = Double.parseDouble(weight.getText().toString());
-//                tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
-//                tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
-//                String va = volume.getText().toString();
-//                volumes = Integer.valueOf((volume.getText().toString()));
-//
-//
-//                startAddress =  startLocation.getText().toString();
-//
-//
-//                endAddress =  locationEnd.getText().toString();
+                weightAvailable = Double.parseDouble(weight.getText().toString());
+                tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
+                tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
+                String va = volume.getText().toString();
+                volumes = Integer.valueOf((volume.getText().toString()));
+
+
+                startAddress =  startLocation.getText().toString();
+
+
+                endAddress =  locationEnd.getText().toString();
 
 
 
@@ -110,8 +110,8 @@ public class CourierActivity extends AppCompatActivity {
                             Date courierStartDate = null;
 
                             try {
-                                courierStartDate = new SimpleDateFormat("MM/dd").parse("05/05");
-                                courierEndDate = new SimpleDateFormat("MM/dd").parse("05/20");
+                                courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
+                                courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
 
                             } catch (java.text.ParseException e1) {
                                 e1.printStackTrace();
