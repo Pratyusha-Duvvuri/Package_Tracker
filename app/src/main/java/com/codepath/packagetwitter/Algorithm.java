@@ -85,32 +85,41 @@ public class Algorithm {
     }
 
 
-    public static boolean isPossibleMatch(ParselTransaction transaction, CourierModel courier) {
+    public static boolean isPossibleMatch(ParselTransaction transaction, String tripStart, String tripEnd, Double weightAvailable, int volumeAvailable,
+                                          String courierStartLoc, String courierEndLoc) {
 
             Date senderStartDate = (transaction.getSenderStart());
             Date senderEndDate = transaction.getSenderEnd();//new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
+        Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
+
         Date courierEndDate= null;
 
         Date courierStartDate = null;
         try {
-            courierStartDate = new SimpleDateFormat("MM/dd").parse(courier.getTripStart());
-            courierEndDate = new SimpleDateFormat("MM/dd").parse((courier.getTripEnd()));
+            courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
+            courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
-            Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
-
-
+        boolean a = courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate);
+        boolean b = courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate);
+        boolean c =transaction.getWeight() <= weightAvailable && transaction.getVolume() <= volumeAvailable;
+        String sendLoc =  transaction.getSenderLoc();
+        boolean d = transaction.getSenderLoc().equals( courierStartLoc);
+        boolean e = transaction.getReceiverLoc().equals(courierEndLoc);
+        String receiverLoc = transaction.getReceiverLoc();
         if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
                 && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
-                && transaction.getWeight() <= courier.getWeightAvailable() && transaction.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
+                && transaction.getWeight() <= weightAvailable && transaction.getVolume() <= volumeAvailable
+                && transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc)) {//TODO change volume into 0-5
 
 
             return true; // if everything is in order, returns true
-        } else {
+        }
+        else {
             return false; //o
         }
     }

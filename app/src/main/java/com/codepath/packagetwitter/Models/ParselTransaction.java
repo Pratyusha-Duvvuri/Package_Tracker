@@ -26,6 +26,10 @@ public class ParselTransaction extends ParseObject{
         super();
     }
 
+    public ParselTransaction(String courier){
+        //for when courier creates the package
+    }
+
     public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd
                              , String type, String description, Double weight,
                              int volume) {
