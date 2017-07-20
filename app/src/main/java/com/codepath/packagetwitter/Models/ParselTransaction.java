@@ -26,8 +26,8 @@ public class ParselTransaction extends ParseObject{
         super();
     }
 
-    public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd,
-                             String receiverLoc, String type, String description, Double weight,
+    public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd
+                             , String type, String description, Double weight,
                              int volume) {
         //for when sender creates package
         super();
@@ -36,7 +36,7 @@ public class ParselTransaction extends ParseObject{
         setSenderLoc(senderLoc);
         setSenderStart(sendStart);
         setSenderEnd(sendEnd);
-        setReceiverLoc(receiverLoc);
+
         setMailType(type);
         setMailDescription(description);
         setWeight(weight);
@@ -109,10 +109,11 @@ public class ParselTransaction extends ParseObject{
 //        });
 //    }
 
-    public void addReceiverInfo(Date receiverStart, Date receiverEnd){
+    public void addReceiverInfo(Date receiverStart, Date receiverEnd, String receiverLoc){
         setReceiverStart(receiverStart);
         setReceiverEnd(receiverEnd);
         setTransactionState(1);
+        setReceiverLoc(receiverLoc);
     }
     public void addCourierInfo(String courierId, Date courierStart, Date courierEnd){
         setCourier(courierId);

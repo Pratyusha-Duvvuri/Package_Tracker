@@ -127,7 +127,7 @@ public class CourierActivity extends AppCompatActivity {
 
                             //if its a match
                             parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
-
+                            break;
 
                         }
 

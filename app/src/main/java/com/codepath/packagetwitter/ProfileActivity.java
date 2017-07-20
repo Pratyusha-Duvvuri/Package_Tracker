@@ -209,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialog(){
         ParseUser.logOut();
         Intent i= new Intent(this, LoginActivity.class);
-        startActivity(i);
+        startActivityForResult(i,0);
 
     }
 

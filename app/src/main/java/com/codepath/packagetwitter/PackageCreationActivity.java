@@ -97,6 +97,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spPackageType.setAdapter(adapter);
+        onVerifyAction();
 
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +118,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
                 //creating new transaction parse object
                 ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
                         USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
-                        senderEndDate, etReceiverLoc.getText().toString(), spPackageType.getSelectedItem().toString(),
+                        senderEndDate, spPackageType.getSelectedItem().toString(),
                         etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
                         Integer.parseInt(etVolume.getText().toString()));
                 transaction.saveEventually();
@@ -170,7 +171,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         //creating new transaction parse object
         ParselTransaction transaction = new ParselTransaction("rafael.jacobovitz@gmail.com",
                 parseUser.getUsername(), sender.getLocation(), senderStartDate,
-                senderEndDate, sender.getLocation(), mail.getType(),
+                senderEndDate, mail.getType(),
                 mail.getDescription(), mail.getWeight(),
                 mail.getVolume());
 

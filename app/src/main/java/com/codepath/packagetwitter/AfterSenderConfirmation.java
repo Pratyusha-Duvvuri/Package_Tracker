@@ -71,7 +71,6 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         setContentView(R.layout.activity_after_sender_confirmation);
 
         ButterKnife.bind(this);
-        onSetLayout();
         ParseUser parseUser = ParseUser.getCurrentUser();
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         // Define our query conditions
@@ -84,12 +83,15 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             public void done(List<ParselTransaction> issueList, ParseException e) {
                 if (e == null) {
                     transaction =  issueList.get(0);
+                    onSetLayout();
+
 
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
             }
         });
+
 
 
         //set listener for confirmation
@@ -101,7 +103,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 //                receiver.setTripEnd(endDate.getText().toString());
 //                receiver.setLocation((receiverLocation.getText().toString()));
 
-                transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd());
+                transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd(), receiverLocation.getText().toString());
+                transaction.saveEventually();
                 //Call the modal to verify information
                 onVerifyAction();
 
@@ -116,7 +119,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 //        i.putExtra("sender", Parcels.wrap(sender));
 //        i.putExtra("mail", Parcels.wrap(mail));
 //        i.putExtra("USER", Parcels.wrap(USER) );
-       startActivity(i);
+        setResult(RESULT_OK, i); // set result code and bundle data for response
+        finish(); // closes the activity, pass data to parent
 
     }
 
@@ -124,8 +128,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
     public void onSetLayout(){
 
-       fragile.setText(""+transaction.getIsFragile());
-       type.setText(""+transaction.getMailType());
+        fragile.setText(""+transaction.getIsFragile());
+        type.setText(""+transaction.getMailType());
         tvSenderLocation.setText(""+transaction.getSenderLoc());
         tvStartDate.setText(""+transaction.getSenderStart());
         tvEndDate.setText(""+transaction.getSenderEnd());
