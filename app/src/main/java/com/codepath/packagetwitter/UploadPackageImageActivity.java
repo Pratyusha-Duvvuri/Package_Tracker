@@ -135,7 +135,7 @@ public class UploadPackageImageActivity extends Activity {
                 // Create a column named "ImageFile" and insert the image
                 parseUser.put("ImageFile", file);
 
-                // Create the class and the columns
+                // Create the s and the columns
                 parseUser.saveInBackground();
 
                 // Show a simple toast message

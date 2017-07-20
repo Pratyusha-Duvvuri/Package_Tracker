@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.codepath.packagetwitter.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -13,6 +14,8 @@ import com.parse.ParseUser;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.parse.ParseUser.logIn;
 
 /**
  * Created by rafasj6 on 7/17/17.
@@ -60,12 +63,17 @@ public class ParselTransaction extends ParseObject{
                     Log.d("yolo",objects.get(0).getString("username"));
                     ParseUser userr = null;
                     try {
-                        userr = ParseUser.logIn(objects.get(0).getString("username"), "x");
+                        userr = logIn(objects.get(0).getString("username"), "x");
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
                     userr.put("hasPendingRequests", true); // attempt to change username
                     userr.saveInBackground();
+                    try {
+                        userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
                 }
 
                 else {
@@ -80,38 +88,6 @@ public class ParselTransaction extends ParseObject{
     Log.d("USER IS ", ParseUser.getCurrentUser().getString("username"));
 
     }
-
-//
-//        query.findInBackground(new FindCallback<ParseUser>() {
-//            public void done(List<ParseUser> objects, ParseException e) {
-//                if (e == null) {
-//                    // The query was successful.
-//                    Log.d("yolo",objects.get(0).getString("username"));
-//                    objects.get(0).put("hasPendingRequests", true);//sets hasPendingRequests as true
-//                    objects.get(0).saveInBackground(new SaveCallback() {
-//                        @Override
-//                        public void done(ParseException ef) {
-//                            if (ef == null) {
-//                                //success, saved!
-//                                Log.d("MyApp", "Successfully saved!");
-//                            } else {
-//                                //fail to save!
-//                                ef.printStackTrace();
-//                            }
-//
-//
-//                        }
-//                    });
-//                }
-//
-//                else {
-//                    // Something went wrong.
-//                    Log.d("ParseApplicationError","tf");
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     public void addReceiverInfo(Date receiverStart, Date receiverEnd, String receiverLoc){
         setReceiverStart(receiverStart);
