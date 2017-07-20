@@ -1,6 +1,8 @@
 package com.codepath.packagetwitter.Models;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @ParseClassName("ParselTransaction")
 public class ParselTransaction extends ParseObject{
+    Context context;
 
 
     public ParselTransaction() {
@@ -42,20 +45,69 @@ public class ParselTransaction extends ParseObject{
         //the following finds the receiver and sets its hasPendingRequests as true
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereGreaterThan("username", receiver); // find adults
+        query.whereEqualTo("username", receiver); // find adults
+
+
+
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
                     // The query was successful.
-                    objects.get(0).put("hasPendingRequests", true);//sets hasPendingRequests as true
-                    objects.get(0).saveEventually();
-                } else {
+                    Log.d("yolo",objects.get(0).getString("username"));
+                    ParseUser userr = null;
+                    try {
+                        userr = ParseUser.logIn(objects.get(0).getString("username"), "x");
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
+                    userr.put("hasPendingRequests", true); // attempt to change username
+                    userr.saveInBackground();
+                }
+
+                else {
                     // Something went wrong.
+                    Log.d("ParseApplicationError","tf");
                     e.printStackTrace();
                 }
             }
         });
+        String str= ParseUser.getCurrentUser().getString("username");
+//        Toast.makeText( ,str, Toast.LENGTH_SHORT).show();
+    Log.d("USER IS ", ParseUser.getCurrentUser().getString("username"));
+
     }
+
+//
+//        query.findInBackground(new FindCallback<ParseUser>() {
+//            public void done(List<ParseUser> objects, ParseException e) {
+//                if (e == null) {
+//                    // The query was successful.
+//                    Log.d("yolo",objects.get(0).getString("username"));
+//                    objects.get(0).put("hasPendingRequests", true);//sets hasPendingRequests as true
+//                    objects.get(0).saveInBackground(new SaveCallback() {
+//                        @Override
+//                        public void done(ParseException ef) {
+//                            if (ef == null) {
+//                                //success, saved!
+//                                Log.d("MyApp", "Successfully saved!");
+//                            } else {
+//                                //fail to save!
+//                                ef.printStackTrace();
+//                            }
+//
+//
+//                        }
+//                    });
+//                }
+//
+//                else {
+//                    // Something went wrong.
+//                    Log.d("ParseApplicationError","tf");
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     public void addReceiverInfo(Date receiverStart, Date receiverEnd){
         setReceiverStart(receiverStart);

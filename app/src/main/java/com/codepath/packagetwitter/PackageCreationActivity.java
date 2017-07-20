@@ -169,7 +169,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
         //creating new transaction parse object
-        ParselTransaction transaction = new ParselTransaction("prm@fb.com",
+        ParselTransaction transaction = new ParselTransaction("rafael.jacobovitz@gmail.com",
                 parseUser.getUsername(), sender.getLocation(), senderStartDate,
                 senderEndDate, sender.getLocation(), mail.getType(),
                 mail.getDescription(), mail.getWeight(),
