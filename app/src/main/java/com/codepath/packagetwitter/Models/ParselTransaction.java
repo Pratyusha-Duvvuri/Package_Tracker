@@ -29,7 +29,17 @@ public class ParselTransaction extends ParseObject{
         super();
     }
 
-    public ParselTransaction(String courier){
+    public ParselTransaction(String courier, String courierStartLoc, String courierEndLoc, Date courierStartDate, Date courierEndDate,
+                             Double weightAvailable , int volumeAvailable){
+        super();
+        setCourier(courier);
+        setCourierStart(courierStartDate);
+        setCourierEnd(courierEndDate);
+        setSenderLoc(courierStartLoc);
+        setReceiverLoc(courierEndLoc);
+        setVolume(volumeAvailable);
+        setWeight(weightAvailable);
+        setTransactionState(7);//courier has posted
         //for when courier creates the package
     }
 
