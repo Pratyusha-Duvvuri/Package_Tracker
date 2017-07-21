@@ -181,6 +181,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         Intent i = new Intent(this, AfterSenderConfirmation.class);
             startActivity(i);
         }
+        else{
+
+        }
     }
 
     public void onFinishEditDialog(){
