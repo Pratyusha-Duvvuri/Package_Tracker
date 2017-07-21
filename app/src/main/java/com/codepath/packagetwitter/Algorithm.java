@@ -20,10 +20,10 @@ import java.util.Date;
 
 public class Algorithm {
 
-    public static ArrayList<Transaction> getPossibleMatches(Context context, Sender sender, Mail  mail){
+    public static ArrayList<Transaction> getPossibleMatches(Context context, Sender sender, Mail mail) {
         //returns a list of random transactions, all of which are possible matches
         ArrayList<Transaction> transactions = new ArrayList<>();
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             CourierModel courier = CourierModel.getRandomCourrier(context);
             Receiver receiver = Receiver.getRandomReceiver(context);
             if (isPossibleMatch(sender, receiver, courier, mail)) {
@@ -32,14 +32,14 @@ public class Algorithm {
             }
         }
 
-        return  transactions;
+        return transactions;
     }
 
-    public static ArrayList<Transaction> getPossibleMatches(Context context, Receiver receiver){
+    public static ArrayList<Transaction> getPossibleMatches(Context context, Receiver receiver) {
         //returns a list of random transactions, all of which are possible matches
 
         ArrayList<Transaction> transactions = new ArrayList<>();
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             CourierModel courier = CourierModel.getRandomCourrier(context);
             Sender sender = Sender.getRandomSender(context);
             Mail mail = Mail.getRandomMail(context);
@@ -48,14 +48,14 @@ public class Algorithm {
 
             }
         }
-        return  transactions;
+        return transactions;
     }
 
-    public static ArrayList<Transaction> getPossibleMatches(Context context, CourierModel courier){
+    public static ArrayList<Transaction> getPossibleMatches(Context context, CourierModel courier) {
         //returns a list of random transactions, all of which are possible matches
 
         ArrayList<Transaction> transactions = new ArrayList<>();
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             Receiver receiver = Receiver.getRandomReceiver(context);
             Sender sender = Sender.getRandomSender(context);
             Mail mail = Mail.getRandomMail(context);
@@ -65,13 +65,13 @@ public class Algorithm {
             }
         }
 
-        return  transactions;
+        return transactions;
     }
 
-    public static ArrayList<Transaction> getPossibleMatches(Context context, Sender sender){
+    public static ArrayList<Transaction> getPossibleMatches(Context context, Sender sender) {
 
         ArrayList<Transaction> transactions = new ArrayList<>();
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             CourierModel courier = CourierModel.getRandomCourrier(context);
             Receiver receiver = Receiver.getRandomReceiver(context);
             Mail mail = Mail.getRandomMail(context);
@@ -81,32 +81,34 @@ public class Algorithm {
             }
         }
 
-        return  transactions;
+        return transactions;
     }
 
 
-    public static boolean isPossibleMatch(ParselTransaction transaction, CourierModel courier) {
+    public static boolean isPossibleMatch(ParselTransaction transaction, String tripStart, String tripEnd, Double weightAvailable, int volumeAvailable,
+                                          String courierStartLoc, String courierEndLoc) {
 
-            Date senderStartDate = (transaction.getSenderStart());
-            Date senderEndDate = transaction.getSenderEnd();//new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
-        Date courierEndDate= null;
+        Date senderStartDate = (transaction.getSenderStart());
+        Date senderEndDate = transaction.getSenderEnd();//new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
+        Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
+
+        Date courierEndDate = null;
 
         Date courierStartDate = null;
         try {
-            courierStartDate = new SimpleDateFormat("MM/dd").parse(courier.getTripStart());
-            courierEndDate = new SimpleDateFormat("MM/dd").parse((courier.getTripEnd()));
+            courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
+            courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
-            Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
-
 
         if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
                 && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
-                && transaction.getWeight() <= courier.getWeightAvailable() && transaction.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
+                && transaction.getWeight() <= weightAvailable && transaction.getVolume() <= volumeAvailable
+                && transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc)) {//TODO change volume into 0-5
 
 
             return true; // if everything is in order, returns true
@@ -133,16 +135,42 @@ public class Algorithm {
             e.printStackTrace();
         }
 
-        if(courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
-            && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
+        if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
+                && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
                 && mail.getWeight() <= courier.getWeightAvailable() && mail.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
+
+
+            return true; // if everything is in order, returns true
+        } else {
+            return false; //otherwise, false
+        }
+    }
+
+
+    public static boolean isPossibleMatch(ParselTransaction courierTransaction, ParselTransaction transaction) {
+
+
+        Date senderStartDate = transaction.getSenderStart();
+        Date senderEndDate = transaction.getSenderEnd();//new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+        Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
+        Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
+
+        Date courierStartDate = transaction.getCourierStart();
+        Date courierEndDate = transaction.getCourierEnd();
+
+
+        if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
+                && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
+                && transaction.getWeight() <= courierTransaction.getWeight() && transaction.getVolume() <= courierTransaction.getVolume()
+                && transaction.getSenderLoc().equals(courierTransaction.getSenderLoc()) && transaction.getReceiverLoc().equals(courierTransaction.getReceiverLoc())) {//TODO change volume into 0-5
 
 
             return true; // if everything is in order, returns true
         }
         else {
-            return false; //otherwise, false
+            return false; //o
         }
-}
 
+
+    }
 }

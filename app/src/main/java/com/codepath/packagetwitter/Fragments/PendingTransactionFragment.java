@@ -85,6 +85,7 @@ public class PendingTransactionFragment extends Fragment {
                 ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
                 query.whereEqualTo("sender", parseUser.getUsername());
+                //query.whereContainedIn("transactionState", Collection<int>);
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<ParselTransaction>() {
                     @Override

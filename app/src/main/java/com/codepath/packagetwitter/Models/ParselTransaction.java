@@ -29,6 +29,20 @@ public class ParselTransaction extends ParseObject{
         super();
     }
 
+    public ParselTransaction(String courier, String courierStartLoc, String courierEndLoc, Date courierStartDate, Date courierEndDate,
+                             Double weightAvailable , int volumeAvailable){
+        super();
+        setCourier(courier);
+        setCourierStart(courierStartDate);
+        setCourierEnd(courierEndDate);
+        setSenderLoc(courierStartLoc);
+        setReceiverLoc(courierEndLoc);
+        setVolume(volumeAvailable);
+        setWeight(weightAvailable);
+        setTransactionState(7);//courier has posted
+        //for when courier creates the package
+    }
+
     public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd
                              , String type, String description, Double weight,
                              int volume) {
@@ -84,38 +98,6 @@ public class ParselTransaction extends ParseObject{
     Log.d("USER IS ", ParseUser.getCurrentUser().getString("username"));
 
     }
-
-//
-//        query.findInBackground(new FindCallback<ParseUser>() {
-//            public void done(List<ParseUser> objects, ParseException e) {
-//                if (e == null) {
-//                    // The query was successful.
-//                    Log.d("yolo",objects.get(0).getString("username"));
-//                    objects.get(0).put("hasPendingRequests", true);//sets hasPendingRequests as true
-//                    objects.get(0).saveInBackground(new SaveCallback() {
-//                        @Override
-//                        public void done(ParseException ef) {
-//                            if (ef == null) {
-//                                //success, saved!
-//                                Log.d("MyApp", "Successfully saved!");
-//                            } else {
-//                                //fail to save!
-//                                ef.printStackTrace();
-//                            }
-//
-//
-//                        }
-//                    });
-//                }
-//
-//                else {
-//                    // Something went wrong.
-//                    Log.d("ParseApplicationError","tf");
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     public void addReceiverInfo(Date receiverStart, Date receiverEnd, String receiverLoc){
         setReceiverStart(receiverStart);

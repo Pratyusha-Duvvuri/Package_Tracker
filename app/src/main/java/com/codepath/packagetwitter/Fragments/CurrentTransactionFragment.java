@@ -15,12 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Transaction;
-import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
@@ -72,6 +75,7 @@ public class CurrentTransactionFragment extends Fragment {
             public void onRefresh() {
                 swipeContainer.setRefreshing(true);
                 Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
+                populateTimeline();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -99,23 +103,37 @@ public class CurrentTransactionFragment extends Fragment {
 
     private void populateTimeline(){
 
-        ArrayList<ParselTransaction> currentTransactions;
-        if (ProfileActivity.parseUser != null) {
-            currentTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of current transactions
-            if (currentTransactions != null){
+        parseUser = ParseUser.getCurrentUser();
+        if (parseUser != null) {
+                ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+                // Define our query conditions
+                query.whereEqualTo("receiver", parseUser.getUsername());
+                query.whereGreaterThanOrEqualTo("transactionState", 2);
+                query.whereLessThan("transactionState", 6);
+                // Execute the find asynchronously
+                query.findInBackground(new FindCallback<ParselTransaction>() {
+                    @Override
+                    public void done(List<ParselTransaction> issueList, ParseException e) {
+                        if (e == null) {
+                            transactions.clear();
+                            Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                            for (int i = 0; i < issueList.size(); i++) {
+                                ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                                addItems(trans);
+                            }
 
-            for (int i = 0; i < currentTransactions.size(); i++) { //for every pending transaction
-                ParselTransaction currentTransaction = currentTransactions.get(i);
-                //transforms the ParseTransaction into transaction and adds to the adapter
-                addItems(currentTransaction);
-            }}
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });
+            }
         }
-
-    }
     public void addItems(ParselTransaction transaction) {
 
         transactions.add(transaction);
         transactionAdapter.notifyItemInserted(transactions.size() - 1);
+        transactionAdapter.notifyDataSetChanged();
 
     }
 

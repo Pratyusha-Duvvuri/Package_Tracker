@@ -10,14 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.packagetwitter.Models.CourierModel;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-import org.parceler.Parcels;
+import com.parse.ParseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,13 +23,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.codepath.packagetwitter.ProfileActivity.COURIER_KEY;
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class CourierActivity extends AppCompatActivity {
 
-    CourierModel courier;
-    User u;
 
     @BindView(R.id.etWeight)EditText weight;
     @BindView(R.id.etVolume)EditText volume;
@@ -51,7 +45,13 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.tvConfirm)TextView tvConfirm;
     @BindView(R.id.tvHeading)TextView tvHeading;
 
+    Double weightAvailable;
+    String tripStart;
+    String tripEnd;
 
+    int volumes;
+    String startAddress;
+    String endAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,38 +59,20 @@ public class CourierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courier);
         ButterKnife.bind(this);
-        courier = new CourierModel();
-        u = Parcels.unwrap(getIntent().getParcelableExtra("courier"));
 
 
         // Apply the adapter to the spinner
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-            //(String name, String handle, String phone, String tripStart, String tripEnd, double weight, int[] v, String sAddress, String eAddress);
 
+                weightAvailable = Double.parseDouble(weight.getText().toString());
+                tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
+                tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
+                volumes = Integer.valueOf((volume.getText().toString()));
+                startAddress =  startLocation.getText().toString();
 
-                Double weightAvailable = Double.parseDouble(weight.getText().toString());
-                String tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
-                String tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
-                String line = volume.getText().toString();
-                String[] numberStrs = line.split(",");
-                int[] volumes = new int[numberStrs.length];
-                for(int i = 0;i < numberStrs.length;i++)
-                {
-                    // Note that this is assuming valid input
-                    // If you want to check then add a try/catch
-                    // and another index for the numbers if to continue adding the others (see below)
-                    volumes[i] = Integer.parseInt(numberStrs[i]);
-                }                //Call the modal to verify information
-
-                String startAddress =  startLocation.getText().toString();
-
-
-                String endAddress =  locationEnd.getText().toString();
-
-                courier = new CourierModel(u, tripStart,  tripEnd,  weightAvailable, volumes[0],  startAddress,  endAddress);
-
+                endAddress =  locationEnd.getText().toString();
 
                 onVerifyAction();
             }
@@ -100,35 +82,50 @@ public class CourierActivity extends AppCompatActivity {
 
 
     public void onVerifyAction() {
+
+
         //queries all pending transactions
+
+        parseUser = ParseUser.getCurrentUser();
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         query.whereEqualTo("transactionState", 1); //pending transaction state
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
+                Date courierEndDate= null;
+
+                Date courierStartDate = null;
                 if (e == null) {
                     //access parsel transactions here
                     for (int i = 0; i < itemList.size(); i++){
                         //for every parsel transaction
                         ParselTransaction parselTransaction = itemList.get(i);
-                        if (Algorithm.isPossibleMatch(parselTransaction, courier)){
-                            Date courierEndDate= null;
+                        try {
+                            courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
+                            courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
 
-                            Date courierStartDate = null;
+                        } catch (java.text.ParseException e1) {
+                            e1.printStackTrace();
+                        }
 
-                            try {
-                                courierStartDate = new SimpleDateFormat("MM/dd").parse(courier.getTripStart());
-                                courierEndDate = new SimpleDateFormat("MM/dd").parse((courier.getTripEnd()));
+                        //if it's a match:
+                        if (Algorithm.isPossibleMatch(parselTransaction, tripStart,tripEnd,weightAvailable,volumes, startAddress, endAddress)){
 
-                            } catch (java.text.ParseException e1) {
-                                e1.printStackTrace();
-                            }
+
 
 
 
                             //if its a match
                             parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
+                            parselTransaction.saveEventually();
                             break;
 
+
+                        }
+                        else{
+                            //if it's not a match:
+                            ParselTransaction courierParsel  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
+                                    courierEndDate,weightAvailable,volumes); //makes a parsel transaction
+                            courierParsel.saveEventually(); // saves it
                         }
 
                     }
@@ -140,7 +137,6 @@ public class CourierActivity extends AppCompatActivity {
         });
 
         Intent i = new Intent(this, ProfileActivity.class);
-        i.putExtra(COURIER_KEY, Parcels.wrap(courier));
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
