@@ -222,7 +222,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             pagerAdapter.pendingTransactionFragment.populateTimeline();
         }
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            Toast.makeText(this, "lololol", Toast.LENGTH_SHORT).show();
             setParametersOfView();
             // Make sure the request was successful
                 // The user picked a contact.

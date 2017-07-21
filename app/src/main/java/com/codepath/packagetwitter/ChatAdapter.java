@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -71,21 +69,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
 
-    // Create a gravatar image based on the hash value obtained from userId
-    private static String getProfileUrl(final String userId) {
-        String hex = "";
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("MD5");
-            final byte[] hash = digest.digest(userId.getBytes());
-            final BigInteger bigInt = new BigInteger(hash);
-            hex = bigInt.abs().toString(16);
-//            hex = (""+ProfileActivity.parseUser.getObjectId()).toString(16);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "http://www.gravatar.com/avatar/" + hex + "?d=identicon";
-    }
+//    // Create a gravatar image based on the hash value obtained from userId
+//    private static String getProfileUrl(final String userId) {
+//        String hex = "";
+//        try {
+//            final MessageDigest digest = MessageDigest.getInstance("MD5");
+//            final byte[] hash = digest.digest(userId.getBytes());
+//            final BigInteger bigInt = new BigInteger(hash);
+//            hex = bigInt.abs().toString(16);
+////            hex = (""+ProfileActivity.parseUser.getObjectId()).toString(16);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return "http://www.gravatar.com/avatar/" + hex + "?d=identicon";
+//    }
 
     @Override
     public int getItemCount() {
