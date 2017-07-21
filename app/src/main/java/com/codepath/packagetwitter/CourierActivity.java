@@ -70,14 +70,9 @@ public class CourierActivity extends AppCompatActivity {
                 tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
                 tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
                 volumes = Integer.valueOf((volume.getText().toString()));
-
-
                 startAddress =  startLocation.getText().toString();
 
-
                 endAddress =  locationEnd.getText().toString();
-
-
 
                 onVerifyAction();
             }
