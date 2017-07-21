@@ -49,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
+    public final int IMAGE_REQUEST_CODE = 40;
     public final static String COURIER_KEY = "courier";
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
@@ -90,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     setParametersOfView();
                     if (parseUser.getBoolean("hasPendingRequests") ){
                         parseUser.put("hasPendingRequests", false);
+                        parseUser.saveInBackground();
                         actOnRequests();
                     }
                 } else {
@@ -144,14 +146,20 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             }
         });
         //For image profie view
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+//        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
+//
+//                startActivityForResult(i,IMAGE_REQUEST_CODE);
+//            }
+//        });
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
 
-                startActivity(i);
+                startActivityForResult(i,IMAGE_REQUEST_CODE);
             }
         });
-
     }
 
 
@@ -213,6 +221,16 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             //pagerAdapter.pendingTransactionFragment.addItems(transaction);
             pagerAdapter.pendingTransactionFragment.populateTimeline();
         }
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+            Toast.makeText(this, "lololol", Toast.LENGTH_SHORT).show();
+            setParametersOfView();
+            // Make sure the request was successful
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+
+                // Do something with the contact here (bigger example below)
+            }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

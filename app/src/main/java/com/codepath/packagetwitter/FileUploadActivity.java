@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,11 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
-
-import org.parceler.Parcels;
 
 import java.io.ByteArrayOutputStream;
 
@@ -112,13 +112,18 @@ public class FileUploadActivity extends Activity {
 
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi
+                //Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
+//                i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
+//                startActivity(i);
                 Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
-                i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
-                startActivity(i);
+                setResult(RESULT_OK, i); // set result code and bundle data for response
+                finish(); // closes the activity, pass data to parent
+
 
             }
         });
         ivPreview = (ImageView) findViewById(R.id.ivPreview);
+        setParametersOfView();
 
 
     }
@@ -143,6 +148,12 @@ public class FileUploadActivity extends Activity {
             // Start the image capture intent to take photo
             startActivityForResult(takepicintent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
+    }
+    public void setParametersOfView() {
+        ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
+        String imageUrl = postImage.getUrl();//live url
+        Uri imageUri = Uri.parse(imageUrl);
+        Glide.with(FileUploadActivity.this).load(imageUri.toString()).into(ivPreview);
     }
 
     @Override
