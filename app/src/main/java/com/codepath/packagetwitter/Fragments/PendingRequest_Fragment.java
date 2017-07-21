@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Mail;
@@ -35,6 +37,10 @@ public class PendingRequest_Fragment extends DialogFragment {
     public long num;
     public Button accept;
     public Button reject;
+    public FrameLayout flForm;
+    public EditText receiverLocation;
+    public EditText receiverEndDate;
+    public LinearLayout llRequest;
 
 
 
@@ -60,30 +66,20 @@ public class PendingRequest_Fragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-//        sender =  unwrap(getArguments().getParcelable("sender"));
-//        mail =  unwrap(getArguments().getParcelable("mail"));
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_pending_request, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-
         accept = (Button) view.findViewById(R.id.btnAccept);
         reject = (Button) view.findViewById(R.id.btnReject);
 
-        reject.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                proceed = false;
 
-                doThis();
-
-            }
-        });
 
 
         accept.setOnClickListener(new View.OnClickListener() {

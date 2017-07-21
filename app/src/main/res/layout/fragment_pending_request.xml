@@ -1,37 +1,42 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/edit_name"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:layout_gravity="center" android:orientation="vertical"  >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svRequest"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/lbl_your_name"
-        android:layout_width="183dp"
-        android:layout_height="31dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/llRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lbl_your_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="YOU HAVE A PENDING REQUEST" />
 
-    <EditText
-        android:id="@+id/txt_your_name"
-        android:layout_width="match_parent"  android:layout_height="85dp"
-        android:inputType="text"
-        android:imeOptions="actionDone" />
+        <FrameLayout
+            android:id="@+id/flForm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvCharCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Character Count: 140" />
+        </FrameLayout>
 
-    <Button
-        android:id="@+id/btnReject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reject" />
+        <Button
+            android:id="@+id/btnReject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Later" />
 
-    <Button
-        android:id="@+id/btnAccept"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Accept" />
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Now" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

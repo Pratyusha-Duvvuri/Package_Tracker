@@ -32,6 +32,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     Mail mail;
     User receiverUser;
     User USER;
+    public ParseUser parseUser;
 
 
     //News things that receiver has to enter
@@ -54,6 +55,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
+    @BindView(R.id.myFABReject)FloatingActionButton fabReject;
     ParselTransaction transaction;
 
 
@@ -103,6 +105,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 //                receiver.setTripEnd(endDate.getText().toString());
 //                receiver.setLocation((receiverLocation.getText().toString()));
 
+                //TODO - get the dates from the form in receiver
                 transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd(), receiverLocation.getText().toString());
                 transaction.saveEventually();
                 //Call the modal to verify information
@@ -110,23 +113,95 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
             }
         });
+
+        fabReject.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            //set transaction state to seven and delete transaction
+                transaction.setTransactionState(8);
+                transaction.saveInBackground();
+                finishIntent();
+
+            }
+        });
     }
     public void onVerifyAction(){
-        //either pass to another activity or put in database
 
-       Intent i = new Intent(this, ProfileActivity.class);
-//        i.putExtra("receiver", Parcels.wrap(receiver));
-//        i.putExtra("sender", Parcels.wrap(sender));
-//        i.putExtra("mail", Parcels.wrap(mail));
-//        i.putExtra("USER", Parcels.wrap(USER) );
+
+        //else keep running through stuff and if not found then just ignore
+
+        parseUser = ParseUser.getCurrentUser();
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        query.whereEqualTo("transactionState", 7); //courier in limbo state
+
+        //run through the algorithm that takes in two transactions
+
+
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            public void done(List<ParselTransaction> itemList, ParseException e) {
+                if (e == null) {
+                    //access parsel transactions here
+                    for (int i = 0; i < itemList.size(); i++){
+                        //for every parsel transaction
+                        ParselTransaction courierTransaction = itemList.get(i);
+                        //if it's a match:
+                        if (Algorithm.isPossibleMatch(courierTransaction, transaction)){
+
+                            //find courier's username, his start date, her end date, change state
+                            transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getSenderStart(), courierTransaction.getReceiverEnd());
+                            transaction.setTransactionState(2);
+                            transaction.saveEventually();
+                            // change state of courier transaction to dead
+                            courierTransaction.setTransactionState(8);
+                            // break
+                            break;
+
+                        }
+                        else{
+                            //if it's not a match:
+                        }
+
+                    } //for loop ends here
+
+                } else {
+                    Log.d("ParseApplicationError",e.toString());
+                }
+            }
+        });
+
+        finishIntent();
+
+
+    }
+
+
+
+    public void finishIntent(){
+        Intent i = new Intent(this, ProfileActivity.class);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
     }
 
-
-
     public void onSetLayout(){
+
+//        Michaun's code from earlier package_confirmation
+//        flForm = view.findViewById(R.id.flForm);
+//        receiverLocation = view.findViewById(R.id.etReceiverLocation);
+//        receiverEndDate = view.findViewById(R.id.etReceiverEnd);
+//        llRequest = view.findViewById(R.id.llRequest);
+//
+//        //initialize framelayout inflater that loads package creation activity
+//        LayoutInflater frameInflater = LayoutInflater.from(getContext());
+//        //inflates package creation activity
+//        View form = frameInflater.inflate(R.layout.activity_package_creation,null, false);
+//        //adds package creation activity to the frame layout
+//        flForm.addView(form);
+//
+//        EditText e;
+//        e = (EditText)flForm.findViewById(R.id.etWeight);
+//        //Get fields from activity package creation
+
 
         fragile.setText(""+transaction.getIsFragile());
         type.setText(""+transaction.getMailType());

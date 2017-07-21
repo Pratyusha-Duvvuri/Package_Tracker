@@ -250,7 +250,7 @@
         android:layout_marginEnd="90dp"
         />
     <FrameLayout
-        android:id="@+id/flFAB"
+        android:id="@+id/flFAB1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -279,8 +279,44 @@
             android:text="OK"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
+
     </FrameLayout>
 
+
+    <FrameLayout
+        android:id="@+id/flFAB2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginBottom="12dp">
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/myFABReject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="5dp"
+        app:fabSize="mini"
+
+        android:src="@android:color/transparent"
+        app:backgroundTint="@color/colorPrimaryLight"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tvReject"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="16dp"
+        android:text="Reject"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    </FrameLayout>
 
 </LinearLayout>
 </ScrollView>

@@ -121,14 +121,6 @@
         android:inputType="text"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/tvFragile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fragile?"
-        android:layout_above="@+id/tvStartDate"
-        android:layout_alignStart="@+id/tvSenderLocation" />
-
     <RadioButton
         android:id="@+id/rbFragile"
         android:layout_width="wrap_content"
@@ -137,9 +129,8 @@
         android:textColorLink="@color/colorPrimaryLight"
         android:textSize="14sp"
         android:buttonTint="@color/colorPrimaryLight"
-        android:layout_below="@+id/tvWidth"
-        android:layout_toRightOf="@+id/tvFragile"
-        android:layout_toEndOf="@+id/tvFragile" />
+        android:layout_alignTop="@+id/isFragile"
+        android:layout_toEndOf="@+id/isFragile" />
 
     <RadioButton
         android:id="@+id/rbNotFragile"
@@ -168,7 +159,8 @@
         android:hint="ex. 6"
         android:inputType="text|number"
         android:textSize="14sp"
-        android:layout_above="@+id/ibUpload"
+        android:layout_alignBaseline="@+id/tvVolume"
+        android:layout_alignBottom="@+id/tvVolume"
         android:layout_toEndOf="@+id/etReceiverLoc" />
 
     <TextView
@@ -280,8 +272,8 @@
         app:cardCornerRadius="4dp"
         app:cardElevation="10dp"
         app:contentPadding="13dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignTop="@+id/ivPackage"
+        android:layout_alignStart="@+id/ivPackage">
 
         <LinearLayout
             android:id="@+id/llcardview"
@@ -307,8 +299,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fragile?:"
-        android:layout_alignBaseline="@+id/rbFragile"
-        android:layout_alignBottom="@+id/rbFragile"
+        android:layout_below="@+id/etWeight"
         android:layout_alignStart="@+id/tvWeight" />
 
     <TextView

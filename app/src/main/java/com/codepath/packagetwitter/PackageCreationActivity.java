@@ -52,7 +52,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     @BindView(R.id.tvPackageDetailHeading) TextView tvPackageDetailHeading;
     @BindView(R.id.tvPackageType) TextView tvPackageType;
     @BindView(R.id.tvWeight) TextView tvWeight;
-    @BindView(R.id.tvFragile) TextView tvFragile;
+   // @BindView(R.id.tvFragile) TextView tvFragile;
     @BindView(R.id.tvDimensionsHeading) TextView tvDimensionsHeading;
     @BindView(R.id.tvConfirm) TextView tvConfirm;
     @BindView(R.id.tvPackage) TextView tvPackage;
@@ -168,7 +168,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
         //creating new transaction parse object
-        ParselTransaction transaction = new ParselTransaction("rafael.jacobovitz@gmail.com",
+        ParselTransaction transaction = new ParselTransaction("booo@gmail.com",
                 parseUser.getUsername(), sender.getLocation(), senderStartDate,
                 senderEndDate, mail.getType(),
                 mail.getDescription(), mail.getWeight(),

@@ -69,16 +69,10 @@ public class CourierActivity extends AppCompatActivity {
                 weightAvailable = Double.parseDouble(weight.getText().toString());
                 tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
                 tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
-                String va = volume.getText().toString();
                 volumes = Integer.valueOf((volume.getText().toString()));
-
-
                 startAddress =  startLocation.getText().toString();
 
-
                 endAddress =  locationEnd.getText().toString();
-
-
 
                 onVerifyAction();
             }
@@ -115,7 +109,6 @@ public class CourierActivity extends AppCompatActivity {
 
                         //if it's a match:
                         if (Algorithm.isPossibleMatch(parselTransaction, tripStart,tripEnd,weightAvailable,volumes, startAddress, endAddress)){
-
 
 
 
