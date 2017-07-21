@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.Mail;
@@ -35,6 +37,10 @@ public class PendingRequest_Fragment extends DialogFragment {
     public long num;
     public Button accept;
     public Button reject;
+    public FrameLayout flForm;
+    public EditText receiverLocation;
+    public EditText receiverEndDate;
+    public LinearLayout llRequest;
 
 
 
@@ -60,21 +66,37 @@ public class PendingRequest_Fragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-//        sender =  unwrap(getArguments().getParcelable("sender"));
-//        mail =  unwrap(getArguments().getParcelable("mail"));
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_pending_request, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-
         accept = (Button) view.findViewById(R.id.btnAccept);
         reject = (Button) view.findViewById(R.id.btnReject);
+        flForm = view.findViewById(R.id.flForm);
+        receiverLocation = view.findViewById(R.id.etReceiverLocation);
+        receiverEndDate = view.findViewById(R.id.etReceiverEnd);
+        llRequest = view.findViewById(R.id.llRequest);
+
+        //initialize framelayout inflater that loads package creation activity
+        LayoutInflater frameInflater = LayoutInflater.from(getContext());
+        //inflates package creation activity
+        View form = frameInflater.inflate(R.layout.activity_package_creation,null, false);
+        //adds package creation activity to the frame layout
+        flForm.addView(form);
+
+        EditText e;
+        e = (EditText)flForm.findViewById(R.id.etWeight);
+        //Get fields from activity package creation
+
+
+
+
 
         reject.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

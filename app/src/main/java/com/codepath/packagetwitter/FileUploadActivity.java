@@ -72,7 +72,7 @@ public class FileUploadActivity extends Activity {
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi
                 Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
-                u.hasPendingRequests= true;
+                //u.hasPendingRequests= true;
                 i.putExtra("USER", Parcels.wrap(u));
                 i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
                 setResult(RESULT_OK, i); // set result code and bundle data for response
