@@ -174,6 +174,24 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
     public void onSetLayout(){
 
+//
+//        flForm = view.findViewById(R.id.flForm);
+//        receiverLocation = view.findViewById(R.id.etReceiverLocation);
+//        receiverEndDate = view.findViewById(R.id.etReceiverEnd);
+//        llRequest = view.findViewById(R.id.llRequest);
+//
+//        //initialize framelayout inflater that loads package creation activity
+//        LayoutInflater frameInflater = LayoutInflater.from(getContext());
+//        //inflates package creation activity
+//        View form = frameInflater.inflate(R.layout.activity_package_creation,null, false);
+//        //adds package creation activity to the frame layout
+//        flForm.addView(form);
+//
+//        EditText e;
+//        e = (EditText)flForm.findViewById(R.id.etWeight);
+//        //Get fields from activity package creation
+
+
         fragile.setText(""+transaction.getIsFragile());
         type.setText(""+transaction.getMailType());
         tvSenderLocation.setText(""+transaction.getSenderLoc());

@@ -14,10 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.codepath.packagetwitter.Models.User;
 import com.parse.ParseFile;
-
-import org.parceler.Parcels;
 
 import java.io.ByteArrayOutputStream;
 
@@ -41,7 +38,6 @@ public class UploadPackageImageActivity extends Activity {
     public Button btnUploadson;
     public Button GoBack;
     public EditText caption;
-    public User u;
 
 
 
@@ -74,9 +70,6 @@ public class UploadPackageImageActivity extends Activity {
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi
                 Intent i = new Intent(UploadPackageImageActivity.this, ProfileActivity.class);
-                u.hasPendingRequests= true;
-                i.putExtra("USER", Parcels.wrap(u));
-                i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
                 setResult(RESULT_OK, i); // set result code and bundle data for response
                 finish(); // closes the activity, pass data to parent
 
