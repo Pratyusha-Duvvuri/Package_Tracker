@@ -25,46 +25,17 @@
 
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvReceiverLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Confirm Your Location:" />
-
-        <EditText
-            android:id="@+id/etReceiverLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ex. Seattle"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvReceiverEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter Your Preferred Delivery Date:" />
-
-        <EditText
-            android:id="@+id/etReceiverEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ex. 08/31"
-            android:inputType="text"
-            android:textSize="14sp" />
-
         <Button
             android:id="@+id/btnReject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reject" />
+            android:text="View Later" />
 
         <Button
             android:id="@+id/btnAccept"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Accept" />
+            android:text="View Now" />
 
     </LinearLayout>
 

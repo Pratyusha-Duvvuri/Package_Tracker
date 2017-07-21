@@ -55,6 +55,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
+    @BindView(R.id.myFABReject)FloatingActionButton fabReject;
     ParselTransaction transaction;
 
 
@@ -112,6 +113,17 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
             }
         });
+
+        fabReject.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            //set transaction state to seven and delete transaction
+                transaction.setTransactionState(7);
+                transaction.saveInBackground();
+                finishIntent();
+
+            }
+        });
     }
     public void onVerifyAction(){
 
@@ -142,9 +154,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             // change state of courier transaction to dead
                             courierTransaction.setTransactionState(8);
                             // break
-
                             break;
-
 
                         }
                         else{
@@ -159,22 +169,23 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             }
         });
 
+        finishIntent();
+
+
+    }
 
 
 
+    public void finishIntent(){
         Intent i = new Intent(this, ProfileActivity.class);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
     }
 
-
-
-
-
     public void onSetLayout(){
 
-//
+//        Michaun's code from earlier package_confirmation
 //        flForm = view.findViewById(R.id.flForm);
 //        receiverLocation = view.findViewById(R.id.etReceiverLocation);
 //        receiverEndDate = view.findViewById(R.id.etReceiverEnd);

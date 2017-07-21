@@ -82,17 +82,6 @@ public class PendingRequest_Fragment extends DialogFragment {
 
 
 
-
-        reject.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                proceed = false;
-
-                doThis();
-
-            }
-        });
-
-
         accept.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 proceed = true;
