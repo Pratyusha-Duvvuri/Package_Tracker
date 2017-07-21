@@ -159,20 +159,18 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         Date senderStartDate = null;
         Date senderEndDate = null;
         try {
-            senderStartDate = new SimpleDateFormat("MM/dd").parse(sender.getTripStart());
-            senderEndDate = new SimpleDateFormat("MM/dd").parse(sender.getTripEnd());
+            senderStartDate = new SimpleDateFormat("MM/dd").parse("01/01");
+            senderEndDate = new SimpleDateFormat("MM/dd").parse("12/31");
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-
-
         //creating new transaction parse object
         ParselTransaction transaction = new ParselTransaction("booo@gmail.com",
-                parseUser.getUsername(), sender.getLocation(), senderStartDate,
-                senderEndDate, mail.getType(),
-                mail.getDescription(), mail.getWeight(),
-                mail.getVolume());
+                parseUser.getUsername(), "Rio", senderStartDate,
+                senderEndDate,"Take me",
+                "dsfs", 5.640987654345678,
+                1);
 
         transaction.saveEventually();
         parseUser.add("pendingTransactions", transaction);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -92,6 +93,7 @@ public class CourierActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
                 Date courierEndDate= null;
+                boolean mark= false;
 
                 Date courierStartDate = null;
                 if (e == null) {
@@ -110,7 +112,7 @@ public class CourierActivity extends AppCompatActivity {
                         //if it's a match:
                         if (Algorithm.isPossibleMatch(parselTransaction, tripStart,tripEnd,weightAvailable,volumes, startAddress, endAddress)){
 
-
+                            mark = true;
 
 
 
@@ -123,14 +125,18 @@ public class CourierActivity extends AppCompatActivity {
                         }
                         else{
                             //if it's not a match:
-                            ParselTransaction courierParsel  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
-                                    courierEndDate,weightAvailable,volumes); //makes a parsel transaction
-                            courierParsel.saveEventually(); // saves it
+
                         }
 
                     }
+                    if (! mark){
+                        ParselTransaction courierParsel  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
+                                courierEndDate,weightAvailable,volumes); //makes a parsel transaction
+                        courierParsel.saveEventually(); // saves it}
+                    }
 
                 } else {
+                    Log.d("ParseApplicationError",e.toString());
                     // something went wrong
                 }
             }

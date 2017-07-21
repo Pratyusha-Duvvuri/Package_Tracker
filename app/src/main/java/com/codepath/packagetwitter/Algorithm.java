@@ -155,8 +155,8 @@ public class Algorithm {
         Date receiverStartDate = transaction.getReceiverStart();//new SimpleDateFormat("MM/dd").parse(receiver.getTripStart());
         Date receiverEndDate = transaction.getReceiverEnd();//new SimpleDateFormat("MM/dd").parse(receiver.getTripEnd());
 
-        Date courierStartDate = transaction.getCourierStart();
-        Date courierEndDate = transaction.getCourierEnd();
+        Date courierStartDate = courierTransaction.getCourierStart();
+        Date courierEndDate = courierTransaction.getCourierEnd();
 
 
         if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
