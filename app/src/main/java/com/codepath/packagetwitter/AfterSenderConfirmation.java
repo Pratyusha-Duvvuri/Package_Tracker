@@ -118,7 +118,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             public void onClick(View v) {
 
             //set transaction state to seven and delete transaction
-                transaction.setTransactionState(7);
+                transaction.setTransactionState(8);
                 transaction.saveInBackground();
                 finishIntent();
 
