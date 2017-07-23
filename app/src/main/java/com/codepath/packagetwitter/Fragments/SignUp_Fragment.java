@@ -175,7 +175,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.setPassword(password.getText().toString());
         user.setEmail(emailId.getText().toString());
 // Set custom properties
-        user.put("userHandle",emailId.getText().toString());
+        user.put("tagline", "Tagline");
         user.put("location", location.getText().toString());
         user.put("mobileNumber", mobileNumber.getText().toString());
         user.put("fullName",fullName.getText().toString());

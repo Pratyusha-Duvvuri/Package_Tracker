@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     ViewPager vpPager;
     User user;
     public TextView tvUsername;
+    public TextView tvTagline;
     public ImageView ivProfileImage;
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
@@ -75,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         tvUsername = (TextView) findViewById(R.id.tvName);
+        tvTagline = (TextView) findViewById(R.id.tvTagline);
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -89,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     ignore = false;
                     reload = true;
                     setParametersOfView();
+
                     if (parseUser.getBoolean("hasPendingRequests") ){
                         parseUser.put("hasPendingRequests", false);
                         parseUser.saveInBackground();
@@ -164,12 +167,19 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
     public void setParametersOfView() {
+        tvTagline.setText(parseUser.getString("tagline"));
+        tvUsername.setText(parseUser.getString("username"));
         ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
-        String imageUrl = postImage.getUrl();//live url
+        if(postImage!=null) {
+            String imageUrl = postImage.getUrl()
+        ;//live url
+
         Uri imageUri = Uri.parse(imageUrl);
+        Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);}
+        else {
+            Glide.with(ProfileActivity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(ivProfileImage);
 
-        Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
-
+        }
     }
 
 
@@ -223,11 +233,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         }
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             setParametersOfView();
-            // Make sure the request was successful
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-
-                // Do something with the contact here (bigger example below)
             }
 
     }

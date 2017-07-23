@@ -43,10 +43,8 @@ public class FileUploadActivity extends Activity {
     public Button btnUploadson;
     public Button GoBack;
     public EditText caption;
+    public EditText name;
     public ParseFile file;
-
-
-
 
 
     @Override
@@ -59,8 +57,12 @@ public class FileUploadActivity extends Activity {
         //button = (Button) findViewById(R.id.uploadbtn);
         btnUploadson = (Button) findViewById(R.id.btnuploadson);
         caption = (EditText) findViewById(R.id.et_imagecaption);
+        name = (EditText) findViewById(R.id.et_username);
         GoBack = (Button) findViewById(R.id.btnBackToProfile);
+        caption.setText(parseUser.getString("tagline"));
+        name.setText(parseUser.getString("fullName"));
 
+        //DONT DELETE THIS MICH, RAFF
         // Capture button clicks
 //        button.setOnClickListener(new OnClickListener() {
 //
@@ -205,6 +207,9 @@ public class FileUploadActivity extends Activity {
 
                 // Create a column named "ImageFile" and insert the image
                 parseUser.put("ImageFile", file);
+                String tagline = caption.getText().toString();
+                if(! tagline.equals("")){
+                parseUser.put("tagline",tagline);}
 
                 parseUser.saveInBackground(new SaveCallback(){
                     @Override
