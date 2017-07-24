@@ -80,8 +80,6 @@ public class CurrentTransactionFragment extends Fragment {
             }
         });
 
-
-
         return v;
     }
 
@@ -101,7 +99,7 @@ public class CurrentTransactionFragment extends Fragment {
     }
 
 
-    private void populateTimeline(){
+    public void populateTimeline(){
 
         parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {

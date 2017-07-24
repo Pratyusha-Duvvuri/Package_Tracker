@@ -1,15 +1,22 @@
-package com.codepath.packagetwitter;
+package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.codepath.packagetwitter.ChatActivity;
+import com.codepath.packagetwitter.ChatAdapter;
+import com.codepath.packagetwitter.Message;
+import com.codepath.packagetwitter.ProfileActivity;
+import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
@@ -25,36 +32,80 @@ import java.util.List;
 
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
 
-public class ChatActivity extends AppCompatActivity {
-    static final String TAG = ChatActivity.class.getSimpleName();
-    static final String USER_ID_KEY = "userId";
-    static final String BODY_KEY = "body";
-    EditText etMessage;
-    Button btSend;
+/**
+ * Created by pratyusha98 on 7/23/17.
+ */
 
-    static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
+public class Tab1Chat_Fragment extends Fragment {
 
+    private static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
     String transactionid;
+    static final String TAG = ChatActivity.class.getSimpleName();
+    static final String USER_ID_KEY = "userId";
+    static final String BODY_KEY = "body";
+    EditText etMessage;
+    Button btSend;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         transactionid =  getIntent().getStringExtra("ParselTransactionId");
+        transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
+    }
+    void login() {
+        ParseAnonymousUtils.logIn(new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                //you want e to BE null
+                if (e != null) {
+                    Log.e("ParseApplicationError", "Anonymous login failed: ", e);
+                } else {
+                    startWithCurrentUser();
+                }
+            }
+        });
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //inflate the layout
+        View v = inflater.inflate(R.layout.chatjsutincase, container, false);
+        rvChat =  v.findViewById(R.id.rvChat);
+        etMessage = (EditText) v.findViewById(R.id.etMessage1);
+        btSend = (Button) v.findViewById(R.id.btSend1);
+        //find swipe containerview
+        //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
+        //RecyclerView setup ( layout manager, use adapter)
+        //llayout= new LinearLayoutManager(getContext()) ;
+        LinearLayoutManager llayout = new LinearLayoutManager(getContext());
+        rvChat.setLayoutManager(llayout);
+        mAdapter = new ChatAdapter(mMessages);
 
-        setContentView(R.layout.activity_chat);
+        //set the adapter
+        rvChat.setAdapter(mAdapter);
+
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipeContainer.setRefreshing(true);
+//                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
+//                populateTimeline();
+//                swipeContainer.setRefreshing(false);
+//            }
+//        });
+
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
         } else {
-            Toast.makeText(this, "NO USER FOUND!", Toast.LENGTH_SHORT).show();
+            Log.d("Parse Application Error","Have no idea how you got here");
             login();
         }
-        // Parse.initialize(...) should come first
 
         // Make sure the Parse server is setup to configured for live queries
         // URL for server is determined by Parse.initialize() call.
@@ -75,7 +126,7 @@ public class ChatActivity extends AppCompatActivity {
                         mMessages.add(0, object);
 
                         // RecyclerView updates need to be run on the UI thread
-                        runOnUiThread(new Runnable() {
+                        getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 mAdapter.notifyDataSetChanged();
@@ -84,24 +135,7 @@ public class ChatActivity extends AppCompatActivity {
                         });
                     }
                 });
-    }
-
-    // Get the userId from the cached currentUser object
-
-
-    // Create an anonymous user using ParseAnonymousUtils and set sUserId
-    void login() {
-        ParseAnonymousUtils.logIn(new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                //you want e to BE null
-                if (e != null) {
-                    Log.e(TAG, "Anonymous login failed: ", e);
-                } else {
-                    startWithCurrentUser();
-                }
-            }
-        });
+        return v;
     }
 
     // Get the userId from the cached currentUser object
@@ -111,17 +145,15 @@ public class ChatActivity extends AppCompatActivity {
 
     void setupMessagePosting() {
         // Find the text field and button
-        etMessage = (EditText) findViewById(R.id.etMessage1);
-        btSend = (Button) findViewById(R.id.btSend1);
-        rvChat = (RecyclerView) findViewById(R.id.rvChat);
+
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ProfileActivity.parseUser.getObjectId();
-        mAdapter = new ChatAdapter(ChatActivity.this, userId, mMessages);
+        mAdapter = new ChatAdapter( mMessages);
         rvChat.setAdapter(mAdapter);
 
         // associate the LayoutManager with the RecylcerView
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         // to have reverse chronological order of messages
         linearLayoutManager.setReverseLayout(true);
 
@@ -132,28 +164,25 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String data = etMessage.getText().toString();
-                //ParseObject message = ParseObject.create("Message");
-                //message.put(Message.USER_ID_KEY, userId);
-                //message.put(Message.BODY_KEY, data);
-                // Using new `Message` Parse-backed model now
+
                 Message message = new Message();
                 message.setBody(data);
                 message.setUserId(ProfileActivity.parseUser.getObjectId());
                 message.setUserName(ProfileActivity.parseUser.getString("username"));
                 message.setPicture(ProfileActivity.parseUser.getParseFile("ImageFile"));
                 message.setTransactionId(transactionid);
-//              message.setUserId(ParseUser.getCurrentUser().getObjectId());
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
-                        Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
-                                Toast.LENGTH_SHORT).show();
-                        refreshMessages();}
+//                            Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
+//                                    Toast.LENGTH_SHORT).show();
+                            refreshMessages();}
                         else{
-                            Log.d("Message", " error");
+                            Log.d("Message  error",e.toString());
 
-                            }
+
+                        }
                     }
                 });
                 etMessage.setText(null);
@@ -191,6 +220,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 }

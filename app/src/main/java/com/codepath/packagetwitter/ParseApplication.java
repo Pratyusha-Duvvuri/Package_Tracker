@@ -42,6 +42,7 @@ public class ParseApplication extends Application {
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("HowCanAndroidBeSoMuchFun") // should correspond to APP_ID env variable
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
+
                 .clientBuilder(builder)
                 .server("https://packagetrackerr.herokuapp.com/parse/").build());
 

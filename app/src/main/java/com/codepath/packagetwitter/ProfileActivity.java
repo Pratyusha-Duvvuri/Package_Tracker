@@ -20,13 +20,12 @@ import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.LogoutFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
-import com.codepath.packagetwitter.Models.CourierModel;
 import com.codepath.packagetwitter.Models.Mail;
-import com.codepath.packagetwitter.Models.Receiver;
+import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Sender;
-import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -34,6 +33,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
+
+import java.util.List;
 
 /**
  * Created by michaunp on 7/13/17.
@@ -47,10 +48,13 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public TextView tvUsername;
     public TextView tvTagline;
     public ImageView ivProfileImage;
+    public TextView tvHandle;
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
-    public final int IMAGE_REQUEST_CODE = 40;
+
+    public final int IMAGE_REQUEST_CODE =40;
+
     public final static String COURIER_KEY = "courier";
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
@@ -76,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
         tvUsername = (TextView) findViewById(R.id.tvName);
+        tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
@@ -93,10 +98,35 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     setParametersOfView();
 
                     if (parseUser.getBoolean("hasPendingRequests") ){
+                        //the following check if the person has any other pending requests
+                        ParseQuery<ParselTransaction> q = ParseQuery.getQuery(ParselTransaction.class);
+                        q.whereEqualTo("receiver", parseUser.getUsername());
+                        q.whereEqualTo("transactionState", 0);
+                        // Execute the find asynchronously
+                        q.findInBackground(new FindCallback<ParselTransaction>() {
+                            @Override
+                            public void done(List<ParselTransaction> issueList, ParseException e) {
+                                if (e == null) {
+                                    if (issueList.size()<=1){//if the current equest is the only pending request
+
+                                        parseUser.put("hasPendingRequests", false);
+                                        parseUser.saveEventually();
+                                    }
+
+                                } else {
+                                    Log.d("score", "Error: " + e.getMessage());
+                                }
+                            }
+                        });
                         parseUser.put("hasPendingRequests", false);
                         parseUser.saveInBackground();
                         actOnRequests();
+
                     }
+                    tvUsername.setText(parseUser.getString("fullName"));
+                    tvHandle.setText(parseUser.getUsername());
+
+
                 } else {
                     Toast.makeText(ProfileActivity.this, "Can't access user",
                             Toast.LENGTH_SHORT).show();
@@ -104,6 +134,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 }
             }
         });
+
+
+
 
 
         //this code is to set up the transactions for the three tabs
@@ -160,6 +193,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
 
+
                 startActivityForResult(i,IMAGE_REQUEST_CODE);
             }
         });
@@ -199,6 +233,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         Intent i = new Intent(this, AfterSenderConfirmation.class);
             startActivity(i);
         }
+        else{
+
+        }
     }
 
     public void onFinishEditDialog(){
@@ -211,27 +248,22 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
-        {
 
-            CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
-            //add the new (incomplete) transaction to current transactions
-            Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
-            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
-        }
 
-        if (requestCode == SENDER_REQUEST_CODE && resultCode == RESULT_OK) // if a courier transaction occured
-        {
-            Sender sender =  Parcels.unwrap(data.getParcelableExtra(SENDER_KEY));
-            Mail mail =  Parcels.unwrap(data.getParcelableExtra(MAIL_KEY));
-            Receiver receiver =  Parcels.unwrap(data.getParcelableExtra(RECEIVER_KEY));
+        pagerAdapter.pendingTransactionFragment.populateTimeline();
+        pagerAdapter.currentTransactionFragment.populateTimeline();
+        pagerAdapter.oldTransactionFragment.populateTimeline();
 
-            //add the new (incomplete) transaction to current transactions
-            Transaction transaction = new Transaction(receiver, sender, new CourierModel(), mail);
-            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
-            pagerAdapter.pendingTransactionFragment.populateTimeline();
-        }
-        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+//        if (requestCode == IMAGE_REQUEST_CODE){
+//            setParametersOfView();
+//
+//            CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
+//            //add the new (incomplete) transaction to current transactions
+//            Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
+//            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
+//        }
+
+        if (requestCode == IMAGE_REQUEST_CODE) {
             setParametersOfView();
             }
 
@@ -241,6 +273,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         getMenuInflater().inflate(R.menu.timeline_menu, menu);
         return true;
     }
+
 
     public void onLogoutAction(MenuItem mi) {
         FragmentManager fm = getSupportFragmentManager();

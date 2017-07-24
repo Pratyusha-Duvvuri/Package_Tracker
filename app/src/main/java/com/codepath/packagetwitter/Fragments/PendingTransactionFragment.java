@@ -3,6 +3,7 @@ package com.codepath.packagetwitter.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,6 +46,9 @@ public class PendingTransactionFragment extends Fragment {
 
         //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        rvTransactions.addItemDecoration(itemDecoration);
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         transactions = new ArrayList<>();
         // init the array list (data source)
@@ -85,7 +89,9 @@ public class PendingTransactionFragment extends Fragment {
                 ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
                 query.whereEqualTo("sender", parseUser.getUsername());
-                //query.whereContainedIn("transactionState", Collection<int>);
+                List<Integer> list = new ArrayList<Integer>();
+                list.add(0); list.add(1); list.add(7);
+                query.whereContainedIn("transactionState", list);
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<ParselTransaction>() {
                     @Override
@@ -103,7 +109,31 @@ public class PendingTransactionFragment extends Fragment {
                         }
                     }
                 });
-            }
+
+            ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query2.whereEqualTo("receiver", parseUser.getUsername());
+                List<Integer> list2 = new ArrayList<Integer>();
+            list2.add(0);    list2.add(1); list2.add(7);
+            query2.whereContainedIn("transactionState", list2);
+            // Execute the find asynchronously
+
+            query2.findInBackground(new FindCallback<ParselTransaction>() {
+                @Override
+                public void done(List<ParselTransaction> issueList, ParseException e) {
+                    if (e == null) {
+                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                        for (int i = 0; i < issueList.size(); i++) {
+                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                            addItems(trans);
+                        }
+
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });}
+
 //            if (pendingTransactions != null){
 //
 //            for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
