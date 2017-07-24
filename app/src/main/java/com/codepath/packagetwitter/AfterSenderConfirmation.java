@@ -205,18 +205,16 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 //        e = (EditText)flForm.findViewById(R.id.etWeight);
 //        //Get fields from activity package creation
 
-
-        fragile.setText(""+transaction.getIsFragile());
-        type.setText(""+transaction.getMailType());
-        tvSenderLocation.setText(""+transaction.getSenderLoc());
-        tvStartDate.setText(""+transaction.getSenderStart());
-        tvEndDate.setText(""+transaction.getSenderEnd());
-        tvWeight.setText(""+transaction.getWeight());
-        tvHeight.setText(""+transaction.getVolume());
-        tvWidth.setText(""+transaction.getVolume());
-        tvLength.setText(""+transaction.getVolume());
-        tvDescription.setText(""+transaction.getMailDescription());
-        ivPackage.setImageResource(R.drawable.ic_upload);
+        tvSenderName.setText(tvSenderName.getText()+transaction.getSender());
+        fragile.setText(fragile.getText()+ "" +transaction.getIsFragile());
+        type.setText(type.getText()+""+transaction.getMailType());
+        tvSenderLocation.setText(tvSenderLocation.getText()+""+transaction.getSenderLoc());
+        tvStartDate.setText(tvStartDate.getText()+""+transaction.getSenderStart());
+        tvEndDate.setText(tvEndDate.getText()+""+transaction.getSenderEnd());
+        tvWeight.setText(tvWeight.getText()+""+transaction.getWeight());
+        tvHeight.setText(tvHeight.getText()+""+transaction.getVolume());
+        tvDescription.setText(tvDescription.getText()+""+transaction.getMailDescription());
+        //ivPackage.setImageResource(R.drawable.ic_upload);
 
 
     }

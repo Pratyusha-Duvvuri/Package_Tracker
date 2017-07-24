@@ -70,7 +70,6 @@ public class ParselTransaction extends ParseObject{
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
                     // The query was successful.
-                    Log.d("yolo",objects.get(0).getString("username"));
                     ParseUser userr = null;
                     try {
                         userr = logIn(objects.get(0).getString("username"), "x");

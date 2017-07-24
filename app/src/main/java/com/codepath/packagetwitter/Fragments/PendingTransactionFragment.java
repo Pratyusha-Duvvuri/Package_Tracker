@@ -79,25 +79,24 @@ public class PendingTransactionFragment extends Fragment {
     public void populateTimeline() {
         ArrayList<ParselTransaction> pendingTransactions;
         parseUser = ParseUser.getCurrentUser();
-        Toast.makeText(getContext(),parseUser.getString("username"),Toast.LENGTH_LONG);
         Log.d(parseUser.getString("username"),"ParseApplication");
         if (parseUser != null) {
             pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions
             if (pendingTransactions != null) {
+                transactions.clear();
                 Log.d("pendingTransactions", pendingTransactions.get(0).toString());
 
                 ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
                 query.whereEqualTo("sender", parseUser.getUsername());
                 List<Integer> list = new ArrayList<Integer>();
-                list.add(0); list.add(1); list.add(7);
+                list.add(0); list.add(1);
                 query.whereContainedIn("transactionState", list);
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<ParselTransaction>() {
                     @Override
                     public void done(List<ParselTransaction> issueList, ParseException e) {
                         if (e == null) {
-                            transactions.clear();
                             Log.d("Issue", "Retrieved " + issueList.size() + " issue");
                             for (int i = 0; i < issueList.size(); i++) {
                                 ParselTransaction trans = issueList.get(i); //gets current parsel transaction
@@ -110,15 +109,38 @@ public class PendingTransactionFragment extends Fragment {
                     }
                 });
 
-            ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
-            // Define our query conditions
-            query2.whereEqualTo("receiver", parseUser.getUsername());
+                ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
+                // Define our query conditions
+                query2.whereEqualTo("receiver", parseUser.getUsername());
                 List<Integer> list2 = new ArrayList<Integer>();
-            list2.add(0);    list2.add(1); list2.add(7);
-            query2.whereContainedIn("transactionState", list2);
+
+                query2.whereEqualTo("transactionState", 1);
+                // Execute the find asynchronously
+
+                query2.findInBackground(new FindCallback<ParselTransaction>() {
+                    @Override
+                    public void done(List<ParselTransaction> issueList, ParseException e) {
+                        if (e == null) {
+                            Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                            for (int i = 0; i < issueList.size(); i++) {
+                                ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                                addItems(trans);
+                            }
+
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });}
+
+            ParseQuery<ParselTransaction> query3 = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query3.whereEqualTo("courier", parseUser.getUsername());
+
+            query3.whereEqualTo("transactionState", 7);
             // Execute the find asynchronously
 
-            query2.findInBackground(new FindCallback<ParselTransaction>() {
+            query3.findInBackground(new FindCallback<ParselTransaction>() {
                 @Override
                 public void done(List<ParselTransaction> issueList, ParseException e) {
                     if (e == null) {
@@ -143,7 +165,7 @@ public class PendingTransactionFragment extends Fragment {
 //                addItems(trans);
 //            }
 //        }}
-        }}
+        }
 
     public void addItems(ParselTransaction transaction) {
         transactions.add(transaction);

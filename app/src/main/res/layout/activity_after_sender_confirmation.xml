@@ -1,322 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_greyish"
     android:scrollbars="vertical">
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/tvSSenderName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sender Handle"
-        android:layout_below="@+id/tvRWidth"
-        android:layout_toStartOf="@+id/etRStartDate" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="c"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-
-
-
-    <TextView
-        android:id="@+id/tvSSenderLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sender Location"
-        android:layout_below="@+id/tvRWidth"
-        android:layout_toStartOf="@+id/etRStartDate" />
-
-    <TextView
-        android:id="@+id/tvSStartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sender Start Date"
-        android:layout_above="@+id/etReceiverLocation"
-         />
-
-    <TextView
-        android:id="@+id/tvSEndDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sender End Date"
-        android:layout_above="@+id/tvRHeight"
-        android:layout_toEndOf="@+id/tvRLength" />
-
-    <TextView
-        android:id="@+id/tvRPackageDetailHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Package Details"
-        android:textSize="24sp"
-        android:textStyle="bold"
-
-        android:layout_below="@+id/etReceiverLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp" />
-
-    <TextView
-        android:id="@+id/tvRPackageType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Package Type:"
-
-        android:layout_below="@+id/tvRPackageDetailHeading"
-        android:layout_toStartOf="@+id/tvRPackageDetailHeading" />
-
-
-
-    <TextView
-        android:id="@+id/tvRWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight:"
-        android:layout_above="@+id/ibRImage"
-        android:layout_toStartOf="@+id/tvRFragile" />
-
-
-
-    <TextView
-        android:id="@+id/tvRFragile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fragile:"
-        android:layout_above="@+id/etReceiverLocation"
-        android:layout_alignEnd="@+id/tvRPackageDetailHeading" />
-
-
-    <TextView
-        android:id="@+id/tvDimensionsHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dimensions"
-        android:layout_marginTop="18dp" />
-
-    <TextView
-        android:id="@+id/tvRLength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Length:"
-        android:layout_alignBottom="@+id/tvSSenderLocation"
-        android:layout_alignStart="@+id/tvReceiverLocation" />
-
-
-
-    <TextView
-        android:id="@+id/tvRWidth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Width:"
-
-        android:layout_alignBottom="@+id/etREndDate"
-        android:layout_alignEnd="@+id/flRFAB" />
-
-
-
-
-    <TextView
-        android:id="@+id/tvRHeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height:"
-        android:layout_above="@+id/tvRWeight"
-        android:layout_toEndOf="@+id/etReceiverLocation" />
-
-    <TextView
-        android:id="@+id/tvRDescription"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        android:textSize="14sp"
-        android:layout_alignBottom="@+id/card_view"
-        android:layout_toEndOf="@+id/etReceiverLocation" />
-
-    <ImageView
-        android:id="@+id/ivRImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="15dp"
-        app:srcCompat="@drawable/ic_upload"
-        android:layout_below="@+id/etReceiverLocation"
-        android:layout_toStartOf="@+id/tvRPackageDetailHeading"
-        android:layout_marginTop="14dp" />
-
-
-    <!--app:backgroundTint="@color/colorPrimaryLight"-->
-        <!--app:elevation="5dp" />-->
-
-
-    <TextView
-        android:id="@+id/tvReceiverLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:text="My Location"
-        android:textSize="18sp"
-        android:textStyle="bold"
-
-        android:layout_below="@+id/etRStartDate"
-        android:layout_toEndOf="@+id/tvDimensionsHeading"
-        android:layout_marginTop="24dp" />
-
-    <EditText
-        android:id="@+id/etReceiverLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:hint="Input Your Location"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:layout_above="@+id/tvREndDate"
-        android:layout_toEndOf="@+id/tvRFragile"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="15dp" />
-
-    <TextView
-        android:id="@+id/tvRStartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:hint="MM/DD/YYYY"
-
-        android:text="Start Date:"
-        android:textStyle="bold"
-        android:layout_marginTop="18dp"
-
-        android:layout_marginEnd="90dp" />
-
-    <EditText
-        android:id="@+id/etRStartDate"
-
-        android:inputType="text"
-        android:textSize="14sp"
-        android:layout_below="@+id/tvDimensionsHeading"
-        android:layout_toStartOf="@+id/tvREndDate"
-
-
-
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:hint="MM/DD/YYYY"
-
-        android:textStyle="bold"
-        android:layout_marginTop="18dp"
-
-        android:layout_marginEnd="90dp"
-        />
-
-    <TextView
-        android:id="@+id/tvREndDate"
-        android:text="Delivery Date:"
-        android:layout_centerVertical="true"
-
-        android:layout_alignStart="@+id/tvRStartDate"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:hint="MM/DD/YYYY"
-
-        android:textStyle="bold"
-        android:layout_marginTop="18dp"
-
-        android:layout_marginEnd="90dp"
-        />
-    <EditText
-
-        android:hint="MM/DD/YYYY"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:id="@+id/etREndDate"
-        android:layout_alignBottom="@+id/tvRDescription"
-        android:layout_alignEnd="@+id/tvReceiverLocation"
-        android:layout_marginBottom="33dp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-
-        android:textStyle="bold"
-        android:layout_marginTop="18dp"
-
-        android:layout_marginEnd="90dp"
-        />
-    <FrameLayout
-        android:id="@+id/flFAB1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_alignParentBottom="true"
-
-        android:layout_marginBottom="12dp">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/myFABOkay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:elevation="5dp"
-        app:fabSize="mini"
-
-        android:src="@android:color/transparent"
-        app:backgroundTint="@color/colorPrimaryLight"
-        />
-
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Someone Wants to Send You a Package!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold" />
 
 
         <TextView
-            android:id="@+id/tvOkay"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvSenderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/etReceiverLocation"
+            android:layout_centerHorizontal="true"
+
+            android:layout_weight="0.21"
+            android:gravity="center"
+            android:text="Sender Details"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:elevation="16dp"
-            android:text="OK"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white" />
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp"
+            app:contentPadding="5dp">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:theme="@">
+
+                <TextView
+                    android:id="@+id/tvSSenderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRWidth"
+                    android:layout_toStartOf="@+id/etRStartDate"
+                    android:gravity="center"
+                    android:text="Sender Handle: " />
+
+                <TextView
+                    android:id="@+id/tvSSenderLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRWidth"
+                    android:layout_toStartOf="@+id/etRStartDate"
+                    android:gravity="center"
+                    android:text="Sender Location:" />
+
+                <TextView
+                    android:id="@+id/tvSEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tvRHeight"
+                    android:layout_toEndOf="@+id/tvRLength"
+                    android:gravity="center"
+                    android:text="Sender End Date:" />
+
+                <TextView
+                    android:id="@+id/tvSStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/etReceiverLocation"
+                    android:gravity="center"
+                    android:text="Sender Start Date:" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvRPackageDetailHeading"
+            android:layout_width="369dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etReceiverLocation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+
+            android:layout_weight="0.21"
+            android:gravity="center"
+            android:text="Package Details"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
 
-    <FrameLayout
-        android:id="@+id/flFAB2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:layout_alignParentBottom="true"
-
-        android:layout_marginBottom="12dp">
+        <!--app:backgroundTint="@color/colorPrimaryLight"-->
+        <!--app:elevation="5dp" />-->
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/myFABReject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:elevation="5dp"
-        app:fabSize="mini"
-
-        android:src="@android:color/transparent"
-        app:backgroundTint="@color/colorPrimaryLight"
-        />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="7dp"
+            app:contentPadding="5dp">
 
 
 
-    <TextView
-        android:id="@+id/tvReject"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:elevation="16dp"
-        android:text="Reject"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/tvRWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/ibRImage"
+                    android:layout_toStartOf="@+id/tvRFragile"
+                    android:text="Weight:"
+                    android:textAlignment="center" />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tvRHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tvRWeight"
+                    android:layout_toEndOf="@+id/etReceiverLocation"
+                    android:text="Volume: "
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvRFragile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/etReceiverLocation"
+                    android:layout_alignEnd="@+id/tvRPackageDetailHeading"
+                    android:text="Fragile:"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tvRDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignBottom="@+id/card_view"
+                    android:layout_toEndOf="@+id/etReceiverLocation"
+                    android:ems="10"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:textAlignment="center"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/flFAB2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom|left"
+                android:backgroundTint="@color/background_color"
+
+                android:layout_marginBottom="12dp">
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/myFABReject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:backgroundTint="@color/colorPrimaryLight"
+                    app:elevation="5dp"
+
+                    app:fabSize="mini" />
+
+
+                <TextView
+                    android:id="@+id/tvReject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="REJECT"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flFAB1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/myFABOkay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    app:backgroundTint="@color/colorPrimaryLight"
+
+                    app:elevation="5dp"
+
+                    app:fabSize="mini" />
+
+
+                <TextView
+                    android:id="@+id/tvOkay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:elevation="16dp"
+                    android:text="CONFIRM"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white" />
+
+            </FrameLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
 </ScrollView>

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codepath.packagetwitter">
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18"/>
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -34,9 +39,10 @@
             android:label="Create A New Package"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AfterSenderConfirmation" />
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".FileUploadActivity"></activity>
-        <activity android:name=".OtherChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".FileUploadActivity" />
+        <activity android:name=".OtherChatActivity" />
+        <activity android:name=".ReceiverActivity"></activity>
     </application>
 
 </manifest>

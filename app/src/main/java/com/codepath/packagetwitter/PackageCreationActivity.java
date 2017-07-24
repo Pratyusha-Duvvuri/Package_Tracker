@@ -116,7 +116,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
                 //creating new transaction parse object
                 ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
-                        USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
+                        parseUser.getUsername(), etSenderLocation.getText().toString(), senderStartDate,
                         senderEndDate, spPackageType.getSelectedItem().toString(),
                         etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
                         Integer.parseInt(etVolume.getText().toString()));
