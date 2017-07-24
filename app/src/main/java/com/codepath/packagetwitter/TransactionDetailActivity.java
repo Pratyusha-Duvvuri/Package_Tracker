@@ -3,6 +3,7 @@ package com.codepath.packagetwitter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,11 +38,17 @@ public class TransactionDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_detail);
+        setContentView(R.layout.transaction_detail_test);
         final FloatingActionMenu materialDesignFAM;
         final com.github.clans.fab.FloatingActionButton matchButton;
         final com.github.clans.fab.FloatingActionButton chatButton;
         ButterKnife.bind(this);
+        //find toolbar inside activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //sets toolbar to act as the actionbar
+        setSupportActionBar(toolbar);
+        //sets up toolbar title
+        getSupportActionBar().setTitle(null);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
