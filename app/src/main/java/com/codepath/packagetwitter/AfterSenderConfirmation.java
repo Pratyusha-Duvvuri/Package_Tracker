@@ -84,9 +84,11 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             @Override
             public void done(List<ParselTransaction> issueList, ParseException e) {
                 if (e == null) {
-                    transaction =  issueList.get(0);
-                    onSetLayout();
+                    if (issueList.size()>0) {
+                        transaction = issueList.get(0);
 
+                        onSetLayout();
+                    }
 
                 } else {
                     Log.d("score", "Error: " + e.getMessage());

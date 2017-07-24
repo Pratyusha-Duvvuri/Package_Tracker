@@ -13,11 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Transaction;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.TransactionAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
@@ -44,6 +48,7 @@ public class OldTransactionFragment extends Fragment {
 
         //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
+
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         transactions = new ArrayList<>();
         // init the array list (data source)
@@ -86,23 +91,37 @@ public class OldTransactionFragment extends Fragment {
     }
 
 
-    private void populateTimeline(){
-        ArrayList<ParselTransaction> pendingTransactions;
+    public void populateTimeline(){
+        parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
-            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("oldTransactions");//gets the list of pending transactions
-            if (pendingTransactions != null){
-                for (int i = 0; i < pendingTransactions.size(); i++) { //for every pending transaction
+            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query.whereEqualTo("receiver", parseUser.getUsername());
+            query.whereEqualTo("transactionState", 10);
+            // Execute the find asynchronously
+            query.findInBackground(new FindCallback<ParselTransaction>() {
+                @Override
+                public void done(List<ParselTransaction> issueList, ParseException e) {
+                    if (e == null) {
+                        transactions = new ArrayList<>();
+                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                        for (int i = 0; i < issueList.size(); i++) {
+                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                            addItems(trans);
+                        }
 
-                    //transofrms the ParseTransaction into transaction and adds to the adapter
-                    addItems(pendingTransactions.get(i));
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
                 }
-            }
+            });
+        }
         }
 
 
 
 
-}
+
     public void addItems(ParselTransaction transaction) {
 
 

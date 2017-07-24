@@ -19,8 +19,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
 
-import org.parceler.Parcels;
-
 import java.io.ByteArrayOutputStream;
 
 import permissions.dispatcher.NeedsPermission;
@@ -114,7 +112,8 @@ public class FileUploadActivity extends Activity {
                 // Locate the image in res > drawable-hdpi
                 Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
                 i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
-                startActivity(i);
+                //startActivity(i);
+                finish();
 
             }
         });

@@ -96,7 +96,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spPackageType.setAdapter(adapter);
-        onVerifyAction();
+        //onVerifyAction();
 
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
