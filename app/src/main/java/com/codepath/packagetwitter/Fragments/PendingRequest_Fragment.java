@@ -44,6 +44,7 @@ public class PendingRequest_Fragment extends DialogFragment {
 
 
 
+
     // 1. Defines the listener interface with a method passing back data result.
     public interface SendResultListener {
         void onFinishEditDialog(Sender sender, Mail mail, Boolean proceed);
@@ -77,7 +78,6 @@ public class PendingRequest_Fragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
         accept = (Button) view.findViewById(R.id.btnAccept);
-        reject = (Button) view.findViewById(R.id.btnReject);
 
 
 

@@ -114,7 +114,7 @@ public class PendingTransactionFragment extends Fragment {
             // Define our query conditions
             query2.whereEqualTo("receiver", parseUser.getUsername());
                 List<Integer> list2 = new ArrayList<Integer>();
-                list.add(1); list.add(7);
+            list2.add(0);    list2.add(1); list2.add(7);
             query2.whereContainedIn("transactionState", list2);
             // Execute the find asynchronously
 

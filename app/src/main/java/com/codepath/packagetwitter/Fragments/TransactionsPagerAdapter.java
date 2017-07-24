@@ -20,17 +20,16 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     public TransactionsPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
         this.context = context;
-        Log.d("Transaction PagerAdap", "Construct");
+        Log.d("Transaction Pager Adap", "Construct");
         pendingTransactionFragment = new PendingTransactionFragment();
         currentTransactionFragment = new CurrentTransactionFragment();
         oldTransactionFragment = new OldTransactionFragment();
-
     }
+
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-
             return pendingTransactionFragment;
         }
         else if (position == 1) {
@@ -40,12 +39,10 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
         else if (position == 2) {
              return oldTransactionFragment;
         }
-
         else {
             return null;
         }
     }
-
 
     //return total # of fragments
     @Override

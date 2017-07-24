@@ -45,12 +45,12 @@ public class TransactionDetailActivity extends AppCompatActivity {
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
-        String ParselTransactionId = getIntent().getStringExtra("ParselTransactionId");
+        final String parselTransactionId = getIntent().getStringExtra("ParselTransactionId");
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
         transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
         // Execute the query to find the object with ID
-        transactionQuery.getInBackground(ParselTransactionId, new GetCallback<ParselTransaction>() {
+        transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
                     public void done(ParselTransaction transaction, ParseException e) {
                         if (e == null) {
                             // item was found
@@ -78,8 +78,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
-                i.putExtra("transactionid","1234");
+                Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
+                i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("courier", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );

@@ -80,8 +80,6 @@ public class CurrentTransactionFragment extends Fragment {
             }
         });
 
-
-
         return v;
     }
 

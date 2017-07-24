@@ -46,12 +46,15 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     ViewPager vpPager;
     User user;
     public TextView tvUsername;
+    public TextView tvTagline;
     public ImageView ivProfileImage;
     public TextView tvHandle;
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
+
     public final int IMAGE_REQUEST_CODE =40;
+
     public final static String COURIER_KEY = "courier";
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
@@ -78,6 +81,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //user = User.getRandomUser(this);
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
+        tvTagline = (TextView) findViewById(R.id.tvTagline);
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -92,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     ignore = false;
                     reload = true;
                     setParametersOfView();
+
                     if (parseUser.getBoolean("hasPendingRequests") ){
                         //the following check if the person has any other pending requests
                         ParseQuery<ParselTransaction> q = ParseQuery.getQuery(ParselTransaction.class);
@@ -113,6 +118,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                                 }
                             }
                         });
+                        parseUser.put("hasPendingRequests", false);
+                        parseUser.saveInBackground();
                         actOnRequests();
 
                     }
@@ -175,24 +182,38 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             }
         });
         //For image profie view
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+//        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
+//
+//                startActivityForResult(i,IMAGE_REQUEST_CODE);
+//            }
+//        });
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
 
-                startActivityForResult(i, IMAGE_REQUEST_CODE);
+
+                startActivityForResult(i,IMAGE_REQUEST_CODE);
             }
         });
-
     }
 
 
     public void setParametersOfView() {
+        tvTagline.setText(parseUser.getString("tagline"));
+        tvUsername.setText(parseUser.getString("username"));
         ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
-        String imageUrl = postImage.getUrl();//live url
+        if(postImage!=null) {
+            String imageUrl = postImage.getUrl()
+        ;//live url
+
         Uri imageUri = Uri.parse(imageUrl);
+        Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);}
+        else {
+            Glide.with(ProfileActivity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(ivProfileImage);
 
-        Glide.with(ProfileActivity.this).load(imageUri.toString()).into(ivProfileImage);
-
+        }
     }
 
 
@@ -228,13 +249,24 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+
         pagerAdapter.pendingTransactionFragment.populateTimeline();
         pagerAdapter.currentTransactionFragment.populateTimeline();
         pagerAdapter.oldTransactionFragment.populateTimeline();
 
-        if (requestCode == IMAGE_REQUEST_CODE){
+//        if (requestCode == IMAGE_REQUEST_CODE){
+//            setParametersOfView();
+//
+//            CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
+//            //add the new (incomplete) transaction to current transactions
+//            Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
+//            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
+//        }
+
+        if (requestCode == IMAGE_REQUEST_CODE) {
             setParametersOfView();
-        }
+            }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

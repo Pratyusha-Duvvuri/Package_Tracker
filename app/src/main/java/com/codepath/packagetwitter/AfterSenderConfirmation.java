@@ -120,7 +120,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             public void onClick(View v) {
 
             //set transaction state to seven and delete transaction
-                transaction.setTransactionState(8);
+                transaction.setTransactionState(9);
                 transaction.saveInBackground();
                 finishIntent();
 
@@ -150,11 +150,12 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         if (Algorithm.isPossibleMatch(courierTransaction, transaction)){
 
                             //find courier's username, his start date, her end date, change state
-                            transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getSenderStart(), courierTransaction.getReceiverEnd());
+                            transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getCourierStart(), courierTransaction.getCourierEnd());
                             transaction.setTransactionState(2);
                             transaction.saveEventually();
                             // change state of courier transaction to dead
                             courierTransaction.setTransactionState(8);
+                            courierTransaction.saveEventually();
                             // break
                             break;
 
