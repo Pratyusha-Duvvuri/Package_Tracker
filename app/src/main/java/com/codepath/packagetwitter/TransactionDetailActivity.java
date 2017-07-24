@@ -78,7 +78,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
+                Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("courier", Parcels.wrap(user));
                 i.putExtra("USER", Parcels.wrap(user));

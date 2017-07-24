@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.LoginActivity;
-import com.codepath.packagetwitter.Models.User;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
 import com.parse.ParseException;
@@ -40,7 +39,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static Button signUpButton;
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
-    public User userr;
 
     public SignUp_Fragment() {
 
@@ -203,3 +201,23 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     }
 }
+
+
+//For future use
+
+
+//    // Create a gravatar image based on the hash value obtained from userId
+//    private static String getProfileUrl(final String userId) {
+//        String hex = "";
+//        try {
+//            final MessageDigest digest = MessageDigest.getInstance("MD5");
+//            final byte[] hash = digest.digest(userId.getBytes());
+//            final BigInteger bigInt = new BigInteger(hash);
+//            hex = bigInt.abs().toString(16);
+////            hex = (""+ProfileActivity.parseUser.getObjectId()).toString(16);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return "http://www.gravatar.com/avatar/" + hex + "?d=identicon";
+//    }

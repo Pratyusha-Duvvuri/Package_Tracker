@@ -121,12 +121,10 @@ public class FileUploadActivity extends Activity {
                 setResult(RESULT_OK, i); // set result code and bundle data for response
                 finish(); // closes the activity, pass data to parent
 
-
             }
         });
         ivPreview = (ImageView) findViewById(R.id.ivPreview);
         setParametersOfView();
-
 
     }
 
