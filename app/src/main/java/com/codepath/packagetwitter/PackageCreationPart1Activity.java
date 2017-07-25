@@ -35,6 +35,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     Context context;
     Integer year, month, date;
+    public final int PART2 = 39;
+
     static final int DIALOG_ID = 0;
     static final int DIALOG_ID2 = 10;
     public static int idd;
@@ -141,8 +143,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         transaction.saveEventually();
         //parseUser.add("pendingTransactions", transaction);
         transaction.saveEventually();
-//
-
+        Intent i = new Intent(PackageCreationPart1Activity.this, PackageCreationPart2Activity.class);
+        i.putExtra("TRANSACTION", transaction.getObjectId());
+        startActivityForResult(i, PART2);//
 
     }
 
