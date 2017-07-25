@@ -40,9 +40,11 @@
             android:label="Create A New Package"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AfterSenderConfirmation" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".FileUploadActivity" />
-        <activity android:name=".OtherChatActivity" />
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".FileUploadActivity"></activity>
+        <activity android:name=".OtherChatActivity"></activity>
+        <activity android:name=".PackageCreationPart1Activity"></activity>
+
         <activity android:name=".ReceiverActivity"></activity>
     </application>
 

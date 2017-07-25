@@ -6,15 +6,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
+import static com.codepath.packagetwitter.OtherChatActivity.tabTitles_main;
+
 /**
  * Created by pratyusha98 on 7/23/17.
  */
 
 public class ChatPagerAdapter extends FragmentPagerAdapter {
-    private String tabTitles[] = new String[] {"Person1","Person2"};
+    //private String tabTitles[] = new String[] {"Person1","Person2"};
     private Context context;
     public Tab1Chat_Fragment tab1Chat_fragment;
     public Tab2Chat_Fragment tab2Chat_fragment;
+
 
     public ChatPagerAdapter(FragmentManager fm , Context context) {
         super(fm);
@@ -45,8 +48,10 @@ public class ChatPagerAdapter extends FragmentPagerAdapter {
     //return title based on item position
     @Override
     public CharSequence getPageTitle(int position) {
+        //get the username of sender
+        //if(ProfileActivity.parseUser.getUsername().equals(OtherChatActivity.transaction_id))
 
-        return tabTitles[position];
+        return tabTitles_main[position];
 
     }
 

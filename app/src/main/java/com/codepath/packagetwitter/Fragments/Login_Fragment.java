@@ -241,7 +241,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     Log.d("ParseApplication","Logged in successfully");
                     // Hooray! The user is logged in.
                     Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
-
                     i.putExtra("PARSEUSER", parseUser.getObjectId());
                     startActivity(i);
 
