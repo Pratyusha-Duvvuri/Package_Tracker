@@ -1,32 +1,9 @@
 package com.codepath.packagetwitter;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.codepath.packagetwitter.Models.Mail;
-import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Receiver;
-import com.codepath.packagetwitter.Models.Sender;
-import com.codepath.packagetwitter.Models.User;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AfterSenderConfirmation extends AppCompatActivity{
-
+    /*
     Receiver receiver;
     Sender sender;
     Mail mail;
@@ -219,5 +196,5 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
     }
 
-
+*/
 }
