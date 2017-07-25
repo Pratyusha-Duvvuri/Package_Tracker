@@ -44,6 +44,7 @@
         <activity android:name=".FileUploadActivity"></activity>
         <activity android:name=".OtherChatActivity"></activity>
         <activity android:name=".PackageCreationPart1Activity"></activity>
+        <activity android:name=".PackageCreationPart2Activity"></activity>
 
         <activity android:name=".ReceiverActivity"></activity>
     </application>
