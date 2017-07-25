@@ -99,11 +99,12 @@ public class CurrentTransactionFragment extends Fragment {
     }
 
 
-    private void populateTimeline(){
+    public void populateTimeline(){
 
         parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
-                ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+            transactions.clear();
+            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
                 query.whereEqualTo("receiver", parseUser.getUsername());
                 query.whereGreaterThanOrEqualTo("transactionState", 2);
@@ -113,7 +114,6 @@ public class CurrentTransactionFragment extends Fragment {
                     @Override
                     public void done(List<ParselTransaction> issueList, ParseException e) {
                         if (e == null) {
-                            transactions.clear();
                             Log.d("Issue", "Retrieved " + issueList.size() + " issue");
                             for (int i = 0; i < issueList.size(); i++) {
                                 ParselTransaction trans = issueList.get(i); //gets current parsel transaction
@@ -125,6 +125,50 @@ public class CurrentTransactionFragment extends Fragment {
                         }
                     }
                 });
+
+            ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query2.whereEqualTo("sender", parseUser.getUsername());
+            query2.whereGreaterThanOrEqualTo("transactionState", 2);
+            query2.whereLessThan("transactionState", 6);
+            // Execute the find asynchronously
+            query2.findInBackground(new FindCallback<ParselTransaction>() {
+                @Override
+                public void done(List<ParselTransaction> issueList, ParseException e) {
+                    if (e == null) {
+                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                        for (int i = 0; i < issueList.size(); i++) {
+                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                            addItems(trans);
+                        }
+
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
+
+            ParseQuery<ParselTransaction> query3 = ParseQuery.getQuery(ParselTransaction.class);
+            // Define our query conditions
+            query3.whereEqualTo("courier", parseUser.getUsername());
+            query3.whereGreaterThanOrEqualTo("transactionState", 2);
+            query3.whereLessThan("transactionState", 6);
+            // Execute the find asynchronously
+            query3.findInBackground(new FindCallback<ParselTransaction>() {
+                @Override
+                public void done(List<ParselTransaction> issueList, ParseException e) {
+                    if (e == null) {
+                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                        for (int i = 0; i < issueList.size(); i++) {
+                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                            addItems(trans);
+                        }
+
+                    } else {
+                        Log.d("score", "Error: " + e.getMessage());
+                    }
+                }
+            });
             }
         }
     public void addItems(ParselTransaction transaction) {

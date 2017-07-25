@@ -118,8 +118,10 @@ public class FileUploadActivity extends Activity {
 //                i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
 //                startActivity(i);
                 Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
+
                 setResult(RESULT_OK, i); // set result code and bundle data for response
                 finish(); // closes the activity, pass data to parent
+
 
             }
         });

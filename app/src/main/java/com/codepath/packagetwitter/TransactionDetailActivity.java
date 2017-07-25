@@ -3,12 +3,15 @@ package com.codepath.packagetwitter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.github.clans.fab.FloatingActionMenu;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -16,10 +19,10 @@ import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.codepath.packagetwitter.R.drawable.user;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
@@ -32,16 +35,24 @@ public class TransactionDetailActivity extends AppCompatActivity {
     @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
     @BindView(R.id.tvFrom) TextView tvFrom;
     @BindView(R.id.tvTo) TextView tvTo;
-
+    @BindView(R.id.btnBack) ImageButton btnBack;
+    @BindView(R.id.tvTitle1) TextView tvTitle1;
+    @BindView(R.id.tvTitle2) TextView tvTitle2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_detail);
+        setContentView(R.layout.transaction_detail_test);
         final FloatingActionMenu materialDesignFAM;
         final com.github.clans.fab.FloatingActionButton matchButton;
         final com.github.clans.fab.FloatingActionButton chatButton;
         ButterKnife.bind(this);
+        //find toolbar inside activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //sets toolbar to act as the actionbar
+        setSupportActionBar(toolbar);
+        //sets up toolbar title
+        getSupportActionBar().setTitle(null);
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
@@ -60,32 +71,67 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             tvTo.setText("To: " + transaction.getReceiverLoc());
                             tvWeight.setText(String.valueOf(transaction.getWeight()));
                             Volume.setText(String.valueOf(transaction.getVolume()));
-                                matchButton.setVisibility(View.GONE);
+                            //not using match activity and button for now
+                            matchButton.setVisibility(View.GONE);
+                            ParseQuery<ParseUser> senderquery = ParseUser.getQuery();
+                            //senderquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                            senderquery.whereEqualTo("username", transaction.getSender());
+                            senderquery.findInBackground(new FindCallback<ParseUser>() {
+                                @Override
+                                public void done(List<ParseUser> userList, ParseException e) {
 
-//                            if (transaction.getCourier() == null) {
-//                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.fab_exclaim));
-//                                chatButton.setVisibility(View.GONE);
-//                            } else {
-//                                materialDesignFAM.getMenuIconView().setImageDrawable(getDrawable(R.drawable.email));
-//                                matchButton.setVisibility(View.GONE);
-//                            }
+                                    ParseUser user = null;
+                                    String sender_name;
+                                    if (e == null) {
+                                        for (int i = 0; i < userList.size(); i++) {
+                                            user = userList.get(i);
+                                            break;
+                                        }
+                                        sender_name = user.get("fullName").toString();
+                                        tvTitle1.setText(sender_name.toString() + "'s package");
+                                    }
+                                }
+                            });
+
+                            ParseQuery<ParseUser> receiverquery = ParseUser.getQuery();
+                            receiverquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                            receiverquery.whereEqualTo("username", transaction.getReceiver());
+                            receiverquery.findInBackground(new FindCallback<ParseUser>() {
+                                @Override
+                                public void done(List<ParseUser> userList, ParseException e) {
+
+                                    ParseUser user = null;
+                                    String receiver_name;
+                                    if (e == null) {
+                                        for (int i = 0; i < userList.size(); i++) {
+                                            user = userList.get(i);
+                                            break;
+                                        }
+                                        receiver_name = user.get("fullName").toString();
+                                        tvTitle2.setText("to " + receiver_name.toString());
+                                    }
+                                }
+                            });
                         }
                     }
         });
-
-        //Transaction transaction = Parcels.unwrap(getIntent().getParcelableExtra("transaction"));
-        //ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
-                i.putExtra("courier", Parcels.wrap(user));
-                i.putExtra("USER", Parcels.wrap(user));
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                 startActivity(i);
 
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
 

@@ -35,6 +35,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         LayoutInflater inflater = LayoutInflater.from(context);
         View transactionView = inflater.inflate(R.layout.item_transaction,parent, false);
         ViewHolder viewHolder = new ViewHolder(transactionView);
+
         return viewHolder;
     }
 
@@ -57,10 +58,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         ParselTransaction transaction = mTransactions.get(position);
 
 
-        holder.tvUsername.setText(String.valueOf(transaction.getSender()));
-        holder.tvBoarding.setText(String.valueOf(transaction.getString("senderEnd")));
-        holder.tvArrival.setText(String.valueOf(transaction.getString("senderEnd")));
-        holder.tvWeight.setText(String.valueOf(transaction.getString("receiverLoc")));
+        //holder.tvUsername.setText(String.valueOf(parseUser.getString("fullName")));
+        holder.tvBoarding.setText(String.valueOf(transaction.getString("senderLoc")));
+        if (transaction.getString("receiverLoc")== null){
+            holder.tvArrival.setText(transaction.getString("senderLoc"));
+            holder.tvArrival.setVisibility(View.GONE);
+
+            holder.ivArrival.setVisibility(View.GONE);
+
+        }
+        else{
+            holder.tvArrival.setText(String.valueOf(transaction.getString("receiverLoc")));
+        }
+        holder.tvWeight.setText(String.valueOf( transaction.getWeight().intValue())+" lbs");
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
     }
@@ -79,6 +89,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public TextView tvArrival;
         public TextView tvBoarding;
         public TextView tvWeight;
+        public ImageView ivArrival;
 
         public  ViewHolder (View itemView) {
             super(itemView);
@@ -89,6 +100,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvBoarding = (TextView) itemView.findViewById(R.id.tvBoarding);
             tvWeight = (TextView) itemView.findViewById(R.id.tvWeight);
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
+
+            ivArrival = (ImageView) itemView.findViewById(R.id.ivArriving);
         }
 
         @Override
