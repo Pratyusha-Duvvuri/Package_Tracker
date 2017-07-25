@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,11 +48,15 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     ParselTransaction transaction;
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODE = 100;
+    private int progressStatus = 0;
+    private TextView textView;
+    private Handler handler = new Handler();
 
     @BindView(R.id.etsenderLocationB) EditText senderLocationB;
-    @BindView(R.id.etreceiverHandleB) EditText receiverHandle;
+    @BindView(R.id.et_receiverHandle) AutoCompleteTextView receiverHandle;
     @BindView(R.id.displaysenderend)TextView displaySenderEnd;
     @BindView(R.id.displaysenderstart)TextView displaySenderStart;
+    @BindView(R.id.pb)ProgressBar progressBar;
 
     @BindView(R.id.senderStartDateB) Button startDate;
     @BindView(R.id.senderEndDateB) Button endDate;
@@ -60,6 +68,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.package_creation_part1);
         ButterKnife.bind(this);
+        textView = (TextView) findViewById(R.id.textView1);
+
         transaction = new ParselTransaction();
         transaction.setTransactionState(20);
         transaction.saveInBackground();
@@ -67,7 +77,15 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        date = cal.get(Calendar.DATE);
+        proceed=false;
+
+// Get the string array
+        String[] countries = getResources().getStringArray(R.array.users_array);
+// Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+        receiverHandle.setAdapter(adapter);
+
         //create a new transaction here
         showDialogButtonClick();
         fbConfirmB.setOnClickListener(
@@ -94,19 +112,59 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                         startActivityForResult(i,UPLOAD_IMAGE_CODE);
                         proceed = true;
 
-
                     }
                 }
 
         );
 
+        date = cal.get(Calendar.DATE);
+        new Thread(new Runnable() {
+
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                while (progressStatus < 100) {
+                    progressStatus=setProgressStatus();
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                            textView.setText(progressStatus+"/"+progressBar.getMax());
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        //Just to display the progress slowly
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+    private int setProgressStatus(){
+        int value =0;
+        int increment = 7;
+        if(!senderLocationB.getText().toString().equals(""))
+            value+=increment;
+        if(!displaySenderStart.getText().toString().equals(""))
+            value+=increment;
+        if(!displaySenderEnd.getText().toString().equals(""))
+            value+=increment;
+        if(!senderLocationB.getText().toString().equals(""))
+            value+=increment;
+        if(!receiverHandle.getText().toString().equals(""))
+            value+=increment;
+        if (proceed) value+=increment;
+        return value;
     }
 
-    public void saveImage(){
-     transaction = new ParselTransaction();
-
-
-    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UPLOAD_IMAGE_CODE && resultCode == RESULT_OK) // if a courier transaction occured
@@ -175,7 +233,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     }
 
-
     @Override
     public Dialog onCreateDialog(int id) {
 
@@ -215,7 +272,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 displaySenderEnd.setText(sendEnd);
 
             }
-
 
         }
     };
