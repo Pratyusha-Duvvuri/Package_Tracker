@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,14 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 
 import java.io.ByteArrayOutputStream;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
-
-import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/19/17.
@@ -31,13 +34,12 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class UploadPackageImageActivity extends Activity {
     Button button;
-    public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
     public ImageView ivPreview;
     public Button btnUploadson;
     public Button GoBack;
     public EditText caption;
+    ParselTransaction trans;
 
 
 
@@ -45,13 +47,28 @@ public class UploadPackageImageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from activity_file_upload.xml_file_upload.xml
-        setContentView(R.layout.activity_file_upload);
+        setContentView(R.layout.activity_upload_image);
+        String parselTransactionID = getIntent().getStringExtra("TRANSACTION");
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        // First try to find from the cache and only then go to network
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+        // Execute the query to find the object with ID
+        query.getInBackground(parselTransactionID, new GetCallback<ParselTransaction>() {
+            @Override
+            public void done(ParselTransaction item, ParseException e) {
+                trans = item;
+                if (e == null) {}
+
+                 else {
+                    Log.d("ParseApplicationError", e.toString());
+                }
+            }
+        });
 
         // Locate the button in activity_file_uploadvity_file_upload.xml
         //button = (Button) findViewById(R.id.uploadbtn);
-        btnUploadson = (Button) findViewById(R.id.btnuploadson);
-        caption = (EditText) findViewById(R.id.et_imagecaption);
-        GoBack = (Button) findViewById(R.id.btnBackToProfile);
+        btnUploadson = (Button) findViewById(R.id.btnuploadson2);
+        GoBack = (Button) findViewById(R.id.btnBackToProfile2);
 
 
 
@@ -75,8 +92,7 @@ public class UploadPackageImageActivity extends Activity {
 
             }
         });
-        ivPreview = (ImageView) findViewById(R.id.ivPreview);
-
+        ivPreview = (ImageView) findViewById(R.id.ivPreview2);
 
     }
 
@@ -115,7 +131,7 @@ public class UploadPackageImageActivity extends Activity {
                 byte[] image = stream.toByteArray();
 
                 // Create the ParseFile
-                ParseFile file = new ParseFile(caption.getText().toString(), image);
+                ParseFile file = new ParseFile("photo", image);
                 // Upload the image into Parse Cloud
                 file.saveInBackground();
 
@@ -123,13 +139,12 @@ public class UploadPackageImageActivity extends Activity {
                 //ParseObject imgupload = new ParseObject("ImageUpload");
 
                 // Create a column named "ImageName" and set the string
-                parseUser.put("ImageName", "Like Logo");
 
                 // Create a column named "ImageFile" and insert the image
-                parseUser.put("ImageFile", file);
+                trans.put("Package_Image", file);
 
                 // Create the s and the columns
-                parseUser.saveInBackground();
+                trans.saveInBackground();
 
                 // Show a simple toast message
                 Toast.makeText(UploadPackageImageActivity.this, "Image Uploaded",

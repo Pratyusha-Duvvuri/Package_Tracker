@@ -122,6 +122,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
+        floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_demo);
 
         //modal code (work on later)
 
@@ -148,14 +149,14 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 }
             }
         });
-        //For image profie view
-//        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
-//
-//                startActivityForResult(i,IMAGE_REQUEST_CODE);
-//            }
-//        });
+//        For image profie view
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
+
+                startActivity(i);
+            }
+        });
         ivProfileImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);

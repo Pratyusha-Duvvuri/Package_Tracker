@@ -37,6 +37,7 @@
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".FileUploadActivity"></activity>
         <activity android:name=".OtherChatActivity"></activity>
+        <activity android:name=".PackageCreationPart1Activity"></activity>
     </application>
 
 </manifest>

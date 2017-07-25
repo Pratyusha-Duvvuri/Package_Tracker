@@ -130,6 +130,13 @@
                 android:src="@drawable/ic_add"
                 fab:fab_label="Update your Profile Picture"
                 fab:fab_size="mini" />
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/material_design_floating_action_menu_demo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                fab:fab_label="NewAc"
+                fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
