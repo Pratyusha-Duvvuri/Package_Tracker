@@ -73,45 +73,45 @@ public class TransactionDetailActivity extends AppCompatActivity {
                             Volume.setText(String.valueOf(transaction.getVolume()));
                             //not using match activity and button for now
                             matchButton.setVisibility(View.GONE);
-                            ParseQuery<ParseUser> senderquery = ParseUser.getQuery();
-                            //senderquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-                            senderquery.whereEqualTo("username", transaction.getSender());
-                            senderquery.findInBackground(new FindCallback<ParseUser>() {
-                                @Override
-                                public void done(List<ParseUser> userList, ParseException e) {
+                            if (transaction.getTransactionState() == 2) {
+                                ParseQuery<ParseUser> senderquery = ParseUser.getQuery();
+                                //senderquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                                senderquery.whereEqualTo("username", transaction.getSender());
+                                senderquery.findInBackground(new FindCallback<ParseUser>() {
+                                    @Override
+                                    public void done(List<ParseUser> userList, ParseException e) {
 
-                                    ParseUser user = null;
-                                    String sender_name;
-                                    if (e == null) {
-                                        for (int i = 0; i < userList.size(); i++) {
-                                            user = userList.get(i);
-                                            break;
+                                        ParseUser user = null;
+                                        String sender_name;
+                                        if (e == null) {
+                                            user = userList.get(0);
+                                            sender_name = user.get("fullName").toString();
+                                            tvTitle1.setText(sender_name.toString() + "'s package ");
                                         }
-                                        sender_name = user.get("fullName").toString();
-                                        tvTitle1.setText(sender_name.toString() + "'s package");
                                     }
-                                }
-                            });
+                                });
 
-                            ParseQuery<ParseUser> receiverquery = ParseUser.getQuery();
-                            receiverquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-                            receiverquery.whereEqualTo("username", transaction.getReceiver());
-                            receiverquery.findInBackground(new FindCallback<ParseUser>() {
-                                @Override
-                                public void done(List<ParseUser> userList, ParseException e) {
+                                ParseQuery<ParseUser> receiverquery = ParseUser.getQuery();
+                                receiverquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+                                receiverquery.whereEqualTo("username", transaction.getReceiver());
+                                receiverquery.findInBackground(new FindCallback<ParseUser>() {
+                                    @Override
+                                    public void done(List<ParseUser> userList, ParseException e) {
 
-                                    ParseUser user = null;
-                                    String receiver_name;
-                                    if (e == null) {
-                                        for (int i = 0; i < userList.size(); i++) {
-                                            user = userList.get(i);
-                                            break;
+                                        ParseUser user = null;
+                                        String receiver_name;
+                                        if (e == null) {
+                                            user = userList.get(0);
+                                            receiver_name = user.get("fullName").toString();
+                                            tvTitle2.setText("to " + receiver_name.toString());
                                         }
-                                        receiver_name = user.get("fullName").toString();
-                                        tvTitle2.setText("to " + receiver_name.toString());
                                     }
-                                }
-                            });
+                                });
+                            }
+                            else {
+                                tvTitle1.setText("This Transaction is ");
+                                tvTitle2.setText("still pending...");
+                            }
                         }
                     }
         });

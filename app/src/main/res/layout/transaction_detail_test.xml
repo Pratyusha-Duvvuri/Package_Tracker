@@ -39,11 +39,12 @@
             android:clipToPadding="false">
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar"
-                app:title=" "
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                android:background="@color/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title=" ">
 
                 <ImageButton
                     android:id="@+id/btnBack"
@@ -51,38 +52,24 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:srcCompat="?android:attr/homeAsUpIndicator" />
-            </android.support.v7.widget.Toolbar>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp">
 
                 <TextView
                     android:id="@+id/tvTitle1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:text="@string/app_name"
-                    android:textColor="#FFF"
-                    android:textSize="18sp" />
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:paddingLeft="15dp"/>
 
                 <TextView
                     android:id="@+id/tvTitle2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_gravity="center"
                     android:text="@string/app_name"
-                    android:textColor="#FFF"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
-
-            </LinearLayout>
+            </android.support.v7.widget.Toolbar>
 
         </FrameLayout>
 
