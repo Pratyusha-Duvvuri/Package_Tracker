@@ -71,6 +71,7 @@ Button confirm;
                 confirm.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
 
+                        weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
                         Intent i = new Intent(context, ProfileActivity.class);
                         setResult(RESULT_OK, i); // set result code and bundle data for response
                         finish(); // closes the activity, pass data to parent

@@ -232,6 +232,8 @@
         android:orientation="horizontal"
         android:layout_below="@+id/tvWhere"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+
         android:weightSum="1">
 
         <android.support.v7.widget.CardView
@@ -267,12 +269,12 @@
 
         <ImageView
             android:id="@+id/arrow"
-            android:layout_width="46dp"
-            android:layout_height="127dp"
-            android:layout_weight="0.67"
+            android:layout_width="40dp"
+            android:layout_height="110dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            app:srcCompat="@drawable/right_arrow" />
+            android:layout_weight="0.22"
+            app:srcCompat="@mipmap/if_arrow_right_392525" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/EndLocation"
@@ -281,6 +283,8 @@
 
             android:layout_alignTop="@+id/EndLocation"
             android:layout_toEndOf="@+id/EndLocation"
+            android:layout_marginLeft="10dp"
+
             app:cardCornerRadius="8dp"
             app:cardElevation="10dp">
 
@@ -323,7 +327,7 @@
         android:id="@+id/tvWhen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
         android:text="When?"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -337,10 +341,9 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/calendar"
-        android:layout_marginEnd="34dp"
-        android:layout_below="@+id/tvWhen"
-        android:layout_toStartOf="@+id/textView2"
-        android:layout_marginTop="42dp" />
+        android:layout_marginBottom="48dp"
+        android:layout_above="@+id/next"
+        android:layout_alignStart="@+id/textView5" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -391,16 +394,32 @@
         android:layout_height="wrap_content"
         android:text="Start Date:"
         android:textStyle="bold"
-        android:layout_marginEnd="26dp"
-        android:layout_below="@+id/tvWhen"
+        android:layout_marginEnd="24dp"
+        android:layout_alignBaseline="@+id/tvEndDate"
+        android:layout_alignBottom="@+id/tvEndDate"
         android:layout_toStartOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/tvEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView4"
-        android:layout_below="@+id/tvWhen"
         android:text="End Date:"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_above="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next"
+        android:layout_alignStart="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next"
+        android:layout_alignStart="@+id/imageView4" />
 </RelativeLayout>
