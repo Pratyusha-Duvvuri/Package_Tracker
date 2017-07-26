@@ -159,7 +159,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         Date senderStartDate = null;
         Date senderEndDate = null;
         try {
-            senderStartDate = new SimpleDateFormat("MM/dd").parse("01/01");
+            senderStartDate = new SimpleDateFormat("MM/dd/YY").parse("01/01/09");
             senderEndDate = new SimpleDateFormat("MM/dd").parse("12/31");
         } catch (ParseException e) {
             e.printStackTrace();

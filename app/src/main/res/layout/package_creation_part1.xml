@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/textViewB"
+        android:layout_width="378dp"
+        android:layout_height="45dp"
+        android:text="STEP 1 of 2" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+        android:layout_width="378dp"
+        android:layout_height="45dp"/>
+
+    <TextView
+        android:id="@+id/tvsenderLocationB"
+        android:layout_width="378dp"
+        android:layout_height="45dp"
+        android:text="Sender Location" />
+
+    <EditText
+        android:id="@+id/etsenderLocationB"
+        android:layout_width="378dp"
+        android:layout_height="45dp"
+        android:inputType="text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/senderStartDateB"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+            android:text="Start Date"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/displaysenderstart"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/senderEndDateB"
+        android:layout_width="181dp"
+        android:layout_height="45dp"
+        android:text="End Date" />
+
+        <TextView
+            android:id="@+id/displaysenderend"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/receiverHandleB"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_weight="0.05"
+        android:text="Receiver Handle" />
+
+    <!--<EditText-->
+        <!--android:id="@+id/etreceiverHandleB"-->
+        <!--android:layout_width="378dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:inputType="text" />-->
+    <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/et_receiverHandle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imageViewUp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="0.71"
+        app:srcCompat="@drawable/ic_upload" />
+
+    <FrameLayout
+        android:id="@+id/flFABB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="12dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbConfirmB"
+            android:layout_width="51dp"
+            android:layout_height="54dp"
+            android:src="@android:color/transparent"
+            app:backgroundTint="@color/colorPrimaryLight"
+            app:elevation="5dp" />
+
+        <TextView
+            android:id="@+id/tvConfirmB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="NEXT"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+</LinearLayout>
