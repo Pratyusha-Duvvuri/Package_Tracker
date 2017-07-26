@@ -49,7 +49,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODE = 100;
     private int progressStatus = 0;
-    private TextView textView;
     private Handler handler = new Handler();
 
     @BindView(R.id.etsenderLocationB) EditText senderLocationB;
@@ -68,7 +67,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.package_creation_part1);
         ButterKnife.bind(this);
-        textView = (TextView) findViewById(R.id.textView1);
 
         transaction = new ParselTransaction();
         transaction.setTransactionState(20);
@@ -77,7 +75,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        proceed=false;
+        proceed = false;
 
 // Get the string array
         String[] countries = getResources().getStringArray(R.array.users_array);
@@ -94,8 +92,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //save information
-                        if(proceed)
-                        saveInformation();
+                        if (proceed)
+                            saveInformation();
                     }
                 }
 
@@ -109,7 +107,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                         //set up an intent
                         Intent i = new Intent(PackageCreationPart1Activity.this, UploadPackageImageActivity.class);
                         i.putExtra("TRANSACTION", transaction.getObjectId());
-                        startActivityForResult(i,UPLOAD_IMAGE_CODE);
+                        startActivityForResult(i, UPLOAD_IMAGE_CODE);
                         proceed = true;
 
                     }
@@ -118,52 +116,53 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         );
 
         date = cal.get(Calendar.DATE);
-        new Thread(new Runnable() {
-
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                while (progressStatus < 100) {
-                    progressStatus=setProgressStatus();
-                    // Update the progress bar and display the
-                    //current value in the text view
-                    handler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(progressStatus);
-                            textView.setText(progressStatus+"/"+progressBar.getMax());
-                        }
-                    });
-                    try {
-                        // Sleep for 200 milliseconds.
-                        //Just to display the progress slowly
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
     }
-    private int setProgressStatus(){
-        int value =0;
-        int increment = 7;
-        if(!senderLocationB.getText().toString().equals(""))
-            value+=increment;
-        if(!displaySenderStart.getText().toString().equals(""))
-            value+=increment;
-        if(!displaySenderEnd.getText().toString().equals(""))
-            value+=increment;
-        if(!senderLocationB.getText().toString().equals(""))
-            value+=increment;
-        if(!receiverHandle.getText().toString().equals(""))
-            value+=increment;
-        if (proceed) value+=increment;
-        return value;
-    }
+//        new Thread(new Runnable() {
+//
+//            public void run() {
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                while (progressStatus < 100) {
+//                    progressStatus=setProgressStatus();
+//                    // Update the progress bar and display the
+//                    //current value in the text view
+//                    handler.post(new Runnable() {
+//                        public void run() {
+//                            progressBar.setProgress(progressStatus);
+////                            textView.setText(progressStatus+"/"+progressBar.getMax());
+//                        }
+//                    });
+//                    try {
+//                        // Sleep for 200 milliseconds.
+//                        //Just to display the progress slowly
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
+//    private int setProgressStatus(){
+//        int value =0;
+//        int increment = 7;
+//        if(!senderLocationB.getText().toString().equals(""))
+//            value+=increment;
+//        if(!displaySenderStart.getText().toString().equals(""))
+//            value+=increment;
+//        if(!displaySenderEnd.getText().toString().equals(""))
+//            value+=increment;
+//        if(!senderLocationB.getText().toString().equals(""))
+//            value+=increment;
+//        if(!receiverHandle.getText().toString().equals(""))
+//            value+=increment;
+//        if (proceed) value+=increment;
+//        return value;
+//    }
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

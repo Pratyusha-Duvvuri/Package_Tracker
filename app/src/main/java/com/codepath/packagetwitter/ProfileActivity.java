@@ -19,10 +19,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.LogoutFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
+import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
-import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 import com.github.clans.fab.FloatingActionMenu;
 import com.parse.FindCallback;
@@ -40,7 +39,7 @@ import java.util.List;
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener {
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener, RejectedRequestFragment.SendResultListener {
 
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
@@ -52,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int SENDER_REQUEST_CODE = 30;
+    public static ParselTransaction currentRejected;
+    public static ParselTransaction currentReceive;
 
     public final int IMAGE_REQUEST_CODE =40;
 
@@ -96,33 +97,39 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     ignore = false;
                     reload = true;
                     setParametersOfView();
+                    actOnRequests();
+                    checkForRejection();
 
-                    if (parseUser.getBoolean("hasPendingRequests") ){
-                        //the following check if the person has any other pending requests
-                        ParseQuery<ParselTransaction> q = ParseQuery.getQuery(ParselTransaction.class);
-                        q.whereEqualTo("receiver", parseUser.getUsername());
-                        q.whereEqualTo("transactionState", 0);
-                        // Execute the find asynchronously
-                        q.findInBackground(new FindCallback<ParselTransaction>() {
-                            @Override
-                            public void done(List<ParselTransaction> issueList, ParseException e) {
-                                if (e == null) {
-                                    if (issueList.size()<=1){//if the current equest is the only pending request
 
-                                        parseUser.put("hasPendingRequests", false);
-                                        parseUser.saveEventually();
-                                    }
+//                    if (parseUser.getBoolean("hasPendingRequests") ){
+//                        //the following check if the person has any other pending requests
+//                        ParseQuery<ParselTransaction> q = ParseQuery.getQuery(ParselTransaction.class);
+//                        q.whereEqualTo("receiver", parseUser.getUsername());
+//                        q.whereEqualTo("transactionState", 0);
+//                        // Execute the find asynchronously
+//                        q.findInBackground(new FindCallback<ParselTransaction>() {
+//                            @Override
+//                            public void done(List<ParselTransaction> issueList, ParseException e) {
+//                                if (e == null) {
+//                                    if (issueList.size()<=1){//if the current equest is the only pending request
+//
+//                                        parseUser.put("hasPendingRequests", false);
+//                                        parseUser.saveEventually();
+//                                    }
+//
+//                                } else {
+//                                    Log.d("score", "Error: " + e.getMessage());
+//                                }
+//                            }
+//                        });
+//                        parseUser.put("hasPendingRequests", false);
+//                        parseUser.saveInBackground();
+//                        actOnRequests();
+//
+//                    }
 
-                                } else {
-                                    Log.d("score", "Error: " + e.getMessage());
-                                }
-                            }
-                        });
-                        parseUser.put("hasPendingRequests", false);
-                        parseUser.saveInBackground();
-                        actOnRequests();
 
-                    }
+
                     tvUsername.setText(parseUser.getString("fullName"));
                     tvHandle.setText(parseUser.getUsername());
 
@@ -200,6 +207,48 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         });
     }
 
+    public void checkForRejection(){
+        //if the sender has been rejected
+        //query all requests with this user as sender and rejected id
+        //if the query is not null loop over each of these requests and handle them
+
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        query.whereEqualTo("transactionState", 9); //pending transaction state
+        query.whereEqualTo("sender", parseUser.getString("username")); //pending transaction state
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            public void done(List<ParselTransaction> itemList, ParseException e) {
+
+                if (e == null) {
+                    for (int i = 0; i < itemList.size(); i++) {
+                        //for every parsel transaction
+                        currentRejected = itemList.get(i);
+
+
+                        FragmentManager fm = getSupportFragmentManager();
+                        //creating random sender and mail object here and checking flow from this
+                        // point till last activity before transaction activity creation.
+
+                        RejectedRequestFragment rejectedRequestFragment = new RejectedRequestFragment();
+                        rejectedRequestFragment.show(fm, "fragment_rejected_request");
+
+                    }
+                    //deletes all these transactions once sender has been notified
+                    for (int i = 0; i < itemList.size(); i++) {
+                        //for every parsel transaction
+                        itemList.get(i).deleteInBackground();
+
+                    }
+
+
+                } else {
+                    Log.d("ParseApplicationError",e.toString());
+                    // something went wrong
+                }
+            }
+        });
+
+
+    }
 
     public void setParametersOfView() {
         tvTagline.setText(parseUser.getString("tagline"));
@@ -219,17 +268,54 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
 //if the person has any pending requests
-    public void actOnRequests() {
-        FragmentManager fm = getSupportFragmentManager();
-        //creating random sender and mail object here and checking flow from this
-        // point till last activity before transaction activity creation.
+//    public void actOnRequests() {
+//        FragmentManager fm = getSupportFragmentManager();
+//        //creating random sender and mail object here and checking flow from this
+//        // point till last activity before transaction activity creation.
+//
+//        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
+//        pendingRequest_fragment.show(fm, "fragment_pending_request");
+//    }
 
-        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
-        pendingRequest_fragment.show(fm, "fragment_pending_request");
+
+    public void actOnRequests() {
+
+
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        query.whereEqualTo("transactionState", 0); //pending transaction state
+        query.whereEqualTo("receiver", parseUser.getString("username")); //pending transaction state
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            public void done(List<ParselTransaction> itemList, ParseException e) {
+
+                if (e == null) {
+                    for (int i = 0; i < itemList.size(); i++) {
+                        //for every parsel transaction
+                        currentReceive= itemList.get(i);
+
+                        FragmentManager fm = getSupportFragmentManager();
+                        //creating random sender and mail object here and checking flow from this
+                        // point till last activity before transaction activity creation.
+                        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
+                        pendingRequest_fragment.show(fm, "fragment_pending_request");
+
+                    }
+
+
+                } else {
+                    Log.d("ParseApplicationError",e.toString());
+                    // something went wrong
+                }
+            }
+        });
+
+
     }
 
+
+
+
     @Override
-    public void onFinishEditDialog(Sender senderr, Mail maill, Boolean proceed) {
+    public void onFinishEditDialog( Boolean proceed) {
         if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
             startActivity(i);
@@ -282,4 +368,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         logoutFragment.show(fm, "fragment_logout");
     }
 
+    @Override
+    public void onFinishEditDialogThis() {
+
+    }
 }

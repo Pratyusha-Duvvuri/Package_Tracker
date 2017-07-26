@@ -52,7 +52,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
     @BindView(R.id.tvPackageDetailHeading) TextView tvPackageDetailHeading;
     @BindView(R.id.tvPackageType) TextView tvPackageType;
     @BindView(R.id.tvWeight) TextView tvWeight;
-   // @BindView(R.id.tvFragile) TextView tvFragile;
+    // @BindView(R.id.tvFragile) TextView tvFragile;
     @BindView(R.id.tvDimensionsHeading) TextView tvDimensionsHeading;
     @BindView(R.id.tvConfirm) TextView tvConfirm;
     @BindView(R.id.tvPackage) TextView tvPackage;
@@ -96,7 +96,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spPackageType.setAdapter(adapter);
-        //onVerifyAction();
+        onVerifyAction();
 
 
         fbConfirm.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +116,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
                 //creating new transaction parse object
                 ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
-                        parseUser.getUsername(), etSenderLocation.getText().toString(), senderStartDate,
+                        USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
                         senderEndDate, spPackageType.getSelectedItem().toString(),
                         etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
                         Integer.parseInt(etVolume.getText().toString()));
@@ -130,7 +130,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 //
 //
 
- //               onVerifyAction();
+                //               onVerifyAction();
 //                mail.setDescription(etDescription.getText().toString());
 //                mail.setFragile(true);//cbIsFragile.isChecked());
 //                //have to set picture
@@ -149,7 +149,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
     }
 
-//generating a random package
+    //generating a random package
     public void onVerifyAction() {
         mail = Mail.getRandomMail(context);
         sender = Sender.getRandomSender(context);
@@ -159,7 +159,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         Date senderStartDate = null;
         Date senderEndDate = null;
         try {
-            senderStartDate = new SimpleDateFormat("MM/dd/YY").parse("01/01/09");
+            senderStartDate = new SimpleDateFormat("MM/dd").parse("01/01");
             senderEndDate = new SimpleDateFormat("MM/dd").parse("12/31");
         } catch (ParseException e) {
             e.printStackTrace();

@@ -1,0 +1,36 @@
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/svRequest"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center">-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/llRequest2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lbl_your_name2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="YOU HAVE BEEN REJECTED" />
+
+
+    <TextView
+        android:id="@+id/tvRejectedBy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnAccept2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Okay" />
+
+</LinearLayout>
+
+<!--</ScrollView>-->
