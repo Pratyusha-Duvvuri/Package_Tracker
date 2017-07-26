@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.FindCallback;
@@ -101,10 +102,18 @@ public class CourierActivity extends AppCompatActivity {
                 confirm.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
 
-.                        weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
-                        Intent i = new Intent(context, ProfileActivity.class);
-                        setResult(RESULT_OK, i); // set result code and bundle data for response
-                        finish(); // closes the activity, pass data to parent
+                        try {
+                            weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
+
+
+                            Intent i = new Intent(context, ProfileActivity.class);
+                            setResult(RESULT_OK, i); // set result code and bundle data for response
+                            finish(); // closes the activity, pass data to parent
+                        }
+                        catch(NullPointerException e){
+
+                            Toast.makeText(CourierActivity.this, "You forgot some fields...", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
