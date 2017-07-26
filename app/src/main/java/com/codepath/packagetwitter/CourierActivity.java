@@ -1,14 +1,13 @@
 package com.codepath.packagetwitter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -29,22 +28,12 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 public class CourierActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.etWeight)EditText weight;
-    @BindView(R.id.etVolume)EditText volume;
+
     @BindView(R.id.etLocationStart)EditText startLocation;
-    @BindView(R.id.etStartDay)EditText startDay;
-    @BindView(R.id.etMonthStart)EditText startMonth;
-    @BindView(R.id.etDayEnd)EditText endDay;
-    @BindView(R.id.etMonthEnd)EditText endMonth;
+
     @BindView(R.id.etLocationEnd)TextView locationEnd;
-    @BindView(R.id.fbConfirm)FloatingActionButton btnNext;
-    @BindView(R.id.ivTakeOff)ImageView ivTakeOff;
-    @BindView(R.id.tvFirstDash)TextView tvFirstDash;
-    @BindView(R.id.tvSecondDash)TextView tvSecondDash;
-    @BindView(R.id.ivLanding)ImageView ivLanding;
-    @BindView(R.id.flFAB)FrameLayout flFAB;
-    @BindView(R.id.tvConfirm)TextView tvConfirm;
-    @BindView(R.id.tvHeading)TextView tvHeading;
+    @BindView(R.id.next)Button btnNext;
+Button confirm;
 
     Double weightAvailable;
     String tripStart;
@@ -53,13 +42,19 @@ public class CourierActivity extends AppCompatActivity {
     int volumes;
     String startAddress;
     String endAddress;
+    private View view1, view2;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courier);
+        view1 = getLayoutInflater().inflate(R.layout.activity_courier, null);
+        view2 = getLayoutInflater().inflate(R.layout.activity_courier_2, null);
+        setContentView(view1);
         ButterKnife.bind(this);
+        context = this;
+
 
 
         // Apply the adapter to the spinner
@@ -67,19 +62,39 @@ public class CourierActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
 
-                weightAvailable = Double.parseDouble(weight.getText().toString());
-                tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
-                tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
-                volumes = Integer.valueOf((volume.getText().toString()));
                 startAddress =  startLocation.getText().toString();
-
                 endAddress =  locationEnd.getText().toString();
 
-                onVerifyAction();
+                setContentView(view2);
+                confirm = (Button) findViewById(R.id.btConfirm);
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v){
+
+                        Intent i = new Intent(context, ProfileActivity.class);
+                        setResult(RESULT_OK, i); // set result code and bundle data for response
+                        finish(); // closes the activity, pass data to parent
+                    }
+                });
+
+
+
+//                weightAvailable = Double.parseDouble(weight.getText().toString());
+//                tripStart =  startMonth.getText().toString() + "/" + startDay.getText().toString();
+//                tripEnd =  endMonth.getText().toString() + "/" + endDay.getText().toString();
+//                volumes = Integer.valueOf((volume.getText().toString()));
+//                startAddress =  startLocation.getText().toString();
+//
+//                endAddress =  locationEnd.getText().toString();
+
+                //onVerifyAction();
             }
         });
 
-    }
+
+
+
+}
 
 
     public void onVerifyAction() {

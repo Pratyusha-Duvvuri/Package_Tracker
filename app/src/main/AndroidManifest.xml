@@ -30,7 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TransactionDetailActivity"
+        <activity
+            android:name=".TransactionDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CourierActivity" />
         <activity android:name=".ProfileActivity" />
@@ -40,13 +41,13 @@
             android:label="Create A New Package"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AfterSenderConfirmation" />
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".FileUploadActivity"></activity>
-        <activity android:name=".OtherChatActivity"></activity>
-        <activity android:name=".PackageCreationPart1Activity"></activity>
-        <activity android:name=".PackageCreationPart2Activity"></activity>
-
-        <activity android:name=".ReceiverActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".FileUploadActivity" />
+        <activity android:name=".OtherChatActivity" />
+        <activity android:name=".PackageCreationPart1Activity" />
+        <activity android:name=".PackageCreationPart2Activity" />
+        <activity android:name=".ReceiverActivity" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>
