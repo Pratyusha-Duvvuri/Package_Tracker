@@ -52,7 +52,8 @@
                 android:id="@+id/etsenderStartLocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="SEA" />
+                android:gravity="center"
+                android:text="Start Location" />
         </android.support.v7.widget.CardView>
 
         <ImageView
@@ -74,14 +75,16 @@
             card_view:cardElevation="7dp">
 
             <EditText
-                android:id="@+id/etsenderEndLocation"
+                android:id="@+id/etreceiverEndLocationB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@+id/card_view2"
                 android:layout_alignEnd="@+id/card_view2"
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/card_view2"
-                android:text="AUS" />
+                android:gravity="center"
+
+                android:text="End Location" />
 
         </android.support.v7.widget.CardView>
 
@@ -95,7 +98,6 @@
         android:background="@android:color/darker_gray" />
 
     <!--SECOND PART WHO-->
-<!--fljdkahfisdkjnfiudsgfbuydsjkfhncisdfgbcudshjbxnck-->
 
 
     <RelativeLayout
@@ -138,10 +140,6 @@
             android:layout_gravity="center"
             card_view:cardCornerRadius="4dp">
 
-            <!--<android.support.v7.widget.LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal">-->
 
             <!--set the receiver here-->
             <RelativeLayout
@@ -150,6 +148,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/et_receiverHandle"
+                    android:gravity="center"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
 
@@ -181,7 +180,6 @@
 
 
     <!--THIRD PART WHEN-->
-    <!--lfdjhoidzlxjfhneiorskdfjhnoedlj-->
 
     <RelativeLayout
         android:layout_marginTop="5dp"
@@ -252,12 +250,12 @@
             android:id="@+id/senderStartDateB"
             android:layout_width="50dp"
             android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:text="WHO"
-            android:textSize="17dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="75dp" />
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="75dp"
+            android:text="Start"
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/senderEndDateB"
@@ -267,8 +265,8 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginEnd="75dp"
-            android:textSize="17dp"
-            android:text="WHAA" />
+            android:text="End"
+            android:textSize="17dp" />
 
 
     </RelativeLayout>
@@ -284,15 +282,15 @@
 
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
 
+        android:layout_weight="0.65"
         android:background="@drawable/buttonshape"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="0"
         android:text="NEXT"
         android:textColor="#FFFFFF"
-        android:textSize="10sp"
-        android:layout_weight="0.65" />
+        android:textSize="20sp" />
 
 </LinearLayout>
