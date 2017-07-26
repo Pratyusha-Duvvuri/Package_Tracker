@@ -333,7 +333,7 @@
         android:layout_alignParentStart="true" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/startCalendar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/calendar"
@@ -343,11 +343,11 @@
         android:layout_marginTop="42dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/endCalendar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/calendar"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="43dp"
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignStart="@+id/next" />
 
@@ -382,7 +382,7 @@
         android:text="to:"
         android:textSize="30sp"
         android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignBottom="@+id/startCalendar"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -399,7 +399,7 @@
         android:id="@+id/tvEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView4"
+        android:layout_alignEnd="@+id/endCalendar"
         android:layout_below="@+id/tvWhen"
         android:text="End Date:"
         android:textStyle="bold" />
