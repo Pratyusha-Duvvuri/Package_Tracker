@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -39,12 +40,24 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.etLocationStart)EditText startLocation;
 
     @BindView(R.id.etLocationEnd)TextView locationEnd;
+    @BindView(R.id.displaySenderStart)TextView displaySenderStart;
+    @BindView(R.id.displaySenderEnd)TextView displaySenderEnd;
+
+
+    @BindView(R.id.imageView3)ImageView startDate;
+    @BindView(R.id.imageView4)ImageView endDate;
+
+
     @BindView(R.id.next)Button btnNext;
-Button confirm;
+
+    Button confirm;
 
     Double weightAvailable;
     String tripStart;
     String tripEnd;
+
+
+
 
     Integer year, month, date;
     int volumes;
@@ -80,10 +93,15 @@ Button confirm;
                 setContentView(view2);
                 confirm = (Button) findViewById(R.id.btConfirm);
 
+
+
+
+                showDialogButtonClick();
+
                 confirm.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
 
-                        weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
+.                        weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
                         Intent i = new Intent(context, ProfileActivity.class);
                         setResult(RESULT_OK, i); // set result code and bundle data for response
                         finish(); // closes the activity, pass data to parent
@@ -110,7 +128,7 @@ Button confirm;
 }
 
     public void showDialogButtonClick() {
-        tripStart.setOnClickListener(
+        startDate.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -121,7 +139,7 @@ Button confirm;
                 }
 
         );
-        tripEnd.setOnClickListener(
+        endDate.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -162,16 +180,16 @@ Button confirm;
                 //start date
 
 //                sendStart = s1 + "/" + s2+"/"+s3;
-                sendStart = Month+"/"+Date+"/"+Year;
+                tripStart = Month+"/"+Date+"/"+Year;
 
-                displaySenderStart.setText(sendStart);
+                displaySenderStart.setText(tripStart);
 
             }
             else{
                 //end date
 //                sendEnd= S1 + "/" + S2+"/"+S3;
-                sendEnd = Month+"/"+Date+"/"+Year;
-                displaySenderEnd.setText(sendEnd);
+                tripEnd = Month+"/"+Date+"/"+Year;
+                displaySenderEnd.setText(tripEnd);
 
             }
 
