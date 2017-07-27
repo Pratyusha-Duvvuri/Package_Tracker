@@ -8,220 +8,220 @@
     android:orientation="vertical">
 
     <!--<EditText-->
-        <!--android:id="@+id/etLocationEnd"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignStart="@+id/etLocationStart"-->
-        <!--android:layout_centerVertical="true"-->
+    <!--android:id="@+id/etLocationEnd"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignStart="@+id/etLocationStart"-->
+    <!--android:layout_centerVertical="true"-->
 
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:gravity="center"-->
-        <!--android:hint="Location"-->
-        <!--android:inputType="text"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/etVolume"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignBaseline="@+id/etWeight"-->
-        <!--android:layout_alignBottom="@+id/etWeight"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:hint="Volume Available"-->
-        <!--android:inputType="text"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp" />-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="Location"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
     <!--<EditText-->
-        <!--android:id="@+id/etWeight"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_below="@+id/ivLanding"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginTop="43dp"-->
-        <!--android:hint="Weight Available"-->
-        <!--android:inputType="numberDecimal"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp" />-->
+    <!--android:id="@+id/etVolume"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBaseline="@+id/etWeight"-->
+    <!--android:layout_alignBottom="@+id/etWeight"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:hint="Volume Available"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
     <!--<EditText-->
-        <!--android:id="@+id/etMonthStart"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="8dp"-->
-
-        <!--android:hint="Month"-->
-        <!--android:inputType="text"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp"-->
-        <!--android:layout_below="@+id/etLocationStart"-->
-        <!--android:layout_toStartOf="@+id/tvSecondDash"-->
-       <!--/>-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/etMonthEnd"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="46dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:hint="Month"-->
-        <!--android:inputType="text"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp"-->
-        <!--android:layout_below="@+id/etLocationEnd"-->
-        <!--android:layout_alignStart="@+id/etLocationEnd" />-->
+    <!--android:id="@+id/etWeight"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_below="@+id/ivLanding"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="43dp"-->
+    <!--android:hint="Weight Available"-->
+    <!--android:inputType="numberDecimal"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
     <!--<EditText-->
-        <!--android:id="@+id/etStartDay"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/etMonthStart"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="8dp"-->
 
-        <!--android:hint="Day"-->
-        <!--android:inputType="text"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
-
-        <!--tools:layout_editor_absoluteY="-1dp"-->
-        <!--android:layout_below="@+id/etLocationStart"-->
-        <!--android:layout_toEndOf="@+id/tvFirstDash"-->
-        <!--android:layout_alignBottom="@+id/etMonthStart" />-->
+    <!--android:hint="Month"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toStartOf="@+id/tvSecondDash"-->
+    <!--/>-->
 
     <!--<EditText-->
-        <!--android:id="@+id/etDayEnd"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/etMonthEnd"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="46dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:hint="Month"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationEnd"-->
+    <!--android:layout_alignStart="@+id/etLocationEnd" />-->
 
-        <!--android:layout_below="@+id/etLocationEnd"-->
+    <!--<EditText-->
+    <!--android:id="@+id/etStartDay"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
 
-        <!--android:layout_toEndOf="@+id/tvSecondDash"-->
-        <!--android:hint="Day"-->
-        <!--android:inputType="text"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
-        <!--tools:layout_editor_absoluteY="-1dp" />-->
+    <!--android:hint="Day"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toEndOf="@+id/tvFirstDash"-->
+    <!--android:layout_alignBottom="@+id/etMonthStart" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/etDayEnd"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:layout_below="@+id/etLocationEnd"-->
+
+    <!--android:layout_toEndOf="@+id/tvSecondDash"-->
+    <!--android:hint="Day"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/ivTakeOff"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignBottom="@+id/tvFirstDash"-->
-        <!--android:layout_alignEnd="@+id/ivLanding"-->
-        <!--android:layout_alignStart="@+id/etWeight"-->
-        <!--android:layout_alignTop="@+id/etLocationStart"-->
-        <!--android:backgroundTint="@color/background_color"-->
-        <!--app:srcCompat="@drawable/plane_taking_off" />-->
-        <!--android:layout_alignBottom="@+id/editText"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_toStartOf="@+id/editText"-->
-        <!--app:srcCompat="@drawable/airplane_taking_off"-->
-        <!--/>-->
+    <!--android:id="@+id/ivTakeOff"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/tvFirstDash"-->
+    <!--android:layout_alignEnd="@+id/ivLanding"-->
+    <!--android:layout_alignStart="@+id/etWeight"-->
+    <!--android:layout_alignTop="@+id/etLocationStart"-->
+    <!--android:backgroundTint="@color/background_color"-->
+    <!--app:srcCompat="@drawable/plane_taking_off" />-->
+    <!--android:layout_alignBottom="@+id/editText"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_toStartOf="@+id/editText"-->
+    <!--app:srcCompat="@drawable/airplane_taking_off"-->
+    <!--/>-->
 
 
     <!--<EditText-->
-        <!--android:id="@+id/etLocationStart"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginTop="102dp"-->
-        <!--android:layout_toEndOf="@+id/etWeight"-->
-        <!--android:gravity="center"-->
-        <!--android:hint="Location"-->
-        <!--android:inputType="text"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--tools:layout_editor_absoluteY="-1dp" />-->
-<!--`-->
+    <!--android:id="@+id/etLocationStart"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="102dp"-->
+    <!--android:layout_toEndOf="@+id/etWeight"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="Location"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
+    <!--`-->
     <!--<TextView-->
-        <!--android:id="@+id/tvFirstDash"-->
+    <!--android:id="@+id/tvFirstDash"-->
 
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:text="/"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
-        <!--android:layout_below="@+id/etLocationStart"-->
-        <!--android:layout_toEndOf="@+id/etMonthStart" />-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:text="/"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toEndOf="@+id/etMonthStart" />-->
 
     <!--<TextView-->
-        <!--android:id="@+id/tvSecondDash"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:text="/"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
-        <!--android:layout_below="@+id/etLocationEnd"-->
-        <!--android:layout_toEndOf="@+id/etMonthEnd" />-->
+    <!--android:id="@+id/tvSecondDash"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:text="/"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:layout_below="@+id/etLocationEnd"-->
+    <!--android:layout_toEndOf="@+id/etMonthEnd" />-->
 
     <!--<ImageView-->
-        <!--android:id="@+id/ivLanding"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignBottom="@+id/tvSecondDash"-->
-        <!--android:layout_alignEnd="@+id/etWeight"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignTop="@+id/etLocationEnd"-->
-        <!--android:layout_toStartOf="@+id/etMonthStart"-->
-        <!--android:backgroundTint="@color/background_color"-->
-        <!--app:srcCompat="@drawable/plane_landing" />-->
+    <!--android:id="@+id/ivLanding"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/tvSecondDash"-->
+    <!--android:layout_alignEnd="@+id/etWeight"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignTop="@+id/etLocationEnd"-->
+    <!--android:layout_toStartOf="@+id/etMonthStart"-->
+    <!--android:backgroundTint="@color/background_color"-->
+    <!--app:srcCompat="@drawable/plane_landing" />-->
 
     <!--<FrameLayout-->
-        <!--android:id="@+id/flFAB"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_alignParentBottom="true"-->
+    <!--android:id="@+id/flFAB"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_alignParentBottom="true"-->
 
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginBottom="12dp"-->
-        <!--android:layout_marginRight="12dp"-->
-       <!--&gt;-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:layout_marginRight="12dp"-->
+    <!--&gt;-->
 
-        <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/fbConfirm"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@android:color/transparent"-->
-            <!--app:backgroundTint="@color/colorPrimaryLight"-->
-            <!--app:elevation="5dp" />-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fbConfirm"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@android:color/transparent"-->
+    <!--app:backgroundTint="@color/colorPrimaryLight"-->
+    <!--app:elevation="5dp" />-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/tvConfirm"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:elevation="16dp"-->
-            <!--android:text="OK"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:textColor="@android:color/white" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/tvConfirm"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:elevation="16dp"-->
+    <!--android:text="OK"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+    <!--android:textColor="@android:color/white" />-->
     <!--</FrameLayout>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/tvHeading"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/ivTakeOff"-->
-        <!--android:layout_alignEnd="@+id/etLocationStart"-->
-        <!--android:layout_marginBottom="22dp"-->
-        <!--android:layout_toStartOf="@+id/flFAB"-->
-        <!--android:text="Courier Information"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textAllCaps="false"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
-        <!--android:textStyle="bold" />-->
+    <!--android:id="@+id/tvHeading"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_above="@+id/ivTakeOff"-->
+    <!--android:layout_alignEnd="@+id/etLocationStart"-->
+    <!--android:layout_marginBottom="22dp"-->
+    <!--android:layout_toStartOf="@+id/flFAB"-->
+    <!--android:text="Courier Information"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:textStyle="bold" />-->
 
 
     <LinearLayout

@@ -110,7 +110,7 @@ public class CourierActivity extends AppCompatActivity {
                             setResult(RESULT_OK, i); // set result code and bundle data for response
                             finish(); // closes the activity, pass data to parent
                         }
-                        catch(NullPointerException e){
+                        catch(NullPointerException e) {
 
                             Toast.makeText(CourierActivity.this, "You forgot some fields...", Toast.LENGTH_SHORT).show();
                         }
@@ -134,7 +134,7 @@ public class CourierActivity extends AppCompatActivity {
 
 
 
-}
+    }
 
     public void showDialogButtonClick() {
         startDate.setOnClickListener(

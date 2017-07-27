@@ -192,7 +192,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        For image profie view
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
+                Intent i = new Intent(ProfileActivity.this, ReviewActivity.class);
 
                 startActivity(i);
             }

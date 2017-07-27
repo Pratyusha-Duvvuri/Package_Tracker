@@ -11,21 +11,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="0.04">
 
         <TextView
-            android:id="@+id/text_view_id"
+            android:id="@+id/whereTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:text="WHERE" />
 
         <TextView
-            android:id="@+id/text_view_id12"
+            android:id="@+id/whereDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_id"
+            android:layout_below="@+id/whereTag"
             android:text="From where are you planning on sending it?"
-            android:textSize="10dp" />
+            android:textSize="15dp" />
 
 
     </RelativeLayout>
@@ -43,13 +45,15 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginStart="50dp"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="20dp"
+            card_view:cardElevation="7dp">
 
             <EditText
-                android:id="@+id/info_text"
+                android:id="@+id/etsenderStartLocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="SEA" />
+                android:gravity="center"
+                android:text="Start Location" />
         </android.support.v7.widget.CardView>
 
         <ImageView
@@ -67,17 +71,20 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginEnd="50dp"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="20dp"
+            card_view:cardElevation="7dp">
 
             <EditText
-                android:id="@+id/info_text254"
+                android:id="@+id/etreceiverEndLocationB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@+id/card_view2"
                 android:layout_alignEnd="@+id/card_view2"
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/card_view2"
-                android:text="AUS" />
+                android:gravity="center"
+
+                android:text="End Location" />
 
         </android.support.v7.widget.CardView>
 
@@ -87,31 +94,33 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
+
         android:background="@android:color/darker_gray" />
 
     <!--SECOND PART WHO-->
-<!--fljdkahfisdkjnfiudsgfbuydsjkfhncisdfgbcudshjbxnck-->
 
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.04"
-        >
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.04">
 
         <TextView
-            android:id="@+id/text_view_id2"
+            android:id="@+id/whoTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:text="WHO" />
 
         <TextView
-            android:id="@+id/text_view_id22"
+            android:id="@+id/whoDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_id2"
+            android:layout_below="@+id/whoTag"
             android:text="Who are you sending it to?"
-            android:textSize="10dp" />
+            android:textSize="15dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -131,28 +140,31 @@
             android:layout_gravity="center"
             card_view:cardCornerRadius="4dp">
 
-            <!--<android.support.v7.widget.LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
 
             <!--set the receiver here-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imgayy"
-                android:layout_width="wrap_content"
-                android:layout_height="39dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/if_user_add_383199" />
+                <AutoCompleteTextView
+                    android:id="@+id/et_receiverHandle"
+                    android:gravity="center"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
 
-            <AutoCompleteTextView
-                android:id="@+id/et_receiverHandle"
-                android:layout_width="155dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/imgayy"
+                    android:paddingLeft="200dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true" />
 
-                android:paddingLeft="200dp"/>
+                <ImageView
+                    android:id="@+id/whoIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_alignBottom="@+id/et_receiverHandle"
+                    android:layout_alignParentStart="true"
+                    android:src="@mipmap/if_user_add_383199" />
+            </RelativeLayout>
+
             <!--</android.support.v7.widget.LinearLayout>-->
 
         </android.support.v7.widget.CardView>
@@ -169,91 +181,92 @@
 
     <!--THIRD PART WHEN-->
 
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.04"
+        >
+
+        <TextView
+            android:id="@+id/whenTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="WHEN" />
+
+        <TextView
+            android:id="@+id/whenDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/whenTag"
+            android:text="Mention your availbale daterange to send it in"
+            android:textSize="15dp" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.04">
 
-        <TextView
-            android:id="@+id/text_view_id56"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WHEN" />
+        <ImageView
+            android:id="@+id/startCalendar"
 
-        <TextView
-            android:id="@+id/text_view_id1256"
+            android:src="@drawable/calendar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/endCalendar"
+            android:layout_marginEnd="85dp" />
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_id56"
-            android:text="Enter the range of dates to hand over package to receiver"
-            android:textSize="10dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/if_arrow_right_392525"
+            android:id="@+id/imgto" />
+
+        <ImageView
+            android:id="@+id/endCalendar"
+            android:src="@drawable/calendar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imgto"
+            android:layout_marginStart="50dp" />
+
+
 
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_height="wrap_content">
 
-        >
-
-        <!-- A CardView that contains a TextView -->
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view5"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <TextView
+            android:id="@+id/senderStartDateB"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            card_view:cardCornerRadius="4dp">
-
-
-            <ImageView
-                android:id="@+id/calendariconstart"
-                android:layout_width="wrap_content"
-                android:layout_height="39dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/if_user_add_383199" />
-
-            <AutoCompleteTextView
-                android:id="@+id/et_senderStartDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
-
-        </android.support.v7.widget.CardView>
+            android:layout_marginStart="75dp"
+            android:text="Start"
+            android:textSize="17dp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="TO" />
-        <!-- A CardView that contains a TextView -->
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view25"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/senderEndDateB"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="50dp"
-            card_view:cardCornerRadius="4dp">
-
-            <EditText
-                android:id="@+id/info_text2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/card_view2"
-                android:layout_alignEnd="@+id/card_view2"
-                android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/card_view2"
-                android:text="AUS" />
-
-        </android.support.v7.widget.CardView>
+            android:layout_marginEnd="75dp"
+            android:text="End"
+            android:textSize="17dp" />
 
 
     </RelativeLayout>
@@ -264,5 +277,20 @@
         android:layout_height="2dp"
         android:background="@android:color/darker_gray" />
 
+    <Button
+        android:id="@+id/next"
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="40dp"
+
+        android:layout_weight="0.65"
+        android:background="@drawable/buttonshape"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="NEXT"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 </LinearLayout>

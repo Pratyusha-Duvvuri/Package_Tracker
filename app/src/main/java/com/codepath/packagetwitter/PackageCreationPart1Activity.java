@@ -4,11 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,15 +15,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.parse.ParseFile;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -48,26 +42,26 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     ParselTransaction transaction;
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODE = 100;
-    private int progressStatus = 0;
-    private Handler handler = new Handler();
-
+    //these are for the locations
     @BindView(R.id.etsenderLocationB) EditText senderLocationB;
-    @BindView(R.id.et_receiverHandle) AutoCompleteTextView receiverHandle;
-    @BindView(R.id.displaysenderend)TextView displaySenderEnd;
-    @BindView(R.id.displaysenderstart)TextView displaySenderStart;
-    @BindView(R.id.pb)ProgressBar progressBar;
+    @BindView(R.id.etreceiverEndLocationB) EditText receiverLocationB;
+    @BindView(R.id.et_receiverHandle)
+    AutoCompleteTextView receiverHandle;
+    //these are supposed to be the text views
+    @BindView(R.id.senderEndDateB)TextView displaySenderEnd;
+    @BindView(R.id.senderStartDateB)TextView displaySenderStart;
 
-    @BindView(R.id.senderStartDateB) Button startDate;
-    @BindView(R.id.senderEndDateB) Button endDate;
-    @BindView(R.id.fbConfirmB)  FloatingActionButton fbConfirmB;
-    @BindView(R.id.imageViewUp) ImageView package_image;
+    @BindView(R.id.startCalendar) ImageView startDate;
+    @BindView(R.id.endCalendar) ImageView endDate;
+
+    @BindView(R.id.next)  Button fbConfirmB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.packagecreationaa);
+        setContentView(R.layout.packagecreationaa);
 
-        setContentView(R.layout.package_creation_part1);
         ButterKnife.bind(this);
 
         transaction = new ParselTransaction();
@@ -102,87 +96,12 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
-        package_image.setOnClickListener(
-                new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        //save information
-                        //set up an intent
-                        Intent i = new Intent(PackageCreationPart1Activity.this, UploadPackageImageActivity.class);
-                        i.putExtra("TRANSACTION", transaction.getObjectId());
-                        startActivityForResult(i,UPLOAD_IMAGE_CODE);
-                        proceed = true;
 
-                    }
-                }
 
-        );
-
-        new Thread(new Runnable() {
-
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                while (progressStatus < 100) {
-                    progressStatus=setProgressStatus();
-                    // Update the progress bar and display the
-                    //current value in the text view
-                    handler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(progressStatus);
-//                            textView.setText(progressStatus+"/"+progressBar.getMax());
-                        }
-                    });
-                    try {
-                        // Sleep for 200 milliseconds.
-                        //Just to display the progress slowly
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-    }
-    private int setProgressStatus(){
-        int value =0;
-        int increment = 7;
-        if(!senderLocationB.getText().toString().equals(""))
-            value+=increment;
-        if(!displaySenderStart.getText().toString().equals(""))
-            value+=increment;
-        if(!displaySenderEnd.getText().toString().equals(""))
-            value+=increment;
-        if(!senderLocationB.getText().toString().equals(""))
-            value+=increment;
-        if(!receiverHandle.getText().toString().equals(""))
-            value+=increment;
-        if (proceed) value+=increment;
-        return value;
     }
 
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == UPLOAD_IMAGE_CODE && resultCode == RESULT_OK) // if a courier transaction occured
-        {
-            //load the image here
-            ParseFile postImage = transaction.getParseFile("ImageFile");
-            if (postImage != null) {
-                String imageUrl = postImage.getUrl();//live url
-
-                Uri imageUri = Uri.parse(imageUrl);
-                Glide.with(PackageCreationPart1Activity.this).load(imageUri.toString()).into(package_image);
-            } else {
-                Glide.with(PackageCreationPart1Activity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(package_image);
-
-            }
-        }
-    }
     public void saveInformation(){
         Date senderStartDate = null;
         Date senderEndDate = null;

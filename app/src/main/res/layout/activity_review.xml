@@ -6,269 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.ReviewActivity"
     android:orientation="vertical">
-    <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-        <!--FIRST PART WHERE-->
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.04">
-
-            <TextView
-                android:id="@+id/text_view_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WHERE"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="30dp">
 
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="50dp"
-                card_view:cardCornerRadius="4dp">
-
-                <EditText
-                    android:id="@+id/info_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="SEA"
-                    android:textAlignment="center" />
-            </android.support.v7.widget.CardView>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/if_arrow_right_392525" />
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginEnd="50dp"
-                card_view:cardCornerRadius="4dp">
-
-                <EditText
-                    android:id="@+id/info_text254"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/card_view2"
-                    android:layout_alignEnd="@+id/card_view2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/card_view2"
-                    android:text="AUS"
-                    android:textAlignment="center" />
-
-            </android.support.v7.widget.CardView>
+    </FrameLayout>
 
 
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray" />
-
-        <!--SECOND PART WHO-->
-        <!--fljdkahfisdkjnfiudsgfbuydsjkfhncisdfgbcudshjbxnck-->
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.04"
-            >
-
-            <TextView
-                android:id="@+id/text_view_id2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WHO"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-
-            >
-
-            <!-- A CardView that contains a TextView -->
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view3"
-                android:layout_width="200dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                card_view:cardCornerRadius="4dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
-
-                <!--<android.support.v7.widget.LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--set the receiver here-->
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imgayy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="39dp"
-                        android:layout_centerVertical="true"
-                        android:src="@mipmap/if_user_add_383199" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/imgayy"
-                        android:layout_alignParentEnd="true"
-                        android:layout_toEndOf="@+id/imgayy"
-                        android:text="Handle"
-                        android:textAlignment="center" />
-                </RelativeLayout>
-
-                <!--</android.support.v7.widget.LinearLayout>-->
-
-            </android.support.v7.widget.CardView>
-
-
-        </RelativeLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray" />
-
-
-        <!--THIRD PART WHEN-->
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.04">
-
-            <TextView
-                android:id="@+id/text_view_id56"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WHEN"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-
-            >
-
-            <!-- A CardView that contains a TextView -->
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view5"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="50dp"
-                card_view:cardCornerRadius="4dp">
-
-
-                <ImageView
-                    android:id="@+id/calendariconstart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="39dp"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/if_user_add_383199" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/et_senderStartDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
-
-            </android.support.v7.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="TO" />
-            <!-- A CardView that contains a TextView -->
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view25"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginEnd="50dp"
-                card_view:cardCornerRadius="4dp">
-
-                <EditText
-                    android:id="@+id/info_text2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/card_view2"
-                    android:layout_alignEnd="@+id/card_view2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/card_view2"
-                    android:text="AUS"
-                    android:textAlignment="center" />
-
-            </android.support.v7.widget.CardView>
-
-
-        </RelativeLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray" />
-
-
-    </LinearLayout>
     <Button
         android:id="@+id/cancel"
 
@@ -305,5 +58,16 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Review"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
