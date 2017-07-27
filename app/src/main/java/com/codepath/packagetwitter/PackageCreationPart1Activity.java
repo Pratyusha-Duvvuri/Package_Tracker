@@ -37,13 +37,15 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     static final int DIALOG_ID = 0;
     static final int DIALOG_ID2 = 10;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+
     public static int idd;
     public String s1,s2,s3,S1,S2,S3,sendStart,sendEnd;
     ParselTransaction transaction;
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODE = 100;
     //these are for the locations
-    @BindView(R.id.etsenderLocationB) EditText senderLocationB;
+    @BindView(R.id.etsenderStartLocationB) EditText senderLocationB;
     @BindView(R.id.etreceiverEndLocationB) EditText receiverLocationB;
     @BindView(R.id.et_receiverHandle)
     AutoCompleteTextView receiverHandle;
@@ -96,6 +98,15 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+        senderLocationB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+
+        });
 
 
 

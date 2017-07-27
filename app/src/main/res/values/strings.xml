@@ -37,6 +37,8 @@
     <string name="profile_other">Other profile pic</string>
     <string name="send">Send</string>
     <string name="uploadbtn">Upload Image</string>
+    <string name="google_api_key">AIzaSyD-jUeA2YcqBt3DOQU-BFntqfgW0XAgFYU</string>
+
 
     <string-array name="users_array">
         <item>Afghanistan</item>
