@@ -138,6 +138,7 @@
                             android:src="@mipmap/ic_clothes" />
 
                         <TextView
+                            android:id="@+id/tvClothes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Clothes" />
@@ -159,6 +160,7 @@
                             android:src="@mipmap/ic_electronics" />
 
                         <TextView
+                            android:id="@+id/tvElectronics"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Electronics" />
@@ -180,6 +182,7 @@
                             android:src="@mipmap/ic_books" />
 
                         <TextView
+                            android:id="@+id/tvBooks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Books" />
@@ -201,6 +204,7 @@
                             android:src="@mipmap/ic_games" />
 
                         <TextView
+                            android:id="@+id/tvGames"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Games" />
@@ -222,6 +226,7 @@
                             android:src="@mipmap/ic_movies" />
 
                         <TextView
+                            android:id="@+id/tvMovies"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Movies" />
@@ -243,6 +248,7 @@
                             android:src="@mipmap/ic_food" />
 
                         <TextView
+                            android:id="@+id/tvFood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Food" />
@@ -264,6 +270,7 @@
                             android:src="@mipmap/ic_health" />
 
                         <TextView
+                            android:id="@+id/tvHealth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Health" />
@@ -285,6 +292,7 @@
                             android:src="@mipmap/ic_beauty" />
 
                         <TextView
+                            android:id="@+id/tvBeauty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Beauty" />
@@ -306,6 +314,7 @@
                             android:src="@mipmap/ic_other" />
 
                         <TextView
+                            android:id="@+id/tvOther"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Other" />

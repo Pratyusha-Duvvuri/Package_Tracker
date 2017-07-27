@@ -51,8 +51,9 @@
         <activity android:name=".FileUploadActivity" />
         <activity android:name=".OtherChatActivity" />
         <activity android:name=".PackageCreationPart1Activity" />
-        <activity android:name=".PackageCreationPart2Activity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".PackageCreationPart2Activity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".ReviewActivity" />
 
@@ -63,6 +64,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SearchPlaceActivity"></activity>
+        <activity android:name=".SearchPlaceActivity" />
+        <activity android:name=".test"></activity>
     </application>
+
 </manifest>
