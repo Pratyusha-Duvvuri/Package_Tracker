@@ -283,7 +283,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         query.whereEqualTo("transactionState", 0); //pending transaction state
-        query.whereEqualTo("receiver", parseUser.getString("username")); //pending transaction state
+        query.whereEqualTo("receiver", parseUser.getString("fullName")); //pending transaction state
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
 

@@ -6,12 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1">
-    <fragment
-        android:id="@+id/place_autocomplete_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-        />
+
     <!--FIRST PART WHERE-->
 
     <RelativeLayout
@@ -46,21 +41,33 @@
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginStart="50dp"
-            card_view:cardCornerRadius="20dp"
+            card_view:cardCornerRadius="10dp"
             card_view:cardElevation="7dp">
-
-            <AutoCompleteTextView
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/place_autocomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                />
+            <TextView
                 android:id="@+id/etsenderStartLocationB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"
                 android:gravity="center"
-                android:hint="Start Location" />
+                android:hint="Start Location"
+                android:textSize="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/place_autocomplete_fragment" />
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
         <ImageView
@@ -73,24 +80,35 @@
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view2"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginEnd="50dp"
-            card_view:cardCornerRadius="20dp"
+            card_view:cardCornerRadius="10dp"
             card_view:cardElevation="7dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/place_autocomplete_fragment2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                />
 
-            <AutoCompleteTextView
+            <TextView
                 android:id="@+id/etreceiverEndLocationB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/card_view2"
-                android:layout_alignEnd="@+id/card_view2"
-                android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/card_view2"
+
                 android:gravity="center"
-                android:hint="End Location" />
+                android:hint="End Location"
+                android:textSize="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
 
         </android.support.v7.widget.CardView>
 
@@ -173,6 +191,8 @@
                 <AutoCompleteTextView
                 android:id="@+id/et_receiverHandle"
                 android:layout_width="155dp"
+                    android:textSize="20dp"
+                    android:gravity="center"
                 android:layout_height="wrap_content"
                 android:hint="Enter receiver's handle"
                 android:layout_centerVertical="true"
@@ -263,26 +283,26 @@
         <TextView
             android:id="@+id/senderStartDateB"
             android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="48dp"
             android:hint="Start"
             android:gravity="center"
-            android:textSize="17dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/senderEndDateB"
             android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="55dp"
             android:hint="End"
             android:gravity="center"
-            android:textSize="17dp" />
+            android:textSize="20dp" />
 
 
     </RelativeLayout>
