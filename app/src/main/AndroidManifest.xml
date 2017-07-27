@@ -51,7 +51,8 @@
         <activity android:name=".FileUploadActivity" />
         <activity android:name=".OtherChatActivity" />
         <activity android:name=".PackageCreationPart1Activity" />
-        <activity android:name=".PackageCreationPart2Activity" />
+        <activity android:name=".PackageCreationPart2Activity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".ReviewActivity" />
 
@@ -64,5 +65,4 @@
 
         <activity android:name=".SearchPlaceActivity"></activity>
     </application>
-
 </manifest>
