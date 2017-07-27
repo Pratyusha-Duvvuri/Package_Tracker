@@ -8,22 +8,29 @@ import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import java.text.ParseException;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.codepath.packagetwitter.LoginActivity.mylist;
 
 /**
  * Created by pratyusha98 on 7/24/17.
@@ -37,14 +44,18 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     static final int DIALOG_ID = 0;
     static final int DIALOG_ID2 = 10;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    private String TAG = "Google Places API";
+
     public static int idd;
     public String s1,s2,s3,S1,S2,S3,sendStart,sendEnd;
     ParselTransaction transaction;
     Boolean proceed;
-    public final int UPLOAD_IMAGE_CODE = 100;
+    public final int UPLOAD_IMAGE_CODEn = 100;
     //these are for the locations
-    @BindView(R.id.etsenderLocationB) EditText senderLocationB;
-    @BindView(R.id.etreceiverEndLocationB) EditText receiverLocationB;
+    @BindView(R.id.etsenderStartLocationB)
+    TextView senderLocationB;
+    @BindView(R.id.etreceiverEndLocationB) TextView receiverLocationB;
     @BindView(R.id.et_receiverHandle)
     AutoCompleteTextView receiverHandle;
     //these are supposed to be the text views
@@ -76,10 +87,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         proceed=false;
 
 // Get the string array
-        String[] countries = getResources().getStringArray(R.array.users_array);
 // Create the adapter and set it to the AutoCompleteTextView
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mylist);
         receiverHandle.setAdapter(adapter);
 
         //create a new transaction here
@@ -96,6 +106,57 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+                Toast.makeText(context, "HEYA", Toast.LENGTH_SHORT).show();
+                senderLocationB.setText(place.getName());
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
+        PlaceAutocompleteFragment autocompleteFragment2 = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
+
+        autocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+                Toast.makeText(context, "YEAH", Toast.LENGTH_SHORT).show();
+                receiverLocationB.setText(place.getName());
+
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
+
+        senderLocationB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+
+        });
 
 
 
@@ -118,6 +179,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         transaction.setSenderEnd(senderEndDate);
         transaction.setReceiver(receiverHandle.getText().toString());
         transaction.setSenderLoc(senderLocationB.getText().toString());
+        transaction.setReceiverLoc(receiverLocationB.getText().toString());
         transaction.saveEventually();
         //parseUser.add("pendingTransactions", transaction);
         transaction.saveEventually();
@@ -139,7 +201,30 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+        displaySenderStart.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        showDialog(DIALOG_ID);
+                    }
+                }
+
+        );
+
         endDate.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        showDialog(DIALOG_ID2);
+                    }
+                }
+
+        );
+        displaySenderEnd.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
