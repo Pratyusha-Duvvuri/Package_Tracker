@@ -8,6 +8,7 @@ import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,8 +17,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -38,6 +44,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     static final int DIALOG_ID = 0;
     static final int DIALOG_ID2 = 10;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    private String TAG = "Google Places API";
 
     public static int idd;
     public String s1,s2,s3,S1,S2,S3,sendStart,sendEnd;
@@ -98,6 +105,24 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+                Toast.makeText(context, "HEYA", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
         senderLocationB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
