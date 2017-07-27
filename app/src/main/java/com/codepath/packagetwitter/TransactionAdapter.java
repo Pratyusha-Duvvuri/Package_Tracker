@@ -57,20 +57,23 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         ParselTransaction transaction = mTransactions.get(position);
 
+        String status = "";
+        switch(transaction.getTransactionState()){
 
-        //holder.tvUsername.setText(String.valueOf(parseUser.getString("fullName")));
-        holder.tvBoarding.setText(String.valueOf(transaction.getString("senderLoc")));
-        if (transaction.getString("receiverLoc")== null){
-            holder.tvArrival.setText(transaction.getString("senderLoc"));
-            holder.tvArrival.setVisibility(View.GONE);
-
-            holder.ivArrival.setVisibility(View.GONE);
+            case 0: status = "Awaiting Receiver";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
+            case 1: status = "Awaiting Match";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
+            case 2: status = "Awating Delivery";holder.ivStatus.setImageResource(R.drawable.green_dot);break;
+            case 6: status = "Package Delivered!";holder.ivStatus.setImageResource(R.drawable.green_dot);break;
+            case 7: status = "Awaiting Match";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
+            default: break;
 
         }
-        else{
-            holder.tvArrival.setText(String.valueOf(transaction.getString("receiverLoc")));
-        }
-        holder.tvWeight.setText(String.valueOf( transaction.getWeight().intValue())+" lbs");
+
+        holder.tvStatus.setText(status);
+
+
+
+
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
     }
@@ -85,23 +88,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView ivPackageImage;
-        public TextView tvUsername;
-        public TextView tvArrival;
-        public TextView tvBoarding;
-        public TextView tvWeight;
-        public ImageView ivArrival;
+        public TextView tvStatus;
+        public ImageView ivStatus;
 
         public  ViewHolder (View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
-            tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
-            tvArrival = (TextView) itemView.findViewById(R.id.tvArrival);
-            tvBoarding = (TextView) itemView.findViewById(R.id.tvBoarding);
-            tvWeight = (TextView) itemView.findViewById(R.id.tvWeight);
+            tvStatus = (TextView) itemView.findViewById(R.id.tvStatus);
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
-
-            ivArrival = (ImageView) itemView.findViewById(R.id.ivArriving);
+            ivStatus = (ImageView) itemView.findViewById(R.id.ivStatus);
         }
 
         @Override

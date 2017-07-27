@@ -16,57 +16,40 @@
 
     <ImageView
         android:id="@+id/ivPackageImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/tvBoarding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Boarding"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/ivArriving"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvArrival"
-        android:layout_toStartOf="@+id/tvBoarding"
-        app:srcCompat="@drawable/arrival"
-        android:layout_below="@+id/tvBoarding" />
-
-    <TextView
-        android:id="@+id/tvArrival"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Arrival"
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvBoarding" />
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/next" />
 
     <ImageView
-        android:id="@+id/ivBoarding"
-        android:layout_width="50dp"
-        android:layout_height="10dp"
-        android:layout_above="@+id/ivArriving"
-        android:layout_alignStart="@+id/ivArriving"
-        android:layout_alignTop="@+id/tvBoarding"
-        android:layout_toStartOf="@+id/tvBoarding"
-        app:srcCompat="@drawable/departures" />
+        android:id="@+id/ivStatus"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        app:srcCompat="@drawable/green_dot" />
 
     <TextView
-        android:id="@+id/tvWeight"
+        android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/ivPackageImage"
-        android:layout_toRightOf="@+id/ivPackageImage"
-        android:text="weight"
-        android:layout_alignTop="@+id/ivBoarding" />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/imageView2"
+        android:text="Courier Boarded"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="22sp" />
 
 
 </RelativeLayout>

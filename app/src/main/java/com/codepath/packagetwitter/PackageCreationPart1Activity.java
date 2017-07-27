@@ -4,24 +4,22 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.parse.ParseFile;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -44,22 +42,28 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     ParselTransaction transaction;
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODE = 100;
-
+    //these are for the locations
     @BindView(R.id.etsenderLocationB) EditText senderLocationB;
-    @BindView(R.id.etreceiverHandleB) EditText receiverHandle;
-    @BindView(R.id.displaysenderend)TextView displaySenderEnd;
-    @BindView(R.id.displaysenderstart)TextView displaySenderStart;
+    @BindView(R.id.etreceiverEndLocationB) EditText receiverLocationB;
+    @BindView(R.id.et_receiverHandle)
+    AutoCompleteTextView receiverHandle;
+    //these are supposed to be the text views
+    @BindView(R.id.senderEndDateB)TextView displaySenderEnd;
+    @BindView(R.id.senderStartDateB)TextView displaySenderStart;
 
-    @BindView(R.id.senderStartDateB) Button startDate;
-    @BindView(R.id.senderEndDateB) Button endDate;
-    @BindView(R.id.fbConfirmB)  FloatingActionButton fbConfirmB;
-    @BindView(R.id.imageViewUp) ImageView package_image;
+    @BindView(R.id.startCalendar) ImageView startDate;
+    @BindView(R.id.endCalendar) ImageView endDate;
+
+    @BindView(R.id.next)  Button fbConfirmB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.package_creation_part1);
+        setContentView(R.layout.packagecreationaa);
+
         ButterKnife.bind(this);
+
         transaction = new ParselTransaction();
         transaction.setTransactionState(20);
         transaction.saveInBackground();
@@ -68,6 +72,16 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         date = cal.get(Calendar.DATE);
+
+        proceed=false;
+
+// Get the string array
+        String[] countries = getResources().getStringArray(R.array.users_array);
+// Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+        receiverHandle.setAdapter(adapter);
+
         //create a new transaction here
         showDialogButtonClick();
         fbConfirmB.setOnClickListener(
@@ -82,48 +96,12 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
-        package_image.setOnClickListener(
-                new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        //save information
-                        //set up an intent
-                        Intent i = new Intent(PackageCreationPart1Activity.this, UploadPackageImageActivity.class);
-                        i.putExtra("TRANSACTION", transaction.getObjectId());
-                        startActivityForResult(i,UPLOAD_IMAGE_CODE);
-                        proceed = true;
-
-
-                    }
-                }
-
-        );
-
-    }
-
-    public void saveImage(){
-     transaction = new ParselTransaction();
 
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == UPLOAD_IMAGE_CODE && resultCode == RESULT_OK) // if a courier transaction occured
-        {
-            //load the image here
-            ParseFile postImage = transaction.getParseFile("ImageFile");
-            if (postImage != null) {
-                String imageUrl = postImage.getUrl();//live url
 
-                Uri imageUri = Uri.parse(imageUrl);
-                Glide.with(PackageCreationPart1Activity.this).load(imageUri.toString()).into(package_image);
-            } else {
-                Glide.with(PackageCreationPart1Activity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(package_image);
-
-            }
-        }
-    }
     public void saveInformation(){
         Date senderStartDate = null;
         Date senderEndDate = null;
@@ -175,7 +153,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     }
 
-
     @Override
     public Dialog onCreateDialog(int id) {
 
@@ -215,7 +192,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 displaySenderEnd.setText(sendEnd);
 
             }
-
 
         }
     };

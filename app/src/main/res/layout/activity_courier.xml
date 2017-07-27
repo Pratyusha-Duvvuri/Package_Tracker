@@ -4,223 +4,424 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.packagetwitter.CourierActivity">
+    tools:context="com.codepath.packagetwitter.CourierActivity"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etLocationEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/etLocationStart"
-        android:layout_centerVertical="true"
+    <!--<EditText-->
+    <!--android:id="@+id/etLocationEnd"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignStart="@+id/etLocationStart"-->
+    <!--android:layout_centerVertical="true"-->
 
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:hint="Location"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp" />
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="Location"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
-    <EditText
-        android:id="@+id/etVolume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etWeight"
-        android:layout_alignBottom="@+id/etWeight"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="Volume Available"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp" />
+    <!--<EditText-->
+    <!--android:id="@+id/etVolume"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBaseline="@+id/etWeight"-->
+    <!--android:layout_alignBottom="@+id/etWeight"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:hint="Volume Available"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
-    <EditText
-        android:id="@+id/etWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivLanding"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="43dp"
-        android:hint="Weight Available"
-        android:inputType="numberDecimal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp" />
+    <!--<EditText-->
+    <!--android:id="@+id/etWeight"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_below="@+id/ivLanding"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="43dp"-->
+    <!--android:hint="Weight Available"-->
+    <!--android:inputType="numberDecimal"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
-    <EditText
-        android:id="@+id/etMonthStart"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+    <!--<EditText-->
+    <!--android:id="@+id/etMonthStart"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="8dp"-->
 
-        android:hint="Month"
-        android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp"
-        android:layout_below="@+id/etLocationStart"
-        android:layout_toStartOf="@+id/tvSecondDash"
-       />
+    <!--android:hint="Month"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toStartOf="@+id/tvSecondDash"-->
+    <!--/>-->
 
-    <EditText
-        android:id="@+id/etMonthEnd"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginLeft="8dp"
-        android:hint="Month"
-        android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp"
-        android:layout_below="@+id/etLocationEnd"
-        android:layout_alignStart="@+id/etLocationEnd" />
+    <!--<EditText-->
+    <!--android:id="@+id/etMonthEnd"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="46dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:hint="Month"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationEnd"-->
+    <!--android:layout_alignStart="@+id/etLocationEnd" />-->
 
-    <EditText
-        android:id="@+id/etStartDay"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+    <!--<EditText-->
+    <!--android:id="@+id/etStartDay"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
 
-        android:hint="Day"
-        android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat"
+    <!--android:hint="Day"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
 
-        tools:layout_editor_absoluteY="-1dp"
-        android:layout_below="@+id/etLocationStart"
-        android:layout_toEndOf="@+id/tvFirstDash"
-        android:layout_alignBottom="@+id/etMonthStart" />
+    <!--tools:layout_editor_absoluteY="-1dp"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toEndOf="@+id/tvFirstDash"-->
+    <!--android:layout_alignBottom="@+id/etMonthStart" />-->
 
-    <EditText
-        android:id="@+id/etDayEnd"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+    <!--<EditText-->
+    <!--android:id="@+id/etDayEnd"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="wrap_content"-->
 
-        android:layout_below="@+id/etLocationEnd"
+    <!--android:layout_below="@+id/etLocationEnd"-->
 
-        android:layout_toEndOf="@+id/tvSecondDash"
-        android:hint="Day"
-        android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        tools:layout_editor_absoluteY="-1dp" />
+    <!--android:layout_toEndOf="@+id/tvSecondDash"-->
+    <!--android:hint="Day"-->
+    <!--android:inputType="text"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
 
-    <ImageView
-        android:id="@+id/ivTakeOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvFirstDash"
-        android:layout_alignEnd="@+id/ivLanding"
-        android:layout_alignStart="@+id/etWeight"
-        android:layout_alignTop="@+id/etLocationStart"
-        android:backgroundTint="@color/background_color"
-        app:srcCompat="@drawable/plane_taking_off" />
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/editText"
-        app:srcCompat="@drawable/airplane_taking_off"
-        />
+    <!--<ImageView-->
+    <!--android:id="@+id/ivTakeOff"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/tvFirstDash"-->
+    <!--android:layout_alignEnd="@+id/ivLanding"-->
+    <!--android:layout_alignStart="@+id/etWeight"-->
+    <!--android:layout_alignTop="@+id/etLocationStart"-->
+    <!--android:backgroundTint="@color/background_color"-->
+    <!--app:srcCompat="@drawable/plane_taking_off" />-->
+    <!--android:layout_alignBottom="@+id/editText"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_toStartOf="@+id/editText"-->
+    <!--app:srcCompat="@drawable/airplane_taking_off"-->
+    <!--/>-->
 
 
-    <EditText
-        android:id="@+id/etLocationStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="102dp"
-        android:layout_toEndOf="@+id/etWeight"
-        android:gravity="center"
-        android:hint="Location"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-1dp" />
-`
-    <TextView
-        android:id="@+id/tvFirstDash"
+    <!--<EditText-->
+    <!--android:id="@+id/etLocationStart"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="102dp"-->
+    <!--android:layout_toEndOf="@+id/etWeight"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="Location"-->
+    <!--android:inputType="text"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--tools:layout_editor_absoluteY="-1dp" />-->
+    <!--`-->
+    <!--<TextView-->
+    <!--android:id="@+id/tvFirstDash"-->
 
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="/"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_below="@+id/etLocationStart"
-        android:layout_toEndOf="@+id/etMonthStart" />
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:text="/"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:layout_below="@+id/etLocationStart"-->
+    <!--android:layout_toEndOf="@+id/etMonthStart" />-->
 
-    <TextView
-        android:id="@+id/tvSecondDash"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="/"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_below="@+id/etLocationEnd"
-        android:layout_toEndOf="@+id/etMonthEnd" />
+    <!--<TextView-->
+    <!--android:id="@+id/tvSecondDash"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:text="/"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:layout_below="@+id/etLocationEnd"-->
+    <!--android:layout_toEndOf="@+id/etMonthEnd" />-->
 
-    <ImageView
-        android:id="@+id/ivLanding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvSecondDash"
-        android:layout_alignEnd="@+id/etWeight"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/etLocationEnd"
-        android:layout_toStartOf="@+id/etMonthStart"
-        android:backgroundTint="@color/background_color"
-        app:srcCompat="@drawable/plane_landing" />
+    <!--<ImageView-->
+    <!--android:id="@+id/ivLanding"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/tvSecondDash"-->
+    <!--android:layout_alignEnd="@+id/etWeight"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignTop="@+id/etLocationEnd"-->
+    <!--android:layout_toStartOf="@+id/etMonthStart"-->
+    <!--android:backgroundTint="@color/background_color"-->
+    <!--app:srcCompat="@drawable/plane_landing" />-->
 
-    <FrameLayout
-        android:id="@+id/flFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_alignParentBottom="true"
+    <!--<FrameLayout-->
+    <!--android:id="@+id/flFAB"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_alignParentBottom="true"-->
 
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
-       >
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:layout_marginRight="12dp"-->
+    <!--&gt;-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:color/transparent"
-            app:backgroundTint="@color/colorPrimaryLight"
-            app:elevation="5dp" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fbConfirm"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@android:color/transparent"-->
+    <!--app:backgroundTint="@color/colorPrimaryLight"-->
+    <!--app:elevation="5dp" />-->
 
-        <TextView
-            android:id="@+id/tvConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:elevation="16dp"
-            android:text="OK"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white" />
-    </FrameLayout>
+    <!--<TextView-->
+    <!--android:id="@+id/tvConfirm"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:elevation="16dp"-->
+    <!--android:text="OK"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+    <!--android:textColor="@android:color/white" />-->
+    <!--</FrameLayout>-->
 
-    <TextView
-        android:id="@+id/tvHeading"
+    <!--<TextView-->
+    <!--android:id="@+id/tvHeading"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_above="@+id/ivTakeOff"-->
+    <!--android:layout_alignEnd="@+id/etLocationStart"-->
+    <!--android:layout_marginBottom="22dp"-->
+    <!--android:layout_toStartOf="@+id/flFAB"-->
+    <!--android:text="Courier Information"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--android:textStyle="bold" />-->
+
+
+    <LinearLayout
+        android:id="@+id/locations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ivTakeOff"
-        android:layout_alignEnd="@+id/etLocationStart"
-        android:layout_marginBottom="22dp"
-        android:layout_toStartOf="@+id/flFAB"
-        android:text="Courier Information"
+        android:layout_marginTop="21dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvWhere"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/StartLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignTop="@+id/EndLocation"
+            android:layout_toEndOf="@+id/EndLocation"
+            android:layout_marginLeft="8dp"
+
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <EditText
+                android:id="@+id/etLocationStart"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+
+                android:layout_above="@+id/imageView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:hint="Location"
+                android:inputType="text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="28sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_editor_absoluteY="-1dp" />
+        </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="40dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_weight="0.22"
+            app:srcCompat="@mipmap/if_arrow_right_392525" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/EndLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignTop="@+id/EndLocation"
+            android:layout_toEndOf="@+id/EndLocation"
+            android:layout_marginLeft="10dp"
+
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <EditText
+                android:id="@+id/etLocationEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+
+                android:layout_above="@+id/imageView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:hint="Location"
+                android:inputType="text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="28sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_editor_absoluteY="-1dp" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvWhere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:text="Where Are You Traveling?"
         android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvWhen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="When?"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/locations"
+        android:layout_alignParentStart="true" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/calendar"
+        android:layout_marginBottom="39dp"
+        android:layout_above="@+id/displaySenderStart"
+        android:layout_alignStart="@+id/textView5" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/calendar"
+        android:layout_marginStart="44dp"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/next" />
+
+    <TextView
+        android:id="@+id/tvTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <Button
+        android:id="@+id/next"
+
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_alignParentEnd="true"
+        android:layout_weight="4.33"
+        android:background="@drawable/buttonshape"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="NEXT"
+        android:onClick="nextLayout"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to:"
+        android:textSize="30sp"
+        android:id="@+id/textView2"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Date:"
+        android:textStyle="bold"
+        android:layout_marginEnd="24dp"
+        android:layout_alignBottom="@+id/tvEndDate"
+        android:layout_toStartOf="@+id/textView2"
+        android:layout_alignTop="@+id/tvEndDate" />
+
+    <TextView
+        android:id="@+id/tvEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Date:"
+        android:textStyle="bold"
+        android:layout_above="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/displaySenderStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next"
+        android:layout_marginBottom="50dp"
+        android:layout_alignStart="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/displaySenderEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next"
+        android:layout_marginBottom="50dp"
+        android:layout_alignStart="@+id/tvEndDate" />
 </RelativeLayout>

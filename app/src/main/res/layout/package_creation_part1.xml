@@ -42,13 +42,14 @@
             android:text="Start Date"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
+
         <TextView
             android:id="@+id/displaysenderstart"
-            android:layout_alignParentRight="true"
             android:layout_width="184dp"
             android:layout_height="45dp"
 
-            android:text="MEAW" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -59,13 +60,14 @@
         android:layout_width="181dp"
         android:layout_height="45dp"
         android:text="End Date" />
-    <TextView
-        android:id="@+id/displaysenderend"
-        android:layout_alignParentRight="true"
-        android:layout_width="184dp"
-        android:layout_height="45dp"
 
-        android:text="HELLO" />
+        <TextView
+            android:id="@+id/displaysenderend"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 
@@ -77,11 +79,15 @@
         android:layout_weight="0.05"
         android:text="Receiver Handle" />
 
-    <EditText
-        android:id="@+id/etreceiverHandleB"
-        android:layout_width="378dp"
-        android:layout_height="45dp"
-        android:inputType="text" />
+    <!--<EditText-->
+        <!--android:id="@+id/etreceiverHandleB"-->
+        <!--android:layout_width="378dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:inputType="text" />-->
+    <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/et_receiverHandle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/imageViewUp"
@@ -115,5 +121,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
     </FrameLayout>
+
+
 
 </LinearLayout>
