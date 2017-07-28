@@ -19,7 +19,7 @@
             android:id="@+id/whereTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:text="WHERE" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/whereTag"
             android:text="From where are you planning on sending it?"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
 
 
     </RelativeLayout>
@@ -117,7 +117,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
 
         android:background="@android:color/darker_gray" />
 
@@ -135,7 +135,7 @@
             android:id="@+id/whoTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:text="WHO" />
 
         <TextView
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/whoTag"
             android:text="Who are you sending it to?"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -170,15 +170,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!--<AutoCompleteTextView-->
-                    <!--android:id="@+id/et_receiverHandle"-->
-                    <!--android:gravity="left"-->
-                    <!--android:layout_width="155dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint=""-->
-                    <!--android:paddingLeft="200dp"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_alignParentEnd="true" />-->
 
                 <ImageView
                     android:id="@+id/whoIcon"
@@ -310,14 +301,14 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/next"
 
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="1dp"
         android:layout_marginTop="40dp"
 
         android:layout_weight="0.65"

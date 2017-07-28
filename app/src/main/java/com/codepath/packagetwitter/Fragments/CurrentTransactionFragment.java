@@ -20,7 +20,6 @@ import com.codepath.packagetwitter.TransactionAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +100,7 @@ public class CurrentTransactionFragment extends Fragment {
 
     public void populateTimeline(){
 
-        parseUser = ParseUser.getCurrentUser();
+//        parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
             transactions.clear();
             ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
