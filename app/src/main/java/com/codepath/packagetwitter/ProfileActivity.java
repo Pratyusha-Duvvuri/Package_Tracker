@@ -396,7 +396,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             setParametersOfView();
             }
         pagerAdapter.pendingTransactionFragment.populateTimeline();
-        pagerAdapter.currentTransactionFragment.populateTimeline();
         pagerAdapter.oldTransactionFragment.populateTimeline();
 
     }
