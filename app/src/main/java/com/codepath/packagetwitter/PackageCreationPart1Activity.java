@@ -75,9 +75,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        transaction = new ParselTransaction();
-        transaction.setTransactionState(20);
-        transaction.saveInBackground();
+//        transaction = new ParselTransaction();
+//        transaction.setTransactionState(20);
+//        transaction.saveInBackground();
         context = this;
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
