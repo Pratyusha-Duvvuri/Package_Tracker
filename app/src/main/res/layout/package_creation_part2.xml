@@ -13,12 +13,10 @@
         android:background="?android:attr/colorBackground"
         android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/ibPackageUpload"
+        <ImageView
+            android:id="@+id/ivPackageImage"
             android:layout_width="match_parent"
-            android:layout_height="214dp"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/ic_image_placeholder"
+            android:layout_height="210dp"
             app:srcCompat="@mipmap/ic_image_placeholder" />
 
         <View

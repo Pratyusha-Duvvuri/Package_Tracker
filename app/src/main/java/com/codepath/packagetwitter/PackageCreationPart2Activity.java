@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -87,6 +88,9 @@ public class PackageCreationPart2Activity extends Activity {
 
     //confirm button
     @BindView(R.id.btnConfirm) Button btnConfirm;
+
+    //Package image view
+    @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
 
 
     //default android text color
