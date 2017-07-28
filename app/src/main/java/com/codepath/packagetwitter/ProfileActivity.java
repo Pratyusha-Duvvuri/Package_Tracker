@@ -130,8 +130,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
 
-                    tvUsername.setText(parseUser.getString("fullName"));
-                    tvHandle.setText(parseUser.getUsername());
+
 
 
                 } else {
@@ -251,9 +250,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
 
     public void setParametersOfView() {
-        tvTagline.setText(parseUser.getString("tagline"));
-        tvUsername.setText(parseUser.getString("username"));
-        ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
+        tvTagline.setText(ParseUser.getCurrentUser().getString("tagline"));
+        Toast.makeText(this, "LLL"+parseUser.getString("tagline"), Toast.LENGTH_SHORT).show();
+        tvUsername.setText(ParseUser.getCurrentUser().getString("fullName"));
+        ParseFile postImage = ParseUser.getCurrentUser().getParseFile("ImageFile");
         if(postImage!=null) {
             String imageUrl = postImage.getUrl()
         ;//live url
