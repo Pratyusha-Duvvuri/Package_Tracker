@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +42,14 @@ public class CourierActivity extends AppCompatActivity {
 
 
 
-    @BindView(R.id.etLocationStart)EditText startLocation;
+    LinearLayout llSizeTitles;
+
+    TextView tvKey;
+    TextView tvPhone;
+    TextView tvBook;
+    TextView tvFish;
+
+    @BindView(R.id.etLocationStart)TextView startLocation;
 
     @BindView(R.id.etLocationEnd)TextView locationEnd;
     @BindView(R.id.displaySenderStart)TextView displaySenderStart;
@@ -65,7 +76,12 @@ public class CourierActivity extends AppCompatActivity {
     String startAddress;
     String endAddress;
     private View view1, view2;
+    RadioGroup rgSize;
+
     Context context;
+    String volume_string;
+
+    int defaultTextColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,17 +103,91 @@ public class CourierActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
 
-
                 startAddress =  startLocation.getText().toString();
                 endAddress =  locationEnd.getText().toString();
 
                 setContentView(view2);
+
+                llSizeTitles = view2.findViewById(R.id.llSizeTitles);
+                tvKey = view2.findViewById(R.id.tvKey);
+                tvPhone = view2.findViewById(R.id.tvKey);
+                tvFish =view2.findViewById(R.id.tvFishBowl);
+                rgSize = view2.findViewById(R.id.rgSize);
+
+
+
+
+
+
+
                 confirm = (Button) findViewById(R.id.btConfirm);
 
+                rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                        //takes in id of currently clicked item
+                        defaultTextColor = tvPhone.getTextColors().getDefaultColor();
+
+                        switch (i) {
+                            //switches bolded text based on currently selected item
+                            case R.id.rbKey:
+
+                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                                    if (llSizeTitles.getChildAt(j) == tvKey) {
+
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                                    }
+                                    else {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                                    }
+                                }
+                                break;
 
 
+
+                            case R.id.rbPhone:
+
+                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                                    if (llSizeTitles.getChildAt(j) == tvPhone) {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                                    }
+                                    else {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                                    }
+                                }
+                                break;
+
+                            case R.id.rbBook:
+
+                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                                    if (llSizeTitles.getChildAt(j) == tvBook) {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                                    }
+                                    else {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                                    }
+                                }
+                                break;
+
+                            case R.id.rbFishBowl:
+
+                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                                    if (llSizeTitles.getChildAt(j) == tvFish) {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                                    }
+                                    else {
+                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
 
                 showDialogButtonClick();
+
 
                 confirm.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
@@ -105,8 +195,10 @@ public class CourierActivity extends AppCompatActivity {
                         try {
                             weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
 
+                            onVerifyAction();
 
                             Intent i = new Intent(context, ProfileActivity.class);
+
                             setResult(RESULT_OK, i); // set result code and bundle data for response
                             finish(); // closes the activity, pass data to parent
                         }
@@ -119,7 +211,6 @@ public class CourierActivity extends AppCompatActivity {
 
 
 
-//               onVerifyAction();
             }
         });
 
@@ -199,7 +290,25 @@ public class CourierActivity extends AppCompatActivity {
     public void onVerifyAction() {
 
 
+
         //queries all pending transactions
+
+        if (rgSize.getCheckedRadioButtonId() == R.id.rbKey) {
+            volumes = 0;
+            volume_string = "Key Sized";
+        }
+        else if (rgSize.getCheckedRadioButtonId() == R.id.rbPhone) {
+            volumes = 1;
+            volume_string = "Phone Sized";
+        }
+        else if (rgSize.getCheckedRadioButtonId() == R.id.rbBook) {
+            volumes = 2;
+            volume_string = "Book Sized";
+        }
+        else {
+            volumes = 3;
+            volume_string = "Fish Bowl Sized";
+        }
 
         parseUser = ParseUser.getCurrentUser();
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);

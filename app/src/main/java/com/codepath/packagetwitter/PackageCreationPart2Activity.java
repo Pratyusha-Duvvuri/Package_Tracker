@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -88,6 +89,9 @@ public class PackageCreationPart2Activity extends Activity {
     //confirm button
     @BindView(R.id.btnConfirm) Button btnConfirm;
 
+    //Package image view
+    @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
+
 
     //default android text color
     int defaultTextColor;
@@ -111,6 +115,7 @@ public class PackageCreationPart2Activity extends Activity {
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
+
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
         rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

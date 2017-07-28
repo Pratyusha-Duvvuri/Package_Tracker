@@ -36,6 +36,7 @@ public class ReviewActivity extends AppCompatActivity {
     String title;
     String description;
     int volume;
+    String volume_string;
     Double weight;
     String type;
     Boolean fragile;
@@ -60,6 +61,7 @@ public class ReviewActivity extends AppCompatActivity {
         title  = getIntent().getStringExtra("title");
         description = getIntent().getStringExtra("description");
         volume = getIntent().getIntExtra("volume",-1);
+        volume_string = getIntent().getStringExtra("volume_string");
         weight =   getIntent().getDoubleExtra("weight",-1);
         type = getIntent().getStringExtra("type");
         fragile = getIntent().getBooleanExtra("fragile",false);
@@ -78,43 +80,42 @@ public class ReviewActivity extends AppCompatActivity {
 
         fl.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
-            public void onSwipeRight() {
-
-                if(page ==2){
-                page =1;
-                ft = getSupportFragmentManager().beginTransaction();
-                Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description);
-
-                ft.replace(R.id.flContainer, fragment);
-                ft.commit();
-
-            }
-                else {
-                page = 0;
-                ft = getSupportFragmentManager().beginTransaction();
-                Review_frag fragment =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
-
-                ft.replace(R.id.flContainer, fragment);
-                ft.commit();
-
-            }
-
-            }
-            @Override
             public void onSwipeLeft() {
 
+                if(page == 0) {
 
-                if (page == 0) {
                     page = 1;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description);
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+                }
 
+
+                else {
+                    page = 2;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile, volume_string);
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+
+                }
+
+            }
+
+            @Override
+            public void onSwipeRight() {
+                if (page == 2) {
+
+                    page = 1;
                     ft = getSupportFragmentManager().beginTransaction();
                     Review_frag_two fragment = Review_frag_two.newInstance(image, title, description);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
                 } else {
-                    page = 2;
+                    page = 0;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile);
+                    Review_frag fragment =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
                 }
@@ -122,9 +123,7 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
         Review_frag ffrag=  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
-
-        ft.replace(R.id.flContainer,fragment_one);
-
+        ft.replace(R.id.flContainer,ffrag);
         ft.commit();
 
     }

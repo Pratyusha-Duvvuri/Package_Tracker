@@ -34,7 +34,9 @@ public class Review_frag extends Fragment {
             tvHandle.setText(getArguments().getString("receiver"));
             tvStartDate.setText(getArguments().getString("startDate"));
             tvEndDate.setText(getArguments().getString("endDate"));
-return v;
+
+
+            return v;
 
         }
     public static Review_frag newInstance(String startAddress, String endAddress, String receiver, String startDate, String endDate) {

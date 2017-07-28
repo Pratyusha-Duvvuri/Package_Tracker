@@ -4,6 +4,102 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvPackageSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white"
+        android:paddingTop="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_below="@+id/tvPackageSize"
+        android:layout_centerHorizontal="true">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/rgSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbKey"
+                        style="@style/KeyButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:id="@+id/rbPhone"
+                        style="@style/ElectronicsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:id="@+id/rbBook"
+                        style="@style/BooksButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:id="@+id/rbFishBowl"
+                        style="@style/FishBowlButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/llSizeTitles"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvKey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Key Sized" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="Phone Sized" />
+
+                    <TextView
+                        android:id="@+id/tvBook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="Book Sized" />
+
+                    <TextView
+                        android:id="@+id/tvFishBowl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="Fish Bowl Sized" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </android.support.v7.widget.CardView>
+
     <Button
         android:id="@+id/btConfirm"
 
@@ -39,7 +135,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="42dp"
         android:layout_below="@+id/cvPackageSize"
-        android:layout_alignStart="@+id/cvPackageSize">
+        >
 
 
         <RelativeLayout
@@ -50,12 +146,12 @@
                 android:id="@+id/tvlbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tvWeight"
-                android:layout_alignBottom="@+id/tvWeight"
-                android:layout_toEndOf="@+id/tvWeightTrue"
                 android:text="lbs"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignBottom="@+id/tvWeight"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="32dp" />
 
             <EditText
                 android:id="@+id/etWeight"
@@ -99,111 +195,5 @@
         android:layout_below="@+id/tvTitle"
         android:layout_alignParentStart="true"
         android:layout_marginTop="31dp" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cvPackageSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:background="@color/white"
-        android:paddingTop="20dp"
-        android:layout_below="@+id/tvPackageSize"
-        android:layout_alignParentStart="true">
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/llSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/llKey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/ibKey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_key" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Key Sized" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-                    <ImageButton
-                        android:id="@+id/ibPhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_electronics" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Phone Sized" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llBook"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-                    <ImageButton
-                        android:id="@+id/ibBookSized"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_books" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Book Sized" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llFishbowl"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-                    <ImageButton
-                        android:id="@+id/ibFishBowl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_fishbowl" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fish Bowl Sized" />
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
