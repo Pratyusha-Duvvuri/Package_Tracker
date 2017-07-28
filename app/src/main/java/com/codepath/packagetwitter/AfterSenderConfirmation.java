@@ -3,13 +3,18 @@ package com.codepath.packagetwitter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.packagetwitter.Fragments.Review_frag;
+import com.codepath.packagetwitter.Fragments.Review_frag_three;
+import com.codepath.packagetwitter.Fragments.Review_frag_two;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.Receiver;
@@ -20,10 +25,11 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AfterSenderConfirmation extends AppCompatActivity{
 
@@ -57,68 +63,119 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
     @BindView(R.id.myFABReject)FloatingActionButton fabReject;
     ParselTransaction transaction;
+    View view1;
+    View view2;
+    int page = 0;
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        view1 = getLayoutInflater().inflate(R.layout.activity_receiver, null);
+        view2 = getLayoutInflater().inflate(R.layout.activity_after_sender_confirmation, null);
+        setContentView(view1);
 
-        setContentView(R.layout.activity_after_sender_confirmation);
 
-        ButterKnife.bind(this);
+       // ButterKnife.bind(this);
         ParseUser parseUser = ParseUser.getCurrentUser();
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-        // Define our query conditions
-//        query.whereEqualTo("receiver", parseUser.getUsername());
-//        query.whereEqualTo("transactionState", 0);
-//
-//        // Execute the find asynchronously
-//        query.findInBackground(new FindCallback<ParselTransaction>() {
-//            @Override
-//            public void done(List<ParselTransaction> issueList, ParseException e) {
-//                if (e == null) {
-//                    transaction =  issueList.get(0);
-//                    onSetLayout();
-//
-//
-//                } else {
-//                    Log.d("score", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
+
         transaction= ProfileActivity.currentReceive;
 
+        FrameLayout fl = (FrameLayout)findViewById(R.id.flContainer);
+        fl.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeRight() {
+
+                if(page ==2){
+                    page =1;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_two fragment =  Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
+                            transaction.getString("title"),transaction.getMailDescription());
+
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+
+                }
+                else {
+                    page = 0;
+                    DateFormat df = new SimpleDateFormat("MM/dd/yy");
+
+                    String startDay  = df.format(transaction.getSenderStart());
+                    String endDay = df.format(transaction.getSenderEnd());
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
+                            transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+
+                }
+
+            }
+            @Override
+            public void onSwipeLeft() {
+
+
+                if (page == 0) {
+                    page = 1;
+
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_two fragment = Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
+                            transaction.getString("title"),transaction.getMailDescription());
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+                } else {
+                    page = 2;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_three fragment = Review_frag_three.newInstance(transaction.getMailType(),
+                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
+                }
+            }
+        });
+
+        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+
+        String startDay  = df.format(transaction.getSenderStart());
+        String endDay = df.format(transaction.getSenderEnd());
+        Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
+                transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+
+        ft.replace(R.id.flContainer,fragment);
+
+        ft.commit();
 
 
         //set listener for confirmation
 
-        fabOkay.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-//                receiver.setTripStart(startDate.getText().toString());
-//                receiver.setTripEnd(endDate.getText().toString());
-//                receiver.setLocation((receiverLocation.getText().toString()));
-
-                //TODO - get the dates from the form in receiver
-                transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd(), receiverLocation.getText().toString());
-                transaction.saveEventually();
-                //Call the modal to verify information
-                onVerifyAction();
-
-            }
-        });
-
-        fabReject.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                //set transaction state to seven and delete transaction
-                transaction.setTransactionState(9);
-                transaction.saveInBackground();
-                finishIntent();
-
-            }
-        });
+//        fabOkay.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//
+//
+//
+//                //TODO - get the dates from the form in receiver
+//                transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd(), receiverLocation.getText().toString());
+//                transaction.saveEventually();
+//                //Call the modal to verify information
+//                onVerifyAction();
+//
+//            }
+//        });
+//
+//        fabReject.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//
+//                //set transaction state to seven and delete transaction
+//                transaction.setTransactionState(9);
+//                transaction.saveInBackground();
+//                finishIntent();
+//
+//            }
+//        });
     }
     public void onVerifyAction(){
 
@@ -215,6 +272,15 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     }
 
 
+
+
+    public void confirm(View v) throws ParseException {
+
+        transaction.addReceiverInfo(transaction.getSenderStart(), transaction.getSenderEnd());
+                transaction.saveEventually();
+//                //Call the modal to verify information
+               onVerifyAction();
+    }
 }
 
 //package com.codepath.packagetwitter;

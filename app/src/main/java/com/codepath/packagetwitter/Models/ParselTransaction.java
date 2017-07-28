@@ -43,7 +43,7 @@ public class ParselTransaction extends ParseObject{
         //for when courier creates the package
     }
 
-    public ParselTransaction(String receiver, String sender, String senderLoc, Date sendStart, Date sendEnd
+    public ParselTransaction(String receiver, String sender, String senderLoc, String receiverLoc, Date sendStart, Date sendEnd
                              , String type, String description, Double weight,
                              int volume) {
         //for when sender creates package
@@ -53,7 +53,7 @@ public class ParselTransaction extends ParseObject{
         setSenderLoc(senderLoc);
         setSenderStart(sendStart);
         setSenderEnd(sendEnd);
-
+        setReceiverLoc(receiverLoc);
         setMailType(type);
         setMailDescription(description);
         setWeight(weight);
@@ -71,17 +71,19 @@ public class ParselTransaction extends ParseObject{
                 if (e == null) {
                     // The query was successful.
                     ParseUser userr = null;
-                    try {
-                        userr = logIn(objects.get(0).getString("username"), "x");
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
-                    }
-                    userr.put("hasPendingRequests", true); // attempt to change username
-                    userr.saveInBackground();
-                    try {
-                        userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
+                    if(objects.size()!=0) {
+                        try {
+                            userr = logIn(objects.get(0).getString("username"), "x");
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+                        userr.put("hasPendingRequests", true); // attempt to change username
+                        userr.saveInBackground();
+                        try {
+                            userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
 
@@ -98,11 +100,10 @@ public class ParselTransaction extends ParseObject{
 
     }
 
-    public void addReceiverInfo(Date receiverStart, Date receiverEnd, String receiverLoc){
+    public void addReceiverInfo(Date receiverStart, Date receiverEnd){
         setReceiverStart(receiverStart);
         setReceiverEnd(receiverEnd);
         setTransactionState(1);
-        setReceiverLoc(receiverLoc);
     }
     public void addCourierInfo(String courierId, Date courierStart, Date courierEnd){
         setCourier(courierId);

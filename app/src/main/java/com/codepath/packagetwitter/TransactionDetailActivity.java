@@ -121,7 +121,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
-
+                materialDesignFAM.close(true);
                 startActivity(i);
 
             }

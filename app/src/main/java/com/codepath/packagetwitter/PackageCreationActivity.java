@@ -115,14 +115,14 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
 
                 //creating new transaction parse object
-                ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
-                        USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
-                        senderEndDate, spPackageType.getSelectedItem().toString(),
-                        etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
-                        Integer.parseInt(etVolume.getText().toString()));
-                transaction.saveEventually();
-                parseUser.add("pendingTransactions", transaction);
-                parseUser.saveEventually();
+////                ParselTransaction transaction = new ParselTransaction(etReceiverHandle.getText().toString(),
+////                        USER.getUserHandle(), etSenderLocation.getText().toString(), senderStartDate,
+////                        senderEndDate, spPackageType.getSelectedItem().toString(),
+////                        etDescription.getText().toString(), Double.parseDouble(etWeight.getText().toString()),
+////                        Integer.parseInt(etVolume.getText().toString()));
+////                transaction.saveEventually();
+//                parseUser.add("pendingTransactions", transaction);
+//                parseUser.saveEventually();
                 Intent i = new Intent(context, ProfileActivity.class);
                 setResult(RESULT_OK, i);
                 finish();
@@ -167,7 +167,7 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
 
         //creating new transaction parse object
         ParselTransaction transaction = new ParselTransaction("p2@gmail.com",
-                parseUser.getUsername(), "Rio", senderStartDate,
+                parseUser.getUsername(), "Rio", "tokyo", senderStartDate,
                 senderEndDate,"Take me",
                 "dsfs", 5.640987654345678,
                 1);

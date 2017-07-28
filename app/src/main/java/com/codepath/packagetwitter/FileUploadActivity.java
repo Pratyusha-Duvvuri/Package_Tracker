@@ -188,7 +188,6 @@ public class FileUploadActivity extends Activity {
 
 
     public void doIT(){
-
             parseUser.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e1) {
@@ -199,11 +198,6 @@ public class FileUploadActivity extends Activity {
                         String tagline_is = parseUser.getString("tagline");
                         //here the old one is getting deplayed
                         Toast.makeText(FileUploadActivity.this, tagline_is, Toast.LENGTH_SHORT).show();
-//                        try {
-//                            Thread.sleep(5000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
 
                         setResult(RESULT_OK, i); // set result code and bundle data for response
                         finish(); // closes the activity, pass data to parent
