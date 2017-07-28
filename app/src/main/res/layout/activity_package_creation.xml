@@ -344,8 +344,8 @@
         android:id="@+id/ivPackage"
         android:layout_width="300dp"
         android:layout_height="168.75dp"
-        android:layout_above="@+id/etDescription"
-        android:layout_alignStart="@+id/etDescription"
+        android:layout_above="@+id/tvDescription"
+        android:layout_alignStart="@+id/tvDescription"
         app:srcCompat="@color/colorPrimaryDark" />
 
 </RelativeLayout>
