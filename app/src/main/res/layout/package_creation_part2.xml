@@ -2,6 +2,7 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="214dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_image_placeholder" />
+            android:src="@mipmap/ic_image_placeholder"
+            app:srcCompat="@mipmap/ic_image_placeholder" />
 
         <View
             android:layout_width="match_parent"
@@ -121,205 +123,156 @@
                     android:id="@+id/llType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/llClothes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <RadioGroup
+                        android:id="@+id/rgType"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                        <ImageButton
-                            android:id="@+id/ibClothes"
+                        <RadioButton
+                            android:id="@+id/rbClothes"
+                            style="@style/ClothesButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_clothes" />
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbElectronics"
+                            style="@style/ElectronicsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="15dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbBooks"
+                            style="@style/BooksButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbGames"
+                            style="@style/GamesButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbMovies"
+                            style="@style/MoviesButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbFood"
+                            style="@style/FoodButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbHealth"
+                            style="@style/HealthButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbBeauty"
+                            style="@style/BeautyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbOther"
+                            style="@style/OtherButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/llTypeTitles"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tvClothes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Clothes" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llElectronics"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibElectronics"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_electronics" />
 
                         <TextView
                             android:id="@+id/tvElectronics"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
                             android:text="Electronics" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llBooks"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibBooks"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_books" />
 
                         <TextView
                             android:id="@+id/tvBooks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
                             android:text="Books" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llGames"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibGames"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_games" />
 
                         <TextView
                             android:id="@+id/tvGames"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
                             android:text="Games" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llMovies"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibMovies"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_movies" />
 
                         <TextView
                             android:id="@+id/tvMovies"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
                             android:text="Movies" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llFood"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibFood"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_food" />
 
                         <TextView
                             android:id="@+id/tvFood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
                             android:text="Food" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llHeath"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibHealth"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_health" />
 
                         <TextView
                             android:id="@+id/tvHealth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
                             android:text="Health" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llBeauty"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibBeauty"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_beauty" />
 
                         <TextView
                             android:id="@+id/tvBeauty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
                             android:text="Beauty" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llOther"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibOther"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_other" />
 
                         <TextView
                             android:id="@+id/tvOther"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="20dp"
                             android:text="Other" />
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -353,90 +306,79 @@
                     android:id="@+id/llSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/llKey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <RadioGroup
+                        android:id="@+id/rgSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                        <ImageButton
-                            android:id="@+id/ibKey"
+                        <RadioButton
+                            android:id="@+id/rbKey"
+                            style="@style/KeyButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_key" />
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbPhone"
+                            style="@style/ElectronicsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbBook"
+                            style="@style/BooksButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbFishBowl"
+                            style="@style/FishBowlButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/llSizeTitles"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvKey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Key Sized" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibPhone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_electronics" />
 
                         <TextView
+                            android:id="@+id/tvPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
                             android:text="Phone Sized" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llBook"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibBookSized"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_books" />
 
                         <TextView
+                            android:id="@+id/tvBook"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
                             android:text="Book Sized" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llFishbowl"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
-                        <ImageButton
-                            android:id="@+id/ibFishBowl"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@android:color/transparent"
-                            android:src="@mipmap/ic_fishbowl" />
 
                         <TextView
+                            android:id="@+id/tvFishBowl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
                             android:text="Fish Bowl Sized" />
+
                     </LinearLayout>
+
+
                 </LinearLayout>
             </HorizontalScrollView>
         </android.support.v7.widget.CardView>
@@ -483,7 +425,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="20dp"
+                android:paddingTop="12dp"
                 android:text="Fragile: "
                 android:textSize="18sp" />
 
@@ -497,8 +439,8 @@
                 <RadioButton
                     android:id="@+id/rbYes"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="43dp"
+                    android:layout_weight="1.00"
                     android:text="Yes" />
 
                 <RadioButton
