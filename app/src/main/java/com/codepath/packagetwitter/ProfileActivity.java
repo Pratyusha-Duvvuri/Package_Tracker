@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.LogoutFragment;
+import com.codepath.packagetwitter.Fragments.NewPackageFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
@@ -83,6 +84,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
+        if (getIntent().getBooleanExtra("newPackage",false)== true){
+            //if a new paclage was created
+            newPackage();
+        }
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -130,8 +135,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
 
-                    tvUsername.setText(parseUser.getString("fullName"));
-                    tvHandle.setText(parseUser.getUsername());
+
 
 
                 } else {
@@ -192,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        For image profie view
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
+                Intent i = new Intent(ProfileActivity.this, ReviewActivity.class);
 
                 startActivity(i);
             }
@@ -250,10 +254,20 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     }
 
+    public void newPackage(){
+
+            FragmentManager fm = getSupportFragmentManager();
+            NewPackageFragment editNameDialogFragment = new NewPackageFragment();
+            editNameDialogFragment.show(fm, "new_package_fragment");
+
+
+    }
+
     public void setParametersOfView() {
-        tvTagline.setText(parseUser.getString("tagline"));
-        tvUsername.setText(parseUser.getString("username"));
-        ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
+        tvTagline.setText(ParseUser.getCurrentUser().getString("tagline"));
+        Toast.makeText(this, "LLL"+parseUser.getString("tagline"), Toast.LENGTH_SHORT).show();
+        tvUsername.setText(ParseUser.getCurrentUser().getString("fullName"));
+        ParseFile postImage = ParseUser.getCurrentUser().getParseFile("ImageFile");
         if(postImage!=null) {
             String imageUrl = postImage.getUrl()
         ;//live url
@@ -283,7 +297,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         query.whereEqualTo("transactionState", 0); //pending transaction state
-        query.whereEqualTo("receiver", parseUser.getString("username")); //pending transaction state
+        query.whereEqualTo("receiver", parseUser.getString("fullName")); //pending transaction state
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
 
