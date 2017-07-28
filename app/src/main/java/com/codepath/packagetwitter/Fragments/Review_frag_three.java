@@ -42,13 +42,12 @@ public class Review_frag_three extends Fragment {
         return v;
 
     }
-    public static Review_frag_three newInstance(String type, int volume, Double weight, boolean fragile, String volume_string) {
+    public static Review_frag_three newInstance(String type, int volume, Double weight, boolean fragile) {
 
         Bundle args = new Bundle();
         args.putString("type", type);
         args.putDouble("weight", weight);
         args.putInt("volume", volume);
-        args.putString("volume_string", volume_string);
         args.putBoolean("fragile", fragile);
         Review_frag_three fragment = new Review_frag_three();
         fragment.setArguments(args);

@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,8 +36,10 @@ import permissions.dispatcher.NeedsPermission;
  * Created by pratyusha98 on 7/25/17.
  */
 
-public class PackageCreationPart2Activity extends Activity {
+
+public class PackageCreationPart2Activity extends AppCompatActivity {
     byte[] YOIMG;
+
     ParselTransaction trans;
     public static final int REVIEW_REQUEST=90;
 
@@ -118,14 +122,14 @@ public class PackageCreationPart2Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        setSupportActionBar().setTitle("YAY");
         final Context context = this;
 
         // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+        ((TextView) findViewById(R.id.main_toolbar_title)).setText("Package Details");
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
 
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
