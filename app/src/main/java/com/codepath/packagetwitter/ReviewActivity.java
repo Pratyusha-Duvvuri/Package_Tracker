@@ -51,9 +51,9 @@ public class ReviewActivity extends AppCompatActivity {
 
         FrameLayout fl = (FrameLayout)findViewById(R.id.flContainer);
 
-        startAddress = getIntent().getStringExtra("startAddress");
-        endAddress = getIntent().getStringExtra("endAddress");
-        receiver = getIntent().getStringExtra("receiver");
+        startAddress = getIntent().getStringExtra("senderLocation");
+        endAddress = getIntent().getStringExtra("receiverLocation");
+        receiver = getIntent().getStringExtra("receiverHandle");
         startDate   = getIntent().getStringExtra("startDate");
         endDate  = getIntent().getStringExtra("endDate");
         image  = getIntent().getByteArrayExtra("image");
@@ -84,9 +84,10 @@ public class ReviewActivity extends AppCompatActivity {
         }
 
 
+
         fl.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
-            public void onSwipeRight() {
+            public void onSwipeLeft() {
                 if(page ==0){
                     page = 1;
 
@@ -105,7 +106,7 @@ public class ReviewActivity extends AppCompatActivity {
 
             }
             @Override
-            public void onSwipeLeft() {
+            public void onSwipeRight() {
                 if(page ==2){
                     page =1;
                     ft = getSupportFragmentManager().beginTransaction();
