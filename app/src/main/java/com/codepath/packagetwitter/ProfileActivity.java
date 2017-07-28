@@ -44,6 +44,7 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener, RejectedRequestFragment.SendResultListener {
 
+    private static final int PACKAGE_CREATION =76 ;
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
     User user;
@@ -170,9 +171,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        For image profie view
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, ReviewActivity.class);
+                Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
 
-                startActivity(i);
+
+                startActivityForResult(i,PACKAGE_CREATION);
             }
         });
         ivProfileImage.setOnClickListener(new View.OnClickListener() {
@@ -276,8 +278,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void done(ParseUser item, ParseException e) {
                 if (e == null) {
                     parseUser = item;
-
-
 
                 } else {
                     Toast.makeText(ProfileActivity.this, "Can't access user",

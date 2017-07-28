@@ -100,7 +100,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //save information
-                        if(proceed)
                         saveInformation();
                     }
                 }
@@ -175,17 +174,39 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
 //        //creating new transaction parse object
 
-        transaction.setSenderStart(senderStartDate);
-        transaction.setSenderEnd(senderEndDate);
-        transaction.setReceiver(receiverHandle.getText().toString());
-        transaction.setSenderLoc(senderLocationB.getText().toString());
-        transaction.setReceiverLoc(receiverLocationB.getText().toString());
-        transaction.saveEventually();
+//        transaction.setSenderStart(senderStartDate);
+//        transaction.setSenderEnd(senderEndDate);
+//        transaction.setReceiver(receiverHandle.getText().toString());
+//        transaction.setSenderLoc(senderLocationB.getText().toString());
+//        transaction.setReceiverLoc(receiverLocationB.getText().toString());
+//        transaction.saveEventually();
         //parseUser.add("pendingTransactions", transaction);
-        transaction.saveEventually();
+//        transaction.saveEventually();
+        String strsenderStartDate= senderStartDate.toString();
+        String strsenderEndDate= senderEndDate.toString();
+
         Intent i = new Intent(PackageCreationPart1Activity.this, PackageCreationPart2Activity.class);
-        i.putExtra("TRANSACTION", transaction.getObjectId());
-        startActivityForResult(i, PART2);//
+
+        i.putExtra("senderStartDate", strsenderStartDate);
+        i.putExtra("senderEndDate", strsenderEndDate);
+        i.putExtra("receiverHandle", receiverHandle.getText().toString());
+        i.putExtra("senderLocation", senderLocationB.getText().toString());
+        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
+        startActivityForResult(i, PART2);
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == PART2) {
+            // Extract name value from result extras
+           returnToProfileActivity();
+
+        }
+    }
+
+    public void returnToProfileActivity(){
+
 
     }
 
