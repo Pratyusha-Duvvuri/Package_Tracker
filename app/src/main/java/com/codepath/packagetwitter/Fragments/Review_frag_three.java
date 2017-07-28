@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter.Fragments;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,7 +35,11 @@ public class Review_frag_three extends Fragment {
         String type = getArguments().getString("type");
         int volume = getArguments().getInt("volume") ;
         tvType.setText(getArguments().getString("type"));
-        tvSize.setText(String.valueOf(getArguments().getString("volume_string")));
+
+        TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
+        int size = (int) (Math.random() * sizes.length());
+
+        tvSize.setText(sizes.getString(size));
         tvWeight.setText(String.valueOf(getArguments().getDouble("weight")));
         setFragile(v);
         if (type == "Clothes")
@@ -42,13 +47,12 @@ public class Review_frag_three extends Fragment {
         return v;
 
     }
-    public static Review_frag_three newInstance(String type, int volume, Double weight, boolean fragile, String volume_string) {
+    public static Review_frag_three newInstance(String type, int volume, Double weight, boolean fragile) {
 
         Bundle args = new Bundle();
         args.putString("type", type);
         args.putDouble("weight", weight);
         args.putInt("volume", volume);
-        args.putString("volume_string", volume_string);
         args.putBoolean("fragile", fragile);
         Review_frag_three fragment = new Review_frag_three();
         fragment.setArguments(args);

@@ -39,6 +39,27 @@
         <item>Tel Aviv</item>
     </array>
 
+    <!--"Key Sized";-->
+    <!--}-->
+    <!--else if (rgSize.getCheckedRadioButtonId() == R.id.rbPhone) {-->
+    <!--volume = 1;-->
+    <!--volume_string = "Phone Sized";-->
+    <!--}-->
+    <!--else if (rgSize.getCheckedRadioButtonId() == R.id.rbBook) {-->
+    <!--volume = 2;-->
+    <!--volume_string = "Book Sized";-->
+    <!--}-->
+    <!--else {-->
+    <!--volume = 3;-->
+    <!--volume_string = "Fish Bowl Sized";-->
+
+    <array name ="sizes">
+        <item>Key Sized</item>
+        <item>Phone Sized</item>
+        <item>Book Sized</item>
+        <item>Fish Bowl Sized</item>
+    </array>
+
 
 
     <array name="contact_numbers">
