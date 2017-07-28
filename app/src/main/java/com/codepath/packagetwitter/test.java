@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,8 +28,10 @@ public class test extends AppCompatActivity {
 
     boolean key_outline = true;
     boolean phone_outline = true;
-    int icon;
-    int color;
+    int iconkey;
+    int iconphone;
+    int colorkey;
+    int colorphone;
     int defaultTextColor;
 
     @Override
@@ -38,122 +41,72 @@ public class test extends AppCompatActivity {
         setContentView(R.layout.test);
         ButterKnife.bind(this);
         defaultTextColor = tvKey.getTextColors().getDefaultColor();
-        /*
-        rbKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (key_outline) {
-                    key_outline = false;
-                    icon = R.mipmap.ic_key_filled;
-                    color = Color.BLACK;
-                }
-                else {
-                    key_outline = true;
-                    icon = R.mipmap.ic_key;
-                    color = defaultTextColor;
-                }
-                rbKey.setButtonDrawable(icon);
-                tvKey.setTextColor(color);
-            }
-        });
-        */
-        /*
-        rbPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (phone_outline) {
-                    phone_outline = false;
-                    icon = R.mipmap.ic_electronics_filled;
-                    color = Color.BLACK;
-                }
-                else {
-                    key_outline = true;
-                    icon = R.mipmap.ic_electronics;
-                    color = defaultTextColor;
-                }
-                rbPhone.setButtonDrawable(icon);
-                tvPhone.setTextColor(color);
-            }
-        });
-        */
+
+
 
         rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                Log.d("WORK", String.valueOf(radioGroup.getId()));
+                Log.d("WORK", String.valueOf(i));
+                Log.d("WORK", String.valueOf(R.id.rb1));
+                Log.d("WORK", String.valueOf(R.id.rb2));
                 switch (i) {
                     case R.id.rb1 :
+
+                        rbPhone.setChecked(false);
+                        phone_outline = true;
+                        iconphone = R.mipmap.ic_electronics;
+                        colorphone = defaultTextColor;
+                        rbBook.setChecked(false);
+                        rbFish.setChecked(false);
+
                         if (key_outline) {
                             key_outline = false;
-                            icon = R.mipmap.ic_key_filled;
-                            color = Color.BLACK;
+                            iconkey = R.mipmap.ic_key_filled;
+                            colorkey = Color.BLACK;
                         }
                         else {
                             key_outline = true;
-                            icon = R.mipmap.ic_key;
-                            color = defaultTextColor;
+                            iconkey = R.mipmap.ic_key;
+                            colorkey = defaultTextColor;
                         }
-                        rbKey.setButtonDrawable(icon);
-                        tvKey.setTextColor(color);
+                        rbKey.setButtonDrawable(iconkey);
+                        rbPhone.setButtonDrawable(iconphone);
+                        tvKey.setTextColor(colorkey);
+                        tvPhone.setTextColor(colorphone);
                         break;
 
                     case R.id.rb2:
+
+                        rbKey.setChecked(false);
+                        key_outline = true;
+                        iconkey = R.mipmap.ic_key;
+                        colorkey = defaultTextColor;
+                        rbBook.setChecked(false);
+                        rbFish.setChecked(false);
+
                         if (phone_outline) {
                             phone_outline = false;
-                            icon = R.mipmap.ic_electronics_filled;
-                            color = Color.BLACK;
+                            iconphone = R.mipmap.ic_electronics_filled;
+                            colorphone = Color.BLACK;
                         }
                         else {
-                            key_outline = true;
-                            icon = R.mipmap.ic_electronics;
-                            color = defaultTextColor;
+                            phone_outline = true;
+                            iconphone = R.mipmap.ic_electronics;
+                            colorphone = defaultTextColor;
                         }
-                        rbPhone.setButtonDrawable(icon);
-                        tvPhone.setTextColor(color);
+                        rbPhone.setButtonDrawable(iconphone);
+                        rbKey.setButtonDrawable(iconkey);
+                        tvKey.setTextColor(colorkey);
+                        tvPhone.setTextColor(colorphone);
                         break;
-                }
-            }
-        });
-        /*
-        rgSize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case rb1 :
-                        if (key_outline) {
-                            key_outline = false;
-                            icon = R.mipmap.ic_key_filled;
-                            color = Color.BLACK;
-                        }
-                        else {
-                            key_outline = true;
-                            icon = R.mipmap.ic_key;
-                            color = defaultTextColor;
-                        }
-                        rbKey.setButtonDrawable(icon);
-                        tvKey.setTextColor(color);
-                        break;
-
-                    case R.id.rb2:
-                        if (phone_outline) {
-                            phone_outline = false;
-                            icon = R.mipmap.ic_electronics_filled;
-                            color = Color.BLACK;
-                        }
-                        else {
-                            key_outline = true;
-                            icon = R.mipmap.ic_electronics;
-                            color = defaultTextColor;
-                        }
-                        rbPhone.setButtonDrawable(icon);
-                        tvPhone.setTextColor(color);
-                        break;
-
                     default:
                         break;
                 }
             }
         });
-        */
+
 
     }
 }

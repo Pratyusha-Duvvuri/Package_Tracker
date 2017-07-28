@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.LogoutFragment;
+import com.codepath.packagetwitter.Fragments.NewPackageFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
@@ -90,6 +91,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
+        if (getIntent().getBooleanExtra("newPackage",false)== true){
+            //if a new paclage was created
+            newPackage();
+        }
 
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
@@ -165,7 +170,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        For image profie view
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
+                Intent i = new Intent(ProfileActivity.this, ReviewActivity.class);
 
                 startActivity(i);
             }
@@ -219,6 +224,15 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 }
             }
         });
+
+
+    }
+
+    public void newPackage(){
+
+            FragmentManager fm = getSupportFragmentManager();
+            NewPackageFragment editNameDialogFragment = new NewPackageFragment();
+            editNameDialogFragment.show(fm, "new_package_fragment");
 
 
     }

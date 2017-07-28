@@ -1,0 +1,43 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svRequest"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/llRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lbl_your_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="You just successfully sent a package request! A request was just sent to the receiver."
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/flForm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="196dp"
+            android:layout_height="29dp"
+
+            android:background="@drawable/buttonshape"
+            android:text="OK"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

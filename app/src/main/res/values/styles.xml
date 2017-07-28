@@ -13,5 +13,37 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="KeyButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/keybutton</item>
+    </style>
+    <style name="ElectronicsButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/electronicsbutton</item>
+    </style>
+    <style name="BooksButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/booksbutton</item>
+    </style>
+    <style name="FishBowlButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/fishbowlbutton</item>
+    </style>
+    <style name="ClothesButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/clothesbutton</item>
+    </style>
+    <style name="GamesButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/gamesbutton</item>
+    </style>
+    <style name="MoviesButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/moviesbutton</item>
+    </style>
+    <style name="FoodButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/foodbutton</item>
+    </style>
+    <style name="HealthButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/healthbutton</item>
+    </style>
+    <style name="BeautyButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/beautybutton</item>
+    </style>
+    <style name="OtherButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/otherbutton</item>
+    </style>
 </resources>
