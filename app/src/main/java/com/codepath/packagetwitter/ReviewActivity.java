@@ -95,7 +95,7 @@ public class ReviewActivity extends AppCompatActivity {
                 else {
                     page = 2;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile, volume_string);
+                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
 
