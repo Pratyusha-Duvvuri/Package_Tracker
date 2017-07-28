@@ -111,6 +111,7 @@ public class PackageCreationPart2Activity extends Activity {
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
+
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
         rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
