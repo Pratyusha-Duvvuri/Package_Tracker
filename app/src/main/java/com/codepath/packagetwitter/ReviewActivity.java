@@ -64,6 +64,7 @@ public class ReviewActivity extends AppCompatActivity {
         type = getIntent().getStringExtra("type");
         fragile = getIntent().getBooleanExtra("fragile",false);
 
+
         if (image == null) {
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.arrival);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -73,52 +74,54 @@ public class ReviewActivity extends AppCompatActivity {
         }
 
 
+
+
         fl.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
             public void onSwipeRight() {
-                if(page ==0){
-                    page = 1;
 
-                    ft = getSupportFragmentManager().beginTransaction();
-                Review_frag_two fragment = Review_frag_two.newInstance(image,title,description);
+                if(page ==2){
+                page =1;
+                ft = getSupportFragmentManager().beginTransaction();
+                Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description);
+
                 ft.replace(R.id.flContainer, fragment);
                 ft.commit();
-                }
-                else{
-                    page =2;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_three fragment = Review_frag_three.newInstance(type,volume,weight,fragile);
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-                }
+
+            }
+                else {
+                page = 0;
+                ft = getSupportFragmentManager().beginTransaction();
+                Review_frag fragment =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
+
+                ft.replace(R.id.flContainer, fragment);
+                ft.commit();
+
+            }
 
             }
             @Override
             public void onSwipeLeft() {
-                if(page ==2){
-                    page =1;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description);
 
+
+                if (page == 0) {
+                    page = 1;
+
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_two fragment = Review_frag_two.newInstance(image, title, description);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-
-                }
-                else {
-                    page = 0;
+                } else {
+                    page = 2;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag fragment =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
-
+                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-
                 }
             }
         });
 
-
-
-        fragment_one =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
+        Review_frag ffrag=  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
 
         ft.replace(R.id.flContainer,fragment_one);
 
@@ -140,16 +143,15 @@ public class ReviewActivity extends AppCompatActivity {
         i.putExtra("PARSEUSER", parseUser.getObjectId());
 
         i.putExtra("newPackage", true);
-        Date startDay = new SimpleDateFormat("MM/dd/yyyy").parse(startDate);
-        Date endDay = new SimpleDateFormat("MM/dd/yyyy").parse(endDate);
-        final ParselTransaction transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,startDay,endDay,type, description,weight,volume);
+        Date startDay = new SimpleDateFormat("MM/dd/yy").parse(startDate);
+        Date endDay = new SimpleDateFormat("MM/dd/yy").parse(endDate);
+        final ParselTransaction transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,endAddress,startDay,endDay,type, description,weight,volume);
         transaction.saveEventually(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
+
                 onSubmit();
-//                i.putExtra("transID",transaction.getObjectId());
-//                setResult(RESULT_OK, i); // set result code and bundle data for response
-//                finish(); // closes the activity, pass data to parent
+
             }
         });
 

@@ -60,11 +60,13 @@ public class Review_frag_two extends Fragment {
 
     public void setPackageImage(byte[] byteArray, View v){
         //folowing converts byteArray to bitmpa then puts into image view
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        ImageView image = (ImageView) v.findViewById(R.id.ibPackageUpload);
+        if (byteArray!= null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            ImageView image = (ImageView) v.findViewById(R.id.ibPackageUpload);
 
-        image.setImageBitmap(Bitmap.createScaledBitmap(bmp, 200,
-                200, false));
+            image.setImageBitmap(Bitmap.createScaledBitmap(bmp, 200,
+                    200, false));
+        }
     }
 
 

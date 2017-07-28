@@ -226,7 +226,7 @@
             android:id="@+id/whenTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:text="WHEN" />
 
         <TextView
@@ -235,7 +235,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/whenTag"
             android:text="Mention your availbale daterange to send it in"
-            android:textSize="15dp" />
+            android:textSize="13dp" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -94,7 +94,7 @@ public class PendingTransactionFragment extends Fragment {
                 // Define our query conditions
                 query.whereEqualTo("sender", parseUser.getUsername());
                 List<Integer> list = new ArrayList<Integer>();
-                list.add(0); list.add(1);
+                list.add(0); list.add(1); list.add(2);
                 query.whereContainedIn("transactionState", list);
                 // Execute the find asynchronously
                 query.findInBackground(new FindCallback<ParselTransaction>() {
@@ -117,8 +117,9 @@ public class PendingTransactionFragment extends Fragment {
                 // Define our query conditions
                 query2.whereEqualTo("receiver", parseUser.getUsername());
                 List<Integer> list2 = new ArrayList<Integer>();
+                list2.add(1); list2.add(2);
 
-                query2.whereEqualTo("transactionState", 1);
+                query2.whereContainedIn("transactionState", list2);
                 // Execute the find asynchronously
 
                 query2.findInBackground(new FindCallback<ParselTransaction>() {
@@ -140,8 +141,9 @@ public class PendingTransactionFragment extends Fragment {
             ParseQuery<ParselTransaction> query3 = ParseQuery.getQuery(ParselTransaction.class);
             // Define our query conditions
             query3.whereEqualTo("courier", parseUser.getUsername());
-
-            query3.whereEqualTo("transactionState", 7);
+            List<Integer> list3 = new ArrayList<Integer>();
+            list3.add(7); list3.add(2);
+            query3.whereContainedIn("transactionState", list3);
             // Execute the find asynchronously
 
             query3.findInBackground(new FindCallback<ParselTransaction>() {

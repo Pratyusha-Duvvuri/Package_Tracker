@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
-        if (getIntent().getBooleanExtra("newPackage",false)== true){
+        if (getIntent().getBooleanExtra("newPackage",false) == true){
             //if a new paclage was created
             newPackage();
         }
@@ -167,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (!ignore) {
-                    materialDesignFAM.close(true);
+
                 }
 
             }
@@ -239,7 +239,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         itemList.get(i).deleteInBackground();
 
                     }
-
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -328,7 +327,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         query.whereEqualTo("transactionState", 0); //pending transaction state
-        query.whereEqualTo("receiver", parseUser.getString("fullName")); //pending transaction state
+        query.whereEqualTo("receiver", parseUser.getString("username")); //pending transaction state
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
 
@@ -342,7 +341,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         // point till last activity before transaction activity creation.
                         PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
                         pendingRequest_fragment.show(fm, "fragment_pending_request");
-
+                        break;
                     }
 
 
