@@ -1,22 +1,22 @@
 package com.codepath.packagetwitter;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Fragments.Review_frag;
 import com.codepath.packagetwitter.Fragments.Review_frag_three;
 import com.codepath.packagetwitter.Fragments.Review_frag_two;
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +27,7 @@ public class ReviewActivity extends AppCompatActivity {
 
     String startAddress;
     String endAddress;
+    ParseFile file;
 
     String receiver;
 
@@ -40,7 +41,7 @@ public class ReviewActivity extends AppCompatActivity {
     Double weight;
     String type;
     Boolean fragile;
-
+    public ParselTransaction transaction;
     int page = 0;
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     Review_frag fragment_one;
@@ -57,7 +58,7 @@ public class ReviewActivity extends AppCompatActivity {
         receiver = getIntent().getStringExtra("receiverHandle");
         startDate   = getIntent().getStringExtra("senderStartDate");
         endDate  = getIntent().getStringExtra("senderEndDate");
-        image  = getIntent().getByteArrayExtra("image");
+//        image  = getIntent().getByteArrayExtra("image");
         title  = getIntent().getStringExtra("title");
         description = getIntent().getStringExtra("description");
         volume = getIntent().getIntExtra("volume",-1);
@@ -65,16 +66,7 @@ public class ReviewActivity extends AppCompatActivity {
         weight =   getIntent().getDoubleExtra("weight",-1);
         type = getIntent().getStringExtra("type");
         fragile = getIntent().getBooleanExtra("fragile",false);
-
-
-        if (image == null) {
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.arrival);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            image = stream.toByteArray();
-
-        }
-
+        image = getIntent().getByteArrayExtra("package_image");
 
 
 
@@ -144,7 +136,30 @@ public class ReviewActivity extends AppCompatActivity {
         i.putExtra("newPackage", true);
         Date startDay = new SimpleDateFormat("MM/dd/yy").parse(startDate);
         Date endDay = new SimpleDateFormat("MM/dd/yy").parse(endDate);
-        final ParselTransaction transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,endAddress,startDay,endDay,type, description,weight,volume);
+        transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,endAddress,startDay,endDay,type, description,weight,volume,fragile,title);
+
+
+        file = new ParseFile("notimp", image);
+        file.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(com.parse.ParseException e) {
+                if (e == null) {
+                    Toast.makeText(ReviewActivity.this, "Image Saved",
+                            Toast.LENGTH_SHORT).show();
+                    dunk();
+
+                } else {
+                    Log.d("ParseApplicationError",e.toString());
+                    Toast.makeText(ReviewActivity.this, "Image NOT Saved",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    public void dunk(){
+        transaction.put("ImageFile", file);
         transaction.saveEventually(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
@@ -153,8 +168,6 @@ public class ReviewActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     public void onSubmit() {
@@ -163,8 +176,5 @@ public class ReviewActivity extends AppCompatActivity {
         setResult(RESULT_OK, data); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
     }
-
-
-
 
 }
