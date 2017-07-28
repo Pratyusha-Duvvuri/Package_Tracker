@@ -78,7 +78,11 @@ public class PendingTransactionFragment extends Fragment {
 
     public void populateTimeline() {
         ArrayList<ParselTransaction> pendingTransactions;
-        parseUser = ParseUser.getCurrentUser();
+        try {
+            parseUser = ParseUser.getCurrentUser().fetch();
+        } catch (com.parse.ParseException e) {
+
+        }
         Log.d(parseUser.getString("username"),"ParseApplication");
         if (parseUser != null) {
             pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions

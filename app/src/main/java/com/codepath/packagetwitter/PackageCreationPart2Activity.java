@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 
 import java.io.ByteArrayInputStream;
 
@@ -106,11 +102,6 @@ public class PackageCreationPart2Activity extends Activity {
     String type;
     Boolean fragile;
 
-    String startAddress;
-    String endAddress;
-    String startDate;
-    String endDate;
-    String receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,14 +111,6 @@ public class PackageCreationPart2Activity extends Activity {
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
-        /*
-        //get attributes from part 1 of form
-        String startAddress = getIntent().getStringExtra("startAddress");
-        String endAddress = getIntent().getStringExtra("endAddress");
-        String startDate = getIntent().getStringExtra("startDate");
-        String endDate = getIntent().getStringExtra("endDate");
-        String receiver = getIntent().getStringExtra("receiver");
-        */
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
         rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -380,19 +363,14 @@ public class PackageCreationPart2Activity extends Activity {
                 String strsenderStartDate= getIntent().getStringExtra("senderStartDate");
                 String strsenderEndDate= getIntent().getStringExtra("senderEndDate");
 
-
+                //from previous activity
                 review.putExtra("senderStartDate", strsenderStartDate);
                 review.putExtra("senderEndDate", strsenderEndDate);
                 review.putExtra("receiverHandle", getIntent().getStringExtra("receiverHandle"));
                 review.putExtra("senderLocation", getIntent().getStringExtra("senderLocation"));
                 review.putExtra("receiverLocation", getIntent().getStringExtra("receiverLocation"));
 
-
-                review.putExtra("startAddress", startAddress);
-                review.putExtra("endAddress", endAddress);
-                review.putExtra("startDate", startDate);
-                review.putExtra("endDate", endDate);
-                review.putExtra("receiver", receiver);
+                //From current activity
                 review.putExtra("title", title);
                 review.putExtra("description", description);
                 review.putExtra("weight", weight);
@@ -406,29 +384,6 @@ public class PackageCreationPart2Activity extends Activity {
             }
         });
 
-        //not sure if we're still going to use this
-        String parselTransactionID = getIntent().getStringExtra("TRANSACTION");
-        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-        // First try to find from the cache and only then go to network
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-        // Execute the query to find the object with ID
-        query.getInBackground(parselTransactionID, new GetCallback<ParselTransaction>() {
-            @Override
-            public void done(ParselTransaction item, ParseException e) {
-                trans = item;
-                if (e == null) {
-                    Log.d("WORK", "inside query");
-                    trans.put("title", etTitle.toString());
-                    trans.setMailDescription(etDescription.toString());
-                    trans.setWeight(Double.parseDouble(etWeight.toString()));
-
-                }
-
-                else {
-                    Log.d("ParseApplicationError", e.toString());
-                }
-            }
-        });
     }
 
 
@@ -438,7 +393,7 @@ public class PackageCreationPart2Activity extends Activity {
         if (requestCode == REVIEW_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                //finsih the other activity lol
+                //finish the other activity lol
                 onSubmit();
             }
         }
@@ -450,7 +405,6 @@ public class PackageCreationPart2Activity extends Activity {
         setResult(RESULT_OK, data); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
     }
-
 
 
 

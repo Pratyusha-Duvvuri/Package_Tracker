@@ -51,11 +51,11 @@ public class ReviewActivity extends AppCompatActivity {
 
         FrameLayout fl = (FrameLayout)findViewById(R.id.flContainer);
 
-        startAddress = getIntent().getStringExtra("startAddress");
-        endAddress = getIntent().getStringExtra("endAddress");
-        receiver = getIntent().getStringExtra("receiver");
-        startDate   = getIntent().getStringExtra("startDate");
-        endDate  = getIntent().getStringExtra("endDate");
+        startAddress = getIntent().getStringExtra("senderLocation");
+        endAddress = getIntent().getStringExtra("receiverLocation");
+        receiver = getIntent().getStringExtra("receiverHandle");
+        startDate   = getIntent().getStringExtra("senderStartDate");
+        endDate  = getIntent().getStringExtra("senderEndDate");
         image  = getIntent().getByteArrayExtra("image");
         title  = getIntent().getStringExtra("title");
         description = getIntent().getStringExtra("description");
@@ -64,23 +64,12 @@ public class ReviewActivity extends AppCompatActivity {
         type = getIntent().getStringExtra("type");
         fragile = getIntent().getBooleanExtra("fragile",false);
 
-        if (startAddress == null) {
+        if (image == null) {
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.arrival);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            image = stream.toByteArray();
 
-        startAddress = "SEA";
-        endAddress = "NYC";
-        receiver = "booo@gmail.com";
-        startDate = "05/02/17";
-        endDate = "05/08/17";
-         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.arrival);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        image = stream.toByteArray();
-        title = "Clothes and a Phone Case";
-        description = "none of these things in the middle of the Amazon";
-        volume = 5;
-        weight = 20.4;
-        type = "clothes";
-        fragile = false;
         }
 
 
@@ -163,13 +152,6 @@ public class ReviewActivity extends AppCompatActivity {
 //                finish(); // closes the activity, pass data to parent
             }
         });
-
-
-
-
-
-
-
 
 
     }

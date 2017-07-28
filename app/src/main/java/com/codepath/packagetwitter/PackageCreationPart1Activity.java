@@ -187,8 +187,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         Intent i = new Intent(PackageCreationPart1Activity.this, PackageCreationPart2Activity.class);
 
-        i.putExtra("senderStartDate", strsenderStartDate);
-        i.putExtra("senderEndDate", strsenderEndDate);
+        i.putExtra("senderStartDate", sendStart);
+        i.putExtra("senderEndDate", sendEnd);
         i.putExtra("receiverHandle", receiverHandle.getText().toString());
         i.putExtra("senderLocation", senderLocationB.getText().toString());
         i.putExtra("receiverLocation", receiverLocationB.getText().toString());
@@ -207,7 +207,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     public void returnToProfileActivity(){
 
-
+        Intent data = new Intent();
+        setResult(RESULT_OK, data); // set result code and bundle data for response
+        finish(); // closes the activity, pass data to parent
     }
 
     public void showDialogButtonClick() {

@@ -71,17 +71,19 @@ public class ParselTransaction extends ParseObject{
                 if (e == null) {
                     // The query was successful.
                     ParseUser userr = null;
-                    try {
-                        userr = logIn(objects.get(0).getString("username"), "x");
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
-                    }
-                    userr.put("hasPendingRequests", true); // attempt to change username
-                    userr.saveInBackground();
-                    try {
-                        userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
+                    if(objects.size()!=0) {
+                        try {
+                            userr = logIn(objects.get(0).getString("username"), "x");
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+                        userr.put("hasPendingRequests", true); // attempt to change username
+                        userr.saveInBackground();
+                        try {
+                            userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
 

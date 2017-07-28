@@ -75,6 +75,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public com.github.clans.fab.FloatingActionButton floatingActionButton4;
     public Boolean ignore;
     public Boolean reload;
+    private final int DELAY = 5000;
+
 
 
     @Override
@@ -85,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         setContentView(R.layout.activity_profile);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
 
-        FloatingActionMenu materialDesignFAM;
+        final FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
         //user = User.getRandomUser(this);
@@ -146,11 +148,26 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //modal code (work on later)
 
         //FOR SENDER
+//        materialDesignFAM.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//
+//                try {
+//                            Thread.sleep(5000);
+//                    materialDesignFAM.close(true);
+//
+//                } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//            }
+//
+//
+//        });
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (!ignore) {
-                    Intent i = new Intent(ProfileActivity.this, PackageCreationActivity.class);
-                    startActivityForResult(i, SENDER_REQUEST_CODE);
+                    materialDesignFAM.close(true);
                 }
 
             }
@@ -165,6 +182,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     i.putExtra("USER", Parcels.wrap(user));
 
                     startActivityForResult(i, COURRIER_REQUEST_CODE);
+                    materialDesignFAM.close(true);
+
                 }
             }
         });
@@ -175,6 +194,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
                 startActivityForResult(i,PACKAGE_CREATION);
+                materialDesignFAM.close(true);
+
             }
         });
         ivProfileImage.setOnClickListener(new View.OnClickListener() {
@@ -361,9 +382,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-        pagerAdapter.pendingTransactionFragment.populateTimeline();
-        pagerAdapter.currentTransactionFragment.populateTimeline();
-        pagerAdapter.oldTransactionFragment.populateTimeline();
+
 
 //        if (requestCode == IMAGE_REQUEST_CODE){
 //            setParametersOfView();
@@ -375,8 +394,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        }
 
         if (requestCode == IMAGE_REQUEST_CODE) {
-            setOtherParametersOfView();
+            setParametersOfView();
             }
+        pagerAdapter.pendingTransactionFragment.populateTimeline();
+        pagerAdapter.currentTransactionFragment.populateTimeline();
+        pagerAdapter.oldTransactionFragment.populateTimeline();
 
     }
     @Override
