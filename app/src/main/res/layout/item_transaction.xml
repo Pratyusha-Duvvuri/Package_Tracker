@@ -43,13 +43,12 @@
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@+id/imageView2"
         android:text="Courier Boarded"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="22sp" />
+        android:textSize="13sp"
+        android:layout_alignTop="@+id/ivStatus"
+        android:layout_toEndOf="@+id/ivStatus" />
 
 
 </RelativeLayout>

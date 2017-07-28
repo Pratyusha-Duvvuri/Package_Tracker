@@ -11,7 +11,7 @@ import android.util.Log;
  */
 
 public class TransactionsPagerAdapter extends FragmentPagerAdapter {
-    private String tabTitles[] = new String[] {"Pending","Current", "Completed"};
+    private String tabTitles[] = new String[] {"Current", "Completed"};
     private Context context;
     public PendingTransactionFragment pendingTransactionFragment;
     public CurrentTransactionFragment currentTransactionFragment;
@@ -29,14 +29,14 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
+//        if (position == 0) {
+//            return pendingTransactionFragment;
+//        }
+         if (position == 0) {
+
             return pendingTransactionFragment;
         }
         else if (position == 1) {
-
-            return currentTransactionFragment;
-        }
-        else if (position == 2) {
              return oldTransactionFragment;
         }
         else {
@@ -47,7 +47,7 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     //return total # of fragments
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     //return title based on item position

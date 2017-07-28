@@ -17,8 +17,6 @@ import com.codepath.packagetwitter.Models.Receiver;
 import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.R;
 
-import org.parceler.Parcels;
-
 /**
  * Created by pratyusha98 on 7/14/17.
  */
@@ -57,14 +55,14 @@ public class PendingRequest_Fragment extends DialogFragment {
         // Make sure not to add arguments to the constructor
     }
 
-    public static PendingRequest_Fragment newInstance(Mail mail, Sender sender) {
-        PendingRequest_Fragment frag = new PendingRequest_Fragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("sender", Parcels.wrap(sender));
-        bundle.putParcelable("mail", Parcels.wrap(mail));
-        frag.setArguments(bundle);
-        return frag;
-    }
+//    public static PendingRequest_Fragment newInstance(Mail mail, Sender sender) {
+//        PendingRequest_Fragment frag = new PendingRequest_Fragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("sender", Parcels.wrap(sender));
+//        bundle.putParcelable("mail", Parcels.wrap(mail));
+//        frag.setArguments(bundle);
+//        return frag;
+//    }
 
     public static PendingRequest_Fragment newInstance() {
         PendingRequest_Fragment frag = new PendingRequest_Fragment();

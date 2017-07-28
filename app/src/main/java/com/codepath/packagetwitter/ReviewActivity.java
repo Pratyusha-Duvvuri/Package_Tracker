@@ -137,15 +137,6 @@ public class ReviewActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-
-
-
     public void cancel(View v){
         Intent i = new Intent(ReviewActivity.this, ProfileActivity.class ) ;
         i.putExtra("PARSEUSER", ParseUser.getCurrentUser().getObjectId());
@@ -167,8 +158,8 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void done(com.parse.ParseException e) {
 
-                i.putExtra("transID",transaction.getObjectId());
-                startActivity(i);
+                onSubmit();
+
             }
         });
 
@@ -180,6 +171,13 @@ public class ReviewActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void onSubmit() {
+//  return to part 1
+        Intent data = new Intent();
+        setResult(RESULT_OK, data); // set result code and bundle data for response
+        finish(); // closes the activity, pass data to parent
     }
 
 

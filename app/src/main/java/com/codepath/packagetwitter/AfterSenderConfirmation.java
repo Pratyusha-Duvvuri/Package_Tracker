@@ -63,13 +63,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //receiverUser= Parcels.unwrap(getIntent().getParcelableExtra("receiver"));
-        //USER= Parcels.unwrap(getIntent().getParcelableExtra("USER"));
-        //receiver = new Receiver(receiverUser);
-        //sender = Parcels.unwrap(getIntent().getParcelableExtra("sender"));
-        //mail = Parcels.unwrap(getIntent().getParcelableExtra("mail"));
-//        sender = Sender.getRandomSender(this);
-//        mail = Mail.getRandomMail(this);
+
         setContentView(R.layout.activity_after_sender_confirmation);
 
         ButterKnife.bind(this);
