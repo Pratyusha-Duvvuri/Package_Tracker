@@ -45,7 +45,7 @@ public class ParselTransaction extends ParseObject{
 
     public ParselTransaction(String receiver, String sender, String senderLoc, String receiverLoc, Date sendStart, Date sendEnd
                              , String type, String description, Double weight,
-                             int volume) {
+                             int volume, Boolean fragile, String title) {
         //for when sender creates package
         super();
         setReceiver(receiver);
@@ -59,6 +59,8 @@ public class ParselTransaction extends ParseObject{
         setWeight(weight);
         setVolume(volume);
         setTransactionState(0);
+        setIsFragile(fragile);
+        setTitle(title);
         //the following finds the receiver and sets its hasPendingRequests as true
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -158,6 +160,10 @@ public class ParselTransaction extends ParseObject{
     public void setMailDescription(String mailDescription) {
         put("mailDescription", mailDescription);
     }
+    public void setTitle(String title) {
+        put("title",title);
+    }
+
 
     public void setWeight(Double weight) {
         put("weight", weight);
@@ -213,6 +219,9 @@ public class ParselTransaction extends ParseObject{
 
     public String getSender() {
         return getString("sender");
+    }
+    public String getTitle() {
+        return getString("title");
     }
 
 //    public Bitmap getMailPic() {

@@ -1,44 +1,8 @@
 package com.codepath.packagetwitter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
+public class PackageCreationActivity {
 
-import com.codepath.packagetwitter.Fragments.PackageConfirmation_Fragment;
-import com.codepath.packagetwitter.Models.Mail;
-import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.Receiver;
-import com.codepath.packagetwitter.Models.Sender;
-import com.codepath.packagetwitter.Models.User;
-
-import org.parceler.Parcels;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.codepath.packagetwitter.ProfileActivity.parseUser;
-
-public class PackageCreationActivity extends AppCompatActivity implements PackageConfirmation_Fragment.SendDialogListener {
-
-    String sender_handle;
+   /* String sender_handle;
     Context context;
     Receiver receiver;
     Sender sender;
@@ -199,4 +163,5 @@ public class PackageCreationActivity extends AppCompatActivity implements Packag
         }
 
     }
+    */
 }
