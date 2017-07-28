@@ -168,8 +168,7 @@ public class ReviewActivity extends AppCompatActivity {
             public void done(com.parse.ParseException e) {
 
                 i.putExtra("transID",transaction.getObjectId());
-                setResult(RESULT_OK, i); // set result code and bundle data for response
-                finish(); // closes the activity, pass data to parent
+                startActivity(i);
             }
         });
 

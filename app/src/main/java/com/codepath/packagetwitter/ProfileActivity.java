@@ -84,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
-        if (getIntent().getBooleanExtra("newPackage",false)== true){
+        if (getIntent().getBooleanExtra("newPackage",false) == true){
             //if a new paclage was created
             newPackage();
         }
