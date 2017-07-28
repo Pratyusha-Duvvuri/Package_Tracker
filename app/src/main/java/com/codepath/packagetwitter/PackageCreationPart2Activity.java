@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 public class PackageCreationPart2Activity extends Activity {
 
     ParselTransaction trans;
+    public static final int REVIEW_REQUEST=90;
 
     //Binds Views to the layout file
     @BindView(R.id.etTitle) EditText etTitle;
@@ -375,6 +376,18 @@ public class PackageCreationPart2Activity extends Activity {
 
                 //pass all of the data from part 1 and 2 of the form to review activity
                 Intent review = new Intent(PackageCreationPart2Activity.this, ReviewActivity.class);
+
+                String strsenderStartDate= getIntent().getStringExtra("senderStartDate");
+                String strsenderEndDate= getIntent().getStringExtra("senderEndDate");
+
+
+                review.putExtra("senderStartDate", strsenderStartDate);
+                review.putExtra("senderEndDate", strsenderEndDate);
+                review.putExtra("receiverHandle", getIntent().getStringExtra("receiverHandle"));
+                review.putExtra("senderLocation", getIntent().getStringExtra("senderLocation"));
+                review.putExtra("receiverLocation", getIntent().getStringExtra("receiverLocation"));
+
+
                 review.putExtra("startAddress", startAddress);
                 review.putExtra("endAddress", endAddress);
                 review.putExtra("startDate", startDate);
@@ -387,6 +400,8 @@ public class PackageCreationPart2Activity extends Activity {
                 review.putExtra("type", type);
                 review.putExtra("volume", volume);
                 review.putExtra("volume_string", volume_string);
+
+                startActivityForResult(review, REVIEW_REQUEST);
 
             }
         });
@@ -415,5 +430,28 @@ public class PackageCreationPart2Activity extends Activity {
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == REVIEW_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                //finsih the other activity lol
+                onSubmit();
+            }
+        }
+    }
+
+    public void onSubmit() {
+//  return to part 1
+        Intent data = new Intent();
+        setResult(RESULT_OK, data); // set result code and bundle data for response
+        finish(); // closes the activity, pass data to parent
+    }
+
+
+
 
 }

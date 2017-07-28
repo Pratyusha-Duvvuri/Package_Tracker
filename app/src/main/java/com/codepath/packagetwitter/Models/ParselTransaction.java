@@ -254,7 +254,6 @@ public class ParselTransaction extends ParseObject{
     public Date getReceiverEnd() {
         return getDate("receiverEnd");
     }
-
     public int getTransactionState() {
         return getInt("transactionState");
     }
