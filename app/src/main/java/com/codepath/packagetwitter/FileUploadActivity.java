@@ -26,6 +26,9 @@ import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
+import static com.codepath.packagetwitter.ProfileActivity.updated_image;
+import static com.codepath.packagetwitter.ProfileActivity.updated_tagline;
+import static com.codepath.packagetwitter.ProfileActivity.updated_username;
 
 @RuntimePermissions
 
@@ -46,13 +49,13 @@ public class FileUploadActivity extends Activity {
     public EditText caption;
     public EditText name;
     public ParseFile file;
-    Boolean proceed;
+    public static Boolean newPictureTaken;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        newPictureTaken=false;
         super.onCreate(savedInstanceState);
-        proceed=true;
         // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.activity_file_upload);
         btnUploadson = (Button) findViewById(R.id.btnuploadson);
@@ -68,7 +71,6 @@ public class FileUploadActivity extends Activity {
         btnUploadson.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                proceed=false;
                 // Locate the image in res > drawable-hdpi
                 onLaunchCamera(view);
 
@@ -79,30 +81,30 @@ public class FileUploadActivity extends Activity {
         GoBack.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                // Locate the image in res > drawable-hdpi
-                //Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
-//                i.putExtra("PARSEUSER", ProfileActivity.parseUser.getObjectId());
-//                startActivity(i);
-                if(proceed) {
+
 
                     String fullName = name.getText().toString();
-                    if(! fullName.equals("")){
-                        parseUser.put("fullName",fullName);}
-
-
+                    if (!fullName.equals("")) {
+                        parseUser.put("fullName", fullName);
+                        updated_username = fullName;
+                    } else
+                        updated_username = parseUser.getString("fullName");
 
                     String tagline = caption.getText().toString();
-                    if(! tagline.equals("")){
-                        parseUser.put("tagline",tagline);}
+                    if (!tagline.equals("")) {
+                        parseUser.put("tagline", tagline);
+                        updated_tagline=tagline;
 
-                    parseUser.saveEventually();
-                    Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
+                    } else {
+                        updated_tagline = parseUser.getString("tagline");
+                    }
+
+
+
                     doIT();
 
-                    setResult(RESULT_OK, i); // set result code and bundle data for response
-                    finish(); // closes the activity, pass data to parent
 
-                }
+
 
             }
         });
@@ -148,13 +150,12 @@ public class FileUploadActivity extends Activity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] image = stream.toByteArray();
-
+                 updated_image = stream.toByteArray();
 
 
 
                 // Create the ParseFile
-                file = new ParseFile(parseUser.getString("username"), image);
+                file = new ParseFile(parseUser.getString("username"), updated_image);
 
                 file.saveInBackground(new SaveCallback(){
                     @Override
@@ -181,20 +182,31 @@ public class FileUploadActivity extends Activity {
 
         }
     public void dunk(){
+        newPictureTaken=true;
         parseUser.put("ImageFile", file);
-        proceed = true;
     }
 
 
     public void doIT(){
 
-            parseUser.saveEventually(new SaveCallback(){
+            parseUser.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e1) {
                     if (e1 == null) {
                         Log.d("FOR THE LOVE OF GOD","yass");
-                        Toast.makeText(FileUploadActivity.this, "Image Uploaded "+parseUser.getString("tagline"),
-                                Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
+                        String tagline_is = parseUser.getString("tagline");
+                        //here the old one is getting deplayed
+                        Toast.makeText(FileUploadActivity.this, tagline_is, Toast.LENGTH_SHORT).show();
+//                        try {
+//                            Thread.sleep(5000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+
+                        setResult(RESULT_OK, i); // set result code and bundle data for response
+                        finish(); // closes the activity, pass data to parent
                     } else {
                         Log.d("UMM","THEFISH");
                         Log.d("ParseApplicationError",e1.toString());
@@ -206,6 +218,5 @@ public class FileUploadActivity extends Activity {
 
         }
 
-
-    }
+}
 

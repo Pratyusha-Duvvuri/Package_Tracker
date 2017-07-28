@@ -1,6 +1,8 @@
 package com.codepath.packagetwitter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -56,6 +58,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     public final int IMAGE_REQUEST_CODE =40;
 
+    //for hacky solution
+    public static String updated_username,updated_tagline;
+    public static byte[] updated_image;
+
+
     public final static String COURIER_KEY = "courier";
     public final static String SENDER_KEY = "sender";
     public final static String MAIL_KEY = "mail";
@@ -99,39 +106,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     setParametersOfView();
                     actOnRequests();
                     checkForRejection();
-
-
-//                    if (parseUser.getBoolean("hasPendingRequests") ){
-//                        //the following check if the person has any other pending requests
-//                        ParseQuery<ParselTransaction> q = ParseQuery.getQuery(ParselTransaction.class);
-//                        q.whereEqualTo("receiver", parseUser.getUsername());
-//                        q.whereEqualTo("transactionState", 0);
-//                        // Execute the find asynchronously
-//                        q.findInBackground(new FindCallback<ParselTransaction>() {
-//                            @Override
-//                            public void done(List<ParselTransaction> issueList, ParseException e) {
-//                                if (e == null) {
-//                                    if (issueList.size()<=1){//if the current equest is the only pending request
-//
-//                                        parseUser.put("hasPendingRequests", false);
-//                                        parseUser.saveEventually();
-//                                    }
-//
-//                                } else {
-//                                    Log.d("score", "Error: " + e.getMessage());
-//                                }
-//                            }
-//                        });
-//                        parseUser.put("hasPendingRequests", false);
-//                        parseUser.saveInBackground();
-//                        actOnRequests();
-//
-//                    }
-
-
-
-
-
 
                 } else {
                     Toast.makeText(ProfileActivity.this, "Can't access user",
@@ -250,10 +224,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
 
     public void setParametersOfView() {
-        tvTagline.setText(ParseUser.getCurrentUser().getString("tagline"));
+        tvTagline.setText(parseUser.getString("tagline"));
         Toast.makeText(this, "LLL"+parseUser.getString("tagline"), Toast.LENGTH_SHORT).show();
-        tvUsername.setText(ParseUser.getCurrentUser().getString("fullName"));
-        ParseFile postImage = ParseUser.getCurrentUser().getParseFile("ImageFile");
+        tvUsername.setText(parseUser.getString("fullName"));
+        ParseFile postImage = parseUser.getParseFile("ImageFile");
         if(postImage!=null) {
             String imageUrl = postImage.getUrl()
         ;//live url
@@ -264,6 +238,42 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             Glide.with(ProfileActivity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(ivProfileImage);
 
         }
+    }
+
+    public void setOtherParametersOfView(){
+
+        tvTagline.setText(updated_tagline);
+        tvUsername.setText(updated_username);
+
+        if(FileUploadActivity.newPictureTaken){
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(updated_image, 0, updated_image.length);
+            ivProfileImage.setImageBitmap(Bitmap.createScaledBitmap(bmp, ivProfileImage.getWidth(),
+                    ivProfileImage.getHeight(), false));}
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+        // First try to find from the cache and only then go to network
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+        // Execute the query to find the object with ID
+        String text = ParseUser.getCurrentUser().getObjectId();
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        query.getInBackground(text, new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser item, ParseException e) {
+                if (e == null) {
+                    parseUser = item;
+
+
+
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Can't access user",
+                            Toast.LENGTH_SHORT).show();
+                    Log.d("ParseApplicationError", e.toString());
+                }
+            }
+        });
+
+
     }
 
 
@@ -351,7 +361,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //        }
 
         if (requestCode == IMAGE_REQUEST_CODE) {
-            setParametersOfView();
+            setOtherParametersOfView();
             }
 
     }
