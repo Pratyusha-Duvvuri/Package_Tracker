@@ -216,8 +216,8 @@ public class CourierActivity extends AppCompatActivity {
                         //for every parsel transaction
                         ParselTransaction parselTransaction = itemList.get(i);
                         try {
-                            courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
-                            courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
+                            courierStartDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripStart);
+                            courierEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripEnd);
 
                         } catch (java.text.ParseException e1) {
                             e1.printStackTrace();

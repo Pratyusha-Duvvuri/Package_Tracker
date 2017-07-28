@@ -12,8 +12,16 @@ import android.widget.FrameLayout;
 import com.codepath.packagetwitter.Fragments.Review_frag;
 import com.codepath.packagetwitter.Fragments.Review_frag_three;
 import com.codepath.packagetwitter.Fragments.Review_frag_two;
+import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class ReviewActivity extends AppCompatActivity {
 
@@ -60,7 +68,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         startAddress = "SEA";
         endAddress = "NYC";
-        receiver = "Rafa";
+        receiver = "booo@gmail.com";
         startDate = "05/02/17";
         endDate = "05/08/17";
          Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.arrival);
@@ -140,15 +148,39 @@ public class ReviewActivity extends AppCompatActivity {
 
     public void cancel(View v){
         Intent i = new Intent(ReviewActivity.this, ProfileActivity.class ) ;
+        i.putExtra("PARSEUSER", ParseUser.getCurrentUser().getObjectId());
+
         startActivity(i);
 
     }
 
-    public void confirm(View v){
+    public void confirm(View v) throws ParseException {
 
-        Intent i = new Intent(this, ProfileActivity.class);
-        setResult(RESULT_OK, i); // set result code and bundle data for response
-        finish(); // closes the activity, pass data to parent
+        final Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("PARSEUSER", parseUser.getObjectId());
+
+        i.putExtra("newPackage", true);
+        Date startDay = new SimpleDateFormat("MM/dd/yyyy").parse(startDate);
+        Date endDay = new SimpleDateFormat("MM/dd/yyyy").parse(endDate);
+        final ParselTransaction transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,startDay,endDay,type, description,weight,volume);
+        transaction.saveEventually(new SaveCallback() {
+            @Override
+            public void done(com.parse.ParseException e) {
+
+                i.putExtra("transID",transaction.getObjectId());
+                setResult(RESULT_OK, i); // set result code and bundle data for response
+                finish(); // closes the activity, pass data to parent
+            }
+        });
+
+
+
+
+
+
+
+
+
     }
 
 
