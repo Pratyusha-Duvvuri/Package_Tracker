@@ -110,7 +110,11 @@ public class PackageCreationPart2Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        setSupportActionBar().setTitle("YAY");
         final Context context = this;
+
         // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
