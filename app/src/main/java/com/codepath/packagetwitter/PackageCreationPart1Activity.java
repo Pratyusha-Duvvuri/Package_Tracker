@@ -74,6 +74,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         setContentView(R.layout.packagecreationaa);
 
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Create A New Package");
 
         context = this;
         final Calendar cal = Calendar.getInstance();
