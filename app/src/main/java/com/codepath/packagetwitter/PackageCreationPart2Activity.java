@@ -1,9 +1,13 @@
 package com.codepath.packagetwitter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -15,20 +19,25 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import permissions.dispatcher.NeedsPermission;
 
 
 /**
  * Created by pratyusha98 on 7/25/17.
  */
 
+
 public class PackageCreationPart2Activity extends AppCompatActivity {
+    byte[] YOIMG;
 
     ParselTransaction trans;
     public static final int REVIEW_REQUEST=90;
@@ -97,6 +106,8 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
     int defaultTextColor;
 
     //data to be sent through intent
+    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+
     ByteArrayInputStream image;
     String title;
     String description;
@@ -304,6 +315,14 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
             }
         });
 
+        ivPackageImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLaunchCamera(view);
+
+            }
+        });
+
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -385,6 +404,8 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 review.putExtra("type", type);
                 review.putExtra("volume", volume);
                 review.putExtra("volume_string", volume_string);
+                review.putExtra("package_image", YOIMG);
+
 
                 startActivityForResult(review, REVIEW_REQUEST);
 
@@ -392,16 +413,45 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
         });
 
     }
+    @NeedsPermission(Manifest.permission.CAMERA	)
+    public void onLaunchCamera(View view) {
+        // create Intent to take a picture and return control to the calling application
+        Intent takepicintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takepicintent.resolveActivity(getPackageManager()) != null) {
+            // Start the image capture intent to take photo
+            startActivityForResult(takepicintent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        }
+    }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
         if (requestCode == REVIEW_REQUEST) {
-            // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 //finish the other activity lol
                 onSubmit();
+            }
+        }
+
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                Bundle extras = data.getExtras();
+                Bitmap bitmap = (Bitmap) extras.get("data");
+                ivPackageImage.setImageBitmap(bitmap);
+
+                // Convert it to gibyte
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                // Compress image to lower quality scale 1 - 100
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                YOIMG = stream.toByteArray();
+
+
+                // Show a simple toast message
+                Toast.makeText(PackageCreationPart2Activity.this, "Image Saved",
+                        Toast.LENGTH_SHORT).show();
+
             }
         }
     }

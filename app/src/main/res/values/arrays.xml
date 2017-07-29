@@ -41,6 +41,35 @@
 
 
 
+    <array name ="sizes">
+        <item>Key Sized</item>
+        <item>Phone Sized</item>
+        <item>Book Sized</item>
+        <item>Fish Bowl Sized</item>
+    </array>
+
+    <integer-array name="size_pics">
+        <item>@mipmap/ic_key_filled</item>
+        <item>@mipmap/ic_electronics_filled</item>
+        <item>@mipmap/ic_books_filled</item>
+        <item>@mipmap/ic_fishbowl_filled</item>
+
+    </integer-array>
+
+    <array name="type_pics">
+        <item>@mipmap/ic_clothes_fill</item>
+        <item>@mipmap/ic_electronics_filled</item>
+        <item>@mipmap/ic_books_filled</item>
+        <item>@mipmap/ic_games_filled</item>
+        <item>@mipmap/ic_movies_filled</item>
+        <item>@mipmap/ic_food_filled</item>
+        <item>@mipmap/ic_health_filled</item>
+        <item>@mipmap/ic_beauty_filled</item>
+        <item>@mipmap/ic_other_filled</item>
+    </array>
+
+
+
     <array name="contact_numbers">
         <item>4153708881</item>
         <item>4153708882</item>

@@ -163,8 +163,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         Date senderStartDate = null;
         Date senderEndDate = null;
         try {
-            senderStartDate = new SimpleDateFormat("MM/dd/yyyy").parse(sendStart);
-            senderEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(sendEnd);
+            senderStartDate = new SimpleDateFormat("MM/dd/yy").parse(sendStart);
+            senderEndDate = new SimpleDateFormat("MM/dd/yy").parse(sendEnd);
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -45,14 +45,15 @@
                     android:layout_marginLeft="15dp"
                     android:text="Title: "
                     android:textAlignment="viewStart"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:hint="Clothes for my sister" />
+                    android:hint="Clothes for my sister"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -68,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:text="Description: "
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/etDescription"
@@ -76,7 +77,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts." />
+                    android:hint="Sending clothes to my sister"
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
         <View
