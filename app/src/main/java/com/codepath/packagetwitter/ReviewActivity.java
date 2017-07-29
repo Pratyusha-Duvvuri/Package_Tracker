@@ -136,7 +136,9 @@ public class ReviewActivity extends AppCompatActivity {
         i.putExtra("newPackage", true);
         Date startDay = new SimpleDateFormat("MM/dd/yy").parse(startDate);
         Date endDay = new SimpleDateFormat("MM/dd/yy").parse(endDate);
-        transaction = new ParselTransaction(receiver,parseUser.getUsername(),startAddress,endAddress,startDay,endDay,type, description,weight,volume,fragile,title);
+        String receiver_username = LoginActivity.dictionary_populate.get(receiver).toString();
+        transaction = new ParselTransaction(receiver_username,parseUser.getUsername(),startAddress,endAddress,startDay,
+                endDay,type, description,weight,volume,fragile,title);
 
 
         file = new ParseFile("notimp", image);

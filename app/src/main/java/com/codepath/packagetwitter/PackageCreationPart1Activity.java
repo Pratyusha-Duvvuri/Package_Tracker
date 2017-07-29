@@ -149,7 +149,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
             }
 
         });
@@ -169,16 +168,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        //creating new transaction parse object
-
-//        transaction.setSenderStart(senderStartDate);
-//        transaction.setSenderEnd(senderEndDate);
-//        transaction.setReceiver(receiverHandle.getText().toString());
-//        transaction.setSenderLoc(senderLocationB.getText().toString());
-//        transaction.setReceiverLoc(receiverLocationB.getText().toString());
-//        transaction.saveEventually();
-        //parseUser.add("pendingTransactions", transaction);
-//        transaction.saveEventually();
         String strsenderStartDate= senderStartDate.toString();
         String strsenderEndDate= senderEndDate.toString();
 
@@ -186,9 +175,13 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         i.putExtra("senderStartDate", sendStart);
         i.putExtra("senderEndDate", sendEnd);
-        i.putExtra("receiverHandle", receiverHandle.getText().toString());
-        i.putExtra("senderLocation", senderLocationB.getText().toString());
-        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
+        i.putExtra("receiverHandle", "Pamela");
+        i.putExtra("senderLocation", "Tokyo");
+        i.putExtra("receiverLocation", "Boston");
+
+//        i.putExtra("receiverHandle", receiverHandle.getText().toString());
+//        i.putExtra("senderLocation", senderLocationB.getText().toString());
+//        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
         startActivityForResult(i, PART2);
 
     }

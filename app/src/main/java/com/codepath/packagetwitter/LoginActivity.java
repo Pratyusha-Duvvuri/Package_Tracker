@@ -12,13 +12,15 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
     public static String[] userListMain;
     public static ArrayList<String> mylist = new ArrayList<String>();
-
+    public static Dictionary dictionary_populate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void getTheRightString(){
 
+         dictionary_populate = new Hashtable();
 
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -44,7 +47,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (e == null) {
                     for (int i = 0; i < itemList.size(); i++) {
-                        mylist.add(itemList.get(i).getString("fullName"));
+                        String name = itemList.get(i).getString("fullName");
+                        String email = itemList.get(i).getString("username");
+
+                        mylist.add(name);
+                        dictionary_populate.put(name, email);
                     }
 
                     }
