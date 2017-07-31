@@ -55,6 +55,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static FragmentManager fragmentManager;
     public static SignUp_Fragment signUp_fragment;
     public ParseUser parseUser;
+    private String TAG = "Google Places API";
 
     public Login_Fragment() {
 

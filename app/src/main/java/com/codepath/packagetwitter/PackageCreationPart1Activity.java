@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.codepath.packagetwitter.LoginActivity.mylist;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/24/17.
@@ -77,6 +78,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setTitle("Create A New Package");
 
+        senderLocationB.setText(parseUser.getString("location"));
         context = this;
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
