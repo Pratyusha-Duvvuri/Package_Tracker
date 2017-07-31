@@ -21,9 +21,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.codepath.packagetwitter.Models.ParselTransaction;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
@@ -38,8 +35,6 @@ import permissions.dispatcher.NeedsPermission;
 
 public class PackageCreationPart2Activity extends AppCompatActivity {
     byte[] YOIMG;
-
-    ParselTransaction trans;
     public static final int REVIEW_REQUEST=90;
 
     //Binds Views to the layout file
@@ -108,7 +103,6 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
     //data to be sent through intent
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
 
-    ByteArrayInputStream image;
     String title;
     String description;
     int volume;
@@ -126,9 +120,14 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
         // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
 //        setSupportActionBar(toolbar);
 //        ((TextView) findViewById(R.id.main_toolbar_title)).setText("Package Details");
+
+
+        getSupportActionBar().setTitle("Package Details");
+
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
 
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
@@ -149,8 +148,6 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                             }
                         }
                         break;
-
-
 
                     case R.id.rbPhone:
 

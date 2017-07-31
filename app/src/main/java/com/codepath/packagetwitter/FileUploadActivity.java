@@ -13,9 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
@@ -26,9 +32,6 @@ import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
-import static com.codepath.packagetwitter.ProfileActivity.updated_image;
-import static com.codepath.packagetwitter.ProfileActivity.updated_tagline;
-import static com.codepath.packagetwitter.ProfileActivity.updated_username;
 
 @RuntimePermissions
 
@@ -46,10 +49,13 @@ public class FileUploadActivity extends Activity {
     public ImageView ivPreview;
     public Button btnUploadson;
     public Button GoBack;
-    public EditText caption;
+    public TextView location;
     public EditText name;
     public ParseFile file;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE=90;
     public static Boolean newPictureTaken;
+    public String otherString;
+    public  byte[] updated_image;
 
 
     @Override
@@ -59,14 +65,30 @@ public class FileUploadActivity extends Activity {
         // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.activity_file_upload);
         btnUploadson = (Button) findViewById(R.id.btnuploadson);
-        caption = (EditText) findViewById(R.id.et_imagecaption);
+        location = (TextView) findViewById(R.id.et_imagecaption);
         name = (EditText) findViewById(R.id.et_username);
         GoBack = (Button) findViewById(R.id.btnBackToProfile);
-        caption.setText(parseUser.getString("tagline"));
+        location.setText("Update your current location - "+parseUser.getString("location"));
         name.setText(parseUser.getString("fullName"));
+        otherString = parseUser.getString("location");
 
 
+        location.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View view) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(FileUploadActivity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+
+            }
+        });
 
         btnUploadson.setOnClickListener(new View.OnClickListener() {
 
@@ -86,20 +108,14 @@ public class FileUploadActivity extends Activity {
                     String fullName = name.getText().toString();
                     if (!fullName.equals("")) {
                         parseUser.put("fullName", fullName);
-                        updated_username = fullName;
-                    } else
-                        updated_username = parseUser.getString("fullName");
-
-                    String tagline = caption.getText().toString();
-                    if (!tagline.equals("")) {
-                        parseUser.put("tagline", tagline);
-                        updated_tagline=tagline;
-
-                    } else {
-                        updated_tagline = parseUser.getString("tagline");
                     }
 
 
+                    String tagline = location.getText().toString();
+                    if (!tagline.equals("")) {
+                        parseUser.put("location", otherString);
+
+                    }
 
                     doIT();
 
@@ -179,6 +195,22 @@ public class FileUploadActivity extends Activity {
 
             }
 
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(FileUploadActivity.this, data);
+                otherString= place.getName().toString();
+                location.setText("Update your current location - "+otherString);
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(FileUploadActivity.this, data);
+                // TODO: Handle the error.
+                Log.i("LoginActivity", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+
 
         }
     public void dunk(){
@@ -195,9 +227,7 @@ public class FileUploadActivity extends Activity {
                         Log.d("FOR THE LOVE OF GOD","yass");
 
                         Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
-                        String tagline_is = parseUser.getString("tagline");
                         //here the old one is getting deplayed
-                        Toast.makeText(FileUploadActivity.this, tagline_is, Toast.LENGTH_SHORT).show();
 
                         setResult(RESULT_OK, i); // set result code and bundle data for response
                         finish(); // closes the activity, pass data to parent

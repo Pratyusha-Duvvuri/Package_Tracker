@@ -1,13 +1,12 @@
 package com.codepath.packagetwitter;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -60,9 +59,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     public final int IMAGE_REQUEST_CODE =40;
 
-    //for hacky solution
-    public static String updated_username,updated_tagline;
-    public static byte[] updated_image;
 
 
     public final static String COURIER_KEY = "courier";
@@ -76,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public Boolean ignore;
     public Boolean reload;
     private final int DELAY = 5000;
+    FragmentManager fm;
 
 
 
@@ -99,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             newPackage();
         }
 
+        fm = getSupportFragmentManager();
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         // First try to find from the cache and only then go to network
@@ -260,8 +258,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
 
     public void setParametersOfView() {
-        tvTagline.setText(parseUser.getString("tagline"));
-        Toast.makeText(this, "LLL"+parseUser.getString("tagline"), Toast.LENGTH_SHORT).show();
+        tvTagline.setText("Current Location: "+parseUser.getString("location"));
         tvUsername.setText(parseUser.getString("fullName"));
         ParseFile postImage = parseUser.getParseFile("ImageFile");
         if(postImage!=null) {
@@ -276,50 +273,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         }
     }
 
-    public void setOtherParametersOfView(){
-
-        tvTagline.setText(updated_tagline);
-        tvUsername.setText(updated_username);
-
-        if(FileUploadActivity.newPictureTaken){
-
-            Bitmap bmp = BitmapFactory.decodeByteArray(updated_image, 0, updated_image.length);
-            ivProfileImage.setImageBitmap(Bitmap.createScaledBitmap(bmp, ivProfileImage.getWidth(),
-                    ivProfileImage.getHeight(), false));}
-
-        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
-        // First try to find from the cache and only then go to network
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-        // Execute the query to find the object with ID
-        String text = ParseUser.getCurrentUser().getObjectId();
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-        query.getInBackground(text, new GetCallback<ParseUser>() {
-            @Override
-            public void done(ParseUser item, ParseException e) {
-                if (e == null) {
-                    parseUser = item;
-
-                } else {
-                    Toast.makeText(ProfileActivity.this, "Can't access user",
-                            Toast.LENGTH_SHORT).show();
-                    Log.d("ParseApplicationError", e.toString());
-                }
-            }
-        });
-
-
-    }
-
-
-//if the person has any pending requests
-//    public void actOnRequests() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        //creating random sender and mail object here and checking flow from this
-//        // point till last activity before transaction activity creation.
-//
-//        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
-//        pendingRequest_fragment.show(fm, "fragment_pending_request");
-//    }
 
 
     public void actOnRequests() {
@@ -381,7 +334,12 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-
+            if (requestCode == PACKAGE_CREATION){
+                PendingRequest_Fragment package_conf = PendingRequest_Fragment.newInstance("Package was created.\n A request was sent to the recipient.");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.add(package_conf, null);
+                ft.commitAllowingStateLoss();
+            }
 
 //        if (requestCode == IMAGE_REQUEST_CODE){
 //            setParametersOfView();

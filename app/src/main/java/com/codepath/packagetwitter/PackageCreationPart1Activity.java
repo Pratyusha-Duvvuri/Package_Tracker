@@ -16,13 +16,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.codepath.packagetwitter.LoginActivity.mylist;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/24/17.
@@ -44,7 +45,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
     static final int DIALOG_ID = 0;
     static final int DIALOG_ID2 = 10;
-    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE_1 = 1;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE_2 = 2;
     private String TAG = "Google Places API";
 
     public static int idd;
@@ -74,7 +76,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         setContentView(R.layout.packagecreationaa);
 
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Create A New Package");
 
+        senderLocationB.setText(parseUser.getString("location"));
         context = this;
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
@@ -104,62 +108,47 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         );
 
 
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
-                Toast.makeText(context, "HEYA", Toast.LENGTH_SHORT).show();
-                senderLocationB.setText(place.getName());
-
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
-
-        PlaceAutocompleteFragment autocompleteFragment2 = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
-
-        autocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
-                Toast.makeText(context, "YEAH", Toast.LENGTH_SHORT).show();
-                receiverLocationB.setText(place.getName());
 
 
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
 
 
         senderLocationB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(PackageCreationPart1Activity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE_1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+       }
 
+        });
 
+        receiverLocationB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(PackageCreationPart1Activity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE_2);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
             }
 
         });
 
-
-
     }
-
 
     public void saveInformation(){
         Date senderStartDate = null;
@@ -171,16 +160,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        //creating new transaction parse object
-
-//        transaction.setSenderStart(senderStartDate);
-//        transaction.setSenderEnd(senderEndDate);
-//        transaction.setReceiver(receiverHandle.getText().toString());
-//        transaction.setSenderLoc(senderLocationB.getText().toString());
-//        transaction.setReceiverLoc(receiverLocationB.getText().toString());
-//        transaction.saveEventually();
-        //parseUser.add("pendingTransactions", transaction);
-//        transaction.saveEventually();
         String strsenderStartDate= senderStartDate.toString();
         String strsenderEndDate= senderEndDate.toString();
 
@@ -188,9 +167,13 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         i.putExtra("senderStartDate", sendStart);
         i.putExtra("senderEndDate", sendEnd);
-        i.putExtra("receiverHandle", receiverHandle.getText().toString());
-        i.putExtra("senderLocation", senderLocationB.getText().toString());
-        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
+        i.putExtra("receiverHandle", "Pamela");
+        i.putExtra("senderLocation", "Tokyo");
+        i.putExtra("receiverLocation", "Boston");
+
+//        i.putExtra("receiverHandle", receiverHandle.getText().toString());
+//        i.putExtra("senderLocation", senderLocationB.getText().toString());
+//        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
         startActivityForResult(i, PART2);
 
     }
@@ -202,6 +185,36 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
            returnToProfileActivity();
 
         }
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_1) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i(TAG, "Place: " + place.getName());
+                senderLocationB.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_2) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i(TAG, "Place: " + place.getName());
+                receiverLocationB.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+
+
     }
 
     public void returnToProfileActivity(){
