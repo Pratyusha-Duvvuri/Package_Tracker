@@ -163,8 +163,19 @@ public class ReviewActivity extends AppCompatActivity {
         transaction.saveEventually(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
+                if (e == null) {
+                    try {
+                        parseUser = ParseUser.getCurrentUser().fetch();
+                    } catch (com.parse.ParseException e1) {
 
-                onSubmit();
+                    }
+                    onSubmit();
+
+                }
+
+                else{
+                    Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                }
 
             }
         });

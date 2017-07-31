@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Fragments.Review_frag;
+import com.codepath.packagetwitter.Fragments.Review_frag_three;
 import com.codepath.packagetwitter.Fragments.Review_frag_two;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -21,6 +22,7 @@ import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -91,7 +93,12 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                 if(page ==2){
                     page =1;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment =  Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
+                    ParseFile postImage = transaction.getParseFile("ImageFile");
+                    String imageUrl = "";
+                    if(postImage!=null) {
+                        imageUrl = postImage.getUrl();//live url
+                    }
+                    Review_frag_two fragment =  Review_frag_two.newInstance(imageUrl,
                             transaction.getString("title"),transaction.getMailDescription());
 
                     ft.replace(R.id.flContainer, fragment);
@@ -122,17 +129,22 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                     page = 1;
 
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment = Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
+                    ParseFile postImage = transaction.getParseFile("ImageFile");
+                    String imageUrl = "";
+                    if(postImage!=null) {
+                        imageUrl = postImage.getUrl();//live url
+                    }
+                    Review_frag_two fragment = Review_frag_two.newInstance(imageUrl,
                             transaction.getString("title"),transaction.getMailDescription());
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
                 } else {
-//                    page = 2;
-//                    ft = getSupportFragmentManager().beginTransaction();
-//                    Review_frag_three fragment = Review_frag_three.newInstance(transaction.getMailType(),
-//                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
-//                    ft.replace(R.id.flContainer, fragment);
-//                    ft.commit();
+                    page = 2;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    Review_frag_three fragment = Review_frag_three.newInstance(transaction.getMailType(),
+                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
+                    ft.replace(R.id.flContainer, fragment);
+                    ft.commit();
                 }
             }
         });

@@ -2,6 +2,7 @@ package com.codepath.packagetwitter.Fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.R;
 
 /**
@@ -56,6 +58,22 @@ public class Review_frag_two extends Fragment {
         return fragment;
     }
 
+    public static Review_frag_two newInstance(String Url, String title, String description) {
+
+        Bundle args = new Bundle();
+        args.putString("imageUrl", Url);
+        args.putString("title", title);
+        args.putString("description", description);
+
+
+
+
+        Review_frag_two fragment = new Review_frag_two();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
 
 
     public void setPackageImage(byte[] byteArray, View v){
@@ -67,7 +85,15 @@ public class Review_frag_two extends Fragment {
             image.setImageBitmap(Bitmap.createScaledBitmap(bmp, 200,
                     200, false));
         }
-    }
+        else if (getArguments().getString("imageUrl") != null){
+            Uri imageUri = Uri.parse(getArguments().getString("imageUrl"));
+            Glide.with(this).load(imageUri.toString()).into((ImageView) v.findViewById(R.id.ibPackageUpload));}
+        else {
+            Glide.with(this).load("http://i.imgur.com/zuG2bGQ.jpg").into((ImageView) v.findViewById(R.id.ibPackageUpload));
+
+        }
+        }
+
 
 
 }

@@ -272,7 +272,7 @@ public class CourierActivity extends AppCompatActivity {
                 //start date
 
 //                sendStart = s1 + "/" + s2+"/"+s3;
-                tripStart = Month+"/"+Date+"/"+Year;
+                tripStart = month+"/"+Date+"/"+Year;
 
                 displaySenderStart.setText(tripStart);
 
@@ -280,7 +280,7 @@ public class CourierActivity extends AppCompatActivity {
             else{
                 //end date
 //                sendEnd= S1 + "/" + S2+"/"+S3;
-                tripEnd = Month+"/"+Date+"/"+Year;
+                tripEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(tripEnd);
 
             }

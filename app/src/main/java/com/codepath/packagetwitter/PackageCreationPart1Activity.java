@@ -102,6 +102,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+
+
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -285,7 +287,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 //start date
 
 //                sendStart = s1 + "/" + s2+"/"+s3;
-                sendStart = Month+"/"+Date+"/"+Year;
+                sendStart = month+"/"+Date+"/"+Year;
 
                 displaySenderStart.setText(sendStart);
 
@@ -293,7 +295,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             else{
                 //end date
 //                sendEnd= S1 + "/" + S2+"/"+S3;
-                sendEnd = Month+"/"+Date+"/"+Year;
+                sendEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(sendEnd);
 
             }
