@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.codepath.packagetwitter.ChatActivity;
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
+import com.codepath.packagetwitter.OtherChatActivity;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
@@ -51,6 +52,7 @@ public class Tab1Chat_Fragment extends Fragment {
     EditText etMessage;
     Button btSend;
 
+    final String userId = ProfileActivity.parseUser.getObjectId();
 
 
     @Override
@@ -85,7 +87,7 @@ public class Tab1Chat_Fragment extends Fragment {
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvChat.setLayoutManager(llayout);
-        mAdapter = new ChatAdapter(mMessages);
+        mAdapter = new ChatAdapter(getActivity(),userId,mMessages);
 
         //set the adapter
         rvChat.setAdapter(mAdapter);
@@ -114,6 +116,8 @@ public class Tab1Chat_Fragment extends Fragment {
         ParseQuery<Message> parseQuery = ParseQuery.getQuery(Message.class);
         // This query can even be more granular (i.e. only refresh if the entry was added by some other user)
         parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
+//        parseQuery.whereNotEqualTo("userName", type);
+
 
         // Connect to Parse server
         SubscriptionHandling<Message> subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery);
@@ -149,7 +153,7 @@ public class Tab1Chat_Fragment extends Fragment {
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ProfileActivity.parseUser.getObjectId();
-        mAdapter = new ChatAdapter( mMessages);
+        mAdapter = new ChatAdapter( getActivity(), userId,mMessages);
         rvChat.setAdapter(mAdapter);
 
         // associate the LayoutManager with the RecylcerView
@@ -171,6 +175,7 @@ public class Tab1Chat_Fragment extends Fragment {
                 message.setUserName(ProfileActivity.parseUser.getString("username"));
                 message.setPicture(ProfileActivity.parseUser.getParseFile("ImageFile"));
                 message.setTransactionId(transactionid);
+                message.setType(OtherChatActivity.tabTitles_main[2]);
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
