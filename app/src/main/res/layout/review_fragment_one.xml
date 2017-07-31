@@ -31,11 +31,12 @@
             <TextView
                 android:id="@+id/text_view_id"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:text="WHERE"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -136,12 +137,13 @@
 
             <TextView
                 android:id="@+id/text_view_id2"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:text="WHO"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -231,6 +233,7 @@
 
                 android:text="WHEN"
                 android:textAllCaps="true"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 

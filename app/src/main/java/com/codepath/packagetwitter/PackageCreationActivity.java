@@ -47,6 +47,7 @@ public class PackageCreationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_creation);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Create A New Package");
         mail = new Mail();
         context = this;
         USER = User.getRandomUser(context);

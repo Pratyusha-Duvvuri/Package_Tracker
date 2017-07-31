@@ -35,7 +35,7 @@
         android:paddingTop="10dp"
         android:text="Package"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <View
@@ -67,7 +67,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="Title: "
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:hint="Clothes for my sister"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +95,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="Description: "
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -105,7 +106,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp"
                 android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -19,11 +19,14 @@
             android:id="@+id/whereTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textSize="16dp"
+            android:paddingLeft="15dp"
             android:text="WHERE" />
 
         <TextView
             android:id="@+id/whereDescription"
+            android:paddingLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whereTag"
@@ -40,23 +43,16 @@
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            card_view:cardCornerRadius="10dp"
-            card_view:cardElevation="7dp">
+            card_view:cardCornerRadius="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <fragment
-                android:id="@+id/place_autocomplete_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-                />
+
             <TextView
                 android:id="@+id/etsenderStartLocationB"
                 android:layout_width="match_parent"
@@ -64,7 +60,7 @@
                 android:focusable="false"
                 android:gravity="center"
                 android:hint="Start Location"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/place_autocomplete_fragment" />
             </RelativeLayout>
@@ -79,23 +75,18 @@
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view2"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="50dp"
-            card_view:cardCornerRadius="10dp"
-            card_view:cardElevation="7dp">
+            card_view:cardCornerRadius="4dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
+            <!--     card_view:cardElevation="7dp"-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <fragment
-                android:id="@+id/place_autocomplete_fragment2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-                />
+
 
             <TextView
                 android:id="@+id/etreceiverEndLocationB"
@@ -104,8 +95,8 @@
 
                 android:gravity="center"
                 android:hint="End Location"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
+                android:textSize="20dp"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
             </RelativeLayout>
 
@@ -116,6 +107,7 @@
     </RelativeLayout>
 
     <View
+
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#00aaaa" />
@@ -132,9 +124,12 @@
 
         <TextView
             android:id="@+id/whoTag"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
+            android:paddingLeft="15dp"
+
             android:text="WHO" />
 
         <TextView
@@ -142,6 +137,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whoTag"
+            android:paddingLeft="15dp"
+
             android:text="Who are you sending it to?"
             android:textSize="13dp" />
     </RelativeLayout>
@@ -156,16 +153,18 @@
         <!-- A CardView that contains a TextView -->
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view3"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true">
 
 
             <!--set the receiver here-->
             <RelativeLayout
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -174,19 +173,21 @@
                     android:id="@+id/whoIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="39dp"
-                    android:src="@mipmap/if_user_add_383199"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true" />
+                    android:src="@mipmap/if_user_add_383199" />
 
                 <AutoCompleteTextView
-                android:id="@+id/et_receiverHandle"
-                android:layout_width="155dp"
-                    android:textSize="20dp"
+                    android:id="@+id/et_receiverHandle"
+                    android:layout_width="100dp"
+                    android:paddingLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:gravity="center"
-                android:layout_height="wrap_content"
-                android:hint="Enter receiver's handle"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                    android:hint="Enter receiver's handle"
+                    android:textSize="20dp"
+                    android:layout_toEndOf="@+id/whoIcon" />
             </RelativeLayout>
 
             <!--</android.support.v7.widget.LinearLayout>-->
@@ -198,6 +199,7 @@
 
 
     <View
+        android:alpha="0.4"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/darker_gray" />
@@ -217,6 +219,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
+            android:paddingLeft="15dp"
+            android:textStyle="bold"
             android:text="WHEN" />
 
         <TextView
@@ -224,7 +228,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whenTag"
-            android:text="Mention your availbale daterange to send it in"
+            android:paddingLeft="15dp"
+
+            android:text="Mention your availbale daterange to handover package to courier"
             android:textSize="13dp" />
     </RelativeLayout>
 
@@ -240,16 +246,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginStart="77dp"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/endCalendar"
-            android:layout_marginEnd="85dp" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/if_arrow_right_392525"
-            android:id="@+id/imgto" />
+            android:layout_alignParentStart="true" />
+
 
         <ImageView
             android:id="@+id/endCalendar"
@@ -258,11 +258,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imgto"
-            android:layout_marginStart="50dp" />
-
-
-
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="74dp" />
 
     </RelativeLayout>
 
@@ -278,8 +275,8 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
-            android:hint="Start"
             android:gravity="center"
+            android:hint="Start"
             android:textSize="20dp" />
 
         <TextView
@@ -290,10 +287,9 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginEnd="55dp"
-            android:hint="End"
             android:gravity="center"
+            android:hint="End"
             android:textSize="20dp" />
-
 
     </RelativeLayout>
 
