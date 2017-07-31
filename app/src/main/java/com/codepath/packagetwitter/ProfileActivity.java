@@ -52,18 +52,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public TextView tvHandle;
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
-    public final int SENDER_REQUEST_CODE = 30;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
 
     public final int IMAGE_REQUEST_CODE =40;
 
-
-
-    public final static String COURIER_KEY = "courier";
-    public final static String SENDER_KEY = "sender";
-    public final static String MAIL_KEY = "mail";
-    public final static String RECEIVER_KEY = "receiver";
     public FloatingActionButton floatingActionButton1;
     public FloatingActionButton floatingActionButton2;
     public com.github.clans.fab.FloatingActionButton floatingActionButton3;
@@ -142,13 +135,13 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         //modal code (work on later)
 
-        //FOR SENDER
 //        materialDesignFAM.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //
 //                try {
 //                            Thread.sleep(5000);
 //                    materialDesignFAM.close(true);
+//
 //
 //                } catch (InterruptedException e) {
 //                            e.printStackTrace();
@@ -161,9 +154,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!ignore) {
 
-                }
+
 
             }
         });

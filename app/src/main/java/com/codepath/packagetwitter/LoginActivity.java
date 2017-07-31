@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String[] userListMain;
     public static ArrayList<String> mylist = new ArrayList<String>();
     public static Dictionary dictionary_populate;
+    public static Dictionary dictionary_name;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
     Login_Fragment login_fragment;
 
@@ -48,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void getTheRightString(){
 
-         dictionary_populate = new Hashtable();
+        dictionary_populate = new Hashtable();
+        dictionary_name = new Hashtable();
 
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         mylist.add(name);
                         dictionary_populate.put(name, email);
+                        dictionary_name.put(email,name);
                     }
 
                     }
