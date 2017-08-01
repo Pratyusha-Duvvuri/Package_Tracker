@@ -78,7 +78,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:10.0.1'
     compile 'com.google.android.gms:play-services-location:10.0.1'
     compile 'com.google.android.gms:play-services-places:10.0.1'
-
+    compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
 
 //    compile 'com.google.android.gms:play-services:7.0.0'
 
