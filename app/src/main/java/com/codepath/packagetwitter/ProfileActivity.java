@@ -1,13 +1,14 @@
 package com.codepath.packagetwitter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -132,10 +133,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
+        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
-        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_image);
-        floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_demo);
 
         //modal code (work on later)
 
@@ -156,13 +155,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 //
 //        });
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-
-
-            }
-        });
         //For Courier
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -278,15 +271,28 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void done(List<ParselTransaction> itemList, ParseException e) {
 
                 if (e == null) {
+                    if (itemList.size()== 0 | itemList  == null) {
+                        parseUser.put("hasPendingRequests", false);
+                        parseUser.saveInBackground();
+                    }
+
                     for (int i = 0; i < itemList.size(); i++) {
                         //for every parsel transaction
                         currentReceive= itemList.get(i);
 
-                        FragmentManager fm = getSupportFragmentManager();
-                        //creating random sender and mail object here and checking flow from this
-                        // point till last activity before transaction activity creation.
-                        PendingRequest_Fragment pendingRequest_fragment = new  PendingRequest_Fragment();
-                        pendingRequest_fragment.show(fm, "fragment_pending_request");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+
+                        builder.setMessage("Someone wants to send you a package");    //set message
+
+
+                        builder.setPositiveButton("View now", new DialogInterface.OnClickListener() { //when click on DELETE
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(ProfileActivity.this, AfterSenderConfirmation.class);
+                                startActivityForResult(i, RECEIVER_CODE);
+                                return;
+                            }
+                                }).show();
                         break;
                     }
 
@@ -326,61 +332,67 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        pagerAdapter.pendingTransactionFragment.populateTimeline();
+        pagerAdapter.oldTransactionFragment.populateTimeline();
 
         if (requestCode == PACKAGE_CREATION && resultCode == RESULT_OK){
-            PendingRequest_Fragment package_conf = PendingRequest_Fragment.newInstance("Package was created.\n A request was sent to the recipient.");
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(package_conf, null);
-            ft.commitAllowingStateLoss();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+
+            builder.setMessage("Package was created.\n A request was sent to the recipient");    //set message
+
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;}
+            }).show();
         }
 
         if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK){
-
-            PendingRequest_Fragment package_conf;
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
             if (data.getBooleanExtra("matched", false)){
-                package_conf = PendingRequest_Fragment.newInstance("Trip was entered.\n A match was found!.");
+                builder.setMessage("Trip was entered.\nA match was found!");    //set message
+
             }
             else{
-                package_conf = PendingRequest_Fragment.newInstance("Trip was entered.\n We are looking for a match.");
+                builder.setMessage("Trip was entered.");    //set message
 
             }
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;}
+            }).show();
 
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(package_conf, null);
-            ft.commitAllowingStateLoss();
         }
 
 
         if (requestCode == RECEIVER_CODE && resultCode == RESULT_OK){
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
             PendingRequest_Fragment package_conf;
             if (data.getBooleanExtra("matched", false)){
-                package_conf = PendingRequest_Fragment.newInstance("Package was confirmed.\n A match was found!.");
+                builder.setMessage("Package was confirmed.\nA match was found!");    //set message
+
             }
             else{
-                package_conf = PendingRequest_Fragment.newInstance("Package was confirmed.\n We are looking for a match.");
+                builder.setMessage("Package was confirmed.");    //set message
 
             }
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(package_conf, null);
-            ft.commitAllowingStateLoss();
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;}
+            }).show();
         }
 
-//        if (requestCode == IMAGE_REQUEST_CODE){
-//            setParametersOfView();
-//
-//            CourierModel courier = (CourierModel) Parcels.unwrap(data.getParcelableExtra(COURIER_KEY));
-//            //add the new (incomplete) transaction to current transactions
-//            Transaction transaction = new Transaction(new Receiver(), new Sender(), courier, new Mail());
-//            //pagerAdapter.pendingTransactionFragment.addItems(transaction);
-//        }
-
-        if (requestCode == IMAGE_REQUEST_CODE) {
+        if (requestCode == IMAGE_REQUEST_CODE){
             setParametersOfView();
-            }
-        pagerAdapter.pendingTransactionFragment.populateTimeline();
-        pagerAdapter.oldTransactionFragment.populateTimeline();
+
+
+        }
+
+
 
     }
     @Override

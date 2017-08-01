@@ -104,6 +104,8 @@ public class CourierActivity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
+        startLocation.setText(parseUser.getString("location"));
+
         date = cal.get(Calendar.DATE);
         showDialogButtonClick();
 

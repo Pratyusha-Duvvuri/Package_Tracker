@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="20dp"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
         android:text="Where Are You Traveling?"
         android:textSize="16sp" />
 
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/locations"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="When?"
         android:textSize="16sp" />
     <RelativeLayout

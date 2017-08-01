@@ -223,6 +223,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
                                         }
                                         finishIntent();
+
                                     }
 
                                     else{
@@ -240,6 +241,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         else{
                             //if it's not a match:
                         }
+
 
                     } //for loop ends here
 
