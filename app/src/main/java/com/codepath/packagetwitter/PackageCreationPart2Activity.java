@@ -329,12 +329,15 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 title = etTitle.getText().toString();
                 description = etDescription.getText().toString();
                 weight = Double.parseDouble(etWeight.getText().toString());
+                int id = rgFragile.getCheckedRadioButtonId();
 
-                if (rgFragile.getCheckedRadioButtonId() == R.id.Yes) {
+
+                if (rgFragile.getCheckedRadioButtonId() == R.id.rbYes) {
                     fragile = true;
                 }
-                else if (rgFragile.getCheckedRadioButtonId() == R.id.No)
+                else {
                     fragile = false;
+                }
 
 
                 if (rgType.getCheckedRadioButtonId() == R.id.rbClothes) {

@@ -6,121 +6,307 @@
     android:layout_height="match_parent">
 
 
-    <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-
-    <View
-        android:id="@+id/view1"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="255dp">
 
-    <ImageButton
-        android:id="@+id/ibPackageUpload"
-        android:layout_width="match_parent"
-        android:layout_height="214dp"
-        android:background="@android:color/transparent"
-        android:src="@mipmap/ic_image_placeholder" />
-
-    <TextView
-        android:id="@+id/tvPackageType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="10dp"
-        android:text="Package"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:id="@+id/llTitleDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
-
-        <LinearLayout
-            android:id="@+id/llTitle"
+        <TextView
+            android:id="@+id/tvPackageType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingBottom="20dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="Package"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvTitleText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="Title: "
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:hint="Clothes for my sister"
-                android:textAlignment="center"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llDescription"
+        <ImageButton
+            android:id="@+id/ibPackageUpload"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:paddingTop="5dp">
+            android:layout_height="214dp"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/gradient"
+            android:src="@mipmap/ic_image_placeholder"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="7dip"
+            android:layout_alignParentBottom="true" />
 
-            <TextView
-                android:id="@+id/tvDescriptionText"
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvDescription"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="15dp"
+            android:hint="Clothes for my sister"
+            android:textAlignment="center"
+            android:textColor="@color/white_greyish"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPackageType"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="168dp"
+            android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
+            android:textAlignment="center"
+            android:textColor="@color/white_greyish"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cvPackageSize"
+            android:layout_marginTop="7dp">
+
+            <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="Description: "
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="8dp"
-                android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
-                android:textAlignment="center"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/tvWeightTrue"
+                android:layout_weight="1"
+                android:paddingTop="20dp"
+                android:text="Weight: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvWeightTrue"
+                android:layout_width="30sp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvWeight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:hint="5.5"
                 android:textSize="13sp" />
-        </LinearLayout>
-    </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvlbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvWeightTrue"
+                android:layout_alignBottom="@+id/tvWeightTrue"
+                android:layout_toEndOf="@+id/tvWeightTrue"
+                android:text="lbs"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:id="@+id/llFragile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvWeight"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+               >
 
 
-    <View
-        android:id="@+id/view3"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_alignParentStart="true" />
 
+                <RadioGroup
+                    android:id="@+id/rgFragile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toEndOf="@+id/tvFragile"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvFragile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.58"
+                        android:gravity="center_vertical|center"
+                        android:text="Fragile: "
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+
+                        android:enabled="false"
+                        android:text="Yes"
+                        android:textSize="13sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="0.07"
+                        android:enabled="false"
+                        android:text="No"
+                        android:textSize="13sp" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvPackageSize"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/view4"
+            android:layout_alignTop="@+id/tvTypeText"
+            android:layout_marginEnd="55dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="Size:"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvPackageSize"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvPackageSize"
+            android:layout_alignTop="@+id/cvPackageType"
+            android:layout_marginRight="15dp"
+            android:background="@color/white"
+            android:paddingTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/llKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/cvPackageType"
+                android:layout_toStartOf="@+id/cvPackageSize"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ibSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/ic_key" />
+
+                <TextView
+                    android:id="@+id/tvSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="45dp"
+                    android:text="Key Sized"
+                    android:textAlignment="center"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvTypeText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignStart="@+id/cvPackageType"
+            android:layout_below="@+id/view4"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="5dp"
+            android:text="Type:"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvPackageType"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvTypeText"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:paddingTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/llClothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ibType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/ic_clothes" />
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="45dp"
+                    android:text="Clothes"
+                    android:textAlignment="center"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

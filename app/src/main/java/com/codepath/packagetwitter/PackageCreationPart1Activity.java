@@ -167,9 +167,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         i.putExtra("senderStartDate", sendStart);
         i.putExtra("senderEndDate", sendEnd);
-        i.putExtra("receiverHandle", "Pamela");
-        i.putExtra("senderLocation", "Tokyo");
-        i.putExtra("receiverLocation", "Boston");
+        i.putExtra("receiverHandle", receiverHandle.getText());
+        i.putExtra("senderLocation", senderLocationB.getText());
+        i.putExtra("receiverLocation", receiverLocationB.getText());
 
 //        i.putExtra("receiverHandle", receiverHandle.getText().toString());
 //        i.putExtra("senderLocation", senderLocationB.getText().toString());

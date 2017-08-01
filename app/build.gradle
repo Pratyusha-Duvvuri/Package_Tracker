@@ -34,6 +34,7 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.github.bumptech.glide:glide:3.8.0'
 
+
     //    compile fileTree(dir: 'libs', include: ['*.jar'])
 ////    compile 'com.android.support:appcompat-v7:23.0.0'
 //    compile 'org.apache.httpcomponents:httpclient:4.5'
@@ -72,6 +73,7 @@ dependencies {
     compile 'com.parse:parse-android:1.15.8'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     compile 'com.parse:parse-livequery-android:1.0.4'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 //    compile 'com.android.support:appcompat-v7:26f.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])

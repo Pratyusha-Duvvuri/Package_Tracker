@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Fragments.Review_frag;
-import com.codepath.packagetwitter.Fragments.Review_frag_three;
 import com.codepath.packagetwitter.Fragments.Review_frag_two;
 import com.codepath.packagetwitter.Models.Mail;
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -99,7 +98,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         imageUrl = postImage.getUrl();//live url
                     }
                     Review_frag_two fragment =  Review_frag_two.newInstance(imageUrl,
-                            transaction.getString("title"),transaction.getMailDescription());
+                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
+                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
@@ -135,13 +135,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         imageUrl = postImage.getUrl();//live url
                     }
                     Review_frag_two fragment = Review_frag_two.newInstance(imageUrl,
-                            transaction.getString("title"),transaction.getMailDescription());
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-                } else {
-                    page = 2;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_three fragment = Review_frag_three.newInstance(transaction.getMailType(),
+                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
                             transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();

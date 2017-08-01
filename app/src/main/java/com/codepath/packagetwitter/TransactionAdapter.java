@@ -2,6 +2,7 @@ package com.codepath.packagetwitter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.ParseUser;
 
@@ -58,24 +60,46 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         ParselTransaction transaction = mTransactions.get(position);
 
         String status = "";
-        switch(transaction.getTransactionState()){
+        switch (transaction.getTransactionState()) {
 
-            case 0: status = "Awaiting Receiver";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
-            case 1: status = "Awaiting Match";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
-            case 2: status = "Awating Delivery";holder.ivStatus.setImageResource(R.drawable.green_dot);break;
-            case 6: status = "Package Delivered!";holder.ivStatus.setImageResource(R.drawable.green_dot);break;
-            case 7: status = "Awaiting Match";holder.ivStatus.setImageResource(R.drawable.yellow_dot);break;
-            default: break;
+            case 0:
+                status = "Awaiting Receiver";
+                holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                break;
+            case 1:
+                status = "Awaiting Match";
+                holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                break;
+            case 2:
+                status = "Awating Delivery";
+                holder.ivStatus.setImageResource(R.drawable.green_dot);
+                break;
+            case 6:
+                status = "Package Delivered!";
+                holder.ivStatus.setImageResource(R.drawable.green_dot);
+                break;
+            case 7:
+                status = "Awaiting Match";
+                holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                break;
+            default:
+                break;
 
         }
 
         holder.tvStatus.setText(status);
 
+        try{
+             Uri imageUri = Uri.parse(transaction.getParseFile("ImageFile").getUrl());
+            Glide.with(context).load(imageUri.toString()).into(holder.ivPackageImage);
+        }
 
-
-
+        catch (NullPointerException e) {
+        Glide.with(context).load("http://i.imgur.com/zuG2bGQ.jpg").centerCrop().into(holder.ivPackageImage);
+//        holder.ivPackageImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
+    }
     }
 
     @Override
