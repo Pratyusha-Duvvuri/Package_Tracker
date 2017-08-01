@@ -32,6 +32,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static com.codepath.packagetwitter.LoginActivity.dictionary_name;
+
 public class AfterSenderConfirmation extends AppCompatActivity{
 
     Receiver receiver;
@@ -114,7 +116,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                     String endDay = df.format(transaction.getSenderEnd());
                     ft = getSupportFragmentManager().beginTransaction();
                     Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
-                            transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+                            transaction.getReceiverLoc(), (String) dictionary_name.get(transaction.getSender()),startDay,endDay);
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
@@ -149,7 +151,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         String startDay  = df.format(transaction.getSenderStart());
         String endDay = df.format(transaction.getSenderEnd());
         Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
-                transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+                transaction.getReceiverLoc(), (String) dictionary_name.get(transaction.getSender()),startDay,endDay);
 
         ft.replace(R.id.flContainer,fragment);
 

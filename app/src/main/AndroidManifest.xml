@@ -39,6 +39,9 @@
         <activity
             android:name=".TransactionDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TransactionDetailTest"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CourierActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".UploadPackageImageActivity" />
