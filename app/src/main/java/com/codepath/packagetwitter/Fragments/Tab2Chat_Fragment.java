@@ -32,6 +32,7 @@ import java.util.List;
 import static com.codepath.packagetwitter.Message.FROM;
 import static com.codepath.packagetwitter.Message.TO;
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
+import static com.codepath.packagetwitter.OtherChatActivity.goOn;
 import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
@@ -48,7 +49,6 @@ public class Tab2Chat_Fragment extends Fragment {
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
     String transactionid;
-//    static final String TAG = ChatActivity.class.getSimpleName();
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
@@ -102,6 +102,8 @@ public class Tab2Chat_Fragment extends Fragment {
 
                 if (e == null) {
                     thisUser2 = itemList.get(0);
+                    goOn=true;
+
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -128,15 +130,6 @@ public class Tab2Chat_Fragment extends Fragment {
         //set the adapter
         rvChat.setAdapter(mAdapter);
 
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeContainer.setRefreshing(true);
-//                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
-//                populateTimeline();
-//                swipeContainer.setRefreshing(false);
-//            }
-//        });
 
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -256,15 +249,6 @@ public class Tab2Chat_Fragment extends Fragment {
         queries.add(myQuery1);
         queries.add(myQuery2);
         ParseQuery<Message> query = ParseQuery.or(queries);
-
-        // Construct query to execute
-//        ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
-//        query.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
-//
-//        // Configure limit and sort order
-//        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
-//        type = messages_main[0];
-//        query.whereNotEqualTo("userName", type);
 
 
         // get the latest 50 messages, order will show up newest to oldest of this group
