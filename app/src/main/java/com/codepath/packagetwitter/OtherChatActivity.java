@@ -37,7 +37,8 @@ public class OtherChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         transaction_id =  getIntent().getStringExtra("ParselTransactionId");
-
+        android.support.v7.app.ActionBar actionBar =  getSupportActionBar();
+        actionBar.hide();
         ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
         query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
@@ -93,17 +94,6 @@ public class OtherChatActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-//        setContentView(R.layout.activity_chat);
-//
-//        //this code is to set up the transactions for the three tabs
-//        pagerAdapter = new ChatPagerAdapter(getSupportFragmentManager(), this);
-//        //get the View pager
-//        vpPager = (ViewPager) findViewById(R.id.viewpager2);
-//        //set the adapter for the pager
-//        vpPager.setAdapter(pagerAdapter);
-//        //setup tablayout to use the view pager
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs2);
-//        tabLayout.setupWithViewPager(vpPager);
 
     }
 

@@ -1,6 +1,8 @@
 package com.codepath.packagetwitter.Fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
@@ -19,6 +22,7 @@ import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseLiveQueryClient;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -51,10 +55,14 @@ public class Tab1Chat_Fragment extends Fragment {
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
-    Button btSend;
+    ImageButton btSend;
+    ImageView ivProfileImage;
     public static ParseUser thisUser1;
+    Handler handler;
+    ParseFile postImage;
+    Uri imageUri;
 
-
+    Runnable refresh;
     final String userId = parseUser.getObjectId();
 
 
@@ -63,8 +71,23 @@ public class Tab1Chat_Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
         getThisUser();
+         handler = new Handler();
+
+        got();
+
+
     }
 
+    public void got(){
+
+        refresh = new Runnable() {
+            public void run() {
+                refreshMessages();
+                handler.postDelayed(refresh, 4000);
+            }
+        };
+        handler.post(refresh);
+    }
 
     public void getThisUser(){
 
@@ -105,7 +128,8 @@ public class Tab1Chat_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.chatjsutincase, container, false);
         rvChat =  v.findViewById(R.id.rvChat);
         etMessage = (EditText) v.findViewById(R.id.etMessage1);
-        btSend = (Button) v.findViewById(R.id.btSend1);
+        btSend = (ImageButton) v.findViewById(R.id.btSend1);
+        ivProfileImage = (ImageView) v.findViewById(R.id.ivProfileImage);
         //find swipe containerview
         //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)
@@ -182,9 +206,26 @@ public class Tab1Chat_Fragment extends Fragment {
                         });
                     }
                 });
+
+        populateHeader();
         return v;
     }
 
+
+    public void populateHeader(){
+
+        postImage = thisUser1.getParseFile("ImageFile");
+        String imageUrl = postImage.getUrl();//live url
+        imageUri = Uri.parse(imageUrl);
+
+//        ivProfileImage.setImageResource();
+
+//        Glide.with(holder.imageOther.getContext()).load(imageUri.toString()).into(profileView);
+//        holder.body.setText(message.getBody());
+
+
+
+    }
     // Get the userId from the cached currentUser object
     void startWithCurrentUser() {
         setupMessagePosting();
@@ -237,6 +278,8 @@ public class Tab1Chat_Fragment extends Fragment {
                 etMessage.setText(null);
             }
         });
+
+
     }
 
     // Query messages from Parse so we can load them into the chat adapter
