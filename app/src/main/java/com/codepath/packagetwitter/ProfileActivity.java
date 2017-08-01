@@ -53,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public TextView tvHandle;
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
+    public final int RECEIVER_CODE = 30;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
 
@@ -307,7 +308,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialog( Boolean proceed) {
         if(proceed){
         Intent i = new Intent(this, AfterSenderConfirmation.class);
-            startActivity(i);
+            startActivityForResult(i, RECEIVER_CODE);
         }
         else{
 
@@ -326,12 +327,45 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-            if (requestCode == PACKAGE_CREATION){
-                PendingRequest_Fragment package_conf = PendingRequest_Fragment.newInstance("Package was created.\n A request was sent to the recipient.");
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.add(package_conf, null);
-                ft.commitAllowingStateLoss();
+        if (requestCode == PACKAGE_CREATION && resultCode == RESULT_OK){
+            PendingRequest_Fragment package_conf = PendingRequest_Fragment.newInstance("Package was created.\n A request was sent to the recipient.");
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(package_conf, null);
+            ft.commitAllowingStateLoss();
+        }
+
+        if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK){
+
+            PendingRequest_Fragment package_conf;
+            if (data.getBooleanExtra("matched", false)){
+                package_conf = PendingRequest_Fragment.newInstance("Trip was entered.\n A match was found!.");
             }
+            else{
+                package_conf = PendingRequest_Fragment.newInstance("Trip was entered.\n We are looking for a match.");
+
+            }
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(package_conf, null);
+            ft.commitAllowingStateLoss();
+        }
+
+
+        if (requestCode == RECEIVER_CODE && resultCode == RESULT_OK){
+
+            PendingRequest_Fragment package_conf;
+            if (data.getBooleanExtra("matched", false)){
+                package_conf = PendingRequest_Fragment.newInstance("Package was confirmed.\n A match was found!.");
+            }
+            else{
+                package_conf = PendingRequest_Fragment.newInstance("Package was confirmed.\n We are looking for a match.");
+
+            }
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(package_conf, null);
+            ft.commitAllowingStateLoss();
+        }
 
 //        if (requestCode == IMAGE_REQUEST_CODE){
 //            setParametersOfView();

@@ -103,9 +103,11 @@
     <Button
         android:id="@+id/btConfirm"
 
-        android:layout_width="300dp"
-        android:layout_height="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
 
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_weight="4.33"
         android:background="@drawable/buttonshape"
         android:shadowDx="0"
@@ -113,9 +115,7 @@
         android:shadowRadius="0"
         android:text="Confirm"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvTitle"

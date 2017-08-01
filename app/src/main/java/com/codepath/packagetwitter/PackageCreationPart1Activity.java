@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -55,14 +56,16 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     Boolean proceed;
     public final int UPLOAD_IMAGE_CODEn = 100;
     //these are for the locations
-    @BindView(R.id.etsenderStartLocationB)
-    TextView senderLocationB;
+    @BindView(R.id.etsenderStartLocationB) TextView senderLocationB;
+    @BindView(R.id.rlStart) RelativeLayout rlStart;
+    @BindView(R.id.rlEnd) RelativeLayout rlEnd;
+
     @BindView(R.id.etreceiverEndLocationB) TextView receiverLocationB;
     @BindView(R.id.et_receiverHandle)
     AutoCompleteTextView receiverHandle;
     //these are supposed to be the text views
-    @BindView(R.id.senderEndDateB)TextView displaySenderEnd;
-    @BindView(R.id.senderStartDateB)TextView displaySenderStart;
+    @BindView(R.id.tvEndDate)TextView displaySenderEnd;
+    @BindView(R.id.tvStartDate)TextView displaySenderStart;
 
     @BindView(R.id.startCalendar) ImageView startDate;
     @BindView(R.id.endCalendar) ImageView endDate;
@@ -226,7 +229,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     }
 
     public void showDialogButtonClick() {
-        startDate.setOnClickListener(
+        rlStart.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -249,7 +252,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         );
 
-        endDate.setOnClickListener(
+        rlEnd.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override

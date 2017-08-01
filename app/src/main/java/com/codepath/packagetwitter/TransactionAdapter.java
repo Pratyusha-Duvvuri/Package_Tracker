@@ -89,6 +89,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.tvStatus.setText(status);
 
+        holder.tvTitle.setText(transaction.getString("title"));
+
         try{
              Uri imageUri = Uri.parse(transaction.getParseFile("ImageFile").getUrl());
             Glide.with(context).load(imageUri.toString()).into(holder.ivPackageImage);
@@ -114,6 +116,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public ImageView ivPackageImage;
         public TextView tvStatus;
         public ImageView ivStatus;
+        public TextView tvTitle;
 
         public  ViewHolder (View itemView) {
             super(itemView);
@@ -122,6 +125,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvStatus = (TextView) itemView.findViewById(R.id.tvStatus);
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
             ivStatus = (ImageView) itemView.findViewById(R.id.ivStatus);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
         }
 
         @Override
