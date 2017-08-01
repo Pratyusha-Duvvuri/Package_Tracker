@@ -192,6 +192,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         });
     }
 
+    @Override
+    public void onFinishEditDialogThis() {
+
+    }
+
     public void checkForRejection(){
         //if the sender has been rejected
         //query all requests with this user as sender and rejected id
@@ -403,13 +408,30 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
     public void onLogoutAction(MenuItem mi) {
-        FragmentManager fm = getSupportFragmentManager();
-        LogoutFragment logoutFragment = LogoutFragment.newInstance();
-        logoutFragment.show(fm, "fragment_logout");
+//        FragmentManager fm = getSupportFragmentManager();
+//        LogoutFragment logoutFragment = LogoutFragment.newInstance();
+//        logoutFragment.show(fm, "fragment_logout");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); //alert for confirm to delete
+        builder.setMessage("Are you sure you want to logout?");    //set message
+
+        builder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() { //when click on DELETE
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                ParseUser.logOut();
+                Intent i= new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivityForResult(i,0);
+
+                return;
+            }
+
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {  //not removing items if cancel is done
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                                return;
+            }
+        }).show();
     }
 
-    @Override
-    public void onFinishEditDialogThis() {
 
-    }
 }

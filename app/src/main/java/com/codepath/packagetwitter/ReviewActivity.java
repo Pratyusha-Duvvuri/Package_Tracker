@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Fragments.Review_frag;
@@ -29,7 +30,8 @@ public class ReviewActivity extends AppCompatActivity {
     ParseFile file;
 
     String receiver;
-
+    ImageView page1;
+    ImageView page2;
     String startDate;
     String endDate;
     byte[] image;
@@ -51,6 +53,8 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
         FrameLayout fl = (FrameLayout)findViewById(R.id.flContainer);
+       page1 = (ImageView) findViewById(R.id.page1);
+        page2  = (ImageView)findViewById(R.id.page2);
 
         startAddress = getIntent().getStringExtra("senderLocation");
         endAddress = getIntent().getStringExtra("receiverLocation");
@@ -80,6 +84,8 @@ public class ReviewActivity extends AppCompatActivity {
                     Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description, type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
 
 
 
@@ -89,20 +95,15 @@ public class ReviewActivity extends AppCompatActivity {
 
             @Override
             public void onSwipeRight() {
-                if (page == 2) {
 
-                    page = 1;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment = Review_frag_two.newInstance(image, title, description, type, volume, weight, fragile);
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-                } else {
                     page = 0;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag fragment =  Review_frag.newInstance(startAddress,endAddress,receiver,startDate,endDate);
+                    Review_frag fragment = Review_frag.newInstance(startAddress, endAddress, receiver, startDate, endDate);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                }
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
+
             }
         });
 
