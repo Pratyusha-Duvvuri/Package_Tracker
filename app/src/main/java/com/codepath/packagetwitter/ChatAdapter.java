@@ -13,8 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.codepath.packagetwitter.Fragments.Tab1Chat_Fragment.thisUser1;
+import static com.codepath.packagetwitter.Fragments.Tab2Chat_Fragment.thisUser2;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/14/17.
@@ -24,16 +27,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private List<Message> mMessages;
     private Context mContext;
     private String mUserId;
+    private Integer tabNo;
 
-    public ChatAdapter(Context context, String userId, List<Message> messages) {
+    public ChatAdapter(Context context, String userId, List<Message> messages, Integer tabNum) {
         mMessages = messages;
         this.mUserId = userId;
         mContext = context;
+        tabNo=tabNum;
+
+
     }
 
-    public ChatAdapter(ArrayList<Message> messages) {
-    mMessages = messages;
-    }
+
+//    public ChatAdapter(ArrayList<Message> messages) {
+//    mMessages = messages;
+//    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,9 +58,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = mMessages.get(position);
         final boolean isMe = message.getUserId() != null && message.getUserId().equals(mUserId);
-        ParseFile postImage = message.getParseFile("picture");
+        ParseFile postImage;
         Uri imageUri;
         if (isMe) {
+            postImage = parseUser.getParseFile("ImageFile");
             holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
@@ -61,6 +70,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
             //put my image from parse user
         } else {
+            if(tabNo==0)
+                postImage = thisUser1.getParseFile("ImageFile");
+            else
+                postImage = thisUser2.getParseFile("ImageFile");
+
             holder.imageOther.setVisibility(View.VISIBLE);
             holder.imageMe.setVisibility(View.GONE);
             holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
