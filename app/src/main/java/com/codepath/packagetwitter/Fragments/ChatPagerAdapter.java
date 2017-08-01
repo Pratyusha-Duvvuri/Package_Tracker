@@ -33,7 +33,7 @@ public class ChatPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         if(position==0)
-        {type = messages_main[1];
+        {
             return tab1Chat_fragment;}
         else if(position ==1)
             {type = messages_main[0];

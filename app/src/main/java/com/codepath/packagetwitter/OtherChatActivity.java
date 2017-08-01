@@ -33,6 +33,7 @@ public class OtherChatActivity extends AppCompatActivity {
     public static ParselTransaction transaction_main;
     public static String type;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         transaction_id =  getIntent().getStringExtra("ParselTransactionId");
