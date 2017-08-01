@@ -1,6 +1,5 @@
 package com.codepath.packagetwitter.Fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,16 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
+import com.codepath.packagetwitter.OtherChatActivity;
 import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseLiveQueryClient;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -56,15 +54,10 @@ public class Tab1Chat_Fragment extends Fragment {
     static final String BODY_KEY = "body";
     EditText etMessage;
     ImageButton btSend;
-    ImageView ivProfileImage;
     public static ParseUser thisUser1;
     Handler handler;
-    ParseFile postImage;
-    Uri imageUri;
-
     Runnable refresh;
     final String userId = parseUser.getObjectId();
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,10 +65,7 @@ public class Tab1Chat_Fragment extends Fragment {
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
         getThisUser();
          handler = new Handler();
-
         got();
-
-
     }
 
     public void got(){
@@ -91,7 +81,6 @@ public class Tab1Chat_Fragment extends Fragment {
 
     public void getThisUser(){
 
-
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         query.whereEqualTo("username", messages_main[0]); //pending transaction state
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -99,6 +88,7 @@ public class Tab1Chat_Fragment extends Fragment {
 
                 if (e == null) {
                         thisUser1 = itemList.get(0);
+                    OtherChatActivity.loadImageBoi(0);
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -129,7 +119,6 @@ public class Tab1Chat_Fragment extends Fragment {
         rvChat =  v.findViewById(R.id.rvChat);
         etMessage = (EditText) v.findViewById(R.id.etMessage1);
         btSend = (ImageButton) v.findViewById(R.id.btSend1);
-        ivProfileImage = (ImageView) v.findViewById(R.id.ivProfileImage);
         //find swipe containerview
         //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)
@@ -141,15 +130,7 @@ public class Tab1Chat_Fragment extends Fragment {
         //set the adapter
         rvChat.setAdapter(mAdapter);
 
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeContainer.setRefreshing(true);
-//                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
-//                populateTimeline();
-//                swipeContainer.setRefreshing(false);
-//            }
-//        });
+
 
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -207,25 +188,9 @@ public class Tab1Chat_Fragment extends Fragment {
                     }
                 });
 
-        populateHeader();
         return v;
     }
 
-
-    public void populateHeader(){
-
-        postImage = thisUser1.getParseFile("ImageFile");
-        String imageUrl = postImage.getUrl();//live url
-        imageUri = Uri.parse(imageUrl);
-
-//        ivProfileImage.setImageResource();
-
-//        Glide.with(holder.imageOther.getContext()).load(imageUri.toString()).into(profileView);
-//        holder.body.setText(message.getBody());
-
-
-
-    }
     // Get the userId from the cached currentUser object
     void startWithCurrentUser() {
         setupMessagePosting();
@@ -265,8 +230,6 @@ public class Tab1Chat_Fragment extends Fragment {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
-//                            Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
-//                                    Toast.LENGTH_SHORT).show();
                             refreshMessages();}
                         else{
                             Log.d("Message  error",e.toString());

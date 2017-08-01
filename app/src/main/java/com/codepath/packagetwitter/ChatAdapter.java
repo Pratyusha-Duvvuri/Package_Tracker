@@ -34,14 +34,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         this.mUserId = userId;
         mContext = context;
         tabNo=tabNum;
-
-
     }
 
-
-//    public ChatAdapter(ArrayList<Message> messages) {
-//    mMessages = messages;
-//    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,10 +50,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //load image onto the thing
-
-
-
 
         Message message = mMessages.get(position);
         final boolean isMe = message.getUserId() != null && message.getUserId().equals(mUserId);
