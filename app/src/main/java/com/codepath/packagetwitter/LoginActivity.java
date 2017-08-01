@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.codepath.packagetwitter.Fragments.Login_Fragment;
 import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -38,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
         AppEventsLogger.activateApp(this);
 
 

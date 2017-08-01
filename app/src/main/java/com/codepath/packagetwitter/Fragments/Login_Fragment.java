@@ -31,9 +31,14 @@ import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
@@ -41,7 +46,13 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,6 +73,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public ParseUser parseUser;
     private String TAG = "Google Places API";
     private static Button loginButtonn;
+    CallbackManager callbackManager;
+    public AccessToken accessToken;
+    public AccessTokenTracker accessTokenTracker;
 
     public Login_Fragment() {
 
@@ -78,32 +92,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+//        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday"));
         // If using in a fragment
         loginButton.setFragment(this);
         // Other app specific specialization
-        CallbackManager callbackManager= CallbackManager.Factory.create();
-
-      //   Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
-
-
-
 
         return view;
 
@@ -209,9 +203,165 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer, signUp_fragment, SignUp_Fragment).commit();
                 break;
+
+            case R.id.login_button:
+                onFbLogin();
+                break;
         }
 
     }
+
+    private void onFbLogin() {
+        callbackManager = CallbackManager.Factory.create();
+
+//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                Toast.makeText(getActivity(),"in LoginResult on success", Toast.LENGTH_LONG).show();
+//
+//                accessTokenTracker = new AccessTokenTracker() {
+//                    @Override
+//                    protected void onCurrentAccessTokenChanged(
+//                            AccessToken oldAccessToken,
+//                            AccessToken currentAccessToken) {
+//                        // Set the access token using
+//                        // currentAccessToken when it's loaded or set.
+//                    }
+//                };
+//                // If the access token is available already assign it.
+////                accessToken = AccessToken.getCurrentAccessToken();
+//                accessToken = loginResult.getAccessToken();
+//                Profile profile = Profile.getCurrentProfile();
+//
+//                // Facebook Email address
+//                GraphRequest request = GraphRequest.newMeRequest(
+//                        accessToken,
+//                        new GraphRequest.GraphJSONObjectCallback() {
+//                            @Override
+//                            public void onCompleted(
+//                                    JSONObject object,
+//                                    GraphResponse response) {
+//                                Log.v("LoginActivity Response ", response.toString());
+//                                String Name,FEmail;
+//
+//                                try {
+//                                    Name = object.getString("name");
+//
+//                                    FEmail = object.getString("email");
+//                                    Log.v("Email = ", " " + FEmail);
+//                                    Toast.makeText(getApplicationContext(), "Name " + Name, Toast.LENGTH_LONG).show();
+//
+//
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        });
+//                Bundle parameters = new Bundle();
+//                parameters.putString("fields", "id,name,email,gender, birthday");
+//                request.setParameters(parameters);
+//                request.executeAsync();
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//                Toast.makeText(getActivity(),"in LoginResult on cancel", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onError(FacebookException exception) {
+//                Toast.makeText(getActivity(),"in LoginResult on error", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+               GraphRequest.Callback req = new GraphRequest.Callback() {
+
+                   @Override
+                   public void onCompleted( GraphResponse response) {
+                       JSONObject object=response.getJSONObject();
+
+                       Log.i("LoginActivity", response.toString());
+                       // Get facebook data from login
+
+
+
+                       Bundle bFacebookData = getFacebookData(object);
+                   }
+               };
+
+                String accessToken = loginResult.getAccessToken().getToken();
+                Log.i("accessToken", accessToken);
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location");
+                new GraphRequest(loginResult.getAccessToken(),"/me",parameters, HttpMethod.GET,req).executeAsync();
+
+
+            }
+
+
+
+
+
+
+            @Override
+            public void onCancel() {
+                System.out.println("onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                System.out.println("onError");
+                Log.v("LoginActivity", exception.getCause().toString());
+            }
+        });
+    }
+
+
+
+        private Bundle getFacebookData(JSONObject object) {
+
+            try {
+                Bundle bundle = new Bundle();
+                String id = object.getString("id");
+
+                try {
+                    URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                    Log.i("profile_pic", profile_pic + "");
+                    bundle.putString("profile_pic", profile_pic.toString());
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                bundle.putString("idFacebook", id);
+                if (object.has("first_name"))
+                    bundle.putString("first_name", object.getString("first_name"));
+                if (object.has("last_name"))
+                    bundle.putString("last_name", object.getString("last_name"));
+                if (object.has("email"))
+                    bundle.putString("email", object.getString("email"));
+                if (object.has("gender"))
+                    bundle.putString("gender", object.getString("gender"));
+                if (object.has("birthday"))
+                    bundle.putString("birthday", object.getString("birthday"));
+                if (object.has("location"))
+                    bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+                return bundle;
+            }
+            catch(JSONException e) {
+                Log.d(TAG,"Error parsing JSON");
+            }
+            return null;
+        }
+
+
 
     // Check Validation before login
     private void checkValidation() {
@@ -292,6 +442,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             }
         });
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 }
