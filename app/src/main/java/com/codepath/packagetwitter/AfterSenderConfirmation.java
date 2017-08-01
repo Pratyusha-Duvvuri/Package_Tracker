@@ -68,6 +68,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     ParselTransaction transaction;
     View view1;
     View view2;
+    Boolean match = false;
     int page = 0;
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
@@ -206,6 +207,8 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         ParselTransaction courierTransaction = itemList.get(i);
                         //if it's a match:
                         if (Algorithm.isPossibleMatch(courierTransaction, transaction)){
+                            match = true;
+
 
                             //find courier's username, his start date, her end date, change state
                             transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getCourierStart(), courierTransaction.getCourierEnd());
@@ -220,6 +223,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
                                         }
                                         finishIntent();
+
                                     }
 
                                     else{
@@ -238,6 +242,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             //if it's not a match:
                         }
 
+
                     } //for loop ends here
 
                 } else {
@@ -252,6 +257,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
     public void finishIntent(){
         Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("matched", match);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
