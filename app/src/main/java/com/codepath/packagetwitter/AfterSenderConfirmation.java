@@ -21,6 +21,7 @@ import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.Models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -29,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static com.codepath.packagetwitter.LoginActivity.dictionary_name;
 
 public class AfterSenderConfirmation extends AppCompatActivity{
 
@@ -91,8 +94,14 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                 if(page ==2){
                     page =1;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment =  Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
-                            transaction.getString("title"),transaction.getMailDescription());
+                    ParseFile postImage = transaction.getParseFile("ImageFile");
+                    String imageUrl = "";
+                    if(postImage!=null) {
+                        imageUrl = postImage.getUrl();//live url
+                    }
+                    Review_frag_two fragment =  Review_frag_two.newInstance(imageUrl,
+                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
+                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
@@ -106,7 +115,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                     String endDay = df.format(transaction.getSenderEnd());
                     ft = getSupportFragmentManager().beginTransaction();
                     Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
-                            transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+                            transaction.getReceiverLoc(), (String) dictionary_name.get(transaction.getSender()),startDay,endDay);
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
@@ -122,17 +131,16 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                     page = 1;
 
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment = Review_frag_two.newInstance(transaction.getBytes("Package_Image"),
-                            transaction.getString("title"),transaction.getMailDescription());
+                    ParseFile postImage = transaction.getParseFile("ImageFile");
+                    String imageUrl = "";
+                    if(postImage!=null) {
+                        imageUrl = postImage.getUrl();//live url
+                    }
+                    Review_frag_two fragment = Review_frag_two.newInstance(imageUrl,
+                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
+                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                } else {
-//                    page = 2;
-//                    ft = getSupportFragmentManager().beginTransaction();
-//                    Review_frag_three fragment = Review_frag_three.newInstance(transaction.getMailType(),
-//                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
-//                    ft.replace(R.id.flContainer, fragment);
-//                    ft.commit();
                 }
             }
         });
@@ -142,7 +150,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         String startDay  = df.format(transaction.getSenderStart());
         String endDay = df.format(transaction.getSenderEnd());
         Review_frag fragment =  Review_frag.newInstance(transaction.getSenderLoc(),
-                transaction.getReceiverLoc(), transaction.getReceiver(),startDay,endDay);
+                transaction.getReceiverLoc(), (String) dictionary_name.get(transaction.getSender()),startDay,endDay);
 
         ft.replace(R.id.flContainer,fragment);
 

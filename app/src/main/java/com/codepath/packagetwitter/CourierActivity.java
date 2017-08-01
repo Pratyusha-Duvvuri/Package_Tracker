@@ -20,6 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -68,7 +73,8 @@ public class CourierActivity extends AppCompatActivity {
     String tripStart;
     String tripEnd;
 
-
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE_1 = 1;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE_2 = 3;
 
 
     Integer year, month, date;
@@ -100,6 +106,42 @@ public class CourierActivity extends AppCompatActivity {
 
         // Apply the adapter to the spinner
 
+        startLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(CourierActivity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE_1);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+            }
+
+        });
+
+        locationEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(CourierActivity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE_2);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+            }
+
+        });
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
 
@@ -115,76 +157,9 @@ public class CourierActivity extends AppCompatActivity {
                 rgSize = view2.findViewById(R.id.rgSize);
 
 
-
-
-
-
-
                 confirm = (Button) findViewById(R.id.btConfirm);
 
-                rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                        //takes in id of currently clicked item
-                        defaultTextColor = tvPhone.getTextColors().getDefaultColor();
-
-                        switch (i) {
-                            //switches bolded text based on currently selected item
-                            case R.id.rbKey:
-
-                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
-                                    if (llSizeTitles.getChildAt(j) == tvKey) {
-
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
-                                    }
-                                    else {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
-                                    }
-                                }
-                                break;
-
-
-
-                            case R.id.rbPhone:
-
-                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
-                                    if (llSizeTitles.getChildAt(j) == tvPhone) {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
-                                    }
-                                    else {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
-                                    }
-                                }
-                                break;
-
-                            case R.id.rbBook:
-
-                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
-                                    if (llSizeTitles.getChildAt(j) == tvBook) {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
-                                    }
-                                    else {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
-                                    }
-                                }
-                                break;
-
-                            case R.id.rbFishBowl:
-
-                                for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
-                                    if (llSizeTitles.getChildAt(j) == tvFish) {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
-                                    }
-                                    else {
-                                        ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
-                                    }
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
+                setRadioGroup();
 
                 showDialogButtonClick();
 
@@ -211,11 +186,79 @@ public class CourierActivity extends AppCompatActivity {
 
 
 
+
             }
         });
 
 
 
+
+    }
+
+    public void setRadioGroup(){
+        rgSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                //takes in id of currently clicked item
+                defaultTextColor = tvPhone.getTextColors().getDefaultColor();
+
+                switch (i) {
+                    //switches bolded text based on currently selected item
+                    case R.id.rbKey:
+
+                        for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                            if (llSizeTitles.getChildAt(j) == tvKey) {
+
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                            }
+                            else {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                            }
+                        }
+                        break;
+
+
+
+                    case R.id.rbPhone:
+
+                        for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                            if (llSizeTitles.getChildAt(j) == tvPhone) {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                            }
+                            else {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                            }
+                        }
+                        break;
+
+                    case R.id.rbBook:
+
+                        for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                            if (llSizeTitles.getChildAt(j) == tvBook) {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                            }
+                            else {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                            }
+                        }
+                        break;
+
+                    case R.id.rbFishBowl:
+
+                        for (int j = 0; j < llSizeTitles.getChildCount(); j++) {
+                            if (llSizeTitles.getChildAt(j) == tvFish) {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(Color.BLACK);
+                            }
+                            else {
+                                ((TextView)llSizeTitles.getChildAt(j)).setTextColor(defaultTextColor);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -272,7 +315,7 @@ public class CourierActivity extends AppCompatActivity {
                 //start date
 
 //                sendStart = s1 + "/" + s2+"/"+s3;
-                tripStart = Month+"/"+Date+"/"+Year;
+                tripStart = month+"/"+Date+"/"+Year;
 
                 displaySenderStart.setText(tripStart);
 
@@ -280,7 +323,7 @@ public class CourierActivity extends AppCompatActivity {
             else{
                 //end date
 //                sendEnd= S1 + "/" + S2+"/"+S3;
-                tripEnd = Month+"/"+Date+"/"+Year;
+                tripEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(tripEnd);
 
             }
@@ -372,4 +415,30 @@ public class CourierActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_1) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                startLocation.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+        else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE_2) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                locationEnd.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }    }
 }

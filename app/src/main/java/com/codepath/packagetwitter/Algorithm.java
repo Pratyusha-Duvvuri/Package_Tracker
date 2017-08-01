@@ -97,13 +97,18 @@ public class Algorithm {
 
         Date courierStartDate = null;
         try {
-            courierStartDate = new SimpleDateFormat("MM/dd").parse(tripStart);
-            courierEndDate = new SimpleDateFormat("MM/dd").parse(tripEnd);
+            courierStartDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripStart);
+            courierEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripEnd);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        Boolean a = courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate);
+        Boolean b = courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate);
+        Boolean c = transaction.getWeight() <= weightAvailable;
+        Boolean d = transaction.getVolume() <= volumeAvailable;
+        Boolean e = transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc);
 
         if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
                 && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date

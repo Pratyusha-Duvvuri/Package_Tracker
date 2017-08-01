@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
+import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
 import static com.codepath.packagetwitter.OtherChatActivity.tabTitles_main;
+import static com.codepath.packagetwitter.OtherChatActivity.type;
 
 /**
  * Created by pratyusha98 on 7/23/17.
@@ -30,11 +32,12 @@ public class ChatPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-
         if(position==0)
-            return tab1Chat_fragment;
+        {
+            return tab1Chat_fragment;}
         else if(position ==1)
-            return tab2Chat_fragment;
+            {type = messages_main[0];
+            return tab2Chat_fragment;}
         else return  null;
     }
 

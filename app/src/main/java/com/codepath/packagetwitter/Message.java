@@ -16,9 +16,18 @@ public class Message extends ParseObject {
     public static final String USER_NAME_KEY = "userName";
     public static final String PICTURE_KEY = "picture";
     public static final String TRANSACTION_ID_KEY = "transactionid";
+    public static final String FROM = "from";
+    public static final String TO = "to";
+
 
     public String getUserId() {
         return getString(USER_ID_KEY);
+    }
+    public String getFrom() {
+        return getString(FROM);
+    }
+    public String getTo() {
+        return getString(TO);
     }
 
     public String getBody() {
@@ -33,7 +42,6 @@ public class Message extends ParseObject {
 
     public String getTransactionId() {return getString(TRANSACTION_ID_KEY);}
 
-
     public void setUserId(String userId) {
         put(USER_ID_KEY, userId);
     }
@@ -41,10 +49,17 @@ public class Message extends ParseObject {
     public void setBody(String body) {
         put(BODY_KEY, body);
     }
+    public void setFrom(String body) {
+        put(FROM, body);
+    }
+    public void setTo(String body) {
+        put(TO, body);
+    }
 
     public void setUserName(String userName) {
         put(USER_NAME_KEY, userName);
     }
+
     public void setPicture(ParseFile file) {
         put(PICTURE_KEY, file);
     }

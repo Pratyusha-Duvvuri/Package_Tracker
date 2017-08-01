@@ -22,7 +22,8 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 public class OtherChatActivity extends AppCompatActivity {
 
     ChatPagerAdapter pagerAdapter;
-    public static String tabTitles_main[] = new String[] {"Person1", "Person2"};
+    public static String tabTitles_main[] = new String[] {"Person1", "Person2","Person3"};
+    public static String messages_main[] = new String[] {"FIRST", "SECOND","ME"};
 
     ViewPager vpPager;
     public  String transaction_id;
@@ -30,6 +31,7 @@ public class OtherChatActivity extends AppCompatActivity {
     public static String receiver_main;
     public static String courier_main;
     public static ParselTransaction transaction_main;
+    public static String type;
 
 
     @Override
@@ -52,20 +54,32 @@ public class OtherChatActivity extends AppCompatActivity {
                     courier_main = item.getString("courier");
 
                     if(sender_main.equals(parseUser.getString("username"))){
-                        tabTitles_main[0]=receiver_main;
-                        tabTitles_main[1]=courier_main;
+                        messages_main[0] = receiver_main;
+                        messages_main[1] = courier_main;
+
+                        tabTitles_main[0]="Receiver - "+ LoginActivity.dictionary_name.get(receiver_main).toString();
+                        tabTitles_main[1]="Courier - "+LoginActivity.dictionary_name.get(courier_main).toString();
+                        tabTitles_main[2]=sender_main;
 
                     }
                     else if(receiver_main.equals(parseUser.getString("username"))) {
-                        tabTitles_main[0]=sender_main;
-                        tabTitles_main[1]=courier_main;
+                        messages_main[0] = sender_main;
+                        messages_main[1] = courier_main;
+
+                        tabTitles_main[0]="Sender - " + LoginActivity.dictionary_name.get(sender_main).toString();
+                        tabTitles_main[1]="Courier - "+LoginActivity.dictionary_name.get(courier_main).toString();
+                        tabTitles_main[2]=receiver_main;
                     }
 
                     else if(courier_main.equals(parseUser.getString("username"))) {
-                        tabTitles_main[0]=sender_main;
-                        tabTitles_main[1]=receiver_main;
-                    }
 
+                        messages_main[0] = sender_main;
+                        messages_main[1] = receiver_main;
+
+                        tabTitles_main[0]="Sender - "+LoginActivity.dictionary_name.get(sender_main).toString();
+                        tabTitles_main[1]="Receiver - "+LoginActivity.dictionary_name.get(receiver_main).toString();
+                        tabTitles_main[2]=courier_main;
+                    }
                         setUpStuff();
                 }
                 else {

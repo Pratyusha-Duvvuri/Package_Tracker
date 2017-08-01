@@ -12,10 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.codepath.packagetwitter.ChatActivity;
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
-import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -30,17 +28,16 @@ import com.parse.SubscriptionHandling;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codepath.packagetwitter.Message.FROM;
+import static com.codepath.packagetwitter.Message.TO;
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
+import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/23/17.
  */
 
-
-
-/**
- * Created by pratyusha98 on 7/23/17.
- */
 
 public class Tab2Chat_Fragment extends Fragment {
     private static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
@@ -50,11 +47,14 @@ public class Tab2Chat_Fragment extends Fragment {
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
     String transactionid;
-    static final String TAG = ChatActivity.class.getSimpleName();
+//    static final String TAG = ChatActivity.class.getSimpleName();
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
     Button btSend;
+    final String userId = parseUser.getObjectId();
+    public static ParseUser thisUser2;
+
 
 
 
@@ -62,6 +62,7 @@ public class Tab2Chat_Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
+        getThisUser();
     }
     void login() {
         ParseAnonymousUtils.logIn(new LogInCallback() {
@@ -72,6 +73,24 @@ public class Tab2Chat_Fragment extends Fragment {
                     Log.e("ParseApplicationError", "Anonymous login failed: ", e);
                 } else {
                     startWithCurrentUser();
+                }
+            }
+        });
+    }
+    public void getThisUser(){
+
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+        query.whereEqualTo("username", messages_main[1]); //pending transaction state
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> itemList, ParseException e) {
+
+                if (e == null) {
+                    thisUser2 = itemList.get(0);
+
+                } else {
+                    Log.d("ParseApplicationError",e.toString());
+                    // something went wrong
                 }
             }
         });
@@ -90,8 +109,7 @@ public class Tab2Chat_Fragment extends Fragment {
         //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvChat.setLayoutManager(llayout);
-        mAdapter = new ChatAdapter(mMessages);
-
+        mAdapter = new ChatAdapter( getActivity(), userId,mMessages,1);
         //set the adapter
         rvChat.setAdapter(mAdapter);
 
@@ -111,14 +129,27 @@ public class Tab2Chat_Fragment extends Fragment {
             Log.d("Parse Application Error","Have no idea how you got here");
             login();
         }
-
-        // Make sure the Parse server is setup to configured for live queries
-        // URL for server is determined by Parse.initialize() call.
         ParseLiveQueryClient parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient();
-// Define the class we would like to query
-        ParseQuery<Message> parseQuery = ParseQuery.getQuery(Message.class);
-        // This query can even be more granular (i.e. only refresh if the entry was added by some other user)
+
+        ParseQuery myQuery1 = new ParseQuery("Message");
+        myQuery1.whereEqualTo(FROM, parseUser.getString("username"));
+        myQuery1.whereEqualTo(TO, messages_main[1]);
+
+        //From first to me
+        ParseQuery myQuery2 = new ParseQuery("Message");
+        myQuery2.whereEqualTo(FROM, messages_main[1]);
+        myQuery2.whereEqualTo(TO, parseUser.getString("username"));
+
+        //add all queries
+        List<ParseQuery<Message>> queries = new ArrayList<ParseQuery<Message>>();
+        queries.add(myQuery1);
+        queries.add(myQuery2);
+
+
+        ParseQuery<Message> parseQuery = ParseQuery.or(queries);
         parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
+        parseQuery.orderByDescending("createdAt");
+
 
         // Connect to Parse server
         SubscriptionHandling<Message> subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery);
@@ -153,8 +184,8 @@ public class Tab2Chat_Fragment extends Fragment {
 
         mMessages = new ArrayList<>();
         mFirstLoad = true;
-        final String userId = ProfileActivity.parseUser.getObjectId();
-        mAdapter = new ChatAdapter( mMessages);
+        final String userId = parseUser.getObjectId();
+        mAdapter = new ChatAdapter( getActivity(), userId,mMessages,1);
         rvChat.setAdapter(mAdapter);
 
         // associate the LayoutManager with the RecylcerView
@@ -172,9 +203,11 @@ public class Tab2Chat_Fragment extends Fragment {
 
                 Message message = new Message();
                 message.setBody(data);
-                message.setUserId(ProfileActivity.parseUser.getObjectId());
-                message.setUserName(ProfileActivity.parseUser.getString("username"));
-                message.setPicture(ProfileActivity.parseUser.getParseFile("ImageFile"));
+                message.setUserId(parseUser.getObjectId());
+                message.setUserName(parseUser.getString("username"));
+                message.setTo(messages_main[1]);
+                message.setFrom(parseUser.getString("username"));
+                message.setPicture(parseUser.getParseFile("ImageFile"));
                 message.setTransactionId(transactionid);
                 message.saveInBackground(new SaveCallback() {
                     @Override
@@ -197,12 +230,27 @@ public class Tab2Chat_Fragment extends Fragment {
 
     // Query messages from Parse so we can load them into the chat adapter
     void refreshMessages() {
-        // Construct query to execute
-        ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
-        query.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
-        // Configure limit and sort order
-        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+        ParseQuery myQuery1 = new ParseQuery("Message");
+        myQuery1.whereEqualTo(FROM, parseUser.getString("username"));
+        myQuery1.whereEqualTo(TO, messages_main[1]);
+        ParseQuery myQuery2 = new ParseQuery("Message");
+        myQuery2.whereEqualTo(TO, parseUser.getString("username"));
+        myQuery2.whereEqualTo(FROM, messages_main[1]);
+        List<ParseQuery<Message>> queries = new ArrayList<ParseQuery<Message>>();
+        queries.add(myQuery1);
+        queries.add(myQuery2);
+        ParseQuery<Message> query = ParseQuery.or(queries);
+
+        // Construct query to execute
+//        ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
+//        query.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
+//
+//        // Configure limit and sort order
+//        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+//        type = messages_main[0];
+//        query.whereNotEqualTo("userName", type);
+
 
         // get the latest 50 messages, order will show up newest to oldest of this group
         query.orderByDescending("createdAt");
@@ -225,8 +273,6 @@ public class Tab2Chat_Fragment extends Fragment {
             }
         });
     }
-
-
 
 
 }

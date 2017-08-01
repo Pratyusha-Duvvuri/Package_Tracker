@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.codepath.packagetwitter.LoginActivity.mylist;
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by pratyusha98 on 7/24/17.
@@ -77,6 +78,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setTitle("Create A New Package");
 
+        senderLocationB.setText(parseUser.getString("location"));
         context = this;
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
@@ -104,6 +106,10 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 }
 
         );
+
+
+
+
 
 
         senderLocationB.setOnClickListener(new View.OnClickListener() {
@@ -161,9 +167,10 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
 
         i.putExtra("senderStartDate", sendStart);
         i.putExtra("senderEndDate", sendEnd);
-        i.putExtra("receiverHandle", "Pamela");
-        i.putExtra("senderLocation", "Tokyo");
-        i.putExtra("receiverLocation", "Boston");
+        String a  = receiverHandle.getText().toString();
+        i.putExtra("receiverHandle", receiverHandle.getText().toString());
+        i.putExtra("senderLocation", senderLocationB.getText().toString());
+        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
 
 //        i.putExtra("receiverHandle", receiverHandle.getText().toString());
 //        i.putExtra("senderLocation", senderLocationB.getText().toString());
@@ -294,7 +301,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
                 //start date
 
 //                sendStart = s1 + "/" + s2+"/"+s3;
-                sendStart = Month+"/"+Date+"/"+Year;
+                sendStart = month+"/"+Date+"/"+Year;
 
                 displaySenderStart.setText(sendStart);
 
@@ -302,7 +309,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             else{
                 //end date
 //                sendEnd= S1 + "/" + S2+"/"+S3;
-                sendEnd = Month+"/"+Date+"/"+Year;
+                sendEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(sendEnd);
 
             }

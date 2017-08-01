@@ -83,16 +83,14 @@ public class PendingTransactionFragment extends Fragment {
         } catch (com.parse.ParseException e) {
 
         }
+
         Log.d(parseUser.getString("username"),"ParseApplication");
         if (parseUser != null) {
-            pendingTransactions = (ArrayList<ParselTransaction>) parseUser.get("pendingTransactions");//gets the list of pending transactions
-            if (pendingTransactions != null) {
-                transactions.clear();
-                Log.d("pendingTransactions", pendingTransactions.get(0).toString());
+            transactions.clear();
 
-                ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
-                query.whereEqualTo("sender", parseUser.getUsername());
+            query.whereEqualTo("sender", parseUser.getUsername());
                 List<Integer> list = new ArrayList<Integer>();
                 list.add(0); list.add(1); list.add(2);
                 query.whereContainedIn("transactionState", list);
@@ -136,7 +134,7 @@ public class PendingTransactionFragment extends Fragment {
                             Log.d("score", "Error: " + e.getMessage());
                         }
                     }
-                });}
+                });
 
             ParseQuery<ParselTransaction> query3 = ParseQuery.getQuery(ParselTransaction.class);
             // Define our query conditions

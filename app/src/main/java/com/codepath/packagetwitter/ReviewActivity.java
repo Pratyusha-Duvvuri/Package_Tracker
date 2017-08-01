@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Fragments.Review_frag;
-import com.codepath.packagetwitter.Fragments.Review_frag_three;
 import com.codepath.packagetwitter.Fragments.Review_frag_two;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.ParseFile;
@@ -74,24 +73,17 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onSwipeLeft() {
 
-                if(page == 0) {
+
 
                     page = 1;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description);
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-                }
-
-
-                else {
-                    page = 2;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_three fragment = Review_frag_three.newInstance(type, volume, weight, fragile);
+                    Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description, type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
 
-                }
+
+
+
 
             }
 
@@ -101,7 +93,7 @@ public class ReviewActivity extends AppCompatActivity {
 
                     page = 1;
                     ft = getSupportFragmentManager().beginTransaction();
-                    Review_frag_two fragment = Review_frag_two.newInstance(image, title, description);
+                    Review_frag_two fragment = Review_frag_two.newInstance(image, title, description, type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
                 } else {
@@ -165,8 +157,19 @@ public class ReviewActivity extends AppCompatActivity {
         transaction.saveEventually(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
+                if (e == null) {
+                    try {
+                        parseUser = ParseUser.getCurrentUser().fetch();
+                    } catch (com.parse.ParseException e1) {
 
-                onSubmit();
+                    }
+                    onSubmit();
+
+                }
+
+                else{
+                    Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                }
 
             }
         });

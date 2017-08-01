@@ -21,6 +21,11 @@ import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.LoginActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -28,17 +33,21 @@ import com.parse.SignUpCallback;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static com.codepath.packagetwitter.Utils.Login_Fragment;
 
 
 public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static View view;
-    private static EditText fullName, emailId, mobileNumber, location,
+    private static EditText fullName, emailId, mobileNumber,
             password, confirmPassword;
+    public static TextView location;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
 
     public SignUp_Fragment() {
 
@@ -59,7 +68,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
-        location = (EditText) view.findViewById(R.id.location);
+        location = (TextView) view.findViewById(R.id.location);
         password = (EditText) view.findViewById(R.id.password);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
@@ -82,6 +91,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private void setListeners() {
         signUpButton.setOnClickListener(this);
         login.setOnClickListener(this);
+        location.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +101,21 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
                 // Call checkValidation method
                 checkValidation();
+                break;
+
+            case R.id.location:
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(getActivity());
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+
                 break;
 
             case R.id.already_user:
@@ -117,9 +142,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getLocation = location.getText().toString();
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
-
-//        userr = new User(getFullName, "@" + getFullName, getMobileNumber);
-
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(getEmailId);
@@ -200,6 +222,28 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
 
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getActivity(), data);
+                location.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getActivity(), data);
+                // TODO: Handle the error.
+                Log.i("LoginActivity", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+
+    }
+
+
 }
 
 

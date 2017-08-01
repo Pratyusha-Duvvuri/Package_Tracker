@@ -38,6 +38,7 @@ public class PendingRequest_Fragment extends DialogFragment {
     public FrameLayout flForm;
     public EditText receiverLocation;
     public EditText receiverEndDate;
+    boolean pendingRequest = true;
     public LinearLayout llRequest;
 
 
@@ -64,17 +65,28 @@ public class PendingRequest_Fragment extends DialogFragment {
 //        return frag;
 //    }
 
-    public static PendingRequest_Fragment newInstance() {
+    public static PendingRequest_Fragment newInstance(String message) {
         PendingRequest_Fragment frag = new PendingRequest_Fragment();
         Bundle bundle = new Bundle();
+        bundle.putString("message", message);
         frag.setArguments(bundle);
         return frag;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_pending_request, container, false);
+        try{
+        String message  = getArguments().getString("message");
 
-        return inflater.inflate(R.layout.fragment_pending_request, container, false);
+            //if there is a message diff than defaullt
+            //  set the modals msg as such
+            ((TextView)v.findViewById(R.id.lbl_your_name)).setText(message);
+            ((Button) v.findViewById(R.id.btnAccept)).setText("OK"); // and btn becomes ok
+            pendingRequest = false;
+        }
+        catch (NullPointerException e){}
+        return v;
 
     }
 
@@ -99,7 +111,7 @@ public class PendingRequest_Fragment extends DialogFragment {
     public void doThis(){
 
         SendResultListener listener = (SendResultListener) getActivity();
-        listener.onFinishEditDialog( proceed);
+        if(pendingRequest)listener.onFinishEditDialog( proceed);
         // Close the dialog and return back to the parent activity
         dismiss();
     }

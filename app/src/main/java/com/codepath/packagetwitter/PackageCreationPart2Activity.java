@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,7 +121,13 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+//        setSupportActionBar(toolbar);
+//        ((TextView) findViewById(R.id.main_toolbar_title)).setText("Package Details");
+
+
         getSupportActionBar().setTitle("Package Details");
+
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
 
         //listener for when the selected radio button is changed, nothing happens if same one is clicked
@@ -322,12 +329,15 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 title = etTitle.getText().toString();
                 description = etDescription.getText().toString();
                 weight = Double.parseDouble(etWeight.getText().toString());
+                int id = rgFragile.getCheckedRadioButtonId();
 
-                if (rgFragile.getCheckedRadioButtonId() == R.id.Yes) {
+
+                if (rgFragile.getCheckedRadioButtonId() == R.id.rbYes) {
                     fragile = true;
                 }
-                else if (rgFragile.getCheckedRadioButtonId() == R.id.No)
+                else {
                     fragile = false;
+                }
 
 
                 if (rgType.getCheckedRadioButtonId() == R.id.rbClothes) {

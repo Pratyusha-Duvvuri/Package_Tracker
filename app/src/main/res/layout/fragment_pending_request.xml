@@ -16,7 +16,8 @@
             android:id="@+id/lbl_your_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="YOU HAVE A PENDING REQUEST" />
+            android:text="YOU HAVE A PENDING REQUEST"
+            android:textAlignment="center" />
 
         <FrameLayout
             android:id="@+id/flForm"
