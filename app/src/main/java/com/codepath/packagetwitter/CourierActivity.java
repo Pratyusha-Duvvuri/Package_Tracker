@@ -29,6 +29,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -384,7 +385,25 @@ public class CourierActivity extends AppCompatActivity {
 
                             //if its a match
                             parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
-                            parselTransaction.saveEventually();
+                            parselTransaction.saveEventually(new SaveCallback() {
+                                @Override
+                                public void done(com.parse.ParseException e) {
+                                    if (e == null) {
+                                        try {
+                                            parseUser = ParseUser.getCurrentUser().fetch();
+                                        } catch (com.parse.ParseException e1) {
+
+                                        }
+                                        onSubmit();
+
+                                    }
+
+                                    else{
+                                        Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                                    }
+
+                                }
+                            });
                             break;
 
 
@@ -408,10 +427,15 @@ public class CourierActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    public void onSubmit(){
         Intent i = new Intent(this, ProfileActivity.class);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
-
 
     }
 

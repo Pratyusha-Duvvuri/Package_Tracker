@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.codepath.packagetwitter.Fragments.Login_Fragment;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
@@ -34,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+
+
         setContentView(R.layout.activity_login);
         userListMain = getResources().getStringArray(R.array.users_array);
 

@@ -24,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -207,8 +208,24 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             //find courier's username, his start date, her end date, change state
                             transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getCourierStart(), courierTransaction.getCourierEnd());
                             transaction.setTransactionState(2);
-                            transaction.saveEventually();
-                            // change state of courier transaction to dead
+                            transaction.saveEventually(new SaveCallback() {
+                                @Override
+                                public void done(com.parse.ParseException e) {
+                                    if (e == null) {
+                                        try {
+                                            parseUser = ParseUser.getCurrentUser().fetch();
+                                        } catch (com.parse.ParseException e1) {
+
+                                        }
+                                        finishIntent();
+                                    }
+
+                                    else{
+                                        Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                                    }
+
+                                }
+                            });                            // change state of courier transaction to dead
                             courierTransaction.setTransactionState(8);
                             courierTransaction.saveEventually();
                             // break
@@ -227,12 +244,9 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             }
         });
 
-        finishIntent();
 
 
     }
-
-
 
     public void finishIntent(){
         Intent i = new Intent(this, ProfileActivity.class);

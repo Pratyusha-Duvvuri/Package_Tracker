@@ -56,6 +56,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        //load image onto the thing
+
+
+
+
         Message message = mMessages.get(position);
         final boolean isMe = message.getUserId() != null && message.getUserId().equals(mUserId);
         ParseFile postImage;

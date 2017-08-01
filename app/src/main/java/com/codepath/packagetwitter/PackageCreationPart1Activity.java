@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +22,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-
-import java.text.ParseException;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,10 +46,9 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     private String TAG = "Google Places API";
 
     public static int idd;
-    public String s1,s2,s3,S1,S2,S3,sendStart,sendEnd;
+    public String sendStart,sendEnd;
     ParselTransaction transaction;
     Boolean proceed;
-    public final int UPLOAD_IMAGE_CODEn = 100;
     //these are for the locations
     @BindView(R.id.etsenderStartLocationB)
     TextView senderLocationB;
@@ -108,10 +103,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         );
 
 
-
-
-
-
         senderLocationB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,17 +142,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     }
 
     public void saveInformation(){
-        Date senderStartDate = null;
-        Date senderEndDate = null;
-        try {
-            senderStartDate = new SimpleDateFormat("MM/dd/yy").parse(sendStart);
-            senderEndDate = new SimpleDateFormat("MM/dd/yy").parse(sendEnd);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String strsenderStartDate= senderStartDate.toString();
-        String strsenderEndDate= senderEndDate.toString();
 
         Intent i = new Intent(PackageCreationPart1Activity.this, PackageCreationPart2Activity.class);
 
@@ -171,9 +151,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         i.putExtra("senderLocation", senderLocationB.getText());
         i.putExtra("receiverLocation", receiverLocationB.getText());
 
-//        i.putExtra("receiverHandle", receiverHandle.getText().toString());
-//        i.putExtra("senderLocation", senderLocationB.getText().toString());
-//        i.putExtra("receiverLocation", receiverLocationB.getText().toString());
+
         startActivityForResult(i, PART2);
 
     }
@@ -298,16 +276,12 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
             date= Date;
             if(idd == 1){
                 //start date
-
-//                sendStart = s1 + "/" + s2+"/"+s3;
                 sendStart = month+"/"+Date+"/"+Year;
-
                 displaySenderStart.setText(sendStart);
 
             }
             else{
                 //end date
-//                sendEnd= S1 + "/" + S2+"/"+S3;
                 sendEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(sendEnd);
 

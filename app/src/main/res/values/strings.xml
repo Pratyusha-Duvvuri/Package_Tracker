@@ -51,5 +51,7 @@
         <item>Antarctica</item>
 
     </string-array>
+    <string name="facebook_app_id">158235278061035</string>
+    <string name="fb_login_protocol_scheme">fb158235278061035</string>
 
 </resources>

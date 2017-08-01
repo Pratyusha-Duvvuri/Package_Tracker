@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
@@ -51,18 +52,32 @@ public class Tab2Chat_Fragment extends Fragment {
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
-    Button btSend;
+    ImageButton btSend;
     final String userId = parseUser.getObjectId();
     public static ParseUser thisUser2;
 
+    Handler handler;
 
-
+    Runnable refresh;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
         getThisUser();
+        handler=new Handler();
+        got();
+    }
+
+    public void got(){
+
+        refresh = new Runnable() {
+            public void run() {
+                refreshMessages();
+                handler.postDelayed(refresh, 3000);
+            }
+        };
+        handler.post(refresh);
     }
     void login() {
         ParseAnonymousUtils.logIn(new LogInCallback() {
@@ -102,7 +117,7 @@ public class Tab2Chat_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.chatjsutincase, container, false);
         rvChat =  v.findViewById(R.id.rvChat);
         etMessage = (EditText) v.findViewById(R.id.etMessage1);
-        btSend = (Button) v.findViewById(R.id.btSend1);
+        btSend = (ImageButton) v.findViewById(R.id.btSend1);
         //find swipe containerview
         //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)

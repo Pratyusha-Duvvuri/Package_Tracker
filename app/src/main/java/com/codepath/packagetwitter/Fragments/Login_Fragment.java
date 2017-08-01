@@ -31,6 +31,11 @@ import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -47,7 +52,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static View view;
 
     private static EditText emailid, password;
-    private static Button loginButton;
+    private static com.facebook.login.widget.LoginButton loginButton;
     private static TextView forgotPassword, signUp;
     private static CheckBox show_hide_password;
     private static LinearLayout loginLayout;
@@ -56,6 +61,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public static SignUp_Fragment signUp_fragment;
     public ParseUser parseUser;
     private String TAG = "Google Places API";
+    private static Button loginButtonn;
 
     public Login_Fragment() {
 
@@ -68,6 +74,37 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         initViews();
         setListeners();
         signUp_fragment = new SignUp_Fragment();
+        loginButtonn = (Button) view.findViewById(R.id.loginBtn);
+
+
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        // If using in a fragment
+        loginButton.setFragment(this);
+        // Other app specific specialization
+        CallbackManager callbackManager= CallbackManager.Factory.create();
+
+      //   Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+
+
+
+
         return view;
 
     }
@@ -78,12 +115,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         emailid = (EditText) view.findViewById(R.id.login_emailid);
         password = (EditText) view.findViewById(R.id.login_password);
-        loginButton = (Button) view.findViewById(R.id.loginBtn);
+        loginButton = (com.facebook.login.widget.LoginButton) view.findViewById(R.id.login_button);
         forgotPassword = (TextView) view.findViewById(R.id.forgot_password);
         signUp = (TextView) view.findViewById(R.id.createAccount);
         show_hide_password = (CheckBox) view
                 .findViewById(R.id.show_hide_password);
         loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
+        loginButtonn = (Button) view.findViewById(R.id.loginBtn);
 
         // Load ShakeAnimation
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
@@ -109,6 +147,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         signUp.setOnClickListener(this);
+        loginButtonn.setOnClickListener(this);
 
         // Set check listener over checkbox for showing and hiding password
         show_hide_password
