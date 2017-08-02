@@ -61,8 +61,18 @@ public class ParselTransaction extends ParseObject{
         setTransactionState(0);
         setIsFragile(fragile);
         setTitle(title);
-        //the following finds the receiver and sets its hasPendingRequests as true
 
+
+        //the following finds the receiver and sets its hasPendingRequests as true
+        changePendingRequestsStatus(true, receiver);
+
+        String str= ParseUser.getCurrentUser().getString("username");
+//        Toast.makeText( ,str, Toast.LENGTH_SHORT).show();
+    Log.d("USER IS ", ParseUser.getCurrentUser().getString("username"));
+
+    }
+
+    public static void changePendingRequestsStatus(final Boolean status, String receiver){
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", receiver); // find adults
 
@@ -79,7 +89,7 @@ public class ParselTransaction extends ParseObject{
                         } catch (ParseException e1) {
                             e1.printStackTrace();
                         }
-                        userr.put("hasPendingRequests", true); // attempt to change username
+                        userr.put("hasPendingRequests", status); // attempt to change username
                         userr.saveInBackground();
                         try {
                             userr = logIn(ProfileActivity.parseUser.getString("username"), "x");
@@ -96,10 +106,6 @@ public class ParselTransaction extends ParseObject{
                 }
             }
         });
-        String str= ParseUser.getCurrentUser().getString("username");
-//        Toast.makeText( ,str, Toast.LENGTH_SHORT).show();
-    Log.d("USER IS ", ParseUser.getCurrentUser().getString("username"));
-
     }
 
     public void addReceiverInfo(Date receiverStart, Date receiverEnd){

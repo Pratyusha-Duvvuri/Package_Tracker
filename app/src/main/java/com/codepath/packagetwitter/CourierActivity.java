@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +29,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,12 +58,12 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.etLocationStart)TextView startLocation;
 
     @BindView(R.id.etLocationEnd)TextView locationEnd;
-    @BindView(R.id.displaySenderStart)TextView displaySenderStart;
-    @BindView(R.id.displaySenderEnd)TextView displaySenderEnd;
+    @BindView(R.id.tvStartDate)TextView displaySenderStart;
+    @BindView(R.id.tvEndDate)TextView displaySenderEnd;
 
 
-    @BindView(R.id.imageView3)ImageView startDate;
-    @BindView(R.id.imageView4)ImageView endDate;
+    @BindView(R.id.rlStart)RelativeLayout startDate;
+    @BindView(R.id.rlEnd)RelativeLayout endDate;
 
 
     @BindView(R.id.next)Button btnNext;
@@ -75,6 +76,8 @@ public class CourierActivity extends AppCompatActivity {
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE_1 = 1;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE_2 = 3;
+
+    boolean mark= false;
 
 
     Integer year, month, date;
@@ -101,6 +104,8 @@ public class CourierActivity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
+        startLocation.setText(parseUser.getString("location"));
+
         date = cal.get(Calendar.DATE);
         showDialogButtonClick();
 
@@ -173,7 +178,7 @@ public class CourierActivity extends AppCompatActivity {
                             onVerifyAction();
 
                             Intent i = new Intent(context, ProfileActivity.class);
-
+                            i.putExtra("matched", mark);
                             setResult(RESULT_OK, i); // set result code and bundle data for response
                             finish(); // closes the activity, pass data to parent
                         }
@@ -359,7 +364,6 @@ public class CourierActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParselTransaction>() {
             public void done(List<ParselTransaction> itemList, ParseException e) {
                 Date courierEndDate= null;
-                boolean mark= false;
 
                 Date courierStartDate = null;
                 if (e == null) {
@@ -384,7 +388,25 @@ public class CourierActivity extends AppCompatActivity {
 
                             //if its a match
                             parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
-                            parselTransaction.saveEventually();
+                            parselTransaction.saveEventually(new SaveCallback() {
+                                @Override
+                                public void done(com.parse.ParseException e) {
+                                    if (e == null) {
+                                        try {
+                                            parseUser = ParseUser.getCurrentUser().fetch();
+                                        } catch (com.parse.ParseException e1) {
+
+                                        }
+                                        onSubmit();
+
+                                    }
+
+                                    else{
+                                        Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                                    }
+
+                                }
+                            });
                             break;
 
 
@@ -408,10 +430,16 @@ public class CourierActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    public void onSubmit(){
         Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("matched", mark);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
-
 
     }
 

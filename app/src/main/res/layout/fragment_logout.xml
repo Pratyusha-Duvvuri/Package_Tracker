@@ -9,13 +9,13 @@
     <TextView
         android:id="@+id/lbl_your_name"
         android:layout_width="183dp"
-        android:layout_height="31dp"
+        android:layout_height="wrap_content"
         android:text="You have successfully logged out"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/acceptLogout"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="OKAY" />

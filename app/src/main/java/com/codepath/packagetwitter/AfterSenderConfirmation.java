@@ -24,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,14 +60,19 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.tvRDescription)TextView tvDescription;
     @BindView(R.id.ivRImage)ImageView ivPackage;
 
+
+
     @BindView(R.id.etReceiverLocation)EditText receiverLocation;
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
     @BindView(R.id.myFABReject)FloatingActionButton fabReject;
+    ImageView page1;
+    ImageView page2;
     ParselTransaction transaction;
     View view1;
     View view2;
+    Boolean match = false;
     int page = 0;
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
@@ -77,8 +83,10 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         view1 = getLayoutInflater().inflate(R.layout.activity_receiver, null);
         view2 = getLayoutInflater().inflate(R.layout.activity_after_sender_confirmation, null);
-        setContentView(view1);
 
+        setContentView(view1);
+        page1 = (ImageView) findViewById(R.id.page1);
+        page2  = (ImageView)findViewById(R.id.page2);
 
        // ButterKnife.bind(this);
         ParseUser parseUser = ParseUser.getCurrentUser();
@@ -91,23 +99,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             @Override
             public void onSwipeRight() {
 
-                if(page ==2){
-                    page =1;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ParseFile postImage = transaction.getParseFile("ImageFile");
-                    String imageUrl = "";
-                    if(postImage!=null) {
-                        imageUrl = postImage.getUrl();//live url
-                    }
-                    Review_frag_two fragment =  Review_frag_two.newInstance(imageUrl,
-                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
-                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
 
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-
-                }
-                else {
                     page = 0;
                     DateFormat df = new SimpleDateFormat("MM/dd/yy");
 
@@ -119,15 +111,18 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
+                page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
 
-                }
+
+
 
             }
             @Override
             public void onSwipeLeft() {
 
 
-                if (page == 0) {
+
                     page = 1;
 
                     ft = getSupportFragmentManager().beginTransaction();
@@ -141,7 +136,9 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                }
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_filled));
+
             }
         });
 
@@ -205,12 +202,31 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         ParselTransaction courierTransaction = itemList.get(i);
                         //if it's a match:
                         if (Algorithm.isPossibleMatch(courierTransaction, transaction)){
+                            match = true;
+
 
                             //find courier's username, his start date, her end date, change state
                             transaction.addCourierInfo(courierTransaction.getCourier(), courierTransaction.getCourierStart(), courierTransaction.getCourierEnd());
                             transaction.setTransactionState(2);
-                            transaction.saveEventually();
-                            // change state of courier transaction to dead
+                            transaction.saveEventually(new SaveCallback() {
+                                @Override
+                                public void done(com.parse.ParseException e) {
+                                    if (e == null) {
+                                        try {
+                                            parseUser = ParseUser.getCurrentUser().fetch();
+                                        } catch (com.parse.ParseException e1) {
+
+                                        }
+                                        finishIntent();
+
+                                    }
+
+                                    else{
+                                        Log.e("Saving Image: ", "ParseSaveFileError: " + e.toString());
+                                    }
+
+                                }
+                            });                            // change state of courier transaction to dead
                             courierTransaction.setTransactionState(8);
                             courierTransaction.saveEventually();
                             // break
@@ -221,6 +237,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             //if it's not a match:
                         }
 
+
                     } //for loop ends here
 
                 } else {
@@ -229,15 +246,13 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             }
         });
 
-        finishIntent();
 
 
     }
 
-
-
     public void finishIntent(){
         Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("matched", match);
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 

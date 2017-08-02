@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
+import com.codepath.packagetwitter.OtherChatActivity;
 import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -51,23 +53,33 @@ public class Tab1Chat_Fragment extends Fragment {
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
-    Button btSend;
+    ImageButton btSend;
     public static ParseUser thisUser1;
-
-
+    Handler handler;
+    Runnable refresh;
     final String userId = parseUser.getObjectId();
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
         getThisUser();
+         handler = new Handler();
+        got();
     }
 
+    public void got(){
+
+        refresh = new Runnable() {
+            public void run() {
+                refreshMessages();
+                handler.postDelayed(refresh, 4000);
+            }
+        };
+        handler.post(refresh);
+    }
 
     public void getThisUser(){
-
 
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         query.whereEqualTo("username", messages_main[0]); //pending transaction state
@@ -76,6 +88,7 @@ public class Tab1Chat_Fragment extends Fragment {
 
                 if (e == null) {
                         thisUser1 = itemList.get(0);
+                    OtherChatActivity.loadImageBoi(0);
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -105,7 +118,7 @@ public class Tab1Chat_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.chatjsutincase, container, false);
         rvChat =  v.findViewById(R.id.rvChat);
         etMessage = (EditText) v.findViewById(R.id.etMessage1);
-        btSend = (Button) v.findViewById(R.id.btSend1);
+        btSend = (ImageButton) v.findViewById(R.id.btSend1);
         //find swipe containerview
         //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)
@@ -117,15 +130,7 @@ public class Tab1Chat_Fragment extends Fragment {
         //set the adapter
         rvChat.setAdapter(mAdapter);
 
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeContainer.setRefreshing(true);
-//                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
-//                populateTimeline();
-//                swipeContainer.setRefreshing(false);
-//            }
-//        });
+
 
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -182,6 +187,7 @@ public class Tab1Chat_Fragment extends Fragment {
                         });
                     }
                 });
+
         return v;
     }
 
@@ -224,8 +230,6 @@ public class Tab1Chat_Fragment extends Fragment {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
-//                            Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
-//                                    Toast.LENGTH_SHORT).show();
                             refreshMessages();}
                         else{
                             Log.d("Message  error",e.toString());
@@ -237,6 +241,8 @@ public class Tab1Chat_Fragment extends Fragment {
                 etMessage.setText(null);
             }
         });
+
+
     }
 
     // Query messages from Parse so we can load them into the chat adapter

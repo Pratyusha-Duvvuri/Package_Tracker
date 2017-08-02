@@ -1,6 +1,7 @@
 package com.codepath.packagetwitter.Fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
@@ -31,6 +32,7 @@ import java.util.List;
 import static com.codepath.packagetwitter.Message.FROM;
 import static com.codepath.packagetwitter.Message.TO;
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
+import static com.codepath.packagetwitter.OtherChatActivity.goOn;
 import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
@@ -47,22 +49,35 @@ public class Tab2Chat_Fragment extends Fragment {
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
     String transactionid;
-//    static final String TAG = ChatActivity.class.getSimpleName();
     static final String USER_ID_KEY = "userId";
     static final String BODY_KEY = "body";
     EditText etMessage;
-    Button btSend;
+    ImageButton btSend;
     final String userId = parseUser.getObjectId();
     public static ParseUser thisUser2;
 
+    Handler handler;
 
-
+    Runnable refresh;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactionid = getActivity().getIntent().getStringExtra("ParselTransactionId");
         getThisUser();
+        handler=new Handler();
+        got();
+    }
+
+    public void got(){
+
+        refresh = new Runnable() {
+            public void run() {
+                refreshMessages();
+                handler.postDelayed(refresh, 3000);
+            }
+        };
+        handler.post(refresh);
     }
     void login() {
         ParseAnonymousUtils.logIn(new LogInCallback() {
@@ -87,6 +102,8 @@ public class Tab2Chat_Fragment extends Fragment {
 
                 if (e == null) {
                     thisUser2 = itemList.get(0);
+                    goOn=true;
+
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -102,7 +119,7 @@ public class Tab2Chat_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.chatjsutincase, container, false);
         rvChat =  v.findViewById(R.id.rvChat);
         etMessage = (EditText) v.findViewById(R.id.etMessage1);
-        btSend = (Button) v.findViewById(R.id.btSend1);
+        btSend = (ImageButton) v.findViewById(R.id.btSend1);
         //find swipe containerview
         //swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         //RecyclerView setup ( layout manager, use adapter)
@@ -113,15 +130,6 @@ public class Tab2Chat_Fragment extends Fragment {
         //set the adapter
         rvChat.setAdapter(mAdapter);
 
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeContainer.setRefreshing(true);
-//                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
-//                populateTimeline();
-//                swipeContainer.setRefreshing(false);
-//            }
-//        });
 
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -241,15 +249,6 @@ public class Tab2Chat_Fragment extends Fragment {
         queries.add(myQuery1);
         queries.add(myQuery2);
         ParseQuery<Message> query = ParseQuery.or(queries);
-
-        // Construct query to execute
-//        ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
-//        query.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
-//
-//        // Configure limit and sort order
-//        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
-//        type = messages_main[0];
-//        query.whereNotEqualTo("userName", type);
 
 
         // get the latest 50 messages, order will show up newest to oldest of this group

@@ -20,13 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.04">
-            <View
-                android:id="@+id/view0"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/text_view_id"
@@ -317,16 +310,6 @@
 
 
         </RelativeLayout>
-
-
-        <View
-            android:id="@+id/view4"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/darker_gray" />
 
 
     </LinearLayout>
