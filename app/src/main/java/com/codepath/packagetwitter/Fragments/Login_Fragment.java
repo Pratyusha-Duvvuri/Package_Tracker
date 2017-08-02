@@ -31,8 +31,6 @@ import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.ProfileActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -45,6 +43,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,9 +73,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private String TAG = "Google Places API";
     private static Button loginButtonn;
     CallbackManager callbackManager;
-    public AccessToken accessToken;
-    public AccessTokenTracker accessTokenTracker;
-
+    public Bundle bFacebookData;
     public Login_Fragment() {
 
     }
@@ -92,7 +89,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
-//        loginButton.setReadPermissions("email");
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday"));
         // If using in a fragment
@@ -214,65 +210,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private void onFbLogin() {
         callbackManager = CallbackManager.Factory.create();
 
-//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                Toast.makeText(getActivity(),"in LoginResult on success", Toast.LENGTH_LONG).show();
-//
-//                accessTokenTracker = new AccessTokenTracker() {
-//                    @Override
-//                    protected void onCurrentAccessTokenChanged(
-//                            AccessToken oldAccessToken,
-//                            AccessToken currentAccessToken) {
-//                        // Set the access token using
-//                        // currentAccessToken when it's loaded or set.
-//                    }
-//                };
-//                // If the access token is available already assign it.
-////                accessToken = AccessToken.getCurrentAccessToken();
-//                accessToken = loginResult.getAccessToken();
-//                Profile profile = Profile.getCurrentProfile();
-//
-//                // Facebook Email address
-//                GraphRequest request = GraphRequest.newMeRequest(
-//                        accessToken,
-//                        new GraphRequest.GraphJSONObjectCallback() {
-//                            @Override
-//                            public void onCompleted(
-//                                    JSONObject object,
-//                                    GraphResponse response) {
-//                                Log.v("LoginActivity Response ", response.toString());
-//                                String Name,FEmail;
-//
-//                                try {
-//                                    Name = object.getString("name");
-//
-//                                    FEmail = object.getString("email");
-//                                    Log.v("Email = ", " " + FEmail);
-//                                    Toast.makeText(getApplicationContext(), "Name " + Name, Toast.LENGTH_LONG).show();
-//
-//
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
-//                Bundle parameters = new Bundle();
-//                parameters.putString("fields", "id,name,email,gender, birthday");
-//                request.setParameters(parameters);
-//                request.executeAsync();
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                Toast.makeText(getActivity(),"in LoginResult on cancel", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onError(FacebookException exception) {
-//                Toast.makeText(getActivity(),"in LoginResult on error", Toast.LENGTH_LONG).show();
-//            }
-//        });
 
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -288,18 +225,16 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                        Log.i("LoginActivity", response.toString());
                        // Get facebook data from login
 
-
-
-                       Bundle bFacebookData = getFacebookData(object);
+                        bFacebookData = getFacebookData(object);
+                       newUserorCurrentUser();
                    }
                };
 
                 String accessToken = loginResult.getAccessToken().getToken();
                 Log.i("accessToken", accessToken);
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location");
+                parameters.putString("fields", "id, first_name, last_name, email, location{location}");
                 new GraphRequest(loginResult.getAccessToken(),"/me",parameters, HttpMethod.GET,req).executeAsync();
-
 
             }
 
@@ -356,12 +291,117 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 return bundle;
             }
             catch(JSONException e) {
-                Log.d(TAG,"Error parsing JSON");
+                Log.d("Facebook Login","Error parsing JSON");
             }
             return null;
         }
 
+        public void getPOLLY(){
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            currentUser.logOut();
 
+            ParseUser user = new ParseUser();
+// Set core properties
+
+            user.setUsername(bFacebookData.getString("email"));
+            user.setPassword("x");
+            user.setEmail(bFacebookData.getString("email"));
+            user.put("location", "Seattle");
+            user.put("fullName",bFacebookData.getString("first_name")+ " "+ bFacebookData.getString("last_name"));
+            user.put("hasPendingRequests",false);
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.d("ParseApplication", "Sign-UP succesful");
+                        new CustomToast().Show_Toast(getActivity(), view,
+                                "SIGNNN.");
+                        logInWithFacebook();
+
+                        // Hooray! Let them use the app now.
+                    } else {
+
+
+                        e.printStackTrace();                // Sign up didn't succeed. Look at the ParseException
+                        // to figure out what went wrong
+                    }
+                }
+            });
+
+
+        }
+
+
+
+    public void newUserorCurrentUser(){
+
+        getPOLLY();
+
+//        ParseQuery<ParseUser> query = ParseUser.getQuery();
+//        query.whereEqualTo("email", bFacebookData.getString("email"));
+//        query.findInBackground(new FindCallback<ParseUser>() {
+//            @Override
+//            public void done(List<ParseUser> itemList, ParseException e) {
+//                if (e == null) {
+//                    if (itemList.size() == 0) {
+//                        getPOLLY();
+//                    } else {
+//                        logInWithFacebook();
+//                    }
+//
+//                } else {
+//                    Log.d("ParseApplicationError", e.toString());
+//                }
+//            }
+
+            //put a profile picture later
+
+//        });
+    }
+    public void logInWithFacebook(){
+
+        ParseUser.logInInBackground(bFacebookData.getString("email"),"x" , new LogInCallback() {
+            @Override
+            public void done(ParseUser userrr, ParseException e) {
+                if (userrr != null) {
+
+
+                    parseUser = userrr;
+                    if(parseUser.getParseFile("ImageFile")==null) {
+
+
+                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                                R.drawable.error);
+                        // Convert it to byte
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        // Compress image to lower quality scale 1 - 100
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byte[] image = stream.toByteArray();
+
+                        ParseFile file = new ParseFile("Default", image);
+                        file.saveInBackground();
+
+                        parseUser.put("ImageFile", file);
+
+                        parseUser.saveInBackground();
+
+                    }
+
+                    Log.d("ParseApplication","Logged in successfully");
+                    // Hooray! The user is logged in.
+                    Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
+                    i.putExtra("PARSEUSER", parseUser.getObjectId());
+                    startActivity(i);
+
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                    Log.d("ParseApplication", "Error: " + e.toString());
+
+                }
+            }
+        });
+
+    }
 
     // Check Validation before login
     private void checkValidation() {
@@ -399,6 +439,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     void getUserFromDatabase(){
 
         ParseUser.logInInBackground(emailid.getText().toString(),password.getText().toString() , new LogInCallback() {
+//        ParseUser.logInInBackground(emailid.getText().toString(),"x" , new LogInCallback() {
             @Override
             public void done(ParseUser userrr, ParseException e) {
                 if (userrr != null) {
@@ -424,9 +465,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         parseUser.saveInBackground();
 
                     }
-
-
-                    Log.d("ParseApplication","bwahahaha");
 
                     Log.d("ParseApplication","Logged in successfully");
                     // Hooray! The user is logged in.

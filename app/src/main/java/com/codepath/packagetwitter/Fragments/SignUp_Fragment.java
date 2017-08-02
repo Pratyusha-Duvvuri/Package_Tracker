@@ -21,6 +21,14 @@ import com.codepath.packagetwitter.CustomToast;
 import com.codepath.packagetwitter.LoginActivity;
 import com.codepath.packagetwitter.R;
 import com.codepath.packagetwitter.Utils;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
@@ -30,6 +38,11 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +61,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
+    private static com.facebook.login.widget.LoginButton loginButton2;
+    CallbackManager callbackManager;
+    public Bundle bFacebookData;
 
     public SignUp_Fragment() {
 
@@ -64,6 +80,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Initialize all views
     private void initViews() {
+        loginButton2 = (LoginButton) view.findViewById(R.id.login_button2);
+        loginButton2.setFragment(this);
+
+
         fragmentManager = getActivity().getSupportFragmentManager();
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
@@ -89,6 +109,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Set Listeners
     private void setListeners() {
+        loginButton2.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
         login.setOnClickListener(this);
         location.setOnClickListener(this);
@@ -97,6 +118,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.login_button2:
+                onFbLogin();
+                break;
+
             case R.id.signUpBtn:
 
                 // Call checkValidation method
@@ -201,7 +227,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.put("fullName",fullName.getText().toString());
         user.put("hasPendingRequests",false);
 
-
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.logOut();
 // Invoke signUpInBackground
     user.signUpInBackground(new SignUpCallback() {
         @Override
@@ -242,6 +269,149 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         }
 
     }
+
+
+
+
+
+    private void onFbLogin() {
+        callbackManager = CallbackManager.Factory.create();
+
+
+
+        loginButton2.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                GraphRequest.Callback req = new GraphRequest.Callback() {
+
+                    @Override
+                    public void onCompleted( GraphResponse response) {
+                        JSONObject object=response.getJSONObject();
+
+                        Log.i("LoginActivity", response.toString());
+                        // Get facebook data from login
+
+                        bFacebookData = getFacebookData(object);
+                        afterBundle();
+                    }
+                };
+
+                String accessToken = loginResult.getAccessToken().getToken();
+                Log.i("accessToken", accessToken);
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "location{location}, first_name, last_name, email, ");
+                new GraphRequest(loginResult.getAccessToken(),"/me",parameters, HttpMethod.GET,req).executeAsync();
+
+            }
+
+
+
+
+
+
+            @Override
+            public void onCancel() {
+                System.out.println("onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                System.out.println("onError");
+                Log.v("LoginActivity", exception.getCause().toString());
+            }
+        });
+    }
+
+    public void afterBundle(){
+
+        createNewParseUserFacebook();
+        Intent i = new Intent(getContext(), LoginActivity.class);
+//        userr = User.getRandomUser(getContext());
+//        userr.hasPendingRequests= false;
+//        i.putExtra("USER", Parcels.wrap(userr));
+        startActivity(i);
+
+
+    }
+
+    public void createNewParseUserFacebook(){
+
+        ParseUser user = new ParseUser();
+// Set core properties
+
+        user.setUsername(bFacebookData.getString("email"));
+        user.setPassword("x");
+        user.setEmail(bFacebookData.getString("email"));
+        user.put("location", location.getText().toString());
+        user.put("mobileNumber", mobileNumber.getText().toString());
+        user.put("fullName",bFacebookData.getString("first_name")+ " "+ bFacebookData.getString("last_name"));
+        user.put("hasPendingRequests",false);
+
+
+// Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("ParseApplication", "Sign-UP succesful");
+                    new CustomToast().Show_Toast(getActivity(), view,
+                            "SIGNNN.");
+                    // Hooray! Let them use the app now.
+                } else {
+
+
+                    e.printStackTrace();                // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                }
+            }
+        });
+
+
+
+    }
+
+    private Bundle getFacebookData(JSONObject object) {
+
+        try {
+            Bundle bundle = new Bundle();
+            String id = object.getString("id");
+
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
+            if (object.has("birthday"))
+                bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("location"))
+                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+            return bundle;
+        }
+        catch(JSONException e) {
+            Log.d("Facebook Login","Error parsing JSON");
+        }
+        return null;
+    }
+
+
+
+
 
 
 }
