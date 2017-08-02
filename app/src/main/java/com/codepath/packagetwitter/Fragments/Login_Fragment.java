@@ -5,6 +5,8 @@ import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,9 +41,13 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -49,9 +55,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,6 +69,7 @@ import static com.codepath.packagetwitter.Utils.SignUp_Fragment;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
     private static View view;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     private static EditText emailid, password;
     private static com.facebook.login.widget.LoginButton loginButton;
@@ -74,6 +84,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static Button loginButtonn;
     CallbackManager callbackManager;
     public Bundle bFacebookData;
+    public Geocoder geocoder;
     public Login_Fragment() {
 
     }
@@ -82,6 +93,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.login_layout, container, false);
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
         initViews();
         setListeners();
         signUp_fragment = new SignUp_Fragment();
@@ -94,11 +107,45 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         // If using in a fragment
         loginButton.setFragment(this);
         // Other app specific specialization
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+//        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            mFusedLocationClient.getLastLocation().addOnSuccessListener((Executor) this, new OnSuccessListener<Location>() {
+//                @Override
+//                public void onSuccess(Location location) {
+//                    // Got last known location. In some rare situations this can be null.
+//                    if (location != null) {
+//                        doTheLocationThing(location.getLatitude(),location.getLongitude());
+//
+//                    }
+//                }
+//            });
+//        }
+
 
         return view;
 
     }
 
+
+    private void doTheLocationThing(double latitude, double longitude){
+
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            String add = "";
+            if (addresses.size() > 0)
+            {
+                for (int i=0; i<addresses.get(0).getMaxAddressLineIndex();i++)
+                    add += addresses.get(0).getAddressLine(i) + "\n";
+            }
+
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
     // Initiate Views
     private void initViews() {
         fragmentManager = getActivity().getSupportFragmentManager();
@@ -313,10 +360,36 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        Log.d("ParseApplication", "Sign-UP succesful");
-                        new CustomToast().Show_Toast(getActivity(), view,
-                                "SIGNNN.");
-                        logInWithFacebook();
+
+                        ParseUser userrr = ParseUser.getCurrentUser();
+
+                        parseUser = userrr;
+                        if(parseUser.getParseFile("ImageFile")==null) {
+
+
+                            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                                    R.drawable.error);
+                            // Convert it to byte
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            // Compress image to lower quality scale 1 - 100
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] image = stream.toByteArray();
+
+                            ParseFile file = new ParseFile("Default", image);
+                            file.saveInBackground();
+
+                            parseUser.put("ImageFile", file);
+
+                            parseUser.saveInBackground();
+
+                        }
+
+                        Log.d("ParseApplication","Logged in successfully");
+                        // Hooray! The user is logged in.
+                        Intent i = new Intent(Login_Fragment.this.getContext(), ProfileActivity.class);
+                        i.putExtra("PARSEUSER", parseUser.getObjectId());
+                        startActivity(i);
+
 
                         // Hooray! Let them use the app now.
                     } else {
@@ -337,28 +410,29 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         getPOLLY();
 
-//        ParseQuery<ParseUser> query = ParseUser.getQuery();
-//        query.whereEqualTo("email", bFacebookData.getString("email"));
-//        query.findInBackground(new FindCallback<ParseUser>() {
-//            @Override
-//            public void done(List<ParseUser> itemList, ParseException e) {
-//                if (e == null) {
-//                    if (itemList.size() == 0) {
-//                        getPOLLY();
-//                    } else {
-//                        logInWithFacebook();
-//                    }
-//
-//                } else {
-//                    Log.d("ParseApplicationError", e.toString());
-//                }
-//            }
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username",bFacebookData.getString("email"));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> itemList, ParseException e) {
+                if (e == null) {
+                    if (itemList.size() == 0) {
+                        getPOLLY();
+                    } else {
+                        bruhPleaseWork();
+                    }
 
-            //put a profile picture later
-
-//        });
+                } else {
+                    Log.d("ParseApplicationError", e.toString());
+                }
+            }});
     }
-    public void logInWithFacebook(){
+
+
+    public void bruhPleaseWork(){
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+//        currentUser.logOut();
 
         ParseUser.logInInBackground(bFacebookData.getString("email"),"x" , new LogInCallback() {
             @Override
@@ -400,6 +474,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 }
             }
         });
+
+
 
     }
 

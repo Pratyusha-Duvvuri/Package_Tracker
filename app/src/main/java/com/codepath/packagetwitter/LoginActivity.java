@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
     Login_Fragment login_fragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //query all the Full names from the database and store it in a string
         getTheRightString();
-
         login_fragment = new Login_Fragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frameContainer, login_fragment);
