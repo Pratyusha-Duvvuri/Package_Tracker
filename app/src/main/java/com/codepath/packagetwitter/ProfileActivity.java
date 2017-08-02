@@ -26,6 +26,7 @@ import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.User;
+import com.facebook.login.LoginManager;
 import com.github.clans.fab.FloatingActionMenu;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -37,6 +38,8 @@ import com.parse.ParseUser;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import static com.codepath.packagetwitter.Fragments.Login_Fragment.throughFacebook;
 
 /**
  * Created by michaunp on 7/13/17.
@@ -57,6 +60,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public final int RECEIVER_CODE = 30;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
+    private static com.facebook.login.widget.LoginButton loginButtonProfile;
+
 
     public final int IMAGE_REQUEST_CODE =40;
 
@@ -402,22 +407,23 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.timeline_menu, menu);
+
+            getMenuInflater().inflate(R.menu.timeline_menu, menu);
+
         return true;
     }
 
 
     public void onLogoutAction(MenuItem mi) {
-//        FragmentManager fm = getSupportFragmentManager();
-//        LogoutFragment logoutFragment = LogoutFragment.newInstance();
-//        logoutFragment.show(fm, "fragment_logout");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this); //alert for confirm to delete
         builder.setMessage("Are you sure you want to logout?");    //set message
 
         builder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() { //when click on DELETE
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                if(throughFacebook)
+                {LoginManager.getInstance().logOut();}
                 ParseUser.logOut();
                 Intent i= new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivityForResult(i,0);

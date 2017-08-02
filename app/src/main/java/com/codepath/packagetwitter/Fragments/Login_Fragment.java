@@ -64,6 +64,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+import static com.codepath.packagetwitter.LoginActivity.loginButton;
 import static com.codepath.packagetwitter.Utils.ForgotPassword_Fragment;
 import static com.codepath.packagetwitter.Utils.SignUp_Fragment;
 
@@ -72,7 +74,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private FusedLocationProviderClient mFusedLocationClient;
 
     private static EditText emailid, password;
-    private static com.facebook.login.widget.LoginButton loginButton;
     private static TextView forgotPassword, signUp;
     private static CheckBox show_hide_password;
     private static LinearLayout loginLayout;
@@ -80,6 +81,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static FragmentManager fragmentManager;
     public static SignUp_Fragment signUp_fragment;
     public ParseUser parseUser;
+    public static Boolean throughFacebook;
     private String TAG = "Google Places API";
     private static Button loginButtonn;
     CallbackManager callbackManager;
@@ -94,7 +96,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.login_layout, container, false);
         geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
+        throughFacebook= false;
         initViews();
         setListeners();
         signUp_fragment = new SignUp_Fragment();
@@ -194,7 +196,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     public void onCheckedChanged(CompoundButton button,
                                                  boolean isChecked) {
 
-                        // If it is checkec then show password else hide
+                        // If it is check then show password else hide
                         // password
                         if (isChecked) {
 
@@ -249,6 +251,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             case R.id.login_button:
                 onFbLogin();
+                throughFacebook=true;
+                loginButton.setVisibility(View.INVISIBLE);
+
                 break;
         }
 
@@ -256,9 +261,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     private void onFbLogin() {
         callbackManager = CallbackManager.Factory.create();
-
-
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -284,9 +286,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 new GraphRequest(loginResult.getAccessToken(),"/me",parameters, HttpMethod.GET,req).executeAsync();
 
             }
-
-
-
 
 
 

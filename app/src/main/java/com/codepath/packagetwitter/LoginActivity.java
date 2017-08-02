@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public static Dictionary dictionary_name;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
     Login_Fragment login_fragment;
+    public static com.facebook.login.widget.LoginButton loginButton;
 
 
     @Override
