@@ -66,6 +66,24 @@ public class PendingTransactionFragment extends Fragment {
         //set got the adapter
         rvTransactions.setAdapter(transactionAdapter);
 
+       configureDelete();
+
+        populateTimeline();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeContainer.setRefreshing(true);
+                populateTimeline();
+                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+
+        return v;
+    }
+
+    public void configureDelete(){
         final ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
@@ -122,20 +140,6 @@ public class PendingTransactionFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(rvTransactions);
-
-        populateTimeline();
-
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeContainer.setRefreshing(true);
-                populateTimeline();
-                Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
-                swipeContainer.setRefreshing(false);
-            }
-        });
-
-        return v;
     }
 
     public void populateTimeline() {
@@ -152,9 +156,6 @@ public class PendingTransactionFragment extends Fragment {
 
 
             query();
-
-
-
 
 
         }

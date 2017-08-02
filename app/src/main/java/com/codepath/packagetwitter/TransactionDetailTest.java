@@ -30,7 +30,7 @@ public class TransactionDetailTest extends AppCompatActivity implements Vertical
         setContentView(R.layout.transaction_detail_activity);
         mViewPager = (ViewPager) findViewById(R.id.vpCards);
 
-        mfragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), dpToPixels(2, this));
+        mfragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), dpToPixels(2, this),this);
         mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
 
         mViewPager.setAdapter(mfragmentCardAdapter);

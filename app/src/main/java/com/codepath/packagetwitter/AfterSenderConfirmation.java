@@ -60,11 +60,15 @@ public class AfterSenderConfirmation extends AppCompatActivity{
     @BindView(R.id.tvRDescription)TextView tvDescription;
     @BindView(R.id.ivRImage)ImageView ivPackage;
 
+
+
     @BindView(R.id.etReceiverLocation)EditText receiverLocation;
     @BindView(R.id.etRStartDate)EditText startDate;
     @BindView(R.id.etREndDate)EditText endDate;
     @BindView(R.id.myFABOkay)FloatingActionButton fabOkay;
     @BindView(R.id.myFABReject)FloatingActionButton fabReject;
+    ImageView page1;
+    ImageView page2;
     ParselTransaction transaction;
     View view1;
     View view2;
@@ -79,8 +83,10 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         view1 = getLayoutInflater().inflate(R.layout.activity_receiver, null);
         view2 = getLayoutInflater().inflate(R.layout.activity_after_sender_confirmation, null);
-        setContentView(view1);
 
+        setContentView(view1);
+        page1 = (ImageView) findViewById(R.id.page1);
+        page2  = (ImageView)findViewById(R.id.page2);
 
        // ButterKnife.bind(this);
         ParseUser parseUser = ParseUser.getCurrentUser();
@@ -93,23 +99,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
             @Override
             public void onSwipeRight() {
 
-                if(page ==2){
-                    page =1;
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ParseFile postImage = transaction.getParseFile("ImageFile");
-                    String imageUrl = "";
-                    if(postImage!=null) {
-                        imageUrl = postImage.getUrl();//live url
-                    }
-                    Review_frag_two fragment =  Review_frag_two.newInstance(imageUrl,
-                            transaction.getString("title"),transaction.getMailDescription(), transaction.getMailType(),
-                            transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
 
-                    ft.replace(R.id.flContainer, fragment);
-                    ft.commit();
-
-                }
-                else {
                     page = 0;
                     DateFormat df = new SimpleDateFormat("MM/dd/yy");
 
@@ -121,15 +111,18 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
+                page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
 
-                }
+
+
 
             }
             @Override
             public void onSwipeLeft() {
 
 
-                if (page == 0) {
+
                     page = 1;
 
                     ft = getSupportFragmentManager().beginTransaction();
@@ -143,7 +136,9 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                             transaction.getVolume(), transaction.getWeight(), transaction.getIsFragile());
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                }
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_filled));
+
             }
         });
 

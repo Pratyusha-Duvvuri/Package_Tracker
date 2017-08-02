@@ -137,18 +137,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
                 ParselTransaction transaction = mTransactions.get(position);
-//                parseUser = Parcels.unwrap(((ProfileActivity) context).getIntent().getParcelableExtra("PARSEUSER"));
-//                Log.d("WORK","mew"+parseUser.getString("userName"));
                 // create intent for the new activity
                 if (view == itemView) {
                     intent = new Intent(context, TransactionDetailActivity.class);
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
-                     // serialize the movie using parceler, use its short name as a key
-                    //  intent.putExtra("user", transaction.user.sreenName);
-                   // intent.putExtra("uid", String.valueOf(transaction.uid));
-
 
                     // show the activity
                     context.startActivity(intent);

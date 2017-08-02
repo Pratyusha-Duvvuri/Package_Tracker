@@ -1,62 +1,96 @@
 package com.codepath.packagetwitter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.github.clans.fab.FloatingActionMenu;
-import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
+import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 
-public class TransactionDetailActivity extends AppCompatActivity {
+public class TransactionDetailActivity extends AppCompatActivity implements VerticalStepperForm{
 
     public ParseUser parseUser;
+    Context context = getBaseContext();
+    ParseFile image_file;
 
-    @BindView(R.id.tvDescription) TextView tvDescription;
-    @BindView(R.id.Volume) TextView Volume;
-    @BindView(R.id.Type) TextView Type;
-    @BindView(R.id.Weight) TextView tvWeight;
     @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
     @BindView(R.id.tvFrom) TextView tvFrom;
     @BindView(R.id.tvTo) TextView tvTo;
-    @BindView(R.id.btnBack) ImageButton btnBack;
-    @BindView(R.id.tvTitle1) TextView tvTitle1;
-    @BindView(R.id.tvTitle2) TextView tvTitle2;
+    @BindView(R.id.vpCards) ViewPager mViewPager;
+
+    CardFragmentPagerAdapter mfragmentCardAdapter;
+    ShadowTransformer mshadowTransformer;
+    VerticalStepperFormLayout verticalStepperForm;
+    public SharedPreferences sharedPref ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.transaction_detail_test);
-        final FloatingActionMenu materialDesignFAM;
-        final com.github.clans.fab.FloatingActionButton matchButton;
+        setContentView(R.layout.transaction_detail_activity);
         final com.github.clans.fab.FloatingActionButton chatButton;
         ButterKnife.bind(this);
-        //find toolbar inside activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //sets toolbar to act as the actionbar
-        setSupportActionBar(toolbar);
-        //sets up toolbar title
-        getSupportActionBar().setTitle(null);
-        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        matchButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_matches);
+
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
+
         final String parselTransactionId = getIntent().getStringExtra("ParselTransactionId");
+
+
+
+        //To pass parsel ID to view pager
+        // Create object of SharedPreferences.
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        //now get Editor
+        SharedPreferences.Editor editor = sharedPref.edit();
+        //put your value
+        editor.putString("ParselID", parselTransactionId);
+        //commits your edits
+        editor.commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
+        mViewPager.setAdapter(mfragmentCardAdapter);
+        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
+
+        mViewPager.setPageTransformer(false, mshadowTransformer);
+        mViewPager.setOffscreenPageLimit(3);
+
+        String[] mySteps = {"Created", "Accepted", "Matched"};
+        int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+        int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
+
+        // Finding the view
+        verticalStepperForm = (VerticalStepperFormLayout) findViewById(R.id.vertical_stepper_form);
+
+        // Setting up and initializing the form
+        VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm, mySteps, this, this)
+                .primaryColor(colorPrimary)
+                .primaryDarkColor(colorPrimaryDark)
+                .displayBottomNavigation(false) // It is true by default, so in this case this line is not necessary
+                .init();
+
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
         transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
@@ -65,53 +99,21 @@ public class TransactionDetailActivity extends AppCompatActivity {
                     public void done(ParselTransaction transaction, ParseException e) {
                         if (e == null) {
                             // item was found
-                            tvDescription.setText(transaction.getMailDescription());
-                            Type.setText(transaction.getMailType());
+
                             tvFrom.setText("From: " + transaction.getSenderLoc());
                             tvTo.setText("To: " + transaction.getReceiverLoc());
-                            tvWeight.setText(String.valueOf(transaction.getWeight()));
-                            Volume.setText(String.valueOf(transaction.getVolume()));
-                            //not using match activity and button for now
-                            matchButton.setVisibility(View.GONE);
-                            if (transaction.getTransactionState() == 2) {
-                                ParseQuery<ParseUser> senderquery = ParseUser.getQuery();
-                                //senderquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-                                senderquery.whereEqualTo("username", transaction.getSender());
-                                senderquery.findInBackground(new FindCallback<ParseUser>() {
-                                    @Override
-                                    public void done(List<ParseUser> userList, ParseException e) {
-
-                                        ParseUser user = null;
-                                        String sender_name;
-                                        if (e == null) {
-                                            user = userList.get(0);
-                                            sender_name = user.get("fullName").toString();
-                                            tvTitle1.setText(sender_name.toString() + "'s package ");
-                                        }
+                            image_file = transaction.getParseFile("ImageFile");
+                            image_file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] data, ParseException e) {
+                                    if (e == null) {
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                        ivPackageImage.setImageBitmap(bitmap);
                                     }
-                                });
+                                }
+                            });
 
-                                ParseQuery<ParseUser> receiverquery = ParseUser.getQuery();
-                                receiverquery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-                                receiverquery.whereEqualTo("username", transaction.getReceiver());
-                                receiverquery.findInBackground(new FindCallback<ParseUser>() {
-                                    @Override
-                                    public void done(List<ParseUser> userList, ParseException e) {
 
-                                        ParseUser user = null;
-                                        String receiver_name;
-                                        if (e == null) {
-                                            user = userList.get(0);
-                                            receiver_name = user.get("fullName").toString();
-                                            tvTitle2.setText("to " + receiver_name.toString());
-                                        }
-                                    }
-                                });
-                            }
-                            else {
-                                tvTitle1.setText("This Transaction is ");
-                                tvTitle2.setText("still pending...");
-                            }
                         }
                     }
         });
@@ -121,19 +123,95 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
-                materialDesignFAM.close(true);
+                //materialDesignFAM.close(true);
                 startActivity(i);
 
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
+    }
+
+
+    public static float dpToPixels(int dp, Context context) {
+        return dp * (context.getResources().getDisplayMetrics().density);
+    }
+
+    @Override
+    public View createStepContentView(int stepNumber) {
+        View view = null;
+        switch (stepNumber) {
+            case 0:
+                view = createCreatedStep();
+                break;
+            case 1:
+                view = createAcceptedStep();
+                break;
+            case 2:
+                view = createMatchedStep();
+                break;
+            //case 3:
+            //view = createDeliveredStep();
+        }
+        return view;
+    }
+
+    //private View createDeliveredStep() {
+
+    // }
+
+    private View createMatchedStep() {
+        TextView matched = new TextView(this);
+        matched.setSingleLine(true);
+        matched.setText("Courrier Has Been Matched To The Transaction");
+        return matched;
+    }
+
+    private View createAcceptedStep() {
+        TextView accepted = new TextView(this);
+        accepted.setSingleLine(true);
+        accepted.setText("Recipient Has Accepted The Request");
+        return accepted;
+    }
+
+    private View createCreatedStep() {
+        TextView created = new TextView(this);
+        created.setSingleLine(true);
+        created.setText("Package Has Been Created");
+        return created;
+    }
+
+    @Override
+    public void onStepOpening(int stepNumber) {
 
     }
+
+    @Override
+    public void sendData() {
+
+    }
+
+    /*
+    public void setPackageImage(byte[] byteArray, View v){
+        //folowing converts byteArray to bitmpa then puts into image view
+        if (byteArray!= null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            ImageView image = (ImageView) v.findViewById(R.id.ibPackageUpload);
+            WindowManager w = ((Activity) getContext()).getWindowManager();
+
+            image.setImageBitmap( Bitmap.createScaledBitmap(bmp,
+                    w.getDefaultDisplay().getWidth(), (int) (w.getDefaultDisplay().getWidth()*1.5), false));
+            int a = w.getDefaultDisplay().getWidth();
+            //image.setAdjustViewBounds(true);
+
+            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+        else if (getArguments().getString("imageUrl") != null){
+            Uri imageUri = Uri.parse(getArguments().getString("imageUrl"));
+            Glide.with(this).load(imageUri.toString()).centerCrop().into((ImageView) v.findViewById(R.id.ibPackageUpload));}
+        else {
+            Glide.with(this).load("http://i.imgur.com/zuG2bGQ.jpg").centerCrop().into((ImageView) v.findViewById(R.id.ibPackageUpload));
+
+        }
+    }
+    */
 }

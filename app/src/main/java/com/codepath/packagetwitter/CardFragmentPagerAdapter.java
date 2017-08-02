@@ -4,6 +4,9 @@ package com.codepath.packagetwitter;
  * Created by michaunp on 7/31/17.
  */
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -17,12 +20,17 @@ public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter implemen
     private float mBaseElevation;
     CardDetail1 cardDetail1;
     CardDetail2 cardDetail2;
+    Context context;
 
-    public CardFragmentPagerAdapter(FragmentManager fm, float baseElevation) {
+
+
+    public CardFragmentPagerAdapter(FragmentManager fm, float baseElevation,Context contextt) {
         super(fm);
         mBaseElevation = baseElevation;
-        cardDetail1 = new CardDetail1();
-        cardDetail2 = new CardDetail2();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(contextt);
+        String parselID = sharedPref.getString("ParselID", null);
+        cardDetail1 = CardDetail1.newInstance(parselID);
+        cardDetail2 = CardDetail2.newInstance(parselID);
     }
 
     @Override

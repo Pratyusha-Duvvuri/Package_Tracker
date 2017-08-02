@@ -128,7 +128,7 @@ public class Review_frag_two extends Fragment {
             Glide.with(this).load("http://i.imgur.com/zuG2bGQ.jpg").centerCrop().into((ImageView) v.findViewById(R.id.ibPackageUpload));
 
         }
-        }
+    }
 
     public void setFragile(View v){
         if(getArguments().getBoolean("fragile")) {
@@ -143,6 +143,7 @@ public class Review_frag_two extends Fragment {
     }
 
     public int getTypeId(String type){
+
         if (type.equals( "Clothes")) {
             return  R.mipmap.ic_clothes_fill;
         }
