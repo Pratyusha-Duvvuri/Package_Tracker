@@ -48,6 +48,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
+//    private static com.facebook.login.widget.LoginButton loginButton2;
+//    CallbackManager callbackManager;
+//    public Bundle bFacebookData;
 
     public SignUp_Fragment() {
 
@@ -64,6 +67,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Initialize all views
     private void initViews() {
+//        loginButton2 = (LoginButton) view.findViewById(R.id.login_button2);
+//        loginButton2.setFragment(this);
+
+
         fragmentManager = getActivity().getSupportFragmentManager();
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
@@ -89,6 +96,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Set Listeners
     private void setListeners() {
+//        loginButton2.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
         login.setOnClickListener(this);
         location.setOnClickListener(this);
@@ -97,6 +105,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+//            case R.id.login_button2:
+//                onFbLogin();
+//                break;
+
             case R.id.signUpBtn:
 
                 // Call checkValidation method
@@ -201,7 +214,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.put("fullName",fullName.getText().toString());
         user.put("hasPendingRequests",false);
 
-
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.logOut();
 // Invoke signUpInBackground
     user.signUpInBackground(new SignUpCallback() {
         @Override
@@ -242,6 +256,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         }
 
     }
+
+
 
 
 }
