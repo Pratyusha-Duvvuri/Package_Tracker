@@ -88,12 +88,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public ParseUser parseUser;
     public static Boolean throughFacebook;
     private String TAG = "Google Places API";
-    private static Button loginButtonn;
+    private static Button regular_login_button;
     CallbackManager callbackManager;
     public Bundle bFacebookData;
     public Geocoder geocoder;
     public String locality;
-    private Location user_location;
+    public static Location user_location;
 
     public Login_Fragment() {
 
@@ -108,7 +108,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         initViews();
         setListeners();
         signUp_fragment = new SignUp_Fragment();
-        loginButtonn = (Button) view.findViewById(R.id.loginBtn);
+        regular_login_button = (Button) view.findViewById(R.id.loginBtn);
 
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
@@ -121,6 +121,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
 
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, CODE);
 
         } else {
@@ -140,6 +141,32 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         return view;
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case CODE: {
+
+                if (!(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                    mFusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+
+                                    // Got last known location. In some rare situations this can be null.
+                                    if (location != null) {
+                                        user_location = location;
+                                    }
+                                }
+                            });
+                }
+
+
+            }
+
+        }
     }
 
 
@@ -171,7 +198,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         show_hide_password = (CheckBox) view
                 .findViewById(R.id.show_hide_password);
         loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
-        loginButtonn = (Button) view.findViewById(R.id.loginBtn);
+        regular_login_button = (Button) view.findViewById(R.id.loginBtn);
 
         // Load ShakeAnimation
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
@@ -197,7 +224,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         signUp.setOnClickListener(this);
-        loginButtonn.setOnClickListener(this);
+        regular_login_button.setOnClickListener(this);
 
         // Set check listener over checkbox for showing and hiding password
         show_hide_password
@@ -252,7 +279,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                 ForgotPassword_Fragment).commit();
                 break;
             case R.id.createAccount:
-
                 // Replace signup frgament with animation
                 fragmentManager
                         .beginTransaction()
@@ -263,7 +289,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             case R.id.login_button:
                 onFbLogin();
                 throughFacebook = true;
-                loginButton.setVisibility(View.INVISIBLE);
+//                loginButton.setVisibility(View.INVISIBLE);
 
                 break;
         }
@@ -321,7 +347,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             try {
                 URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
-                Log.i("profile_pic", profile_pic + "");
+                Log.i("profile_pic", profile_pic.toString());
                 bundle.putString("profile_pic", profile_pic.toString());
 
             } catch (MalformedURLException e) {
@@ -350,7 +376,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         return null;
     }
 
-    public void getPOLLY() {
+    public void newUser() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         currentUser.logOut();
 
@@ -360,7 +386,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         user.setUsername(bFacebookData.getString("email"));
         user.setPassword("x");
         user.setEmail(bFacebookData.getString("email"));
-//        user.put("location", "Seattle");
         user.put("fullName", bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name"));
         user.put("hasPendingRequests", false);
 
@@ -413,10 +438,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     }
 
-
     public void newUserorCurrentUser() {
-
-        getPOLLY();
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", bFacebookData.getString("email"));
@@ -425,9 +447,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             public void done(List<ParseUser> itemList, ParseException e) {
                 if (e == null) {
                     if (itemList.size() == 0) {
-                        getPOLLY();
+                        newUser();
                     } else {
-                        bruhPleaseWork();
+                        returningUser();
                     }
 
                 } else {
@@ -438,7 +460,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
 
-    public void bruhPleaseWork() {
+    public void returningUser() {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
 //        currentUser.logOut();
@@ -571,24 +593,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CODE && resultCode == RESULT_OK) {
-//            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                mFusedLocationClient.getLastLocation()
-//                        .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-//                            @Override
-//                            public void onSuccess(Location location) {
-//                                // Got last known location. In some rare situations this can be null.
-//                                if (location != null) {
-//                                    doTheLocationThing(location.getLatitude(), location.getLongitude());
-//                                }
-//                            }
-//                        });
-//                return;
-//            }
-//
-//
-//
-//        }
 
     }
 

@@ -128,4 +128,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult( requestCode,  permissions,  grantResults);
+
+        login_fragment.onRequestPermissionsResult( requestCode,  permissions,  grantResults);
+
+    }
+
 }

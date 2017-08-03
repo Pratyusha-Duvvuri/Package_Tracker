@@ -51,6 +51,7 @@ public class FileUploadActivity extends Activity {
     public Button GoBack;
     public TextView location;
     public EditText name;
+    public EditText email;
     public ParseFile file;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE=90;
     public static Boolean newPictureTaken;
@@ -63,14 +64,17 @@ public class FileUploadActivity extends Activity {
         newPictureTaken=false;
         super.onCreate(savedInstanceState);
         // Get the view from activity_file_upload.xml_file_upload.xml
-        setContentView(R.layout.activity_file_upload);
+        setContentView(R.layout.profile_change_layout);
         btnUploadson = (Button) findViewById(R.id.btnuploadson);
-        location = (TextView) findViewById(R.id.et_imagecaption);
-        name = (EditText) findViewById(R.id.et_username);
+        location = (TextView) findViewById(R.id.et_location);
+        name = (EditText) findViewById(R.id.et_fullName);
+        email = (EditText) findViewById(R.id.et_email);
         GoBack = (Button) findViewById(R.id.btnBackToProfile);
-        location.setText("Update your current location - "+parseUser.getString("location"));
+        location.setText(parseUser.getString("location"));
+//        location.setText("Update your current location - "+parseUser.getString("location"));
         name.setText(parseUser.getString("fullName"));
         otherString = parseUser.getString("location");
+        ivPreview = (ImageView) findViewById(R.id.iv_profile_image);
 
 
         location.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +94,7 @@ public class FileUploadActivity extends Activity {
             }
         });
 
-        btnUploadson.setOnClickListener(new View.OnClickListener() {
+        ivPreview.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi
@@ -111,20 +115,23 @@ public class FileUploadActivity extends Activity {
                     }
 
 
-                    String tagline = location.getText().toString();
-                    if (!tagline.equals("")) {
+                    String location_text = location.getText().toString();
+                    if (!location_text.equals("")) {
                         parseUser.put("location", otherString);
 
                     }
 
-                    doIT();
+                String email_text = email.getText().toString();
+                if (!email_text.equals("")) {
+                    parseUser.put("username", email_text);
+                    parseUser.setEmail( email_text);
 
+                }
 
-
+                    saveUser();
 
             }
         });
-        ivPreview = (ImageView) findViewById(R.id.ivPreview);
         setParametersOfView();
 
     }
@@ -199,7 +206,8 @@ public class FileUploadActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(FileUploadActivity.this, data);
                 otherString= place.getName().toString();
-                location.setText("Update your current location - "+otherString);
+//                location.setText("Update your current location - "+otherString);
+                location.setText(otherString);
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(FileUploadActivity.this, data);
@@ -219,7 +227,7 @@ public class FileUploadActivity extends Activity {
     }
 
 
-    public void doIT(){
+    public void saveUser(){
             parseUser.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e1) {
