@@ -54,11 +54,10 @@
         android:layout_below="@+id/name_icon"
         android:layout_alignStart="@+id/name_icon" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_location"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:layout_alignBottom="@+id/locaation_icon"
         android:layout_alignStart="@+id/et_email" />
 

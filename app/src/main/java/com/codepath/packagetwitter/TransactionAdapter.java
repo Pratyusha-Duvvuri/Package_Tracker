@@ -143,6 +143,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
+                    intent.putExtra("ParselTransactionState", transaction.getTransactionState());
 
                     // show the activity
                     context.startActivity(intent);
