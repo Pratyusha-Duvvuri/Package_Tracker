@@ -303,7 +303,16 @@ public class AfterSenderConfirmation extends AppCompatActivity{
 //                //Call the modal to verify information
                onVerifyAction();
     }
+
+    public void cancel(View v) throws ParseException {
+
+        transaction.setTransactionState(9);
+        transaction.saveEventually();
+//                //Call the modal to verify information
+        onVerifyAction();
+    }
 }
+
 
 //package com.codepath.packagetwitter;
 //
