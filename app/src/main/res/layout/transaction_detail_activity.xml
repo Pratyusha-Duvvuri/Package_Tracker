@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:paddingTop="460dp">
+            android:paddingTop="460dp"
+            android:paddingBottom="-600dp">
 
 
             <LinearLayout
@@ -104,8 +105,8 @@
 
                 <ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout
                     android:id="@+id/vertical_stepper_form"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentTop="true">
 
                 </ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout>
