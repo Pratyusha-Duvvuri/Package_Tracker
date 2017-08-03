@@ -109,6 +109,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                                     if (e == null) {
                                         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                                         ivPackageImage.setImageBitmap(bitmap);
+                                        ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     }
                                 }
                             });
