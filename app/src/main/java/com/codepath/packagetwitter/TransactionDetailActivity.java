@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -60,7 +62,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
         final String parselTransactionId = getIntent().getStringExtra("ParselTransactionId");
-         parselTransactionState = Integer.getInteger(getIntent().getStringExtra("ParselTransactionState"),0);
+         parselTransactionState = getIntent().getIntExtra("ParselTransactionState",0);
 
         //To pass parsel ID to view pager
         // Create object of SharedPreferences.
@@ -135,6 +137,21 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 .showVerticalLineWhenStepsAreCollapsed(true) // false by default
                 .init();
 
+        ScrollView stepperFormScroll = (ScrollView) verticalStepperForm.findViewById(R.id.steps_scroll);
+
+        LinearLayout stepperFormList = (LinearLayout) stepperFormScroll.findViewById(R.id.content);
+
+        int stepCount = stepperFormList.getChildCount();
+
+        for (int i = 0; i<stepCount-1; i++) {
+            stepperFormList.getChildAt(i).findViewById(R.id.next_step).setVisibility(View.GONE);
+
+        }
+        verticalStepperForm.setStepAsCompleted(0);
+        verticalStepperForm.setStepAsCompleted(1);
+        verticalStepperForm.goToStep(2, false);
+
+
     }
 
 
@@ -144,6 +161,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @Override
     public View createStepContentView(int stepNumber) {
+
         View view = null;
         switch (stepNumber) {
             case 0:
@@ -191,34 +209,46 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @Override
     public void onStepOpening(int stepNumber) {
-        if(parselTransactionState>0 && parselTransactionState!=1)
-        switch (stepNumber) {
+        if(parselTransactionState==0){ stepNumber=0;}
+        else if (parselTransactionState==1){ stepNumber=1;}
+        else if (parselTransactionState==2){ stepNumber=2;}
+        else if (parselTransactionState==3){ stepNumber=3;}
+            switch (stepNumber) {
 
-            case 0:
-                checkCreatedState();
-                break;
-            case 1:
-                checkAcceptedState();
-                break;
-            case 2:
-                checkMatchedState();
-                break;
-        }
+                case 0:
+                    checkCreatedState();
+                    break;
+                case 1:
+                    checkAcceptedState();
+                    break;
+                case 2:
+                    checkMatchedState();
+                    break;
+            }
+
     }
 
     private void checkMatchedState() {
-        if (parselTransactionState >= 2)
+
+        if (parselTransactionState >= 2) {
+            verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
+        }
     }
 
     private void checkAcceptedState() {
-        if (parselTransactionState >= 1)
+        if (parselTransactionState >= 1){
+            verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
+
+        }
     }
 
     private void checkCreatedState() {
         if (parselTransactionState >= 0)
             verticalStepperForm.setStepAsCompleted(0);
+
     }
 
 
