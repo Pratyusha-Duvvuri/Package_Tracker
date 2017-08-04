@@ -3,7 +3,6 @@ package com.codepath.packagetwitter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.item_chat, parent, false);
+        View contactView = inflater.inflate(R.layout.item_chatt, parent, false);
 
 
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -59,7 +58,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             postImage = parseUser.getParseFile("ImageFile");
             holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
-            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            holder.body2.setText(message.getBody());
+
             String imageUrl = postImage.getUrl();//live url
              imageUri = Uri.parse(imageUrl);
 
@@ -72,7 +72,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
             holder.imageOther.setVisibility(View.VISIBLE);
             holder.imageMe.setVisibility(View.GONE);
-            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            holder.body.setText(message.getBody());
+
             //load image from messages
             String imageUrl = postImage.getUrl();//live url
              imageUri = Uri.parse(imageUrl);
@@ -80,7 +81,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         //change this code to reflect user now
         final ImageView profileView = isMe ? holder.imageMe : holder.imageOther;
         Glide.with(holder.imageOther.getContext()).load(imageUri.toString()).into(profileView);
-        holder.body.setText(message.getBody());
+//        holder.body.setText(message.getBody());
     }
 
 
@@ -94,12 +95,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         ImageView imageOther;
         ImageView imageMe;
         TextView body;
+        TextView body2;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
             imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
+            body2 = (TextView)itemView.findViewById(R.id.tvBody2);
         }
     }
 }
