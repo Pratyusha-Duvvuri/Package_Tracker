@@ -101,6 +101,7 @@ public class ParselTransaction extends ParseObject{
 //        });
 //    }
 
+
     public void addReceiverInfo(Date receiverStart, Date receiverEnd){
         setReceiverStart(receiverStart);
         setReceiverEnd(receiverEnd);
@@ -215,6 +216,11 @@ public class ParselTransaction extends ParseObject{
     public String getReceiver() {
         return getString("receiver");
     }
+
+    public String getFullName() {
+        return getString("fullName");
+    }
+
 
     public String getSender() {
         return getString("sender");
