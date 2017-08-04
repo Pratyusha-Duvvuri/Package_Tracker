@@ -11,7 +11,7 @@
         android:id="@+id/next"
 
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="50dp"
         android:layout_weight="0.04"
         android:background="@drawable/buttonshape"
         android:shadowDx="0"
@@ -45,15 +45,18 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:text="WHERE"
+            android:textStyle="bold"
+            android:paddingLeft="16dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
         <TextView
+            android:paddingLeft="16dp"
             android:id="@+id/whereDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whereTag"
-            android:text="From where are you planning on sending it?"
+            android:text="From where are you planning on sending the package?"
             android:textSize="13dp" />
 
 
@@ -72,7 +75,7 @@
             card_view:cardCornerRadius="10dp"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/imageView6"
-            android:layout_marginEnd="16dp">
+        android:layout_marginEnd="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -156,12 +159,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
+            android:paddingLeft="16dp"
+            android:textStyle="bold"
             android:text="WHO" />
 
         <TextView
             android:id="@+id/whoDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
             android:layout_below="@+id/whoTag"
             android:text="Who are you sending it to?"
             android:textSize="13dp" />
@@ -208,6 +214,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:hint="Enter receiver's handle"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/whoIcon" />
@@ -242,6 +249,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
+            android:paddingLeft="16dp"
+            android:textStyle="bold"
             android:text="WHEN" />
 
         <TextView
@@ -249,7 +258,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/whenTag"
-            android:text="Mention your availbale daterange to send it in"
+            android:paddingLeft="16dp"
+            android:text="Mention your availbale daterange to send the package"
             android:textSize="13dp" />
 
     </RelativeLayout>
@@ -270,7 +280,7 @@
             <ImageView
                 android:id="@+id/endCalendar"
                 android:layout_width="32dp"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="7dp"
@@ -281,7 +291,7 @@
             <TextView
                 android:id="@+id/senderEndDateB"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/endCalendar"
@@ -303,7 +313,7 @@
             <TextView
                 android:id="@+id/tvStartDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignBottom="@+id/view6"
                 android:layout_alignEnd="@+id/view6"
                 android:layout_alignStart="@+id/view6" />
@@ -321,7 +331,7 @@
                 android:id="@+id/startCalendar"
 
                 android:layout_width="32dp"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
@@ -333,7 +343,7 @@
             <TextView
                 android:id="@+id/senderStartDateB"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:layout_alignTop="@id/startCalendar"
                 android:layout_gravity="center"
                 android:layout_toRightOf="@id/startCalendar"
@@ -341,7 +351,6 @@
                 android:hint="Start"
                 android:text="End Date: "
                 android:textSize="16dp" />
-
 
 
             <View
@@ -357,7 +366,7 @@
             <TextView
                 android:id="@+id/tvEndDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_above="@+id/view5"
                 android:layout_alignEnd="@+id/view5"
                 android:layout_toEndOf="@+id/senderStartDateB" />
