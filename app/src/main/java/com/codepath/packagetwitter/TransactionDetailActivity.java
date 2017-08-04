@@ -124,54 +124,54 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
         // Execute the query to find the object with ID
         transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
-                    public void done(ParselTransaction transaction, ParseException e) {
-                        if (e == null) {
-                            // item was found
-                            String title = transaction.getString("title").toString();
-                            tvTitle.setText(title);
-                            tvFrom.setText(transaction.getSenderLoc());
-                            tvTo.setText(transaction.getReceiverLoc());
-                            String description = transaction.getMailDescription().toString();
-                            tvDescription.setText(description);
-                            setFragile(transaction);
-                            tvType.setText(transaction.getMailType());
-                            TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
-                            TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
-                            if (transaction.getTransactionState() >= 2){
-                                tvCourierTitle.setVisibility(View.VISIBLE);
-                            }
-                            //sets up sender:
-                            setUpPerson(transaction.getSender(),ivSender,tvSender);
-                            //sets up courier:
-                            setUpPerson(transaction.getCourier(),ivCourier,tvCourier);
-                            //sets up receiver:
-                            setUpPerson(transaction.getReceiver(),ivReceiver,tvReceiver);
+            public void done(ParselTransaction transaction, ParseException e) {
+                if (e == null) {
+                    // item was found
+                    String title = transaction.getString("title").toString();
+                    tvTitle.setText(title);
+                    tvFrom.setText(transaction.getSenderLoc());
+                    tvTo.setText(transaction.getReceiverLoc());
+                    String description = transaction.getMailDescription().toString();
+                    tvDescription.setText(description);
+                    setFragile(transaction);
+                    tvType.setText(transaction.getMailType());
+                    TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
+                    TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
+                    if (transaction.getTransactionState() >= 2){
+                        tvCourierTitle.setVisibility(View.VISIBLE);
+                    }
+                    //sets up sender:
+                    setUpPerson(transaction.getSender(),ivSender,tvSender);
+                    //sets up courier:
+                    setUpPerson(transaction.getCourier(),ivCourier,tvCourier);
+                    //sets up receiver:
+                    setUpPerson(transaction.getReceiver(),ivReceiver,tvReceiver);
 
-                            ibSize.setImageDrawable(sizePics.getDrawable(transaction.getVolume()));
-                            tvSize.setText(sizes.getString(transaction.getVolume()));
-                            tvWeight.setText(String.valueOf(transaction.getWeight()));
+                    ibSize.setImageDrawable(sizePics.getDrawable(transaction.getVolume()));
+                    tvSize.setText(sizes.getString(transaction.getVolume()));
+                    tvWeight.setText(String.valueOf(transaction.getWeight()));
 
-                            ibType.setImageResource(getTypeId(transaction.getMailType()));
+                    ibType.setImageResource(getTypeId(transaction.getMailType()));
 //                            tvFrom.setText("From: " + transaction.getSenderLoc());
 //                            tvTo.setText("To: " + transaction.getReceiverLoc());
-                            transaction_state = transaction.getTransactionState();
-                            Log.d("WORK", String.valueOf(transaction_state));
-                            image_file = transaction.getParseFile("ImageFile");
-                            image_file.getDataInBackground(new GetDataCallback() {
-                                @Override
-                                public void done(byte[] data, ParseException e) {
-                                    if (e == null) {
-                                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                        ivPackageImage.setImageBitmap(bitmap);
-                                        ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                                    }
-                                }
-                            });
-
-
-
+                    transaction_state = transaction.getTransactionState();
+                    Log.d("WORK", String.valueOf(transaction_state));
+                    image_file = transaction.getParseFile("ImageFile");
+                    image_file.getDataInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] data, ParseException e) {
+                            if (e == null) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                ivPackageImage.setImageBitmap(bitmap);
+                                ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            }
                         }
-                    }
+                    });
+
+
+
+                }
+            }
         });
 
         chatButton.setOnClickListener(new View.OnClickListener() {
@@ -229,6 +229,18 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         else{
             onStepOpening(0);
         }
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verticalStepperForm.setStepAsCompleted(0);
+                verticalStepperForm.setStepAsCompleted(1);
+                verticalStepperForm.setStepAsCompleted(2);
+                verticalStepperForm.setStepAsCompleted(3);
+                sendData();
+                confirm_button.setVisibility(View.GONE);
+
+            }
+        });
 
 
     }
@@ -301,7 +313,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 view = createMatchedStep();
                 break;
             case 3:
-            view = createDeliveredStep();
+                view = createDeliveredStep();
         }
         return view;
     }
@@ -395,7 +407,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     /*
     private void confirmDeliveredState(){
-
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -416,7 +427,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 confirmationDialog();
             }
         });
-
     }
     */
 
