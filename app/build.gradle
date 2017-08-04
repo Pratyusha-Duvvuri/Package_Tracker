@@ -34,31 +34,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    // for logging API calls to LogCat
-    // for logging API calls to LogCat
-    // for Parse Live Queries
+
     compile 'com.android.support:multidex:1.0.0'
 
     compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.8.0'
-//    compile 'com.google.android.gms:play-services:11.0.0'
-//    compile 'com.google.android.gms:play-services:10.0.1'
 
-
-    //    compile fileTree(dir: 'libs', include: ['*.jar'])
-////    compile 'com.android.support:appcompat-v7:23.0.0'
-//    compile 'org.apache.httpcomponents:httpclient:4.5'
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/commons-codec-1.9.jar')
-//        compile 'org.apache.httpcomponents:httpclient:4.5.3'
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/commons-logging-1.2.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/fluent-hc-4.5.3.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-4.5.3.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-cache-4.5.3.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpclient-win-4.5.3.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpcore-4.4.6.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/httpmime-4.5.3.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/jna-4.1.0.jar')
-//    compile files('libs/httpcomponents-client-4.5.3.jar/lib/jna-platform-4.1.0.jar')
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -85,11 +66,10 @@ dependencies {
     compile 'com.parse:parse-livequery-android:1.0.4'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-//    compile 'com.android.support:appcompat-v7:26f.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.android.gms:play-services-maps:10.0.1'
+    compile 'com.google.android.gms:play-services-maps:11.0.0'
     compile 'com.google.android.gms:play-services-location:11.0.0'
-    compile 'com.google.android.gms:play-services-places:10.0.1'
+    compile 'com.google.android.gms:play-services-places:11.0.0'
 
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'

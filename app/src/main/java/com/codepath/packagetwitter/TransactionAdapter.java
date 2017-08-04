@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 /**
@@ -65,29 +67,41 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             case 0:
                 status = "Awaiting Receiver";
                 holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                holder.ivMessage.setVisibility(View.GONE);
+
                 break;
             case 1:
                 status = "Awaiting Match";
                 holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                holder.ivMessage.setVisibility(View.GONE);
+
                 break;
             case 2:
                 status = "Awating Delivery";
                 holder.ivStatus.setImageResource(R.drawable.green_dot);
+                holder.ivMessage.setVisibility(View.VISIBLE);
                 break;
-            case 6:
+            case 4:
                 status = "Package Delivered!";
                 holder.ivStatus.setImageResource(R.drawable.green_dot);
+                holder.ivMessage.setVisibility(View.GONE);
+
                 break;
             case 7:
                 status = "Awaiting Match";
                 holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                holder.ivMessage.setVisibility(View.GONE);
+
                 break;
             default:
+                holder.ivMessage.setVisibility(View.GONE);
+
                 break;
 
         }
 
         holder.tvStatus.setText(status);
+
 
         holder.tvTitle.setText(transaction.getString("title"));
 
@@ -112,7 +126,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 //create viewholder class
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        public ImageView ivMessage;
         public ImageView ivPackageImage;
         public TextView tvStatus;
         public ImageView ivStatus;
@@ -126,6 +140,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
             ivStatus = (ImageView) itemView.findViewById(R.id.ivStatus);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            ivMessage = itemView.findViewById(R.id.ivMessage);
+            ivMessage.setOnClickListener(this);
         }
 
         @Override
@@ -138,14 +154,22 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 // get the movie at the position, this won't work if the class is static
                 ParselTransaction transaction = mTransactions.get(position);
                 // create intent for the new activity
-                if (view == itemView) {
+                if (view == itemView && transaction.getTransactionState()!=7) {
                     intent = new Intent(context, TransactionDetailActivity.class);
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
+                    intent.putExtra("ParselTransactionState", transaction.getTransactionState());
 
                     // show the activity
                     context.startActivity(intent);
+                }
+                else if (view == ivMessage){
+                    Intent i = new Intent(context, OtherChatActivity.class);
+                    i.putExtra("ParselTransactionId",transaction.getObjectId());
+                    i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
+                    //materialDesignFAM.close(true);
+                    context.startActivity(i);
                 }
             }
         }

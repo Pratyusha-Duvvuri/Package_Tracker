@@ -154,6 +154,7 @@ public class FileUploadActivity extends Activity {
         }
     }
     public void setParametersOfView() {
+        email.setText(parseUser.getString("email"));
         ParseFile postImage = ProfileActivity.parseUser.getParseFile("ImageFile");
         String imageUrl = postImage.getUrl();//live url
         Uri imageUri = Uri.parse(imageUrl);

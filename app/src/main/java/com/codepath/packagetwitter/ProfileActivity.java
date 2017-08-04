@@ -72,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public Boolean ignore;
     public Boolean reload;
     private final int DELAY = 5000;
+
     FragmentManager fm;
 
 
@@ -95,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             //if a new paclage was created
             newPackage();
         }
+
 
         fm = getSupportFragmentManager();
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
@@ -134,8 +136,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //setup tablayout to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
-
-
+        //if (((PendingTransactionFragment)pagerAdapter.getItem(vpPager.getCurrentItem())).getTransactions().size() == 0)
         //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
@@ -219,18 +220,23 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                         currentRejected = itemList.get(i);
 
 
-                        FragmentManager fm = getSupportFragmentManager();
-                        //creating random sender and mail object here and checking flow from this
-                        // point till last activity before transaction activity creation.
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
 
-                        RejectedRequestFragment rejectedRequestFragment = new RejectedRequestFragment();
-                        rejectedRequestFragment.show(fm, "fragment_rejected_request");
+                        builder.setMessage("Your package was rejected");    //set message
 
-                    }
-                    //deletes all these transactions once sender has been notified
-                    for (int i = 0; i < itemList.size(); i++) {
-                        //for every parsel transaction
-                        itemList.get(i).deleteInBackground();
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;}
+                        }).show();
+                        try {
+                            itemList.get(i).delete();
+                        } catch (ParseException e1) {
+                            e1.printStackTrace();
+                        }
+                        itemList.get(i).saveInBackground();
+
 
                     }
 
@@ -360,7 +366,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK){
             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-            if (data.getBooleanExtra("matched", false)){
+            if (data.getBooleanExtra("matched", false)== true){
                 builder.setMessage("Trip was entered.\nA match was found!");    //set message
 
             }
@@ -380,8 +386,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         if (requestCode == RECEIVER_CODE && resultCode == RESULT_OK){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-            PendingRequest_Fragment package_conf;
-            if (data.getBooleanExtra("matched", false)){
+            if (data.getBooleanExtra("accepted", true) == false){ // if rejected
+                builder.setMessage("Package rejected");    //set message
+
+            }
+            else if (data.getBooleanExtra("matched", false)){
                 builder.setMessage("Package was confirmed.\nA match was found!");    //set message
 
             }
@@ -392,6 +401,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    actOnRequests();
                     return;}
             }).show();
         }
@@ -422,8 +432,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         builder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() { //when click on DELETE
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(throughFacebook)
-                {LoginManager.getInstance().logOut();}
+                try{
+                    if(throughFacebook)
+                    {LoginManager.getInstance().logOut();}
+                }
+                catch(NullPointerException e){}
                 ParseUser.logOut();
                 Intent i= new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivityForResult(i,0);

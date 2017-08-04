@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +33,7 @@ import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 
 public class TransactionDetailActivity extends AppCompatActivity implements VerticalStepperForm{
+    Handler handler;
 
     public ParseUser parseUser;
     Context context = getBaseContext();
@@ -47,6 +49,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     VerticalStepperFormLayout verticalStepperForm;
     public SharedPreferences sharedPref;
     int transaction_state;
+    public Integer parselTransactionState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
         final String parselTransactionId = getIntent().getStringExtra("ParselTransactionId");
+         parselTransactionState = Integer.getInteger(getIntent().getStringExtra("ParselTransactionState"),0);
 
         //To pass parsel ID to view pager
         // Create object of SharedPreferences.
@@ -188,7 +192,9 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @Override
     public void onStepOpening(int stepNumber) {
+        if(parselTransactionState>0 && parselTransactionState!=1)
         switch (stepNumber) {
+
             case 0:
                 checkCreatedState();
                 break;
@@ -202,17 +208,17 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     }
 
     private void checkMatchedState() {
-        if (transaction_state >= 2)
+        if (parselTransactionState >= 2)
             verticalStepperForm.setStepAsCompleted(2);
     }
 
     private void checkAcceptedState() {
-        if (transaction_state >= 1)
+        if (parselTransactionState >= 1)
             verticalStepperForm.setStepAsCompleted(1);
     }
 
     private void checkCreatedState() {
-        if (transaction_state >= 0)
+        if (parselTransactionState >= 0)
             verticalStepperForm.setStepAsCompleted(0);
     }
 
