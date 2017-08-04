@@ -212,7 +212,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.put("location", location.getText().toString());
         user.put("mobileNumber", mobileNumber.getText().toString());
         user.put("fullName",fullName.getText().toString());
-        user.put("hasPendingRequests",false);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         currentUser.logOut();

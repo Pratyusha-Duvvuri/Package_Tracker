@@ -36,10 +36,14 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class PendingTransactionFragment extends Fragment {
     TransactionAdapter transactionAdapter;
-    ArrayList<ParselTransaction> transactions;
+     ArrayList<ParselTransaction> transactions;
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
     public static int page;
+
+    public ArrayList<ParselTransaction> getTransactions() {
+        return transactions;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,11 +110,7 @@ public class PendingTransactionFragment extends Fragment {
 
 
                             try {
-                                if (transactions.get(position).getTransactionState() == 0){
 
-                                    ParselTransaction.changePendingRequestsStatus(true, transactions.get(position).getReceiver());
-
-                                }
                                 transactions.get(position).delete();
                                 transactions.get(position).saveInBackground();
                                 transactions.remove(position);  //then remove item

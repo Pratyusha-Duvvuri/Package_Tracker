@@ -50,7 +50,7 @@
 
                 <EditText
                     android:id="@+id/etTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="301dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:hint="Clothes for my sister"
@@ -74,7 +74,7 @@
 
                 <EditText
                     android:id="@+id/etDescription"
-                    android:layout_width="wrap_content"
+                    android:layout_width="305dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"

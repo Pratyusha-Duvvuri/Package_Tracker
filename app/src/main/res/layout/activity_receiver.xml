@@ -7,17 +7,37 @@
     tools:context="com.codepath.packagetwitter.ReviewActivity"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/cancel"
+
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="4.33"
+        android:background="@drawable/buttonshape"
+        android:backgroundTint="@color/red"
+        android:onClick="cancel"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="Reject"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/confirm"
+        android:layout_below="@id/tvTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15sp"
-        android:layout_marginBottom="50dp"
         android:background="@drawable/back"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp">
 
 
     </FrameLayout>
@@ -26,10 +46,8 @@
     <Button
         android:id="@+id/confirm"
 
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_weight="4.33"
         android:background="@drawable/buttonshape"
         android:onClick="confirm"
@@ -39,7 +57,9 @@
         android:text="confirm"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -52,31 +72,24 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvCaption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvTitle"
-        android:text="Swipe below for more info"
-        android:textAlignment="center" />
-
     <ImageView
         android:id="@+id/page1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        app:srcCompat="@drawable/dot_unfilled"
         android:layout_above="@+id/confirm"
-        android:layout_alignEnd="@+id/flContainer"
-        android:layout_marginBottom="13dp"
-        android:layout_toEndOf="@+id/tvTitle"
-        app:srcCompat="@drawable/dot_unfilled" />
+
+        android:layout_toStartOf="@+id/confirm"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
         android:id="@+id/page2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/page1"
-android:layout_alignLeft="@id/page1"
-        app:srcCompat="@drawable/dot_filled" />
+        android:layout_marginLeft="10dp"
+        app:srcCompat="@drawable/dot_filled"
+        android:layout_alignTop="@+id/page1"
+        android:layout_toEndOf="@+id/cancel" />
 
 </RelativeLayout>
