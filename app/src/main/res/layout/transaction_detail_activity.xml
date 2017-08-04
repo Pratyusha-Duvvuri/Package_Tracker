@@ -6,6 +6,65 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="255dp">
+
+        <TextView
+            android:id="@+id/tvPackageType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="Package"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <ImageButton
+            android:id="@+id/ibPackageUpload"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="7dip"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/gradient"
+            android:src="@mipmap/ic_image_placeholder" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvDescription"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="15dp"
+            android:hint="Clothes for my sister"
+            android:textAlignment="center"
+            android:textColor="@color/white_greyish"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPackageType"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="168dp"
+            android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
+            android:textAlignment="center"
+            android:textColor="@color/white_greyish"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
