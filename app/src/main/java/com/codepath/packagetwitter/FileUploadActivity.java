@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,7 +40,6 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class FileUploadActivity extends Activity {
 
-
     Button button;
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -49,7 +47,7 @@ public class FileUploadActivity extends Activity {
     public ImageView ivPreview;
     public Button btnUploadson;
     public Button GoBack;
-    public TextView location;
+    public EditText location;
     public EditText name;
     public EditText email;
     public ParseFile file;
@@ -57,25 +55,25 @@ public class FileUploadActivity extends Activity {
     public static Boolean newPictureTaken;
     public String otherString;
     public  byte[] updated_image;
+    public ImageView closeButton;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         newPictureTaken=false;
         super.onCreate(savedInstanceState);
-        // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.profile_change_layout);
         btnUploadson = (Button) findViewById(R.id.btnuploadson);
-        location = (TextView) findViewById(R.id.et_location);
+        location = (EditText) findViewById(R.id.et_location);
         name = (EditText) findViewById(R.id.et_fullName);
         email = (EditText) findViewById(R.id.et_email);
         GoBack = (Button) findViewById(R.id.btnBackToProfile);
         location.setText(parseUser.getString("location"));
-//        location.setText("Update your current location - "+parseUser.getString("location"));
         name.setText(parseUser.getString("fullName"));
         otherString = parseUser.getString("location");
         ivPreview = (ImageView) findViewById(R.id.iv_profile_image);
-
+        closeButton = (ImageView)findViewById(R.id.close_button);
 
         location.setOnClickListener(new View.OnClickListener() {
 
@@ -90,6 +88,38 @@ public class FileUploadActivity extends Activity {
                 } catch (GooglePlayServicesNotAvailableException e) {
                     // TODO: Handle the error.
                 }
+
+            }
+        });
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                String fullName = name.getText().toString();
+                if (!fullName.equals("")) {
+                    parseUser.put("fullName", fullName);
+                }
+
+
+                String location_text = location.getText().toString();
+                if (!location_text.equals("")) {
+                    parseUser.put("location", otherString);
+
+                }
+
+                String email_text = email.getText().toString();
+                if (!email_text.equals("")) {
+                    parseUser.put("username", email_text);
+                    parseUser.setEmail( email_text);
+
+                }
+
+                saveUser();
+
+
+        setParametersOfView();
+
 
             }
         });
@@ -226,7 +256,6 @@ public class FileUploadActivity extends Activity {
         newPictureTaken=true;
         parseUser.put("ImageFile", file);
     }
-
 
     public void saveUser(){
             parseUser.saveInBackground(new SaveCallback(){
