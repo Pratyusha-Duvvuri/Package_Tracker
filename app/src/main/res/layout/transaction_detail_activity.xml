@@ -479,8 +479,8 @@
         android:src="@drawable/email"
         fab:fab_label="Chat To Arrange Your Transaction"
         fab:fab_size="normal"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 

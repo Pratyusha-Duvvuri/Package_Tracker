@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -167,7 +168,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
                     // show the activity
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, ProfileActivity.TRANSACTION_DETAIL_CODE);
                 }
                 else if (view == ivMessage){
                     Intent i = new Intent(context, OtherChatActivity.class);

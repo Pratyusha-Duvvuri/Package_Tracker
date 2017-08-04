@@ -242,6 +242,20 @@ ParselTransaction transaction;
         else{
             onStepOpening(0);
         }
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verticalStepperForm.setStepAsCompleted(0);
+                verticalStepperForm.setStepAsCompleted(1);
+                verticalStepperForm.setStepAsCompleted(2);
+                verticalStepperForm.setStepAsCompleted(3);
+                sendData();
+                confirm_button.setVisibility(View.GONE);
+
+
+            }
+        });
+
 
     }
 

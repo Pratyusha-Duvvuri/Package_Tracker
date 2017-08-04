@@ -2,6 +2,8 @@ package com.codepath.packagetwitter;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int RECEIVER_CODE = 30;
-    public final int TRANSACTION_DETAIL_CODE = 50;
+    public final static int TRANSACTION_DETAIL_CODE = 50;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
     private static com.facebook.login.widget.LoginButton loginButtonProfile;
@@ -138,30 +141,12 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //setup tablayout to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
+        setupDivider(tabLayout);
         //if (((PendingTransactionFragment)pagerAdapter.getItem(vpPager.getCurrentItem())).getTransactions().size() == 0)
         //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
-
-        //modal code (work on later)
-
-//        materialDesignFAM.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//                try {
-//                            Thread.sleep(5000);
-//                    materialDesignFAM.close(true);
-//
-//
-//                } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//            }
-//
-//
-//        });
 
 
         //For Courier
@@ -203,6 +188,17 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     public void onFinishEditDialogThis() {
 
+    }
+
+    public  void setupDivider(TabLayout tabLayout){
+
+        LinearLayout linearLayout = (LinearLayout)tabLayout.getChildAt(0);
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.LTGRAY);
+        drawable.setSize(1, 1);
+        linearLayout.setDividerPadding(10);
+        linearLayout.setDividerDrawable(drawable);
     }
 
     public void checkForRejection(){
