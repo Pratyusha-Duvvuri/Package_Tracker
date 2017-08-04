@@ -233,10 +233,44 @@ ParselTransaction transaction;
             confirm_button.setVisibility(View.GONE);
 
         if (parselTransactionState == 4){
-            verticalStepperForm.setStepAsCompleted(0);
-            verticalStepperForm.setStepAsCompleted(1);
-            verticalStepperForm.setStepAsCompleted(2);
-            verticalStepperForm.setStepAsCompleted(3);
+            alreadyExecuted = true;
+            switch(verticalStepperForm.getActiveStepNumber()){
+                case 0:
+                    verticalStepperForm.setStepAsCompleted(1);
+                    verticalStepperForm.setStepAsCompleted(2);
+                    verticalStepperForm.setStepAsCompleted(3);
+                    verticalStepperForm.goToStep(1, false);
+                    verticalStepperForm.setStepAsCompleted(0);
+                    break;
+                case 1:
+                    verticalStepperForm.setStepAsCompleted(0);
+                    verticalStepperForm.setStepAsCompleted(2);
+                    verticalStepperForm.setStepAsCompleted(3);
+                    verticalStepperForm.goToStep(2, false);
+                    verticalStepperForm.setStepAsCompleted(1);
+                    break;
+                case 2:
+                    verticalStepperForm.setStepAsCompleted(0);
+                    verticalStepperForm.setStepAsCompleted(1);
+                    verticalStepperForm.setStepAsCompleted(3);
+                    verticalStepperForm.goToStep(3, false);
+                    verticalStepperForm.setStepAsCompleted(2);
+                    break;
+                case 3:
+                    verticalStepperForm.setStepAsCompleted(0);
+                    verticalStepperForm.setStepAsCompleted(1);
+                    verticalStepperForm.setStepAsCompleted(2);
+                    verticalStepperForm.goToStep(4, false);
+                    verticalStepperForm.setStepAsCompleted(3);
+                    break;
+                default:
+                    break;
+
+            }
+//            verticalStepperForm.setStepAsCompleted(0);
+//            verticalStepperForm.setStepAsCompleted(1);
+//            verticalStepperForm.setStepAsCompleted(2);
+//            verticalStepperForm.setStepAsCompleted(3);
             alreadyExecuted = true;
         }
         else{
@@ -248,7 +282,10 @@ ParselTransaction transaction;
                 verticalStepperForm.setStepAsCompleted(0);
                 verticalStepperForm.setStepAsCompleted(1);
                 verticalStepperForm.setStepAsCompleted(2);
-                verticalStepperForm.setStepAsCompleted(3);
+                if (verticalStepperForm.getActiveStepNumber() != 3){
+                    //verticalStepperForm.goToStep(4, false);
+                    verticalStepperForm.setStepAsCompleted(3);
+                }
                 sendData();
                 confirm_button.setVisibility(View.GONE);
 
@@ -362,6 +399,8 @@ ParselTransaction transaction;
 
     public final void onStepOpening(int stepNumber) {
 
+        if (parselTransactionState == 4)
+            alreadyExecuted = true;
         if (!alreadyExecuted){
             switch (stepNumber){
                 case 0:
