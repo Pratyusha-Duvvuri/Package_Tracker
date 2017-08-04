@@ -97,7 +97,7 @@ public class OldTransactionFragment extends Fragment {
             ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
             // Define our query conditions
             query.whereEqualTo("receiver", parseUser.getUsername());
-            query.whereEqualTo("transactionState", 10);
+            query.whereEqualTo("transactionState", 4);
             // Execute the find asynchronously
             query.findInBackground(new FindCallback<ParselTransaction>() {
                 @Override

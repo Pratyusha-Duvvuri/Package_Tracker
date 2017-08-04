@@ -177,10 +177,7 @@ public class CourierActivity extends AppCompatActivity {
 
                             onVerifyAction();
 
-                            Intent i = new Intent(context, ProfileActivity.class);
-                            i.putExtra("matched", mark);
-                            setResult(RESULT_OK, i); // set result code and bundle data for response
-                            finish(); // closes the activity, pass data to parent
+
                         }
                         catch(NumberFormatException e) {
 
@@ -421,6 +418,8 @@ public class CourierActivity extends AppCompatActivity {
                         ParselTransaction courierParsel  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
                                 courierEndDate,weightAvailable,volumes); //makes a parsel transaction
                         courierParsel.saveEventually(); // saves it}
+                        onSubmit();
+
                     }
 
                 } else {

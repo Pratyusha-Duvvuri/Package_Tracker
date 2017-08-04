@@ -12,7 +12,6 @@
 
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_alignParentBottom="true"
         android:layout_weight="0.04"
         android:background="@drawable/buttonshape"
         android:shadowDx="0"
@@ -20,7 +19,9 @@
         android:shadowRadius="0"
         android:text="NEXT"
         android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
     android:layout_width="match_parent"

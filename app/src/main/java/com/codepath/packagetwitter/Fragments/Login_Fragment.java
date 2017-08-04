@@ -170,7 +170,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
 
-    private String doTheLocationThing(double latitude, double longitude) {
+    private String getLocationFromLatLong(double latitude, double longitude) {
 
         Toast.makeText(getActivity(),"IN HERE AYY",Toast.LENGTH_SHORT).show();
 
@@ -387,9 +387,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         user.setPassword("x");
         user.setEmail(bFacebookData.getString("email"));
         user.put("fullName", bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name"));
-        user.put("hasPendingRequests", false);
+        if(user_location!=null)
+        user.put("location", getLocationFromLatLong(user_location.getLatitude(), user_location.getLongitude()));
+        else
+            user.put("location", "Tacoma");
 
-        user.put("location",doTheLocationThing(user_location.getLatitude(), user_location.getLongitude()));
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
@@ -546,7 +548,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     void getUserFromDatabase() {
 
         ParseUser.logInInBackground(emailid.getText().toString(), password.getText().toString(), new LogInCallback() {
-            //        ParseUser.logInInBackground(emailid.getText().toString(),"x" , new LogInCallback() {
             @Override
             public void done(ParseUser userrr, ParseException e) {
                 if (userrr != null) {
@@ -597,4 +598,3 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
 }
-

@@ -20,19 +20,20 @@
             android:text="Package"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/ibPackageUpload"
             android:layout_width="match_parent"
-            android:layout_height="214dp"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/gradient"
-            android:src="@mipmap/ic_image_placeholder"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="15dip"
             android:layout_marginRight="15dip"
             android:layout_marginTop="7dip"
-            android:layout_alignParentBottom="true" />
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/gradient"
+            android:src="@mipmap/ic_image_placeholder" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -45,7 +46,8 @@
             android:hint="Clothes for my sister"
             android:textAlignment="center"
             android:textColor="@color/white_greyish"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDescription"
