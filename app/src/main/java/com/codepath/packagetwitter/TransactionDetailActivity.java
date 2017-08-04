@@ -61,6 +61,9 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     @BindView(R.id.tvSender) TextView tvSender;
     @BindView(R.id.tvCourier) TextView tvCourier;
     @BindView(R.id.tvReceiver) TextView tvReceiver;
+    @BindView(R.id.tvFrom) TextView tvFrom;
+
+    @BindView(R.id.tvTo) TextView tvTo;
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
@@ -124,10 +127,12 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                             // item was found
                             String title = transaction.getString("title").toString();
                             tvTitle.setText(title);
+                            tvFrom.setText(transaction.getSenderLoc());
+                            tvTo.setText(transaction.getReceiverLoc());
                             String description = transaction.getMailDescription().toString();
                             tvDescription.setText(description);
                             setFragile(transaction);
-                            tvType.setText(transaction.getTitle());
+                            tvType.setText(transaction.getMailType());
                             TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
                             TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
                             if (transaction.getTransactionState() >= 2){
