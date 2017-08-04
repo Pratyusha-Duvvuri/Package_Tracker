@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
-import static com.codepath.packagetwitter.OtherChatActivity.tabTitles_main;
-import static com.codepath.packagetwitter.OtherChatActivity.type;
+import static com.codepath.packagetwitter.ChatActivity.messages_main;
+import static com.codepath.packagetwitter.ChatActivity.tabTitles_main;
+import static com.codepath.packagetwitter.ChatActivity.type;
 
 /**
  * Created by pratyusha98 on 7/23/17.

@@ -122,7 +122,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
+                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
                 //materialDesignFAM.close(true);

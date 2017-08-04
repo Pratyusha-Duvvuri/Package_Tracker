@@ -56,9 +56,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Uri imageUri;
         if (isMe) {
             postImage = parseUser.getParseFile("ImageFile");
-            holder.imageMe.setVisibility(View.VISIBLE);
+//            holder.imageMe.setVisibility(View.GONE);
+//            holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
+            holder.body2.setVisibility(View.VISIBLE);
             holder.body2.setText(message.getBody());
+            holder.body.setVisibility(View.GONE);
 
             String imageUrl = postImage.getUrl();//live url
              imageUri = Uri.parse(imageUrl);
@@ -69,17 +72,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 postImage = thisUser1.getParseFile("ImageFile");
             else
                 postImage = thisUser2.getParseFile("ImageFile");
-
+            holder.body.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.VISIBLE);
-            holder.imageMe.setVisibility(View.GONE);
+//            holder.imageMe.setVisibility(View.GONE);
             holder.body.setText(message.getBody());
+            holder.body2.setVisibility(View.GONE);
+
 
             //load image from messages
             String imageUrl = postImage.getUrl();//live url
              imageUri = Uri.parse(imageUrl);
         }
         //change this code to reflect user now
-        final ImageView profileView = isMe ? holder.imageMe : holder.imageOther;
+        final ImageView profileView = holder.imageOther;
         Glide.with(holder.imageOther.getContext()).load(imageUri.toString()).into(profileView);
 //        holder.body.setText(message.getBody());
     }
@@ -93,14 +98,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageOther;
-        ImageView imageMe;
+//        ImageView imageMe;
         TextView body;
         TextView body2;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
-            imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
+//            imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             body2 = (TextView)itemView.findViewById(R.id.tvBody2);
         }

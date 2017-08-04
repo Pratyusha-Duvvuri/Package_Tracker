@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-    <!--<ImageView-->
-        <!--android:id="@+id/ivProfileOther"-->
-        <!--android:contentDescription="@string/profile_other"-->
-        <!--android:layout_width="64dp"-->
-        <!--android:layout_height="64dp"-->
-        <!--android:src="@mipmap/ic_launcher" />-->
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:contentDescription="@string/profile_other"
         android:id="@+id/ivProfileOther"
+        android:paddingLeft = "16dp"
         android:layout_width="64dp"
         android:layout_height="64dp"
         app:civ_border_width="0.5dp"
@@ -23,46 +22,28 @@
         android:id="@+id/tvBody"
         android:layout_width="192dp"
         android:layout_height="64dp"
-        android:ellipsize="end"
         android:lines="1"
+        android:background="@drawable/bubble_white_normal"
+
         android:padding="20dp"
         android:textSize="18sp"
+
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/ivProfileOther"/>
     <TextView
         android:id="@+id/tvBody2"
         android:layout_width="192dp"
         android:layout_height="64dp"
-        android:ellipsize="end"
         android:lines="1"
         android:padding="20dp"
         android:textSize="18sp"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/ivProfileMe"/>
+        android:background="@drawable/bg_chat_me"
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ivProfileMe"
-        android:layout_width="62dp"
-        android:layout_height="64dp"
-        android:layout_gravity="right"
-        android:contentDescription="@string/profile_me"
-        android:src="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        app:civ_border_width="0.5dp"
-        app:civ_border_color="#FF000000"
-        />
+        android:layout_marginEnd="19dp" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/ivProfileMe"-->
-        <!--android:layout_width="62dp"-->
-        <!--android:layout_height="64dp"-->
-        <!--android:layout_gravity="right"-->
-        <!--android:contentDescription="@string/profile_me"-->
-        <!--android:src="@mipmap/ic_launcher"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentEnd="true" />-->
+
 </RelativeLayout>
 
 

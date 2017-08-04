@@ -167,7 +167,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                     context.startActivity(intent);
                 }
                 else if (view == ivMessage){
-                    Intent i = new Intent(context, OtherChatActivity.class);
+                    Intent i = new Intent(context, ChatActivity.class);
                     i.putExtra("ParselTransactionId",transaction.getObjectId());
                     i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
                     //materialDesignFAM.close(true);
