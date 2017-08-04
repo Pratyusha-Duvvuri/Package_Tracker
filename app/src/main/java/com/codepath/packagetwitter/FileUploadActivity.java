@@ -56,6 +56,7 @@ public class FileUploadActivity extends Activity {
     public String otherString;
     public  byte[] updated_image;
     public ImageView closeButton;
+    public ImageView update_pic;
 
 
 
@@ -73,6 +74,7 @@ public class FileUploadActivity extends Activity {
         name.setText(parseUser.getString("fullName"));
         otherString = parseUser.getString("location");
         ivPreview = (ImageView) findViewById(R.id.iv_profile_image);
+        update_pic = (ImageView) findViewById(R.id.iv_updatePic);
         closeButton = (ImageView)findViewById(R.id.close_button);
 
         location.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +126,7 @@ public class FileUploadActivity extends Activity {
             }
         });
 
-        ivPreview.setOnClickListener(new View.OnClickListener() {
+        update_pic.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 // Locate the image in res > drawable-hdpi

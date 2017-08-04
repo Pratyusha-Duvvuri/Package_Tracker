@@ -13,34 +13,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true">
 
-        <ImageView
-            android:id="@+id/ivProfileImage"
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_alignParentStart="true"
             android:layout_marginRight="10dp"
-            app:srcCompat="@color/black" />
+            android:id="@+id/ivProfileImage"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            android:layout_marginBottom="28dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
-            android:layout_toRightOf="@+id/ivProfileImage"
-            android:text="Name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvTagline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tagline"
-            android:textSize="12sp"
-            android:layout_below="@+id/tvName"
-            android:layout_alignStart="@+id/tvName" />
     </RelativeLayout>
+
+    <View android:background="@color/black"
+        android:layout_width = "match_parent"
+        android:layout_above="@+id/sliding_tabs"
+        android:layout_height="1dp"/>
+
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
@@ -125,6 +119,30 @@
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="136dp"
+            android:text="Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="31dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tvTagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Tagline"
+            android:textSize="12sp"
+            android:layout_below="@+id/tvName"
+            android:layout_alignStart="@+id/tvName" />
     </RelativeLayout>
 
 
