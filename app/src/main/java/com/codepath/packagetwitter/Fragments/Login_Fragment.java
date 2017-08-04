@@ -387,7 +387,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         user.setPassword("x");
         user.setEmail(bFacebookData.getString("email"));
         user.put("fullName", bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name"));
-        user.put("hasPendingRequests", false);
 
         user.put("location",doTheLocationThing(user_location.getLatitude(), user_location.getLongitude()));
         user.signUpInBackground(new SignUpCallback() {
@@ -546,7 +545,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     void getUserFromDatabase() {
 
         ParseUser.logInInBackground(emailid.getText().toString(), password.getText().toString(), new LogInCallback() {
-            //        ParseUser.logInInBackground(emailid.getText().toString(),"x" , new LogInCallback() {
             @Override
             public void done(ParseUser userrr, ParseException e) {
                 if (userrr != null) {

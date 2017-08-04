@@ -287,10 +287,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void done(List<ParselTransaction> itemList, ParseException e) {
 
                 if (e == null) {
-                    if (itemList.size()== 0 | itemList  == null) {
-                        parseUser.put("hasPendingRequests", false);
-                        parseUser.saveInBackground();
-                    }
+
 
                     for (int i = 0; i < itemList.size(); i++) {
                         //for every parsel transaction

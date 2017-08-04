@@ -28,7 +28,6 @@ public class User{
     public String tripEnd;
     public String location;
 
-    public Boolean hasPendingRequests = false;
 
     public User(String name, String handle, String phone, String tripStart, String tripEnd) {
         this.userHandle = handle;
