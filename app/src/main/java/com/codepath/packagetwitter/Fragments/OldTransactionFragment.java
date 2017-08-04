@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -21,6 +22,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
@@ -37,6 +40,8 @@ public class OldTransactionFragment extends Fragment {
     SwipeRefreshLayout swipeContainer;
     //TwitterClient client;
     public static int page;
+    TextView tvTransaction;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +55,7 @@ public class OldTransactionFragment extends Fragment {
         rvTransactions =  v.findViewById(R.id.rvTransactions);
 
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
+        tvTransaction = (TextView) v.findViewById(R.id.tvTransaction);
         transactions = new ArrayList<>();
         // init the array list (data source)
         //construct the adapter form this datasource
@@ -76,6 +82,9 @@ public class OldTransactionFragment extends Fragment {
     }
 
 
+
+
+
     //    //this is for the intermediate progress bar
     MenuItem miActionProgressItem;
     // ProgressBar v;
@@ -92,32 +101,110 @@ public class OldTransactionFragment extends Fragment {
 
 
     public void populateTimeline(){
-        parseUser = ParseUser.getCurrentUser();
+        ArrayList<ParselTransaction> pendingTransactions;
+        try {
+            parseUser = ParseUser.getCurrentUser().fetch();
+            }
+            catch (com.parse.ParseException e) {}
+
         if (parseUser != null) {
-            ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-            // Define our query conditions
-            query.whereEqualTo("receiver", parseUser.getUsername());
-            query.whereEqualTo("transactionState", 4);
-            // Execute the find asynchronously
-            query.findInBackground(new FindCallback<ParselTransaction>() {
-                @Override
-                public void done(List<ParselTransaction> issueList, ParseException e) {
-                    if (e == null) {
-                        transactions = new ArrayList<>();
-                        Log.d("Issue", "Retrieved " + issueList.size() + " issue");
-                        for (int i = 0; i < issueList.size(); i++) {
-                            ParselTransaction trans = issueList.get(i); //gets current parsel transaction
-                            addItems(trans);
-                        }
+            transactions.clear();
+            query();
 
-                    } else {
-                        Log.d("score", "Error: " + e.getMessage());
+            }
+        }
+
+    public void query(){
+        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
+        // Define our query conditions
+        query.whereEqualTo("sender", parseUser.getUsername());
+        query.whereEqualTo("transactionState", 4);
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<ParselTransaction>() {
+            @Override
+            public void done(List<ParselTransaction> issueList, ParseException e) {
+                if (e == null) {
+                    Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                    for (int i = 0; i < issueList.size(); i++) {
+                        ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                        addItems(trans);
+
                     }
-                }
-            });
-        }
-        }
+                    queryForReceiver();
 
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void queryForReceiver(){
+
+        ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
+        // Define our query conditions
+        query2.whereEqualTo("receiver", parseUser.getUsername());
+        List<Integer> list2 = new ArrayList<Integer>();
+
+        query2.whereEqualTo("transactionState", 4);
+        // Execute the find asynchronously
+
+        query2.findInBackground(new FindCallback<ParselTransaction>() {
+            @Override
+            public void done(List<ParselTransaction> issueList, ParseException e) {
+                if (e == null) {
+                    Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                    for (int i = 0; i < issueList.size(); i++) {
+                        ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                        addItems(trans);
+                    }
+
+                    queryForCourier();
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+    }
+
+    public void queryForCourier(){
+        ParseQuery<ParselTransaction> query3 = ParseQuery.getQuery(ParselTransaction.class);
+        // Define our query conditions
+        query3.whereEqualTo("courier", parseUser.getUsername());
+        query3.whereEqualTo("transactionState", 4);
+        // Execute the find asynchronously
+
+        query3.findInBackground(new FindCallback<ParselTransaction>() {
+            @Override
+            public void done(List<ParselTransaction> issueList, ParseException e) {
+                if (e == null) {
+                    Log.d("Issue", "Retrieved " + issueList.size() + " issue");
+                    for (int i = 0; i < issueList.size(); i++) {
+                        ParselTransaction trans = issueList.get(i); //gets current parsel transaction
+                        addItems(trans);
+                    }
+                    Collections.sort(transactions, new Comparator<ParselTransaction>() {
+                        @Override
+                        public int compare(ParselTransaction t1, ParselTransaction t2) {
+                            if (t1.getTransactionState() == 7)return 1;
+                            return t2.getTransactionState()-t1.getTransactionState();
+
+                        }
+                    });
+                    transactionAdapter.notifyDataSetChanged();
+
+                    if (transactions.size()>0) tvTransaction.setVisibility(View.GONE);
+                    else {tvTransaction.setVisibility(View.VISIBLE);}
+
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+    }
 
 
 

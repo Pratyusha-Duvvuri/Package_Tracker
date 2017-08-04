@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -40,10 +41,14 @@ public class PendingTransactionFragment extends Fragment {
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
     public static int page;
+    TextView tvTransaction;
+
 
     public ArrayList<ParselTransaction> getTransactions() {
         return transactions;
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +64,9 @@ public class PendingTransactionFragment extends Fragment {
                 DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvTransactions.addItemDecoration(itemDecoration);
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
+        tvTransaction = (TextView) v.findViewById(R.id.tvTransaction);
         transactions = new ArrayList<>();
+
         // init the array list (data source)
         //construct the adapter form this datasource
         transactionAdapter = new TransactionAdapter(transactions);
@@ -150,7 +157,6 @@ public class PendingTransactionFragment extends Fragment {
 
         }
 
-        Log.d(parseUser.getString("username"),"ParseApplication");
         if (parseUser != null) {
             transactions.clear();
 
@@ -249,7 +255,10 @@ public class PendingTransactionFragment extends Fragment {
                             return t2.getTransactionState()-t1.getTransactionState();
                         }
                     });
+                    transactionAdapter.notifyDataSetChanged();
 
+                    if (transactions.size()>0) tvTransaction.setVisibility(View.GONE);
+                    else {tvTransaction.setVisibility(View.VISIBLE);}
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }

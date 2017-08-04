@@ -134,20 +134,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvWeight"
                 android:layout_marginTop="14dp"
-                android:orientation="horizontal"
-               >
+                android:orientation="horizontal">
 
 
                 <View
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentStart="true"
                     android:layout_marginBottom="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_alignParentStart="true" />
+                    android:background="@android:color/darker_gray" />
 
                 <RadioGroup
                     android:id="@+id/rgFragile"
@@ -164,9 +163,10 @@
                         android:id="@+id/tvFragile"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.58"
+                        android:layout_weight="0.21"
                         android:gravity="center_vertical|center"
                         android:text="Fragile: "
+                        android:layout_marginLeft="60dp"
                         android:textAlignment="center"
                         android:textSize="16sp" />
 
