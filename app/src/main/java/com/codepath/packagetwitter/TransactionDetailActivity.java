@@ -58,6 +58,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     String receiverID;
     String currentUserID;
     String parselTransactionId;
+    Button confirm_button;
+    boolean alreadyExecuted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +133,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             }
         });
 
-        String[] mySteps = {"Created", "Accepted", "Matched", "Delivered"};
+        String[] mySteps = {"Create", "Accept", "Match", "Deliver"};
         int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
         int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
 
@@ -143,7 +145,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 .primaryColor(colorPrimary)
                 .primaryDarkColor(colorPrimaryDark)
                 .displayBottomNavigation(false)// It is true by default, so in this case this line is not necessary
-                .showVerticalLineWhenStepsAreCollapsed(true) // false by default
+                .showVerticalLineWhenStepsAreCollapsed(false) // false by default
                 .init();
 
         ScrollView stepperFormScroll = (ScrollView) verticalStepperForm.findViewById(R.id.steps_scroll);
@@ -157,14 +159,24 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         }
 
-        if (currentUserID.equals(receiverID)) {
-            ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step)).setText("CONFIRM DELIVERY");
+        confirm_button = ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step));
+
+        if (currentUserID.equals(receiverID) && parselTransactionState == 2) {
+            confirm_button.setText("CONFIRM DELIVERY");
         }
         else
-            ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step)).setVisibility(View.GONE);
-//        verticalStepperForm.setStepAsCompleted(0);
-//        verticalStepperForm.setStepAsCompleted(1);
-//        verticalStepperForm.goToStep(2, false);
+            confirm_button.setVisibility(View.GONE);
+
+        if (parselTransactionState == 4){
+            verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.setStepAsCompleted(1);
+            verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.setStepAsCompleted(3);
+            alreadyExecuted = true;
+        }
+        else{
+            onStepOpening(0);
+        }
 
 
     }
@@ -222,8 +234,30 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         return created;
     }
 
-    @Override
-    public void onStepOpening(int stepNumber) {
+    public final void onStepOpening(int stepNumber) {
+
+        if (!alreadyExecuted){
+            switch (stepNumber){
+                case 0:
+                    checkTransactionState(0);
+                    break;
+                case 1:
+                    checkTransactionState(1);
+                    break;
+                case 2:
+                    checkTransactionState(2);
+                    break;
+                case 3:
+                    checkTransactionState(3);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private int checkTransactionState(int stepNumber){
+
         if(parselTransactionState == 0){
             verticalStepperForm.setStepAsCompleted(0);
             stepNumber = 1;
@@ -235,14 +269,12 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             stepNumber = 2;
             verticalStepperForm.goToStep(2, false);
         }
-        else if (stepNumber == 3){
+        else if (parselTransactionState == 2 && stepNumber == 3){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
             stepNumber = 4;
-            confirmDeliveredState();
         }
-
         else if (parselTransactionState == 2){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
@@ -255,30 +287,38 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
             verticalStepperForm.setStepAsCompleted(3);
-            stepNumber = 3;
-            verticalStepperForm.goToStep(3, false);
+            stepNumber = 4;
         }
-
+        alreadyExecuted = true;
+        return stepNumber;
     }
 
+    /*
     private void confirmDeliveredState(){
 
-        ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
-        // First try to find from the cache and only then go to network
-        transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-        // Execute the query to find the object with ID
-        transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
-            public void done(ParselTransaction transaction, ParseException e) {
-                if (e == null) {
-                    // item was found
-                    transaction.setTransactionState(4);
-                    transaction.saveEventually();
-                }
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
+                // First try to find from the cache and only then go to network
+                transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+                // Execute the query to find the object with ID
+                transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
+                    public void done(ParselTransaction transaction, ParseException e) {
+                        if (e == null) {
+                            // item was found
+                            transaction.setTransactionState(4);
+                            transaction.saveEventually();
+                        }
+                    }
+                });
+                verticalStepperForm.setStepAsCompleted(3);
+                confirmationDialog();
             }
         });
-        confirmationDialog();
-        verticalStepperForm.setStepAsCompleted(3);
+
     }
+    */
 
     private void confirmationDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(TransactionDetailActivity.this);
@@ -315,7 +355,21 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @Override
     public void sendData() {
-
+        ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
+        // First try to find from the cache and only then go to network
+        transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+        // Execute the query to find the object with ID
+        transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
+            public void done(ParselTransaction transaction, ParseException e) {
+                if (e == null) {
+                    // item was found
+                    transaction.setTransactionState(4);
+                    transaction.saveEventually();
+                }
+            }
+        });
+        verticalStepperForm.setStepAsCompleted(3);
+        confirmationDialog();
     }
 
 }
