@@ -28,7 +28,6 @@ public class TransactionDetailTest extends AppCompatActivity implements Vertical
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_detail_activity);
-        mViewPager = (ViewPager) findViewById(R.id.vpCards);
 
         mfragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(), dpToPixels(2, this),this);
         mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);

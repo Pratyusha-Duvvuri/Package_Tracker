@@ -338,8 +338,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        pagerAdapter.pendingTransactionFragment.populateTimeline();
-        pagerAdapter.oldTransactionFragment.populateTimeline();
+
 
         if (requestCode == PACKAGE_CREATION && resultCode == RESULT_OK){
             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
@@ -402,6 +401,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         }
 
+        pagerAdapter.pendingTransactionFragment.populateTimeline();
+        pagerAdapter.oldTransactionFragment.populateTimeline();
 
 
     }

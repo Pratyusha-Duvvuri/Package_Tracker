@@ -190,6 +190,7 @@ public class PendingTransactionFragment extends Fragment {
                         ParselTransaction trans = issueList.get(i); //gets current parsel transaction
                         addItems(trans);
 
+
                     }
                     queryForReceiver();
 
@@ -255,6 +256,7 @@ public class PendingTransactionFragment extends Fragment {
                             return t2.getTransactionState()-t1.getTransactionState();
                         }
                     });
+
                     transactionAdapter.notifyDataSetChanged();
 
                     if (transactions.size()>0) tvTransaction.setVisibility(View.GONE);
