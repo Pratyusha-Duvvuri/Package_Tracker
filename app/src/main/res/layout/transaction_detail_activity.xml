@@ -4,14 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvFrom"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/ivArrow"
+                android:gravity="center_vertical"
+
+                android:text="from"
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:foregroundGravity="center"
+            android:src="@mipmap/if_arrow_right_392525"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tvTo"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/ivArrow"
+                android:gravity="center_vertical"
+
+                android:text="to"
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+
 
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/svDetails"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/toolbar"
         android:layout_alignParentStart="true">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,7 +113,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_above="@+id/tvDescription"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentEnd="true" />
 
             <RelativeLayout
                 android:id="@+id/rlInfo"
@@ -128,9 +182,10 @@
                     android:id="@+id/textView3"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
                     android:text="Size:"
                     android:textAlignment="center"
+                    android:layout_marginBottom="5dp"
+
                     android:textSize="16sp"
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/textView2"
@@ -140,15 +195,11 @@
                     android:id="@+id/textView2"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="15dp"
 
-
-
-                    android:layout_alignStart="@+id/cvPackageType"
                     android:text="Type:"
                     android:textAlignment="center"
                     android:textSize="16sp"
-                    android:layout_alignTop="@+id/textView3"
                     android:layout_alignBottom="@+id/textView3" />
 
                 <ImageView
@@ -163,10 +214,13 @@
                     android:id="@+id/llClothes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
 
                     android:orientation="vertical"
                     android:layout_below="@+id/textView2"
-                    android:layout_alignEnd="@+id/textView2">
+                    android:layout_alignEnd="@+id/textView2"
+                    android:layout_alignBottom="@id/llKey"
+                    android:layout_marginLeft="15dp">
 
                     <ImageButton
                         android:id="@+id/ibType"
@@ -175,7 +229,9 @@
                         android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        android:src="@mipmap/ic_clothes" />
+                        android:src="@mipmap/ic_clothes"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true" />
 
                     <TextView
                         android:id="@+id/tvType"
@@ -183,16 +239,18 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="45dp"
-                        android:gravity="center_vertical|fill_vertical"
-                        android:text="Clothes"
+                        android:layout_marginTop="50dp"
+                        android:gravity="center"
+                        android:text="Food"
                         android:textAlignment="center"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_alignParentEnd="true" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/llKey"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -207,15 +265,17 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
+                        android:adjustViewBounds="true"
                         android:background="@android:color/transparent"
                         android:src="@mipmap/ic_key" />
 
                     <TextView
                         android:id="@+id/tvSize"
+
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
 
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="50dp"
                         android:text="Key Sized"
                         android:textAlignment="center"
                         android:textSize="13sp" />
