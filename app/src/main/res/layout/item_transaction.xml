@@ -32,7 +32,6 @@
         android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/ivPackageImage"
@@ -75,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
+        android:layout_below="@id/tvTitle"
         android:layout_toRightOf="@id/ivStatus"
         android:text="Courier Boarded"
         android:textSize="13sp" />
@@ -86,6 +85,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="16sp"
+        android:layout_marginBottom="15dp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/ivStatus" />

@@ -98,7 +98,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="bottom"
-                android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
+                android:hint="Sending clothes to my sis."
                 android:textColor="@color/white_greyish"
                 android:textSize="13sp" />
 
@@ -113,7 +113,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_above="@+id/tvDescription"
-                android:layout_alignParentEnd="true" />
+           />
 
             <RelativeLayout
                 android:id="@+id/rlInfo"

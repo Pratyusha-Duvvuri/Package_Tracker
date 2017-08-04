@@ -57,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public static ParseUser parseUser;
     public final int COURRIER_REQUEST_CODE = 20;
     public final int RECEIVER_CODE = 30;
+    public final int TRANSACTION_DETAIL_CODE = 50;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
     private static com.facebook.login.widget.LoginButton loginButtonProfile;
@@ -336,7 +337,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 
 
 
@@ -357,7 +358,16 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
             if (data.getBooleanExtra("matched", false)== true){
                 builder.setMessage("Trip was entered.\nA match was found!");    //set message
+                builder.setNegativeButton("View Now", new DialogInterface.OnClickListener() { //when click on DELETE
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ProfileActivity.this, TransactionDetailActivity.class);
+                        String transactionId = data.getStringExtra("transaction");
+                        intent.putExtra("ParselTransactionId", transactionId);
 
+                        startActivityForResult(intent, TRANSACTION_DETAIL_CODE);
+                        return;}
+                });
             }
             else{
                 builder.setMessage("Trip was entered.");    //set message
@@ -381,7 +391,16 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             }
             else if (data.getBooleanExtra("matched", false)){
                 builder.setMessage("Package was confirmed.\nA match was found!");    //set message
+                builder.setNegativeButton("View Now", new DialogInterface.OnClickListener() { //when click on DELETE
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ProfileActivity.this, TransactionDetailActivity.class);
+                        String transactionId = data.getStringExtra("transaction");
+                        intent.putExtra("ParselTransactionId", transactionId);
 
+                        startActivityForResult(intent, TRANSACTION_DETAIL_CODE);
+                        return;}
+                });
             }
             else{
                 builder.setMessage("Package was confirmed.");    //set message

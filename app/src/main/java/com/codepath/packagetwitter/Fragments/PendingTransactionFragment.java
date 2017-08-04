@@ -252,7 +252,7 @@ public class PendingTransactionFragment extends Fragment {
                     Collections.sort(transactions, new Comparator<ParselTransaction>() {
                         @Override
                         public int compare(ParselTransaction t1, ParselTransaction t2) {
-                            if (t1.getTransactionState() == 7)return 1;
+                            if (t1.getTransactionState() == 7 &&  t2.getTransactionState() == 2)return 1;
                             return t2.getTransactionState()-t1.getTransactionState();
                         }
                     });

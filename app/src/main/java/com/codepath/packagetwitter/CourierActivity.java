@@ -69,6 +69,7 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.next)Button btnNext;
 
     Button confirm;
+    ParselTransaction transaction;
 
     Double weightAvailable;
     String tripStart;
@@ -364,17 +365,19 @@ public class CourierActivity extends AppCompatActivity {
 
                 Date courierStartDate = null;
                 if (e == null) {
+                    try {
+                        courierStartDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripStart);
+                        courierEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripEnd);
+
+                    } catch (java.text.ParseException e1) {
+                        e1.printStackTrace();
+                    }
+
                     //access parsel transactions here
                     for (int i = 0; i < itemList.size(); i++){
                         //for every parsel transaction
                         ParselTransaction parselTransaction = itemList.get(i);
-                        try {
-                            courierStartDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripStart);
-                            courierEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(tripEnd);
 
-                        } catch (java.text.ParseException e1) {
-                            e1.printStackTrace();
-                        }
 
                         //if it's a match:
                         if (Algorithm.isPossibleMatch(parselTransaction, tripStart,tripEnd,weightAvailable,volumes, startAddress, endAddress)){
@@ -382,7 +385,7 @@ public class CourierActivity extends AppCompatActivity {
                             mark = true;
 
 
-
+                            transaction = parselTransaction;
                             //if its a match
                             parselTransaction.addCourierInfo(parseUser.getUsername(), courierStartDate, courierEndDate);
                             parselTransaction.saveEventually(new SaveCallback() {
@@ -415,9 +418,9 @@ public class CourierActivity extends AppCompatActivity {
 
                     }
                     if (! mark){
-                        ParselTransaction courierParsel  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
+                        transaction  = new ParselTransaction(parseUser.getUsername(), startAddress,endAddress,courierStartDate,
                                 courierEndDate,weightAvailable,volumes); //makes a parsel transaction
-                        courierParsel.saveEventually(); // saves it}
+                        transaction.saveEventually(); // saves it}
                         onSubmit();
 
                     }
@@ -437,6 +440,7 @@ public class CourierActivity extends AppCompatActivity {
     public void onSubmit(){
         Intent i = new Intent(this, ProfileActivity.class);
         i.putExtra("matched", mark);
+        i.putExtra("transaction", transaction.getObjectId());
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 

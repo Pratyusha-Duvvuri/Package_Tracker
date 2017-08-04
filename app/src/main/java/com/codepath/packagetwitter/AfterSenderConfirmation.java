@@ -201,11 +201,12 @@ public class AfterSenderConfirmation extends AppCompatActivity{
                         }
                         else{
                             transaction.setTransactionState(1);
-                            finishIntent();
 
                         }
 
                     } //for loop ends here
+
+                    finishIntent();
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());
@@ -220,6 +221,7 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         Intent i = new Intent(this, ProfileActivity.class);
         i.putExtra("matched", match);
         i.putExtra("accepted", accepted);
+        i.putExtra("transaction", transaction.getObjectId());
         setResult(RESULT_OK, i); // set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
