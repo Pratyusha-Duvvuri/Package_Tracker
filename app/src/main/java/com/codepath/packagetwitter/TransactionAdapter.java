@@ -12,11 +12,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
  * Created by rafasj6 on 7/11/17.
@@ -26,7 +27,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     Context context;
     public List<ParselTransaction> mTransactions;
-    public ParseUser parseUser;
     public TransactionAdapter(List<ParselTransaction> transactions)
     {
         mTransactions = transactions;
@@ -160,6 +160,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
                     intent.putExtra("ParselTransactionState", transaction.getTransactionState());
+                    intent.putExtra("ParselTransactionReceiver", transaction.getReceiver());
+                    intent.putExtra("ParselTransactionUser", parseUser.getUsername());
 
                     // show the activity
                     context.startActivity(intent);
