@@ -242,7 +242,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             }
         });
 
-
     }
 
 
