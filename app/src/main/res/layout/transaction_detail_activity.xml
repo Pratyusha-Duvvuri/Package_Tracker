@@ -6,65 +6,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="255dp">
-
-        <TextView
-            android:id="@+id/tvPackageType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="Package"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-        <ImageButton
-            android:id="@+id/ibPackageUpload"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="15dip"
-            android:layout_marginRight="15dip"
-            android:layout_marginTop="7dip"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/gradient"
-            android:src="@mipmap/ic_image_placeholder" />
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tvDescription"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40dp"
-            android:layout_marginLeft="15dp"
-            android:hint="Clothes for my sister"
-            android:textAlignment="center"
-            android:textColor="@color/white_greyish"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPackageType"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="168dp"
-            android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
-            android:textAlignment="center"
-            android:textColor="@color/white_greyish"
-            android:textSize="13sp" />
-
-    </RelativeLayout>
-
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -73,96 +14,390 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/llDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:orientation="vertical"
-            android:paddingTop="460dp"
-            android:paddingBottom="-600dp">
+
+          >
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="20dp">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="5dp">
-
-                    <TextView
-                        android:id="@+id/tvFrom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="15dp"
-                        android:paddingEnd="15dp"
-                        android:paddingStart="15dp"
-                        android:paddingTop="15dp"
-                        android:text="From: New Orleans"
-                        android:textSize="14sp" />
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    app:cardElevation="5dp">
-
-                    <TextView
-                        android:id="@+id/tvTo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="15dp"
-                        android:paddingEnd="15dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingStart="15dp"
-                        android:paddingTop="15dp"
-                        android:text="To: New York City"
-                        android:textSize="14sp" />
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cvPackageImage"
+            <ImageButton
+                android:id="@+id/ibPackageUpload"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
-                android:layout_marginBottom="@dimen/card_padding"
-                android:layout_marginLeft="@dimen/card_padding"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="@dimen/card_padding">
+                android:layout_height="260dp"
+
+                android:background="@android:color/transparent"
+                android:foreground="@drawable/gradient"
+                android:src="@mipmap/ic_image_placeholder"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ibPackageUpload"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="bottom"
+                android:hint="Sending clothes to my sister so she doesn't look like a bum abroad. Contains a couple skirts, 3 pairs of jeans, and 2 shirts."
+                android:textColor="@color/white_greyish"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="bottom"
+                android:hint="Clothes for my sister"
+                android:textColor="@color/white_greyish"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_above="@+id/tvDescription"
+                android:layout_alignParentStart="true" />
+
+            <RelativeLayout
+                android:id="@+id/rlInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/ibPackageUpload"
+
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/tvFragile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:textSize="13sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignStart="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.21"
+                    android:text="Fragile: "
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Weight: "
+                    android:layout_marginRight="20dp"
+                    android:textSize="16sp"
+                    android:layout_toLeftOf="@id/textView7"
+                    android:layout_alignParentTop="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="5.5"
+                    android:textSize="13sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignStart="@+id/textView4"
+                    android:layout_marginStart="8dp" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lbs"
+                    android:textSize="13sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/tvWeight" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="Size:"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/textView2"
+                    android:layout_marginStart="21dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+
+
+
+                    android:layout_alignStart="@+id/cvPackageType"
+                    android:text="Type:"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_alignBottom="@+id/textView3" />
 
                 <ImageView
-                    android:id="@+id/ivPackageImage"
-                    android:layout_width="80dp"
-                    android:layout_height="98dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_clothes_fill" />
+                    android:id="@+id/imageView"
+                    android:layout_width="1dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:foregroundGravity="center_vertical"
+                    fab:srcCompat="@drawable/vertical_line" />
 
-            </android.support.v7.widget.CardView>
+                <RelativeLayout
+                    android:id="@+id/llClothes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vpCards"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignEnd="@+id/textView2">
+
+                    <ImageButton
+                        android:id="@+id/ibType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/ic_clothes" />
+
+                    <TextView
+                        android:id="@+id/tvType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="45dp"
+                        android:gravity="center_vertical|fill_vertical"
+                        android:text="Clothes"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/llKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="22dp"
+                    android:layout_below="@+id/textView3"
+                    android:layout_toEndOf="@+id/llClothes">
+
+                    <ImageButton
+                        android:id="@+id/ibSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:src="@mipmap/ic_key" />
+
+                    <TextView
+                        android:id="@+id/tvSize"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="45dp"
+                        android:text="Key Sized"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view9"
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
-                android:layout_gravity="bottom"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:paddingBottom="30dp"
-                android:paddingEnd="40dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="40dp"
-                android:paddingStart="20dp">
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@id/rlInfo"
+                android:background="@android:color/darker_gray" />
 
-            </android.support.v4.view.ViewPager>
+            <RelativeLayout
+                android:id="@+id/rlPeople"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rlInfo"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/tvSender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvSenderTitle"
+                    android:layout_toEndOf="@+id/ivSender"
+                    android:text="TextView"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:id="@+id/tvCourier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/tvCourierTitle"
+                    android:text="TextView"
+                    android:visibility="invisible"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvReceiver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/ivReceiver"
+                    android:text="TextView"
+                    android:textSize="13sp" />
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/divCourierReceiver"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="35dp"-->
+
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_centerVertical="true"-->
+
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_toLeftOf="@id/ivReceiver"-->
+                    <!--fab:srcCompat="@drawable/vertical_line" />-->
+
+
+
+                <TextView
+                    android:id="@+id/tvCourierTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:visibility="invisible"
+                    android:text="Courier"
+                    android:textSize="16sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignStart="@+id/ivCourier" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivCourier"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:layout_marginRight="20dp"
+                    fab:civ_border_color="#FF000000"
+                    fab:civ_border_width="0.5dp"
+
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+
+
+                    android:layout_toEndOf="@+id/tvSenderTitle"
+
+                    />
+                <TextView
+                    android:id="@+id/tvReceiverTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receiver"
+                    android:textSize="16sp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivReceiver"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+
+
+                    android:layout_toLeftOf="@id/tvReceiverTitle"
+
+
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+
+                    fab:civ_border_color="#FF000000"
+                    fab:civ_border_width="0.5dp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tvSenderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sender"
+                    android:layout_marginRight="19sp"
+                    android:textSize="16sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/ivSender" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivSender"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    fab:civ_border_color="#FF000000"
+                    fab:civ_border_width="0.5dp"
+
+                    />
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/divSenderCourier"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginRight="2dp"-->
+                    <!--android:layout_toLeftOf="@id/ivCourier"-->
+                    <!--fab:srcCompat="@drawable/vertical_line" />-->
+            </RelativeLayout>
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/rlPeople"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@android:color/darker_gray" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view8"
+                android:id="@+id/relativeLayout2">
 
                 <ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout
                     android:id="@+id/vertical_stepper_form"
@@ -171,9 +406,10 @@
                     android:layout_alignParentTop="true">
 
                 </ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout>
+
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <com.github.clans.fab.FloatingActionButton
@@ -187,5 +423,6 @@
         android:layout_marginBottom="23dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
 

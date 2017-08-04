@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Models.ParselTransaction;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -31,6 +32,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,10 +47,30 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     Context context = getBaseContext();
     ParseFile image_file;
 
-    @BindView(R.id.ivPackageImage) ImageView ivPackageImage;
-    @BindView(R.id.tvFrom) TextView tvFrom;
-    @BindView(R.id.tvTo) TextView tvTo;
-    @BindView(R.id.vpCards) ViewPager mViewPager;
+    @BindView(R.id.ibPackageUpload) ImageView ivPackageImage;
+    @BindView(R.id.tvTitle) TextView tvTitle;
+    @BindView(R.id.tvDescription) TextView tvDescription;
+    @BindView(R.id.tvType) TextView tvType;
+    @BindView(R.id.ibSize) ImageView ibSize;
+    @BindView(R.id.tvSize) TextView tvSize;
+    @BindView(R.id.ibType) ImageView ibType;
+    @BindView(R.id.tvWeight) TextView tvWeight;
+    @BindView(R.id.ivSender) ImageView ivSender;
+    @BindView(R.id.ivCourier) ImageView ivCourier;
+    @BindView(R.id.ivReceiver) ImageView ivReceiver;
+    @BindView(R.id.tvSender) TextView tvSender;
+    @BindView(R.id.tvCourier) TextView tvCourier;
+    @BindView(R.id.tvReceiver) TextView tvReceiver;
+
+    @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
+
+
+
+
+
+
+
+//    @BindView(R.id.vpCards) ViewPager mViewPager;
 
     CardFragmentPagerAdapter mfragmentCardAdapter;
     ShadowTransformer mshadowTransformer;
@@ -58,6 +81,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     String receiverID;
     String currentUserID;
     String parselTransactionId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,21 +98,21 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         //To pass parsel ID to view pager
         // Create object of SharedPreferences.
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        //now get Editor
-        SharedPreferences.Editor editor = sharedPref.edit();
-        //put your value
-        editor.putString("ParselID", parselTransactionId);
-        //commits your edits
-        editor.commit();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
-        mViewPager.setAdapter(mfragmentCardAdapter);
-        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
-
-        mViewPager.setPageTransformer(false, mshadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
+//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        //now get Editor
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        //put your value
+//        editor.putString("ParselID", parselTransactionId);
+//        //commits your edits
+//        editor.commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
+//        mViewPager.setAdapter(mfragmentCardAdapter);
+//        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
+//
+//        mViewPager.setPageTransformer(false, mshadowTransformer);
+//        mViewPager.setOffscreenPageLimit(3);
 
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
@@ -98,9 +122,31 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     public void done(ParselTransaction transaction, ParseException e) {
                         if (e == null) {
                             // item was found
+                            String title = transaction.getString("title").toString();
+                            tvTitle.setText(title);
+                            String description = transaction.getMailDescription().toString();
+                            tvDescription.setText(description);
+                            setFragile(transaction);
+                            tvType.setText(transaction.getTitle());
+                            TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
+                            TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
+                            if (transaction.getTransactionState() >= 2){
+                                tvCourierTitle.setVisibility(View.VISIBLE);
+                            }
+                            //sets up sender:
+                            setUpPerson(transaction.getSender(),ivSender,tvSender);
+                            //sets up courier:
+                            setUpPerson(transaction.getCourier(),ivCourier,tvCourier);
+                            //sets up receiver:
+                            setUpPerson(transaction.getReceiver(),ivReceiver,tvReceiver);
 
-                            tvFrom.setText("From: " + transaction.getSenderLoc());
-                            tvTo.setText("To: " + transaction.getReceiverLoc());
+                            ibSize.setImageDrawable(sizePics.getDrawable(transaction.getVolume()));
+                            tvSize.setText(sizes.getString(transaction.getVolume()));
+                            tvWeight.setText(String.valueOf(transaction.getWeight()));
+
+                            ibType.setImageResource(getTypeId(transaction.getMailType()));
+//                            tvFrom.setText("From: " + transaction.getSenderLoc());
+//                            tvTo.setText("To: " + transaction.getReceiverLoc());
                             transaction_state = transaction.getTransactionState();
                             Log.d("WORK", String.valueOf(transaction_state));
                             image_file = transaction.getParseFile("ImageFile");
@@ -114,6 +160,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                                     }
                                 }
                             });
+
 
 
                         }
@@ -174,6 +221,54 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         return dp * (context.getResources().getDisplayMetrics().density);
     }
 
+    public void setUpPerson(String username, final ImageView ivPerson, final TextView name){
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", username); // finds person w that username
+
+
+        query.findInBackground(new FindCallback<ParseUser>() {
+
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    if (objects.size()>0) {
+                        // The query was successful.
+                        name.setVisibility(View.VISIBLE);
+                        name.setText(objects.get(0).getString("fullName"));
+
+                        //image
+                        ParseFile postImage = objects.get(0).getParseFile("ImageFile");
+                        if (postImage != null) {
+                            String imageUrl = postImage.getUrl();//live url
+
+                            Uri imageUri = Uri.parse(imageUrl);
+                            Glide.with(TransactionDetailActivity.this).load(imageUri.toString()).into(ivPerson);
+                        } else {
+                            Glide.with(TransactionDetailActivity.this).load("http://i.imgur.com/zuG2bGQ.jpg").into(ivPerson);
+
+                        }
+                    }
+                }
+
+
+
+
+                else {
+                    // Something went wrong.
+                    Log.d("ParseApplicationError","tf");
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+
+    public void setFragile(ParselTransaction parselTransaction){
+        TextView frag = (TextView) findViewById(R.id.tvFragile);
+
+        if(parselTransaction.getIsFragile())frag.setText("Yes");
+        else {frag.setText("No");}
+    }
     @Override
     public View createStepContentView(int stepNumber) {
 
@@ -317,5 +412,41 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     public void sendData() {
 
     }
+
+    public int getTypeId(String type){
+
+        if (type.equals( "Clothes")) {
+            return  R.mipmap.ic_clothes_fill;
+        }
+        else if (type.equals("Electronics")) {
+            return R.mipmap.ic_electronics_filled;
+        }
+
+        else if (type.equals( "Books")) {
+            return R.mipmap.ic_books_filled;
+        }
+        else if (type.equals( "Games")) {
+            return R.mipmap.ic_games_filled;
+        }
+        else if (type.equals( "Movies")) {
+            return R.mipmap.ic_movies_filled;
+        }
+        else if (type.equals( "Food") ){
+            return R.mipmap.ic_food_filled;
+        }
+        else if (type.equals( "Health")) {
+            return R.mipmap.ic_health_filled;
+        }
+        else if (type.equals(  "Beauty")) {
+            return  R.mipmap.ic_beauty_filled;
+        }
+        else {
+            return R.mipmap.ic_other_filled;
+        }
+
+
+    }
+
+
 
 }
