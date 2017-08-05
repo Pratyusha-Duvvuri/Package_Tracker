@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="titleTextStyle">@color/black</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -49,6 +50,13 @@
     </style>
     <style name="OtherButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/otherbutton</item>
+    </style>
+
+    <style name="FacebookLoginButton">
+        <item name="android:textSize">17dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 </resources>
 

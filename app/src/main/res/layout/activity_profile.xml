@@ -11,6 +11,7 @@
         android:id="@+id/rlUserHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#25CED1"
         android:layout_alignParentStart="true">
 
 
@@ -30,10 +31,10 @@
 
     </RelativeLayout>
 
-    <View android:background="@color/black"
-        android:layout_width = "match_parent"
-        android:layout_above="@+id/sliding_tabs"
-        android:layout_height="1dp"/>
+    <!--<View android:background="@color/black"-->
+        <!--android:layout_width = "match_parent"-->
+        <!--android:layout_above="@+id/sliding_tabs"-->
+        <!--android:layout_height="1dp"/>-->
 
 
     <android.support.design.widget.TabLayout
@@ -43,7 +44,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/rlUserHeader"
-        app:tabIndicatorColor="@color/colorPrimaryLight"
+        app:tabBackground="@color/colorPrimaryLight"
+        app:tabIndicatorColor="@color/colorSecondary"
         app:tabMode="fixed" />
 
     <android.support.v4.view.ViewPager
@@ -54,7 +56,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/sliding_tabs"
         android:layout_weight="1"
-        android:background="@android:color/white"
+        android:background="@color/white"
         android:visibility="visible">
 
     </android.support.v4.view.ViewPager>
@@ -90,8 +92,8 @@
             fab:menu_animationDelayPerItem="55"
             fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="#da3c2f"
-            fab:menu_colorPressed="#dc4b3f"
+            fab:menu_colorNormal="@color/colorSecondary"
+            fab:menu_colorPressed="@color/colorSecondary"
             fab:menu_colorRipple="#99d4d4d4"
             fab:menu_fab_size="normal"
             fab:menu_icon="@drawable/fab_add"
@@ -122,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add"
+
                 fab:fab_label="Send a Package"
                 fab:fab_size="mini" />
 

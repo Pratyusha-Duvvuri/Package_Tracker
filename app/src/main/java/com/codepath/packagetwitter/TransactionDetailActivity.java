@@ -70,13 +70,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
 
 
-
-
-
-//    @BindView(R.id.vpCards) ViewPager mViewPager;
-
-    CardFragmentPagerAdapter mfragmentCardAdapter;
-    ShadowTransformer mshadowTransformer;
     VerticalStepperFormLayout verticalStepperForm;
     public SharedPreferences sharedPref;
     int transaction_state;
@@ -101,23 +94,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
         currentUserID = getIntent().getStringExtra("ParselTransactionUser");
 
-        //To pass parsel ID to view pager
-        // Create object of SharedPreferences.
-//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        //now get Editor
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        //put your value
-//        editor.putString("ParselID", parselTransactionId);
-//        //commits your edits
-//        editor.commit();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
-//        mViewPager.setAdapter(mfragmentCardAdapter);
-//        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
-//
-//        mViewPager.setPageTransformer(false, mshadowTransformer);
-//        mViewPager.setOffscreenPageLimit(3);
+
 
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
@@ -254,10 +231,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     break;
 
             }
-//            verticalStepperForm.setStepAsCompleted(0);
-//            verticalStepperForm.setStepAsCompleted(1);
-//            verticalStepperForm.setStepAsCompleted(2);
-//            verticalStepperForm.setStepAsCompleted(3);
+
             alreadyExecuted = true;
         }
         else{

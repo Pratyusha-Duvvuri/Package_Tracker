@@ -366,6 +366,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 bundle.putString("gender", object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
             if (object.has("location"))
                 bundle.putString("location", object.getJSONObject("location").getString("name"));
 
@@ -398,27 +400,29 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 if (e == null) {
 
                     ParseUser userrr = ParseUser.getCurrentUser();
-
                     parseUser = userrr;
-                    if (parseUser.getParseFile("ImageFile") == null) {
+                    Bitmap bitmap;
+                        if(bFacebookData.getString("gender").equals("female")) {
+                            bitmap = BitmapFactory.decodeResource(getResources(),
+                                    R.drawable.girl);}
+                        else  {
+                         bitmap = BitmapFactory.decodeResource(getResources(),
+                                R.drawable.man);}
+                            // Convert it to byte
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            // Compress image to lower quality scale 1 - 100
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] image = stream.toByteArray();
+
+                            ParseFile file = new ParseFile("Default", image);
+                            file.saveInBackground();
+
+                            parseUser.put("ImageFile", file);
+
+                            parseUser.saveInBackground();
 
 
-                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.error);
-                        // Convert it to byte
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        // Compress image to lower quality scale 1 - 100
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        byte[] image = stream.toByteArray();
 
-                        ParseFile file = new ParseFile("Default", image);
-                        file.saveInBackground();
-
-                        parseUser.put("ImageFile", file);
-
-                        parseUser.saveInBackground();
-
-                    }
 
                     Log.d("ParseApplication", "Logged in successfully");
                     // Hooray! The user is logged in.
