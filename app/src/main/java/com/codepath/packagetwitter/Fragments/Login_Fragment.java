@@ -62,6 +62,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -338,6 +340,21 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         });
     }
 
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
 
     private Bundle getFacebookData(JSONObject object) {
 
@@ -346,7 +363,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             String id = object.getString("id");
 
             try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=200");
                 Log.i("profile_pic", profile_pic.toString());
                 bundle.putString("profile_pic", profile_pic.toString());
 
@@ -394,6 +411,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else
             user.put("location", "Tacoma");
 
+
+
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
@@ -401,17 +420,54 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                     ParseUser userrr = ParseUser.getCurrentUser();
                     parseUser = userrr;
-                    Bitmap bitmap;
-                        if(bFacebookData.getString("gender").equals("female")) {
-                            bitmap = BitmapFactory.decodeResource(getResources(),
-                                    R.drawable.girl);}
-                        else  {
-                         bitmap = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.man);}
+
+
+//                    Thread thread = new Thread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//
+//                        }
+//                            try  {
+//                                                   Bitmap bitmap = getBitmapFromURL(bFacebookData.getString("profile_pic"));
+////                }
+////                        else  {
+////                         bitmap = BitmapFactory.decodeResource(getResources(),
+////                                R.drawable.man);}
+//                                // Convert it to byte
+//                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                                // Compress image to lower quality scale 1 - 100
+//                                bitmap.compress(Bitmap.CompressFormat.PNG, 1, stream);
+//                                byte[] image = stream.toByteArray();
+//
+//                                ParseFile file = new ParseFile("Default", image);
+//                                file.saveInBackground();
+//
+//                                parseUser.put("ImageFile", file);
+//
+//                                parseUser.saveInBackground();                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                    thread.start();
+
+
+                   // Bitmap bitmap;
+//                        if(bFacebookData.getString("gender").equals("female")) {
+//                            bitmap = BitmapFactory.decodeResource(getResources(),
+//                                    R.drawable.girl);
+
+
+//                            Bitmap bitmap = getBitmapFromURL(bFacebookData.getString("profile_pic"));
+//                }
+//
+                         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                                R.drawable.girl);
                             // Convert it to byte
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             // Compress image to lower quality scale 1 - 100
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 1, stream);
                             byte[] image = stream.toByteArray();
 
                             ParseFile file = new ParseFile("Default", image);
@@ -420,7 +476,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             parseUser.put("ImageFile", file);
 
                             parseUser.saveInBackground();
-
 
 
 
@@ -480,7 +535,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     parseUser = userrr;
                     if (parseUser.getParseFile("ImageFile") == null) {
 
-
                         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.error);
                         // Convert it to byte
@@ -488,12 +542,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         // Compress image to lower quality scale 1 - 100
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         byte[] image = stream.toByteArray();
-
                         ParseFile file = new ParseFile("Default", image);
                         file.saveInBackground();
-
                         parseUser.put("ImageFile", file);
-
                         parseUser.saveInBackground();
 
                     }
