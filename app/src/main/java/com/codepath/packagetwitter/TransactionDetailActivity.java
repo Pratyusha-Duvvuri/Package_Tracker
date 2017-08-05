@@ -234,44 +234,12 @@ ParselTransaction transaction;
 
         if (parselTransactionState == 4){
             alreadyExecuted = true;
-            switch(verticalStepperForm.getActiveStepNumber()){
-                case 0:
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(1, false);
-                    verticalStepperForm.setStepAsCompleted(0);
-                    break;
-                case 1:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(2, false);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    break;
-                case 2:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(3, false);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    break;
-                case 3:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    break;
-                default:
-                    break;
+            verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.setStepAsCompleted(1);
+            verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.setStepAsCompleted(3);
+            verticalStepperForm.goToStep(4, false);
 
-            }
-//            verticalStepperForm.setStepAsCompleted(0);
-//            verticalStepperForm.setStepAsCompleted(1);
-//            verticalStepperForm.setStepAsCompleted(2);
-//            verticalStepperForm.setStepAsCompleted(3);
-            alreadyExecuted = true;
         }
         else{
             onStepOpening(0);
@@ -282,10 +250,9 @@ ParselTransaction transaction;
                 verticalStepperForm.setStepAsCompleted(0);
                 verticalStepperForm.setStepAsCompleted(1);
                 verticalStepperForm.setStepAsCompleted(2);
-                if (verticalStepperForm.getActiveStepNumber() != 3){
-                    //verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                }
+                verticalStepperForm.setStepAsCompleted(3);
+                verticalStepperForm.goToStep(4, false);
+
                 sendData();
                 confirm_button.setVisibility(View.GONE);
 
@@ -396,7 +363,7 @@ ParselTransaction transaction;
         created.setText("Package Has Been Created");
         return created;
     }
-
+    @Override
     public final void onStepOpening(int stepNumber) {
 
         if (parselTransactionState == 4)
@@ -438,6 +405,7 @@ ParselTransaction transaction;
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.goToStep(3, false);
             stepNumber = 4;
         }
         else if (parselTransactionState == 2){
