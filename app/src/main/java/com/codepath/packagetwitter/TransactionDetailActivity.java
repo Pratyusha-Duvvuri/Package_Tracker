@@ -221,62 +221,30 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         if (parselTransactionState == 4){
             alreadyExecuted = true;
-            switch(verticalStepperForm.getActiveStepNumber()){
-                case 0:
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(1, false);
-                    verticalStepperForm.setStepAsCompleted(0);
-                    break;
-                case 1:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(2, false);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    break;
-                case 2:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(3, false);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    break;
-                case 3:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    break;
-                default:
-                    break;
-
-            }
-//            verticalStepperForm.setStepAsCompleted(0);
-//            verticalStepperForm.setStepAsCompleted(1);
-//            verticalStepperForm.setStepAsCompleted(2);
-//            verticalStepperForm.setStepAsCompleted(3);
+            verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.goToStep(1, false);
+            verticalStepperForm.setStepAsCompleted(1);
+            verticalStepperForm.goToStep(2, false);
+            verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.goToStep(3, false);
+            verticalStepperForm.setStepAsCompleted(3);
+            verticalStepperForm.goToStep(4, false);
+            verticalStepperForm.setStepAsCompleted(4);
             alreadyExecuted = true;
-        }
-        else{
-            onStepOpening(0);
         }
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 verticalStepperForm.setStepAsCompleted(0);
+                verticalStepperForm.goToStep(1, false);
                 verticalStepperForm.setStepAsCompleted(1);
+                verticalStepperForm.goToStep(2, false);
                 verticalStepperForm.setStepAsCompleted(2);
-
-                if (verticalStepperForm.getActiveStepNumber() != 3){
-                    //verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                }
+                verticalStepperForm.goToStep(3, false);
                 sendData();
-                confirm_button.setVisibility(View.GONE);
-
+                verticalStepperForm.setStepAsCompleted(3);
+                verticalStepperForm.goToStep(4, false);
+                verticalStepperForm.setStepAsCompleted(4);
             }
         });
 
@@ -385,8 +353,10 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     public final void onStepOpening(int stepNumber) {
 
-        if (parselTransactionState == 4)
+        if (parselTransactionState == 4){
             alreadyExecuted = true;
+            return;
+        }
         if (!alreadyExecuted){
             switch (stepNumber){
                 case 0:
@@ -517,7 +487,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 }
             }
         });
-        verticalStepperForm.setStepAsCompleted(3);
         confirmationDialog();
     }
 
@@ -551,8 +520,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         else {
             return R.mipmap.ic_other_filled;
         }
-
-
     }
 
 
