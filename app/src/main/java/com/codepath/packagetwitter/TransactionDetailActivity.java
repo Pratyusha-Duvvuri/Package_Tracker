@@ -67,12 +67,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
-
-
-
-
-
-
 //    @BindView(R.id.vpCards) ViewPager mViewPager;
 
     CardFragmentPagerAdapter mfragmentCardAdapter;
@@ -101,6 +95,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         parselTransactionState = getIntent().getIntExtra("ParselTransactionState",0);
         receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
         currentUserID = getIntent().getStringExtra("ParselTransactionUser");
+
+//        This block of code was used when we were using viewpager fragments in the activity
 
         //To pass parsel ID to view pager
         // Create object of SharedPreferences.
@@ -153,8 +149,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     tvWeight.setText(String.valueOf(transaction.getWeight()));
 
                     ibType.setImageResource(getTypeId(transaction.getMailType()));
-//                            tvFrom.setText("From: " + transaction.getSenderLoc());
-//                            tvTo.setText("To: " + transaction.getReceiverLoc());
                     transaction_state = transaction.getTransactionState();
                     Log.d("WORK", String.valueOf(transaction_state));
                     image_file = transaction.getParseFile("ImageFile");
@@ -247,7 +241,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     }
 
-
+//This function is to render the viewpager correctly
     public static float dpToPixels(int dp, Context context) {
         return dp * (context.getResources().getDisplayMetrics().density);
     }
