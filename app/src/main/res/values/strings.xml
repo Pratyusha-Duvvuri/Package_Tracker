@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PackageTracker</string>
+    <string name="app_name">PACK\'D</string>
     <string name="title_activity_transactions">TransactionsActivity</string>
     <string name="title_activity_package_creation">PackageCreationActivity</string>
     <string name="hello_world">Hello world!</string>
