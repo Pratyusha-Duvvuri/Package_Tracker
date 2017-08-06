@@ -67,12 +67,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
-
-
-
-
-
-
 //    @BindView(R.id.vpCards) ViewPager mViewPager;
 
     CardFragmentPagerAdapter mfragmentCardAdapter;
@@ -81,12 +75,14 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     public SharedPreferences sharedPref;
     int transaction_state;
     public Integer parselTransactionState;
-
+    String receiverID;
+    String currentUserID;
     String parselTransactionId;
     Button confirm_button;
+    AlertDialog confirm;
     boolean alreadyExecuted = false;
 
-ParselTransaction transaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,9 +92,11 @@ ParselTransaction transaction;
 
         chatButton = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_chat);
         parselTransactionId = getIntent().getStringExtra("ParselTransactionId");
-//        parselTransactionState = getIntent().getIntExtra("ParselTransactionState",0);
-//        receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
-//        currentUserID = getIntent().getStringExtra("ParselTransactionUser");
+        parselTransactionState = getIntent().getIntExtra("ParselTransactionState",0);
+        receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
+        currentUserID = getIntent().getStringExtra("ParselTransactionUser");
+
+//        This block of code was used when we were using viewpager fragments in the activity
 
         //To pass parsel ID to view pager
         // Create object of SharedPreferences.
@@ -123,16 +121,47 @@ ParselTransaction transaction;
         transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
         // Execute the query to find the object with ID
         transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
-                    public void done(ParselTransaction trans, ParseException e) {
-                        if (e == null) {
-                            // item was found
-                            transaction = trans;
-                            parselTransactionState = transaction.getTransactionState();
+            public void done(ParselTransaction transaction, ParseException e) {
+                if (e == null) {
+                    // item was found
+                    String title = transaction.getString("title").toString();
+                    tvTitle.setText(title);
+                    tvFrom.setText(transaction.getSenderLoc());
+                    tvTo.setText(transaction.getReceiverLoc());
+                    String description = transaction.getMailDescription().toString();
+                    tvDescription.setText(description);
+                    setFragile(transaction);
+                    tvType.setText(transaction.getMailType());
+                    TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
+                    TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
+                    if (transaction.getTransactionState() >= 2){
+                        tvCourierTitle.setVisibility(View.VISIBLE);
+                    }
+                    //sets up sender:
+                    setUpPerson(transaction.getSender(),ivSender,tvSender);
+                    //sets up courier:
+                    setUpPerson(transaction.getCourier(),ivCourier,tvCourier);
+                    //sets up receiver:
+                    setUpPerson(transaction.getReceiver(),ivReceiver,tvReceiver);
 
-                            populateLayout();
+                    ibSize.setImageDrawable(sizePics.getDrawable(transaction.getVolume()));
+                    tvSize.setText(sizes.getString(transaction.getVolume()));
+                    tvWeight.setText(String.valueOf(transaction.getWeight()));
 
-                            setUpTimeline();
-
+                    ibType.setImageResource(getTypeId(transaction.getMailType()));
+                    transaction_state = transaction.getTransactionState();
+                    Log.d("WORK", String.valueOf(transaction_state));
+                    image_file = transaction.getParseFile("ImageFile");
+                    image_file.getDataInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] data, ParseException e) {
+                            if (e == null) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                ivPackageImage.setImageBitmap(bitmap);
+                                ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            }
+                        }
+                    });
 
 
 
@@ -151,54 +180,6 @@ ParselTransaction transaction;
             }
         });
 
-
-
-
-    }
-    public void populateLayout(){
-        String title = transaction.getString("title").toString();
-        tvTitle.setText(title);
-        tvFrom.setText(transaction.getSenderLoc());
-        tvTo.setText(transaction.getReceiverLoc());
-        String description = transaction.getMailDescription().toString();
-        tvDescription.setText(description);
-        setFragile(transaction);
-        tvType.setText(transaction.getMailType());
-        TypedArray sizes = getResources().obtainTypedArray(R.array.sizes);
-        TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
-        if (transaction.getTransactionState() >= 2){
-            tvCourierTitle.setVisibility(View.VISIBLE);
-        }
-        //sets up sender:
-        setUpPerson(transaction.getSender(),ivSender,tvSender);
-        //sets up courier:
-        setUpPerson(transaction.getCourier(),ivCourier,tvCourier);
-        //sets up receiver:
-        setUpPerson(transaction.getReceiver(),ivReceiver,tvReceiver);
-
-        ibSize.setImageDrawable(sizePics.getDrawable(transaction.getVolume()));
-        tvSize.setText(sizes.getString(transaction.getVolume()));
-        tvWeight.setText(String.valueOf(transaction.getWeight()));
-
-        ibType.setImageResource(getTypeId(transaction.getMailType()));
-//                            tvFrom.setText("From: " + transaction.getSenderLoc());
-//                            tvTo.setText("To: " + transaction.getReceiverLoc());
-        transaction_state = transaction.getTransactionState();
-        Log.d("WORK", String.valueOf(transaction_state));
-        image_file = transaction.getParseFile("ImageFile");
-        image_file.getDataInBackground(new GetDataCallback() {
-            @Override
-            public void done(byte[] data, ParseException e) {
-                if (e == null) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                    ivPackageImage.setImageBitmap(bitmap);
-                    ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                }
-            }
-        });
-    }
-
-    public void setUpTimeline(){
         String[] mySteps = {"Create", "Accept", "Match", "Deliver"};
         int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
         int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
@@ -227,7 +208,7 @@ ParselTransaction transaction;
 
         confirm_button = ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step));
 
-        if (ParseUser.getCurrentUser().getUsername().equals(transaction.getReceiver()) && parselTransactionState == 2) {
+        if (currentUserID.equals(receiverID) && parselTransactionState == 2) {
             confirm_button.setText("CONFIRM DELIVERY");
         }
         else
@@ -236,38 +217,31 @@ ParselTransaction transaction;
         if (parselTransactionState == 4){
             alreadyExecuted = true;
             verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.goToStep(1, false);
             verticalStepperForm.setStepAsCompleted(1);
+            verticalStepperForm.goToStep(2, false);
             verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.goToStep(3, false);
             verticalStepperForm.setStepAsCompleted(3);
             verticalStepperForm.goToStep(4, false);
-
-        }
-        else{
-            onStepOpening(0);
+            verticalStepperForm.setStepAsCompleted(4);
+            alreadyExecuted = true;
         }
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 verticalStepperForm.setStepAsCompleted(0);
+                verticalStepperForm.goToStep(1, false);
                 verticalStepperForm.setStepAsCompleted(1);
+                verticalStepperForm.goToStep(2, false);
                 verticalStepperForm.setStepAsCompleted(2);
-
-
-                if (verticalStepperForm.getActiveStepNumber() != 3){
-                    //verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                }
-                sendData();
-                confirm_button.setVisibility(View.GONE);
-
-
+                confirmationDialog();
             }
         });
 
-
     }
 
-
+    //This function is to render the viewpager correctly
     public static float dpToPixels(int dp, Context context) {
         return dp * (context.getResources().getDisplayMetrics().density);
     }
@@ -299,9 +273,6 @@ ParselTransaction transaction;
                         }
                     }
                 }
-
-
-
 
                 else {
                     // Something went wrong.
@@ -367,11 +338,13 @@ ParselTransaction transaction;
         created.setText("Package Has Been Created");
         return created;
     }
-    @Override
+
     public final void onStepOpening(int stepNumber) {
 
-        if (parselTransactionState == 4)
+        if (parselTransactionState == 4){
             alreadyExecuted = true;
+            return;
+        }
         if (!alreadyExecuted){
             switch (stepNumber){
                 case 0:
@@ -396,27 +369,20 @@ ParselTransaction transaction;
 
         if(parselTransactionState == 0){
             verticalStepperForm.setStepAsCompleted(0);
-            stepNumber = 1;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(1, false);
         }
         else if (parselTransactionState == 1){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
-            stepNumber = 2;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(2, false);
-        }
-        else if (parselTransactionState == 2 && stepNumber == 3){
-            verticalStepperForm.setStepAsCompleted(0);
-            verticalStepperForm.setStepAsCompleted(1);
-            verticalStepperForm.setStepAsCompleted(2);
-            verticalStepperForm.goToStep(3, false);
-            stepNumber = 4;
         }
         else if (parselTransactionState == 2){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
-            stepNumber = 3;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(3, false);
         }
         else if (parselTransactionState == 4){
@@ -424,44 +390,39 @@ ParselTransaction transaction;
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
             verticalStepperForm.setStepAsCompleted(3);
-            stepNumber = 4;
+            alreadyExecuted = true;
         }
         alreadyExecuted = true;
         return stepNumber;
     }
 
-    /*
-    private void confirmDeliveredState(){
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
-                // First try to find from the cache and only then go to network
-                transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-                // Execute the query to find the object with ID
-                transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
-                    public void done(ParselTransaction transaction, ParseException e) {
-                        if (e == null) {
-                            // item was found
-                            transaction.setTransactionState(4);
-                            transaction.saveEventually();
-                        }
-                    }
-                });
-                verticalStepperForm.setStepAsCompleted(3);
-                confirmationDialog();
-            }
-        });
-    }
-    */
 
     private void confirmationDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(TransactionDetailActivity.this);
-        builder.setMessage("Delivery Of Package Confirmed");    //set message
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+        final AlertDialog.Builder builder = new AlertDialog.Builder(TransactionDetailActivity.this);
+        builder.setMessage("Confirm Package Delivery?");    //set message
+        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() { //when click on DELETE
             @Override
-            public void onClick(DialogInterface dialog, int which) {return;}
-        }).show();
+            public void onClick(DialogInterface dialog, int which) {
+                sendData();
+                verticalStepperForm.goToStep(3, false);
+                verticalStepperForm.setStepAsCompleted(3);
+                verticalStepperForm.goToStep(4, false);
+                verticalStepperForm.setStepAsCompleted(4);
+                dialog.dismiss();
+                //return;
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alreadyExecuted = false;
+                verticalStepperForm.setStepAsCompleted(2);
+                verticalStepperForm.goToStep(3, false);
+                dialogInterface.cancel();
+            }
+        });
+        confirm = builder.create();
+        confirm.show();
     }
 
     private void checkMatchedState() {
@@ -503,8 +464,6 @@ ParselTransaction transaction;
                 }
             }
         });
-        verticalStepperForm.setStepAsCompleted(3);
-        confirmationDialog();
     }
 
     public int getTypeId(String type){
@@ -537,10 +496,5 @@ ParselTransaction transaction;
         else {
             return R.mipmap.ic_other_filled;
         }
-
-
     }
-
-
-
 }
