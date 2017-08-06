@@ -165,7 +165,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
-
+                    intent.putExtra("ParselTransactionState", transaction.getTransactionState());
+                    intent.putExtra("ParselTransactionReceiver", transaction.getReceiver());
+                    intent.putExtra("ParselTransactionUser", parseUser.getUsername());
 
                     // show the activity
                     ((Activity)context).startActivityForResult(intent, ProfileActivity.TRANSACTION_DETAIL_CODE);

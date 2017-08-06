@@ -55,4 +55,12 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
     }
+
+//    public View getTabView(int position) {
+//        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
+//        View v = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
+//        TextView tv = (TextView) v.findViewById(R.id.textView);
+//        tv.setText(tabTitles[position]);
+//        return v;
+//    }
 }

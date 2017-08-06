@@ -141,6 +141,13 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //setup tablayout to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
+
+
+        // Iterate over all tabs and set the custom view
+//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+//            TabLayout.Tab tab = tabLayout.getTabAt(i);
+//            tab.setCustomView(pagerAdapter.getTabView(i));
+//        }
         setupDivider(tabLayout);
         //if (((PendingTransactionFragment)pagerAdapter.getItem(vpPager.getCurrentItem())).getTransactions().size() == 0)
         //Floating action button code

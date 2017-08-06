@@ -158,6 +158,8 @@ public class PendingTransactionFragment extends Fragment {
         }
 
         if (parseUser != null) {
+            //transactions = new ArrayList<>();
+
             transactions.clear();
             transactionAdapter.notifyDataSetChanged();
 

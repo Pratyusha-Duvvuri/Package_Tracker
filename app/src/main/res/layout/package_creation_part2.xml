@@ -53,7 +53,8 @@
                     android:layout_width="301dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:hint="Clothes for my sister"
+                    android:hint="ex. Clothes for my sister"
+                    android:inputType="text"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -78,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:hint="Sending clothes to my sister"
+                    android:hint="ex. Sending my sister a couple shirts"
+                    android:inputType="text"
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
@@ -405,7 +407,8 @@
                 android:id="@+id/etWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="5.5" />
+                android:hint="5.5"
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:id="@+id/tvlbs"

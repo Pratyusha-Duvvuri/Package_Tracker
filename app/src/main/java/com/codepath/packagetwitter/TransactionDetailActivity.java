@@ -205,7 +205,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         confirm_button = ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step));
 
-        if (currentUserID.equals(receiverID) && parselTransactionState == 2) {
+        if (ParseUser.getCurrentUser().getObjectId().equals(receiverID) && parselTransactionState == 2) {
             confirm_button.setText("CONFIRM DELIVERY");
         }
         else

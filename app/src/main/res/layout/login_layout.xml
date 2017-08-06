@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="20dp" >
@@ -8,18 +9,17 @@
         android:id="@+id/login_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/login"
-            android:textColor="@color/white_greyish"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:srcCompat="@mipmap/ic_white_plane" />
 
         <EditText
             android:id="@+id/login_emailid"
@@ -99,28 +99,30 @@
             android:textSize="17sp"
             android:textStyle="bold" />
     </LinearLayout>
-    <com.facebook.login.widget.LoginButton
-        xmlns:facebook="http://schemas.android.com/apk/res-auto"
-        facebook:com_facebook_login_text="LOGIN"
+
+    <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        facebook:com_facebook_login_text="CONTINUE WITH FACEBOOK"
+        android:layout_below="@+id/login_layout"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/newUser"
         android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>
