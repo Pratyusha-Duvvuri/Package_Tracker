@@ -103,6 +103,7 @@ public class CurrentTransactionFragment extends Fragment {
 //        parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
             transactions.clear();
+            transactionAdapter.notifyDataSetChanged();
             ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
                 // Define our query conditions
                 query.whereEqualTo("receiver", parseUser.getUsername());
@@ -173,7 +174,7 @@ public class CurrentTransactionFragment extends Fragment {
     public void addItems(ParselTransaction transaction) {
 
         transactions.add(transaction);
-        transactionAdapter.notifyItemInserted(transactions.size() - 1);
+        //transactionAdapter.notifyItemInserted(transactions.size() - 1);
         transactionAdapter.notifyDataSetChanged();
 
     }

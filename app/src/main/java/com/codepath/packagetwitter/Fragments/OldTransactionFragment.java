@@ -3,6 +3,7 @@ package com.codepath.packagetwitter.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,6 +54,9 @@ public class OldTransactionFragment extends Fragment {
 
         //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        rvTransactions.addItemDecoration(itemDecoration);
 
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         tvTransaction = (TextView) v.findViewById(R.id.tvTransaction);
@@ -74,6 +78,7 @@ public class OldTransactionFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeContainer.setRefreshing(true);
+                populateTimeline();
                 Toast.makeText(getContext(), "Refresh is working", Toast.LENGTH_LONG);
                 swipeContainer.setRefreshing(false);
             }
@@ -109,6 +114,7 @@ public class OldTransactionFragment extends Fragment {
 
         if (parseUser != null) {
             transactions.clear();
+            transactionAdapter.notifyDataSetChanged();
             query();
 
             }
@@ -144,7 +150,6 @@ public class OldTransactionFragment extends Fragment {
         ParseQuery<ParselTransaction> query2 = ParseQuery.getQuery(ParselTransaction.class);
         // Define our query conditions
         query2.whereEqualTo("receiver", parseUser.getUsername());
-        List<Integer> list2 = new ArrayList<Integer>();
 
         query2.whereEqualTo("transactionState", 4);
         // Execute the find asynchronously

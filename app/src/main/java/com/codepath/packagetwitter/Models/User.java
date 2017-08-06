@@ -8,7 +8,6 @@ import com.codepath.packagetwitter.R;
 
 import org.parceler.Parcel;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -51,21 +50,7 @@ public class User{
 
     public User(){}
 
-        public static ArrayList<Transaction> getTransactions(Context context){
-            //in  future would get transactions from web
-            Sender sender = Sender.getRandomSender(context);
-            CourierModel courier = CourierModel.getRandomCourrier(context);
 
-            Receiver receiver = Receiver.getRandomReceiver(context);
-
-            ArrayList<Transaction> transactions = new ArrayList<>();
-            Transaction transaction = new Transaction(receiver, sender, courier, new Mail());
-            transactions.add(transaction);
-            transactions.add(transaction);
-            return transactions;
-
-
-        }
 
     public static User getRandomUser(Context context) {
         Resources resources = context.getResources();

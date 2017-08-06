@@ -241,7 +241,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     }
 
-//This function is to render the viewpager correctly
+    //This function is to render the viewpager correctly
     public static float dpToPixels(int dp, Context context) {
         return dp * (context.getResources().getDisplayMetrics().density);
     }
