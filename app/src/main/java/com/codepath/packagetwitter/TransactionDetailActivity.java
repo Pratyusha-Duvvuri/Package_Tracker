@@ -67,9 +67,16 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
+<<<<<<< HEAD
 
 
 
+=======
+//    @BindView(R.id.vpCards) ViewPager mViewPager;
+
+    CardFragmentPagerAdapter mfragmentCardAdapter;
+    ShadowTransformer mshadowTransformer;
+>>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
     VerticalStepperFormLayout verticalStepperForm;
     public SharedPreferences sharedPref;
     int transaction_state;
@@ -78,6 +85,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
     String currentUserID;
     String parselTransactionId;
     Button confirm_button;
+    AlertDialog confirm;
     boolean alreadyExecuted = false;
 
 
@@ -94,7 +102,29 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
         currentUserID = getIntent().getStringExtra("ParselTransactionUser");
 
+<<<<<<< HEAD
 
+=======
+//        This block of code was used when we were using viewpager fragments in the activity
+
+        //To pass parsel ID to view pager
+        // Create object of SharedPreferences.
+//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        //now get Editor
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        //put your value
+//        editor.putString("ParselID", parselTransactionId);
+//        //commits your edits
+//        editor.commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
+//        mViewPager.setAdapter(mfragmentCardAdapter);
+//        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
+//
+//        mViewPager.setPageTransformer(false, mshadowTransformer);
+//        mViewPager.setOffscreenPageLimit(3);
+>>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
 
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
@@ -129,8 +159,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     tvWeight.setText(String.valueOf(transaction.getWeight()));
 
                     ibType.setImageResource(getTypeId(transaction.getMailType()));
-//                            tvFrom.setText("From: " + transaction.getSenderLoc());
-//                            tvTo.setText("To: " + transaction.getReceiverLoc());
                     transaction_state = transaction.getTransactionState();
                     Log.d("WORK", String.valueOf(transaction_state));
                     image_file = transaction.getParseFile("ImageFile");
@@ -198,6 +226,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         if (parselTransactionState == 4){
             alreadyExecuted = true;
+<<<<<<< HEAD
             switch(verticalStepperForm.getActiveStepNumber()){
                 case 0:
                     verticalStepperForm.setStepAsCompleted(1);
@@ -232,31 +261,34 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
             }
 
+=======
+            verticalStepperForm.setStepAsCompleted(0);
+            verticalStepperForm.goToStep(1, false);
+            verticalStepperForm.setStepAsCompleted(1);
+            verticalStepperForm.goToStep(2, false);
+            verticalStepperForm.setStepAsCompleted(2);
+            verticalStepperForm.goToStep(3, false);
+            verticalStepperForm.setStepAsCompleted(3);
+            verticalStepperForm.goToStep(4, false);
+            verticalStepperForm.setStepAsCompleted(4);
+>>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
             alreadyExecuted = true;
-        }
-        else{
-            onStepOpening(0);
         }
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 verticalStepperForm.setStepAsCompleted(0);
+                verticalStepperForm.goToStep(1, false);
                 verticalStepperForm.setStepAsCompleted(1);
+                verticalStepperForm.goToStep(2, false);
                 verticalStepperForm.setStepAsCompleted(2);
-
-                if (verticalStepperForm.getActiveStepNumber() != 3){
-                    //verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                }
-                sendData();
-                confirm_button.setVisibility(View.GONE);
-
+                confirmationDialog();
             }
         });
 
     }
 
-
+//This function is to render the viewpager correctly
     public static float dpToPixels(int dp, Context context) {
         return dp * (context.getResources().getDisplayMetrics().density);
     }
@@ -288,9 +320,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                         }
                     }
                 }
-
-
-
 
                 else {
                     // Something went wrong.
@@ -359,8 +388,10 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     public final void onStepOpening(int stepNumber) {
 
-        if (parselTransactionState == 4)
+        if (parselTransactionState == 4){
             alreadyExecuted = true;
+            return;
+        }
         if (!alreadyExecuted){
             switch (stepNumber){
                 case 0:
@@ -385,26 +416,20 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         if(parselTransactionState == 0){
             verticalStepperForm.setStepAsCompleted(0);
-            stepNumber = 1;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(1, false);
         }
         else if (parselTransactionState == 1){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
-            stepNumber = 2;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(2, false);
-        }
-        else if (parselTransactionState == 2 && stepNumber == 3){
-            verticalStepperForm.setStepAsCompleted(0);
-            verticalStepperForm.setStepAsCompleted(1);
-            verticalStepperForm.setStepAsCompleted(2);
-            stepNumber = 4;
         }
         else if (parselTransactionState == 2){
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
-            stepNumber = 3;
+            alreadyExecuted = true;
             verticalStepperForm.goToStep(3, false);
         }
         else if (parselTransactionState == 4){
@@ -412,44 +437,39 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             verticalStepperForm.setStepAsCompleted(1);
             verticalStepperForm.setStepAsCompleted(2);
             verticalStepperForm.setStepAsCompleted(3);
-            stepNumber = 4;
+            alreadyExecuted = true;
         }
         alreadyExecuted = true;
         return stepNumber;
     }
 
-    /*
-    private void confirmDeliveredState(){
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
-                // First try to find from the cache and only then go to network
-                transactionQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
-                // Execute the query to find the object with ID
-                transactionQuery.getInBackground(parselTransactionId, new GetCallback<ParselTransaction>() {
-                    public void done(ParselTransaction transaction, ParseException e) {
-                        if (e == null) {
-                            // item was found
-                            transaction.setTransactionState(4);
-                            transaction.saveEventually();
-                        }
-                    }
-                });
-                verticalStepperForm.setStepAsCompleted(3);
-                confirmationDialog();
-            }
-        });
-    }
-    */
 
     private void confirmationDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(TransactionDetailActivity.this);
-        builder.setMessage("Delivery Of Package Confirmed");    //set message
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { //when click on DELETE
+        final AlertDialog.Builder builder = new AlertDialog.Builder(TransactionDetailActivity.this);
+        builder.setMessage("Confirm Package Delivery?");    //set message
+        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() { //when click on DELETE
             @Override
-            public void onClick(DialogInterface dialog, int which) {return;}
-        }).show();
+            public void onClick(DialogInterface dialog, int which) {
+                sendData();
+                verticalStepperForm.goToStep(3, false);
+                verticalStepperForm.setStepAsCompleted(3);
+                verticalStepperForm.goToStep(4, false);
+                verticalStepperForm.setStepAsCompleted(4);
+                dialog.dismiss();
+                //return;
+            }
+        });
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alreadyExecuted = false;
+                verticalStepperForm.setStepAsCompleted(2);
+                verticalStepperForm.goToStep(3, false);
+                dialogInterface.cancel();
+            }
+        });
+        confirm = builder.create();
+        confirm.show();
     }
 
     private void checkMatchedState() {
@@ -491,8 +511,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                 }
             }
         });
-        verticalStepperForm.setStepAsCompleted(3);
-        confirmationDialog();
     }
 
     public int getTypeId(String type){
@@ -525,10 +543,5 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         else {
             return R.mipmap.ic_other_filled;
         }
-
-
     }
-
-
-
 }
