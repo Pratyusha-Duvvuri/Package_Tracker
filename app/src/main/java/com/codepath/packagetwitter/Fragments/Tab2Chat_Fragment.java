@@ -32,8 +32,8 @@ import java.util.List;
 import static com.codepath.packagetwitter.Message.FROM;
 import static com.codepath.packagetwitter.Message.TO;
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
-import static com.codepath.packagetwitter.OtherChatActivity.goOn;
-import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
+import static com.codepath.packagetwitter.ChatActivity.goOn;
+import static com.codepath.packagetwitter.ChatActivity.messages_main;
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**

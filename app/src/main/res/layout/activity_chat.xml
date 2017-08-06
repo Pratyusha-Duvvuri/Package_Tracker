@@ -26,29 +26,21 @@
 
 
 
-        <android.support.v7.widget.CardView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:contentDescription="@string/profile_other"
+            android:id="@+id/ivProfileImage2"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:elevation="12dp"
             android:layout_margin="20dp"
-
-            android:id="@+id/ivPackageImageCard99"
-            app:cardCornerRadius="40dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:innerRadius="0dp"
-            android:shape="ring"
-            android:thicknessRatio="1.9">
+            app:civ_border_width="0.5dp"
+            app:civ_border_color="#FF000000"
+            android:src="@mipmap/ic_launcher"
+            />
 
-            <ImageView
-                android:id="@+id/ivProfileImage2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                app:srcCompat="@color/black" />
-        </android.support.v7.widget.CardView>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -63,13 +55,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="23dp"
             android:text="Status"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/ivPackageImageCard99" />
+            android:layout_alignStart="@+id/tvNameHeader" />
 
         <TextView
             android:id="@+id/tvNameHeader"
@@ -80,8 +71,8 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_below="@+id/tvStatus"
-            android:layout_alignStart="@+id/tvStatus" />
+            android:layout_alignTop="@+id/ivProfileImage2"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 

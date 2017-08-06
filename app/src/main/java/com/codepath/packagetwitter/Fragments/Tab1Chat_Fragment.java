@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 
 import com.codepath.packagetwitter.ChatAdapter;
 import com.codepath.packagetwitter.Message;
-import com.codepath.packagetwitter.OtherChatActivity;
+import com.codepath.packagetwitter.ChatActivity;
 import com.codepath.packagetwitter.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -33,7 +33,7 @@ import java.util.List;
 import static com.codepath.packagetwitter.Message.FROM;
 import static com.codepath.packagetwitter.Message.TO;
 import static com.codepath.packagetwitter.Message.TRANSACTION_ID_KEY;
-import static com.codepath.packagetwitter.OtherChatActivity.messages_main;
+import static com.codepath.packagetwitter.ChatActivity.messages_main;
 import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 /**
@@ -88,7 +88,7 @@ public class Tab1Chat_Fragment extends Fragment {
 
                 if (e == null) {
                         thisUser1 = itemList.get(0);
-                    OtherChatActivity.loadImageBoi(0);
+                    ChatActivity.loadImageBoi(0);
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());

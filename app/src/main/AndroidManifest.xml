@@ -51,7 +51,7 @@
 
         <activity android:name=".AfterSenderConfirmation" />
         <activity android:name=".FileUploadActivity" />
-        <activity android:name=".OtherChatActivity" />
+        <activity android:name=".ChatActivity" />
         <activity android:name=".PackageCreationPart1Activity" />
         <activity
             android:name=".PackageCreationPart2Activity"

@@ -135,13 +135,14 @@ ParselTransaction transaction;
 
 
 
-                        }
-                    }
+
+                }
+            }
         });
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(TransactionDetailActivity.this, OtherChatActivity.class);
+                Intent i = new Intent(TransactionDetailActivity.this, ChatActivity.class);
                 i.putExtra("ParselTransactionId",parselTransactionId);
                 i.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
                 //materialDesignFAM.close(true);
@@ -250,9 +251,12 @@ ParselTransaction transaction;
                 verticalStepperForm.setStepAsCompleted(0);
                 verticalStepperForm.setStepAsCompleted(1);
                 verticalStepperForm.setStepAsCompleted(2);
-                verticalStepperForm.setStepAsCompleted(3);
-                verticalStepperForm.goToStep(4, false);
 
+
+                if (verticalStepperForm.getActiveStepNumber() != 3){
+                    //verticalStepperForm.goToStep(4, false);
+                    verticalStepperForm.setStepAsCompleted(3);
+                }
                 sendData();
                 confirm_button.setVisibility(View.GONE);
 
@@ -331,7 +335,7 @@ ParselTransaction transaction;
                 view = createMatchedStep();
                 break;
             case 3:
-            view = createDeliveredStep();
+                view = createDeliveredStep();
         }
         return view;
     }
@@ -428,7 +432,6 @@ ParselTransaction transaction;
 
     /*
     private void confirmDeliveredState(){
-
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -449,7 +452,6 @@ ParselTransaction transaction;
                 confirmationDialog();
             }
         });
-
     }
     */
 

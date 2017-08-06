@@ -27,7 +27,7 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
  * Created by pratyusha98 on 7/23/17.
  */
 
-public class OtherChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     ChatPagerAdapter pagerAdapter;
     public static String tabTitles_main[] = new String[] {"Person1", "Person2","Person3"};
@@ -114,7 +114,7 @@ public class OtherChatActivity extends AppCompatActivity {
                         setUpStuff();
                 }
                 else {
-                    Toast.makeText(OtherChatActivity.this, "Can't access user",
+                    Toast.makeText(ChatActivity.this, "Can't access user",
                             Toast.LENGTH_SHORT).show();
                     Log.d("ParseApplicationError", e.toString());
                 }
