@@ -1,5 +1,6 @@
 package com.codepath.packagetwitter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -61,12 +62,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         ParselTransaction transaction = mTransactions.get(position);
 
+        holder.tvTitle.setText(transaction.getString("title"));
+
+
+
         String status = "";
         switch (transaction.getTransactionState()) {
 
             case 0:
                 status = "Awaiting Receiver";
-                holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                holder.ivStatus.setImageResource(R.drawable.orange_dot);
                 holder.ivMessage.setVisibility(View.GONE);
 
                 break;
@@ -90,6 +95,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             case 7:
                 status = "Awaiting Match";
                 holder.ivStatus.setImageResource(R.drawable.yellow_dot);
+                holder.tvTitle.setText("From: " + transaction.getSenderLoc() +"\nTo: " + transaction.getReceiverLoc());
+                holder.tvTitle.setTextSize(13);
                 holder.ivMessage.setVisibility(View.GONE);
 
                 break;
@@ -103,7 +110,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.tvStatus.setText(status);
 
 
-        holder.tvTitle.setText(transaction.getString("title"));
 
         try{
              Uri imageUri = Uri.parse(transaction.getParseFile("ImageFile").getUrl());
@@ -111,8 +117,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
 
         catch (NullPointerException e) {
-        Glide.with(context).load("http://i.imgur.com/zuG2bGQ.jpg").centerCrop().into(holder.ivPackageImage);
-//        holder.ivPackageImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            holder.ivPackageImage.setImageResource(R.drawable.departures);
+            //        holder.ivPackageImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 
     }
@@ -159,12 +165,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 //                    intent.putExtra("PARSEUSER", Parcels.wrap(parseUser) );
 
                     intent.putExtra("ParselTransactionId", transaction.getObjectId());
-                    intent.putExtra("ParselTransactionState", transaction.getTransactionState());
-                    intent.putExtra("ParselTransactionReceiver", transaction.getReceiver());
-                    intent.putExtra("ParselTransactionUser", parseUser.getUsername());
+
 
                     // show the activity
-                    context.startActivity(intent);
+                    ((Activity)context).startActivityForResult(intent, ProfileActivity.TRANSACTION_DETAIL_CODE);
                 }
                 else if (view == ivMessage){
                     Intent i = new Intent(context, ChatActivity.class);

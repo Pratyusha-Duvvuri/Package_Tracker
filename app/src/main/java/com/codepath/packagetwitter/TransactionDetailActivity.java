@@ -67,16 +67,10 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
-<<<<<<< HEAD
-
-
-
-=======
 //    @BindView(R.id.vpCards) ViewPager mViewPager;
 
     CardFragmentPagerAdapter mfragmentCardAdapter;
     ShadowTransformer mshadowTransformer;
->>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
     VerticalStepperFormLayout verticalStepperForm;
     public SharedPreferences sharedPref;
     int transaction_state;
@@ -102,9 +96,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
         currentUserID = getIntent().getStringExtra("ParselTransactionUser");
 
-<<<<<<< HEAD
-
-=======
 //        This block of code was used when we were using viewpager fragments in the activity
 
         //To pass parsel ID to view pager
@@ -124,7 +115,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 //
 //        mViewPager.setPageTransformer(false, mshadowTransformer);
 //        mViewPager.setOffscreenPageLimit(3);
->>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
 
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network
@@ -226,42 +216,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         if (parselTransactionState == 4){
             alreadyExecuted = true;
-<<<<<<< HEAD
-            switch(verticalStepperForm.getActiveStepNumber()){
-                case 0:
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(1, false);
-                    verticalStepperForm.setStepAsCompleted(0);
-                    break;
-                case 1:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(2, false);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    break;
-                case 2:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    verticalStepperForm.goToStep(3, false);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    break;
-                case 3:
-                    verticalStepperForm.setStepAsCompleted(0);
-                    verticalStepperForm.setStepAsCompleted(1);
-                    verticalStepperForm.setStepAsCompleted(2);
-                    verticalStepperForm.goToStep(4, false);
-                    verticalStepperForm.setStepAsCompleted(3);
-                    break;
-                default:
-                    break;
-
-            }
-
-=======
             verticalStepperForm.setStepAsCompleted(0);
             verticalStepperForm.goToStep(1, false);
             verticalStepperForm.setStepAsCompleted(1);
@@ -271,7 +225,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             verticalStepperForm.setStepAsCompleted(3);
             verticalStepperForm.goToStep(4, false);
             verticalStepperForm.setStepAsCompleted(4);
->>>>>>> fa5f45058575deb112e1dcbc053a8dd1be9c368b
             alreadyExecuted = true;
         }
         confirm_button.setOnClickListener(new View.OnClickListener() {
@@ -288,7 +241,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     }
 
-//This function is to render the viewpager correctly
+    //This function is to render the viewpager correctly
     public static float dpToPixels(int dp, Context context) {
         return dp * (context.getResources().getDisplayMetrics().density);
     }
