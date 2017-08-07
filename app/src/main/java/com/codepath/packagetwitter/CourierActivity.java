@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -127,6 +129,11 @@ public class CourierActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
         getSupportActionBar().setTitle("Start a New Trip");
         toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
 
         startLocation.setOnClickListener(new View.OnClickListener() {
             @Override
