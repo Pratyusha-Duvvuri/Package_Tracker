@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -70,14 +71,16 @@ public class ReviewActivity extends AppCompatActivity {
         type = getIntent().getStringExtra("type");
         fragile = getIntent().getBooleanExtra("fragile",false);
         image = getIntent().getByteArrayExtra("package_image");
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar5);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        getSupportActionBar().setTitle("Review Information");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
 
 
         fl.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
             public void onSwipeLeft() {
-
-
 
                     page = 1;
                     ft = getSupportFragmentManager().beginTransaction();
@@ -86,10 +89,6 @@ public class ReviewActivity extends AppCompatActivity {
                     ft.commit();
                     page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
                     page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
-
-
-
-
 
             }
 

@@ -121,12 +121,12 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-//        setSupportActionBar(toolbar);
-//        ((TextView) findViewById(R.id.main_toolbar_title)).setText("Package Details");
-
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar4);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
         getSupportActionBar().setTitle("Package Details");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
+
 
         defaultTextColor = tvClothes.getTextColors().getDefaultColor();
 

@@ -89,13 +89,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         setContentView(R.layout.activity_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
-        toolbar.setTitle("PACK'D");
-        toolbar.setBackgroundColor(Color.parseColor("#009CA0"));
-
+        getSupportActionBar().setTitle("PACK'D");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
 
         ignore = true;
         ivProfileImage = (ImageButton) findViewById(R.id.ivProfileImage);
