@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -110,7 +111,11 @@ public class CourierActivity extends AppCompatActivity {
         date = cal.get(Calendar.DATE);
         showDialogButtonClick();
 
-        // Apply the adapter to the spinner
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar6);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        getSupportActionBar().setTitle("Start a New Trip");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
 
         startLocation.setOnClickListener(new View.OnClickListener() {
             @Override

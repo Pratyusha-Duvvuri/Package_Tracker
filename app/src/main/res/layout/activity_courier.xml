@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.packagetwitter.CourierActivity"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar6"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:titleTextColor="@android:color/white"
+
+        android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,8 +27,8 @@
     android:orientation="vertical">
 
 
-
     <TextView
+
         android:id="@+id/tvWhere"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -226,36 +245,12 @@
     </RelativeLayout>
 
 
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView3"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--app:srcCompat="@drawable/calendar"-->
-        <!--android:layout_below="@+id/tvWhen"-->
-        <!--android:layout_alignStart="@+id/textView5"-->
-        <!--android:layout_marginTop="50dp" />-->
-
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView4"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--app:srcCompat="@drawable/calendar"-->
-        <!--android:layout_marginStart="44dp"-->
-        <!--android:layout_alignBottom="@+id/textView2"-->
-        <!--android:layout_alignStart="@+id/next" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tvTo"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1" />-->
 
     <Button
         android:id="@+id/next"
 
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
 
         android:layout_alignParentEnd="true"
@@ -266,55 +261,12 @@
         android:shadowDy="0"
         android:shadowRadius="0"
         android:text="NEXT"
+        android:backgroundTint="@color/colorPrimary"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="to:"-->
-        <!--android:textSize="30sp"-->
-        <!--android:id="@+id/textView2"-->
-        <!--android:layout_alignBottom="@+id/imageView3"-->
-        <!--android:layout_centerHorizontal="true" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView5"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Start Date:"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_marginEnd="24dp"-->
-        <!--android:layout_alignBottom="@+id/tvEndDate"-->
-        <!--android:layout_toStartOf="@+id/textView2"-->
-        <!--android:layout_alignTop="@+id/tvEndDate" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tvEndDate"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="End Date:"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_above="@+id/imageView4"-->
-        <!--android:layout_alignEnd="@+id/imageView4"-->
-        <!--android:layout_marginBottom="20dp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/displaySenderStart"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/next"-->
-        <!--android:layout_marginBottom="50dp"-->
-        <!--android:layout_alignStart="@+id/imageView3" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/displaySenderEnd"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/next"-->
-        <!--android:layout_marginBottom="50dp"-->
-        <!--android:layout_alignStart="@+id/tvEndDate" />-->
 
 
 
 </RelativeLayout>
+</LinearLayout>

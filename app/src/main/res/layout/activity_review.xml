@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        app:srcCompat="@drawable/dot_unfilled"
+        app:srcCompat="@drawable/dot_filled"
         android:layout_above="@+id/confirm"
 
         android:layout_toStartOf="@+id/confirm"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        app:srcCompat="@drawable/dot_filled"
+        app:srcCompat="@drawable/dot_unfilled"
         android:layout_alignTop="@+id/page2"
         android:layout_toEndOf="@+id/cancel" />
 
