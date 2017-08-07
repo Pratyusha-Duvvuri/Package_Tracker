@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/confirm"
-        android:layout_below="@id/tvTitle"
+        android:layout_below="@+id/tvTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15sp"
