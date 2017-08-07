@@ -441,16 +441,6 @@
 
                     />
 
-                <!--<ImageView-->
-                <!--android:id="@+id/divSenderCourier"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="35dp"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginRight="2dp"-->
-                <!--android:layout_toLeftOf="@id/ivCourier"-->
-                <!--fab:srcCompat="@drawable/vertical_line" />-->
             </RelativeLayout>
             <View
                 android:id="@+id/view8"
@@ -487,10 +477,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/email"
+
         fab:menu_backgroundColor="@color/colorPrimary"
         fab:fab_label="Chat To Arrange Your Transaction"
         fab:fab_colorNormal="@color/colorPrimary"
         fab:fab_size="normal"
+
+        fab:menu_colorNormal="@color/colorPrimary"
+        fab:menu_colorPressed="@color/colorPrimary"
+        fab:menu_colorRipple="@color/colorPrimary"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/fab_add"
+        fab:menu_labels_colorNormal="@color/colorPrimary"
+        fab:menu_labels_colorPressed="@color/colorPrimary"
+        fab:menu_labels_colorRipple="@color/colorPrimary"
+
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
         android:layout_alignParentBottom="true"
