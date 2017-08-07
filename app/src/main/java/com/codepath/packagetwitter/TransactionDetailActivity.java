@@ -103,6 +103,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
+
+
 //        This block of code was used when we were using viewpager fragments in the activity
 
         //To pass parsel ID to view pager
@@ -143,6 +145,10 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
                     if (transaction.getTransactionState() >= 2){
                         tvCourierTitle.setVisibility(View.VISIBLE);
+                    }
+
+                    if (transaction.getTransactionState() <2){
+                        chatButton.setVisibility(View.GONE);
                     }
                     //sets up sender:
                     setUpPerson(transaction.getSender(),ivSender,tvSender);
@@ -212,7 +218,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
         confirm_button = ((Button) stepperFormList.getChildAt(3).findViewById(R.id.next_step));
 
-        if (ParseUser.getCurrentUser().getObjectId().equals(receiverID) && parselTransactionState == 2) {
+        if (currentUserID.equals(receiverID) && parselTransactionState == 2) {
             confirm_button.setText("CONFIRM DELIVERY");
         }
         else

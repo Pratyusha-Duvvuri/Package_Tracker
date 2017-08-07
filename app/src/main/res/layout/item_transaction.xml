@@ -62,13 +62,15 @@
 
     <ImageView
         android:id="@+id/ivMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:visibility="gone"
-        android:layout_toStartOf="@+id/arrow_trans"
+
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignBottom="@id/ivStatus"
-        app:srcCompat="@drawable/messenger_bubble_large_blue" />
+        android:layout_marginEnd="25dp"
+        android:layout_toStartOf="@+id/arrow_trans"
+        android:visibility="gone"
+
+        app:srcCompat="@mipmap/ic_chat" />
 
 
 </RelativeLayout>

@@ -360,6 +360,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 
 
@@ -374,7 +379,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     return;}
-            }).show();
+            });
+            builder.show();
+
+
         }
 
         if (requestCode == COURRIER_REQUEST_CODE && resultCode == RESULT_OK){
@@ -400,9 +408,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     return;}
-            }).show();
+            });
+            builder.show();
 
         }
+
 
 
         if (requestCode == RECEIVER_CODE && resultCode == RESULT_OK){
@@ -434,7 +444,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 public void onClick(DialogInterface dialog, int which) {
                     actOnRequests();
                     return;}
-            }).show();
+            });
+
+            builder.show();
         }
 
         if (requestCode == IMAGE_REQUEST_CODE){
