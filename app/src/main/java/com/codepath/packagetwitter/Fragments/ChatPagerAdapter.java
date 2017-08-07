@@ -5,6 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+import com.codepath.packagetwitter.R;
 
 import static com.codepath.packagetwitter.ChatActivity.messages_main;
 import static com.codepath.packagetwitter.ChatActivity.tabTitles_main;
@@ -56,6 +61,13 @@ public class ChatPagerAdapter extends FragmentPagerAdapter {
 
         return tabTitles_main[position];
 
+    }
+    public View getTabView(int position) {
+        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
+        View v = LayoutInflater.from(context).inflate(R.layout.tabs_bg, null);
+        TextView tv = (TextView) v.findViewById(R.id.tabsText);
+        tv.setText(tabTitles_main[position]);
+        return v;
     }
 
 }
