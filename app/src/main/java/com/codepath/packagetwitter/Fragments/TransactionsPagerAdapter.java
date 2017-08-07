@@ -5,6 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+import com.codepath.packagetwitter.R;
 
 /**
  * Created by michaunp on 7/11/17.
@@ -56,11 +61,11 @@ public class TransactionsPagerAdapter extends FragmentPagerAdapter {
         return tabTitles[position];
     }
 
-//    public View getTabView(int position) {
-//        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-//        View v = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
-//        TextView tv = (TextView) v.findViewById(R.id.textView);
-//        tv.setText(tabTitles[position]);
-//        return v;
-//    }
+    public View getTabView(int position) {
+        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
+        View v = LayoutInflater.from(context).inflate(R.layout.tabs_bg, null);
+        TextView tv = (TextView) v.findViewById(R.id.tabsText);
+        tv.setText(tabTitles[position]);
+        return v;
+    }
 }

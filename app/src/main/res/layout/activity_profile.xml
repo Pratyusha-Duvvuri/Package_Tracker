@@ -6,42 +6,42 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.ProfileActivity">
 
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar2"
-    android:minHeight="?attr/actionBarSize"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="true"
-    app:titleTextColor="@android:color/white"
 
-    android:background="?attr/colorPrimary">
-</android.support.v7.widget.Toolbar>
-    <RelativeLayout
-        android:layout_below="@+id/toolbar2"
-        android:id="@+id/rlUserHeader"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true">
+        android:fitsSystemWindows="true"
+        app:titleTextColor="@android:color/white"
 
+        android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
 
+    <RelativeLayout
+        android:id="@+id/rlUserHeader"
+        android:layout_below="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/white">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginRight="10dp"
+        <ImageButton
             android:id="@+id/ivProfileImage"
-            app:civ_border_width="0.5dp"
-            app:civ_border_color="#FF000000"
-            android:layout_marginBottom="28dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/gradient"
+            android:src="@mipmap/ic_image_placeholder" />
+
+
 
     </RelativeLayout>
 
-    <View android:background="@color/black"
+    <View android:background="@android:color/darker_gray"
         android:layout_width = "match_parent"
         android:layout_above="@+id/sliding_tabs"
         android:layout_height="1dp"/>
@@ -50,12 +50,15 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/rlUserHeader"
-        app:tabIndicatorColor="@color/colorPrimaryLight"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/white_greyish"
+        app:tabIndicatorHeight="0dp"
         app:tabMode="fixed" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -99,8 +102,9 @@
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp"
             fab:menu_animationDelayPerItem="55"
+            fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="@color/colorPrimaryLight"
+            fab:menu_colorNormal="@color/colorPrimary"
             fab:menu_colorPressed="#dc4b3f"
             fab:menu_colorRipple="#99d4d4d4"
             fab:menu_fab_size="normal"
@@ -131,10 +135,9 @@
                 android:id="@+id/material_design_floating_action_menu_sender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:src="@drawable/ic_add_white"
-                fab:fab_colorNormal="@color/colorPrimaryLight"
+                android:src="@drawable/ic_add"
                 fab:fab_label="Send a Package"
+                fab:fab_colorNormal="@color/colorPrimaryLight"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -142,36 +145,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/colorPrimaryLight"
-                android:src="@drawable/ic_add_white"
+                android:src="@drawable/ic_add"
                 fab:fab_label="Enter a New Trip"
-
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
 
-        <TextView
-            android:id="@+id/tvName"
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="131dp"
+            android:layout_above="@+id/material_design_android_floating_action_menu"
+            android:layout_alignParentStart="true">
 
-            android:layout_marginStart="134dp"
-            android:text="Name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="82dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvDescription"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="15dp"
+                android:hint="Name"
+                android:textColor="@color/white_greyish"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvTagline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Tagline"
-            android:textSize="12sp"
-            android:layout_below="@+id/tvName"
-            android:layout_alignStart="@+id/tvName" />
+            <TextView
+                android:id="@+id/tvTagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ibPackageUpload"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:hint="Tagline"
+                android:textColor="@color/white_greyish"
+                android:textSize="13sp" />
+        </LinearLayout>
     </RelativeLayout>
 
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#007275</color>
-    <color name="colorPrimary">#009CA0</color>
-    <color name="colorPrimaryLight">#6EFFFF</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00675b</color>
+    <color name="colorPrimaryLight">#52c7b8</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="background_color">#009688</color>
+
     <color name="colorSecondary">#FF8A5B</color>
     <color name="colorSecondaryDark">#C75B2F</color>
     <color name="colorSecondaryLight">#FFBB89</color>
-    <color name="colorAccent">#EA526F</color>
-    <color name="background_color">#E87E53</color>
-
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -25,12 +25,4 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
 
-
 </resources>
-
-
-<!--<color name="colorPrimary">#009688</color>-->
-<!--<color name="colorPrimaryDark">#00675b</color>-->
-<!--<color name="colorPrimaryLight">#52c7b8</color>-->
-<!--<color name="colorAccent">#FF4081</color>-->
-<!--<color name="background_color">#009688</color>-->
