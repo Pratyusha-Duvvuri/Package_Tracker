@@ -27,7 +27,8 @@
         android:layout_height="20dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        app:srcCompat="@drawable/next" />
+        android:layout_marginEnd="21dp"
+        app:srcCompat="@drawable/ic_next" />
 
     <ImageView
         android:id="@+id/ivStatus"
