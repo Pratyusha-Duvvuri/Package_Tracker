@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
-        android:text="Mention Your Arrival and Departure Destinations"
+        android:text="Enter Your Arrival and Departure Destinations"
         android:textSize="16sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -138,7 +138,7 @@
         android:layout_below="@+id/locations"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="16dp"
-        android:text="Mention Travel Date Range"
+        android:text="Enter Travel Date Range"
         android:textSize="16sp" />
     <RelativeLayout
         android:id="@+id/rlDates"
@@ -425,9 +425,9 @@
             android:text="Enter Package Size Below"
             android:textAlignment="viewStart"
             android:textSize="16sp"
-            android:layout_below="@+id/tvTitle"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="31dp" />
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

@@ -5,28 +5,25 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_profile_image"
+        android:layout_width="230dp"
 
-            android:layout_marginLeft="200dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/iv_profile_image"
+        android:layout_height="170dp"
+        android:layout_above="@+id/et_fullName"
+        android:layout_centerHorizontal="true"
 
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"
-            android:layout_marginBottom="28dp"
-            android:layout_above="@+id/name_icon"
-            android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="26dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="20dp"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
 
     <ImageView
         android:id="@+id/iv_updatePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit"
-        android:layout_marginEnd="33dp"
-        android:layout_marginTop="34dp"
         android:layout_alignTop="@+id/iv_profile_image"
         android:layout_alignEnd="@+id/iv_profile_image" />
     <ImageView
@@ -34,16 +31,16 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_user_green"
         android:id="@+id/name_icon"
-        android:layout_marginStart="23dp"
-        android:layout_alignTop="@+id/et_fullName"
+        android:layout_marginStart="24dp"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_location_green"
         android:id="@+id/locaation_icon"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/email_icaon"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/et_email"
         android:layout_alignStart="@+id/email_icaon" />
     <ImageView
         android:layout_width="wrap_content"
@@ -51,7 +48,7 @@
         android:src="@drawable/ic_email_green"
         android:layout_marginTop="22dp"
         android:id="@+id/email_icaon"
-        android:layout_below="@+id/name_icon"
+        android:layout_below="@+id/et_fullName"
         android:layout_alignStart="@+id/name_icon" />
 
     <EditText
@@ -60,7 +57,7 @@
         android:editable="false"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/locaation_icon"
+        android:layout_alignBottom="@+id/locaation_icon"
         android:layout_alignStart="@+id/et_email" />
 
     <EditText
@@ -68,7 +65,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:layout_alignTop="@+id/email_icaon"
+        android:layout_alignBottom="@+id/email_icaon"
         android:layout_alignStart="@+id/et_fullName" />
 
     <EditText

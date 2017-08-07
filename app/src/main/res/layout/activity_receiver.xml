@@ -43,9 +43,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/confirm"
-        android:layout_below="@id/toolbar3"
-        android:layout_centerHorizontal="true"
 
+        android:layout_centerHorizontal="true"
+android:layout_below="@id/toolbar3"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15sp"
         android:background="@drawable/back"

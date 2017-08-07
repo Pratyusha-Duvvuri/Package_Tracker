@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -87,6 +88,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -135,12 +138,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                 }
             }
         });
-
-
-
-
-
-        //this code is to set up the transactions for the three tabs
+    //this code is to set up the transactions for the three tabs
         pagerAdapter = new TransactionsPagerAdapter(getSupportFragmentManager(), this);
 
 
@@ -163,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         //if (((PendingTransactionFragment)pagerAdapter.getItem(vpPager.getCurrentItem())).getTransactions().size() == 0)
         //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
+        floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_sender);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_courier);
 
 
@@ -183,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             }
         });
 //        For image profie view
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, PackageCreationPart1Activity.class);
 
@@ -196,9 +194,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         ivProfileImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ProfileActivity.this, FileUploadActivity.class);
-
-
                 startActivityForResult(i,IMAGE_REQUEST_CODE);
+
             }
         });
     }
@@ -206,6 +203,18 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     public void onFinishEditDialogThis() {
 
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
     }
 
     public  void setupDivider(TabLayout tabLayout){
