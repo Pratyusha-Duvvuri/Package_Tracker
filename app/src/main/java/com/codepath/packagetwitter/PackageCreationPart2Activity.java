@@ -442,6 +442,7 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 Bitmap bitmap = (Bitmap) extras.get("data");
                 ivPackageImage.setImageBitmap(bitmap);
+                ivPackageImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                 // Convert it to gibyte
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
