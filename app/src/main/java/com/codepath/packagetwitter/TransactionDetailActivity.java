@@ -103,6 +103,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
+
+
 //        This block of code was used when we were using viewpager fragments in the activity
 
         //To pass parsel ID to view pager
@@ -143,6 +145,10 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
                     TypedArray sizePics = getResources().obtainTypedArray(R.array.size_pics);
                     if (transaction.getTransactionState() >= 2){
                         tvCourierTitle.setVisibility(View.VISIBLE);
+                    }
+
+                    if (transaction.getTransactionState() <2){
+                        chatButton.setVisibility(View.GONE);
                     }
                     //sets up sender:
                     setUpPerson(transaction.getSender(),ivSender,tvSender);

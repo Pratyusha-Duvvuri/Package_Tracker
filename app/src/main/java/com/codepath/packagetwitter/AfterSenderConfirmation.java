@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,11 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         view2 = getLayoutInflater().inflate(R.layout.activity_after_sender_confirmation, null);
 
         setContentView(view1);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        getSupportActionBar().setTitle("Review Information");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
         page1 = (ImageView) findViewById(R.id.page1);
         page2  = (ImageView)findViewById(R.id.page2);
 
