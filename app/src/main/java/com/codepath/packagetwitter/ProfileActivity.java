@@ -204,18 +204,18 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialogThis() {
 
     }
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-    }
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-    }
+//    @Override
+//    protected void onResume()
+//    {
+//        super.onResume();
+//        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
+//    }
+//    @Override
+//    protected void onPause()
+//    {
+//        super.onPause();
+////        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+//    }
 
     public  void setupDivider(TabLayout tabLayout){
 

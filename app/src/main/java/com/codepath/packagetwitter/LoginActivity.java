@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.codepath.packagetwitter.Fragments.Login_Fragment;
 import com.facebook.FacebookSdk;
@@ -135,6 +136,23 @@ public class LoginActivity extends AppCompatActivity {
 
         login_fragment.onRequestPermissionsResult( requestCode,  permissions,  grantResults);
 
+    }
+
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        loginButton.setVisibility(View.VISIBLE);
+//        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
+
+//        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
     }
 
 }

@@ -41,11 +41,8 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 public class FileUploadActivity extends Activity {
 
     Button button;
-    public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
     public ImageView ivPreview;
-    public Button btnUploadson;
     public Button GoBack;
     public EditText location;
     public EditText name;
@@ -57,7 +54,6 @@ public class FileUploadActivity extends Activity {
     public  byte[] updated_image;
     public ImageView closeButton;
     public ImageView update_pic;
-
 
 
     @Override
@@ -128,10 +124,7 @@ public class FileUploadActivity extends Activity {
         update_pic.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                // Locate the image in res > drawable-hdpi
                 onLaunchCamera(view);
-
-                // Show a simple toast message
 
             }
         });
@@ -280,6 +273,20 @@ public class FileUploadActivity extends Activity {
             });
 
         }
+
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+    }
 
 }
 
