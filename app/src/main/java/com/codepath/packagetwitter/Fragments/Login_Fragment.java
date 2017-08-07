@@ -313,6 +313,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                         Log.i("LoginActivity", response.toString());
                         // Get facebook data from login
+                        loginButton.setVisibility(View.GONE);
 
                         bFacebookData = getFacebookData(object);
                         newUserorCurrentUser();
@@ -395,6 +396,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 bundle.putString("first_name", object.getString("first_name"));
             if (object.has("last_name"))
                 bundle.putString("last_name", object.getString("last_name"));
+            Toast.makeText(getActivity(), "Welcome "+ bundle.getString("first_name")+" "+bundle.getString("last_name")+" "+("\ud83d\ude01"), Toast.LENGTH_SHORT).show();
             if (object.has("email"))
                 bundle.putString("email", object.getString("email"));
             if (object.has("gender"))
