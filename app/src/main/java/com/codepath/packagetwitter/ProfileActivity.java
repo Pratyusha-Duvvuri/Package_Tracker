@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -90,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        toolbar.setNavigationIcon(R.mipmap.ic_only_plane);
         getSupportActionBar().setTitle("PACK'D");
         toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
 
@@ -105,6 +107,10 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tvTagline = (TextView) findViewById(R.id.tvTagline);
         tvTransaction = (TextView) findViewById(R.id.tvTransaction);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
         fm = getSupportFragmentManager();
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);

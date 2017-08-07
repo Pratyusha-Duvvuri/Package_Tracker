@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -95,6 +97,11 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
         parselTransactionState = getIntent().getIntExtra("ParselTransactionState",0);
         receiverID = getIntent().getStringExtra("ParselTransactionReceiver");
         currentUserID = getIntent().getStringExtra("ParselTransactionUser");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
 
 //        This block of code was used when we were using viewpager fragments in the activity
 
