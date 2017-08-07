@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="From where are you planning on sending the package?"
+            android:text="Enter the start and end location of the package"
             android:textSize="16dp" />
 
 
@@ -192,12 +192,12 @@
 
                 <ImageView
                     android:id="@+id/whoIcon"
-                    android:layout_width="32dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@mipmap/if_user_add_383199"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="16dp" />
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:src="@mipmap/ic_add_user_red" />
 
                 <AutoCompleteTextView
                     android:id="@+id/et_receiverHandle"
@@ -207,7 +207,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:hint="Enter receiver's handle"
+                    android:hint="Enter recipient's handle"
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/whoIcon" />
             </RelativeLayout>
@@ -240,120 +240,125 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/whenTag"
             android:paddingLeft="16dp"
-            android:text="Mention your available date range to send the package"
+            android:text="Enter your available date range to send the package"
             android:textSize="16dp" />
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rlDates"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.04">
-
         <RelativeLayout
-            android:id="@+id/rlStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true">
-
-            <ImageView
-                android:id="@+id/endCalendar"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="7dp"
-                android:src="@drawable/calendar"
-
-                />
-
-            <TextView
-                android:id="@+id/senderEndDateB"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:hint="End"
-                android:text="Start Date: "
-                android:textSize="16dp"
-                android:layout_alignTop="@+id/endCalendar"
-                android:layout_toEndOf="@+id/endCalendar" />
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignBottom="@id/senderEndDateB"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@id/senderEndDateB"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/tvStartDate"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_alignEnd="@+id/view6"
-/>        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rlEnd"
+            android:id="@+id/rlDates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/rlStart">
+            android:layout_weight="0.04">
 
-
-            <ImageView
-                android:id="@+id/startCalendar"
-
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/calendar"
-
-                />
-
-            <TextView
-                android:id="@+id/senderStartDateB"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:layout_alignTop="@id/startCalendar"
-                android:layout_gravity="center"
-                android:layout_toRightOf="@id/startCalendar"
-                android:gravity="center"
-                android:hint="Start"
-                android:text="End Date: "
-                android:textSize="16dp" />
-
-
-            <View
-                android:id="@+id/view5"
+            <RelativeLayout
+                android:id="@+id/rlStart"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignBottom="@id/senderStartDateB"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@id/senderStartDateB"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true">
 
-            <TextView
-                android:id="@+id/tvEndDate"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_above="@+id/view5"
-                android:layout_alignEnd="@+id/view5"
-                android:layout_toEndOf="@+id/senderStartDateB" />
+                <ImageView
+                    android:id="@+id/endCalendar"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginStart="26dp"
+                    android:src="@mipmap/ic_calendar_red" />
+
+                <TextView
+                    android:id="@+id/senderEndDateB"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@+id/endCalendar"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:hint="End"
+                    android:text="Start Date: "
+                    android:textSize="16dp" />
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:layout_alignBottom="@id/senderEndDateB"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@id/senderEndDateB"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tvStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignBaseline="@+id/senderEndDateB"
+                    android:layout_alignBottom="@+id/senderEndDateB"
+                    android:layout_toEndOf="@+id/senderEndDateB" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlStart"
+                android:layout_marginTop="10dp">
+
+
+                <ImageView
+                    android:id="@+id/startCalendar"
+
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/ic_calendar_red"
+
+                    />
+
+                <TextView
+                    android:id="@+id/senderStartDateB"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_alignTop="@id/startCalendar"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@id/startCalendar"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:hint="Start"
+                    android:text="End Date: "
+                    android:textSize="16dp" />
+
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:layout_alignBottom="@id/senderStartDateB"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@id/senderStartDateB"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tvEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignBaseline="@+id/senderStartDateB"
+                    android:layout_alignBottom="@+id/senderStartDateB"
+                    android:layout_toEndOf="@+id/senderStartDateB" />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-
-    </RelativeLayout>
 
 
     </LinearLayout>

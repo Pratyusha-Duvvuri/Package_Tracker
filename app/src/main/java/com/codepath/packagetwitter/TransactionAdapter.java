@@ -119,7 +119,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
 
         catch (NullPointerException e) {
-            holder.ivPackageImage.setImageResource(R.drawable.departures);
+            holder.ivPackageImage.setImageResource(R.drawable.ic_courier);
             //        holder.ivPackageImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
         //holder.ivPackageImage.setImageBitmap(transaction.getMail().getPicture());
 

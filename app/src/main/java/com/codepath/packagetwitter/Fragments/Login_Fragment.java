@@ -336,7 +336,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             @Override
             public void onError(FacebookException exception) {
                 System.out.println("onError");
-                Log.v("LoginActivity", exception.getCause().toString());
+                //Log.v("LoginActivity", exception.getCause().toString());
             }
         });
     }

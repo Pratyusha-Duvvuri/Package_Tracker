@@ -40,7 +40,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:foregroundGravity="center"
-                android:src="@mipmap/if_arrow_right_392525" />
+                android:src="@drawable/ic_next_white" />
 
             <TextView
                 android:id="@+id/tvTo"

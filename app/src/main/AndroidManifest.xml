@@ -46,7 +46,8 @@
 			android:name=".TransactionDetailTest"
 			android:theme="@style/AppTheme.NoActionBar" />
 		<activity android:name=".CourierActivity"
-			android:theme="@style/AppTheme.NoActionBar"/>
+			android:theme="@style/AppTheme.NoActionBar"
+			android:windowSoftInputMode="stateHidden"/>
 		<activity android:name=".ProfileActivity"
 			android:theme="@style/AppTheme.NoActionBar"
 			/>
@@ -59,8 +60,8 @@
 			android:theme="@style/AppTheme.NoActionBar"/>
 		<activity
 			android:name=".PackageCreationPart2Activity"
-
-			android:theme="@style/AppTheme.NoActionBar"/>
+			android:theme="@style/AppTheme.NoActionBar"
+			android:windowSoftInputMode="stateHidden"/>
 		<activity android:name=".ReceiverActivity"
 			/>
 		<activity android:name=".ReviewActivity"

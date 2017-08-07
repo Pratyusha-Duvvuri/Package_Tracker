@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -155,12 +157,12 @@
 
             <ImageView
                 android:id="@+id/endCalendar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="7dp"
-                android:src="@drawable/calendar" />
+                android:src="@mipmap/ic_calendar_red" />
 
             <TextView
                 android:id="@+id/senderEndDateB"
@@ -176,7 +178,7 @@
 
             <View
                 android:id="@+id/view6"
-                android:layout_width="match_parent"
+                android:layout_width="60dp"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/senderEndDateB"
                 android:layout_marginBottom="15dp"
@@ -204,13 +206,13 @@
             <ImageView
                 android:id="@+id/startCalendar"
 
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/calendar"
+                android:src="@mipmap/ic_calendar_red"
 
                 />
 
@@ -229,7 +231,7 @@
 
             <View
                 android:id="@+id/view5"
-                android:layout_width="match_parent"
+                android:layout_width="60dp"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/senderStartDateB"
                 android:layout_marginBottom="15dp"
@@ -370,7 +372,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/cvPackageSize"
-                >
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:id="@+id/tvlbs"
