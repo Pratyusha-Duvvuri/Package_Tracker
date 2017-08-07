@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -62,6 +63,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -94,6 +97,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public Geocoder geocoder;
     public String locality;
     public static Location user_location;
+    public Bitmap bitmap;
 
     public Login_Fragment() {
 
@@ -289,7 +293,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             case R.id.login_button:
                 onFbLogin();
                 throughFacebook = true;
-//                loginButton.setVisibility(View.INVISIBLE);
 
                 break;
         }
@@ -338,23 +341,55 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         });
     }
 
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
 
     private Bundle getFacebookData(JSONObject object) {
 
         try {
             Bundle bundle = new Bundle();
             String id = object.getString("id");
+            final URL profile_pic;
 
             try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                 profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=200");
+
                 Log.i("profile_pic", profile_pic.toString());
                 bundle.putString("profile_pic", profile_pic.toString());
+
+                new AsyncTask<String, Void, Bitmap>() {
+                    @Override
+                    protected Bitmap doInBackground(String... params) {
+                        return getBitmapFromURL(profile_pic.toString());
+                    }
+
+                    @Override
+                    protected void onPostExecute(Bitmap b) {
+                        super.onPostExecute(b);
+                        bitmap= b;
+
+                    }
+                }.execute(/*your params*/);
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return null;
             }
-
+            //TODO
             bundle.putString("idFacebook", id);
             if (object.has("first_name"))
                 bundle.putString("first_name", object.getString("first_name"));
@@ -366,6 +401,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 bundle.putString("gender", object.getString("gender"));
             if (object.has("birthday"))
                 bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
             if (object.has("location"))
                 bundle.putString("location", object.getJSONObject("location").getString("name"));
 
@@ -381,9 +418,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         currentUser.logOut();
 
         ParseUser user = new ParseUser();
-// Set core properties
-
+        // Set core properties
         user.setUsername(bFacebookData.getString("email"));
+//        user.setPassword(bFacebookData.getString("idFacebook"));
         user.setPassword("x");
         user.setEmail(bFacebookData.getString("email"));
         user.put("fullName", bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name"));
@@ -392,33 +429,25 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         else
             user.put("location", "Tacoma");
 
+
+
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
 
                     ParseUser userrr = ParseUser.getCurrentUser();
-
                     parseUser = userrr;
-                    if (parseUser.getParseFile("ImageFile") == null) {
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 1, stream);
+                            byte[] image = stream.toByteArray();
 
+                            ParseFile file = new ParseFile("Default", image);
+                            file.saveInBackground();
 
-                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.error);
-                        // Convert it to byte
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        // Compress image to lower quality scale 1 - 100
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        byte[] image = stream.toByteArray();
+                            parseUser.put("ImageFile", file);
 
-                        ParseFile file = new ParseFile("Default", image);
-                        file.saveInBackground();
-
-                        parseUser.put("ImageFile", file);
-
-                        parseUser.saveInBackground();
-
-                    }
+                            parseUser.saveInBackground();
 
                     Log.d("ParseApplication", "Logged in successfully");
                     // Hooray! The user is logged in.
@@ -426,13 +455,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     i.putExtra("PARSEUSER", parseUser.getObjectId());
                     startActivity(i);
 
-
-                    // Hooray! Let them use the app now.
                 } else {
-
-
-                    e.printStackTrace();                // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    e.printStackTrace();
                 }
             }
         });
@@ -441,7 +465,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
     public void newUserorCurrentUser() {
-
+//        newUser();
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", bFacebookData.getString("email"));
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -465,9 +489,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public void returningUser() {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
-//        currentUser.logOut();
+        if(currentUser!=null) currentUser.logOut();
 
         ParseUser.logInInBackground(bFacebookData.getString("email"), "x", new LogInCallback() {
+//        ParseUser.logInInBackground(bFacebookData.getString("email"), bFacebookData.getString("idFacebook"), new LogInCallback() {
             @Override
             public void done(ParseUser userrr, ParseException e) {
                 if (userrr != null) {
@@ -476,7 +501,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     parseUser = userrr;
                     if (parseUser.getParseFile("ImageFile") == null) {
 
-
                         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.error);
                         // Convert it to byte
@@ -484,14 +508,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         // Compress image to lower quality scale 1 - 100
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         byte[] image = stream.toByteArray();
-
                         ParseFile file = new ParseFile("Default", image);
                         file.saveInBackground();
-
                         parseUser.put("ImageFile", file);
-
                         parseUser.saveInBackground();
-
                     }
 
                     Log.d("ParseApplication", "Logged in successfully");
