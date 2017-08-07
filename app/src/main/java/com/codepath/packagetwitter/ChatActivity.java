@@ -146,6 +146,12 @@ public class ChatActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs2);
         tabLayout.setupWithViewPager(vpPager);
 
+        //Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(pagerAdapter.getTabView(i));
+        }
+
     }
 
     public static void loadImageBoi(int pos){
