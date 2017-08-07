@@ -47,6 +47,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_weight="4.33"
+        android:backgroundTint="@color/colorPrimary"
         android:background="@drawable/buttonshape"
         android:onClick="confirm"
         android:shadowDx="0"
@@ -54,7 +55,7 @@
         android:shadowRadius="0"
         android:text="confirm"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />

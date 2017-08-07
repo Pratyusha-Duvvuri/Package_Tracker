@@ -18,6 +18,7 @@
         android:layout_height="50dp"
         android:layout_weight="0.04"
         android:background="@drawable/buttonshape"
+        android:backgroundTint="@color/colorPrimary"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="0"

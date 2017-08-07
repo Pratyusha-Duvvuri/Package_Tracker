@@ -436,13 +436,14 @@
         android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_weight="4.33"
         android:background="@drawable/buttonshape"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="0"
         android:text="Confirm"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 </LinearLayout>
 </ScrollView>

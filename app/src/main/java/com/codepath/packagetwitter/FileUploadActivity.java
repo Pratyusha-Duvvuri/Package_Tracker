@@ -65,7 +65,6 @@ public class FileUploadActivity extends Activity {
         newPictureTaken=false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_change_layout);
-        btnUploadson = (Button) findViewById(R.id.btnuploadson);
         location = (EditText) findViewById(R.id.et_location);
         name = (EditText) findViewById(R.id.et_fullName);
         email = (EditText) findViewById(R.id.et_email);

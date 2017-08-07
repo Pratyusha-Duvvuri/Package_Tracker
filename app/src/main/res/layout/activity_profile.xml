@@ -106,7 +106,7 @@
             fab:menu_buttonSpacing="0dp"
             fab:menu_colorNormal="@color/colorPrimary"
             fab:menu_colorPressed="#dc4b3f"
-            fab:menu_colorRipple="#99d4d4d4"
+            fab:menu_colorRipple="@color/colorPrimary"
             fab:menu_fab_size="normal"
             fab:menu_icon="@drawable/fab_add"
             fab:menu_labels_colorNormal="#333"
@@ -191,7 +191,6 @@
                 android:textSize="13sp" />
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </RelativeLayout>
