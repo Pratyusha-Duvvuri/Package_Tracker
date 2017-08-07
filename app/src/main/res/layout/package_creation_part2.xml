@@ -13,7 +13,16 @@
         android:background="?android:attr/colorBackground"
         android:orientation="vertical"
         android:weightSum="1">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar4"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:titleTextColor="@android:color/white"
 
+            android:background="?attr/colorPrimary">
+        </android.support.v7.widget.Toolbar>
         <ImageView
             android:id="@+id/ivPackageImage"
             android:layout_width="match_parent"

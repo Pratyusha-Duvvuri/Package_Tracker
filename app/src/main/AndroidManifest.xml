@@ -54,12 +54,15 @@
         <activity android:name=".AfterSenderConfirmation" />
         <activity android:name=".FileUploadActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".PackageCreationPart1Activity" />
+        <activity android:name=".PackageCreationPart1Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".PackageCreationPart2Activity"
-            android:windowSoftInputMode="stateHidden" />
+
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ReceiverActivity" />
-        <activity android:name=".ReviewActivity" />
+        <activity android:name=".ReviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

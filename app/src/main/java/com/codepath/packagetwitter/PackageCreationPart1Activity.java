@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -74,8 +75,11 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         setContentView(R.layout.packagecreationaa);
 
         ButterKnife.bind(this);
-        getSupportActionBar().setTitle("Create A New Package");
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        getSupportActionBar().setTitle("Create a New Package");
+        toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
         senderLocationB.setText(parseUser.getString("location"));
         context = this;
         final Calendar cal = Calendar.getInstance();
