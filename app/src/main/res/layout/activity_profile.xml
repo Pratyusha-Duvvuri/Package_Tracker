@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.packagetwitter.ProfileActivity">
 
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar2"
+    android:minHeight="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    app:titleTextColor="@android:color/white"
 
+    android:background="?attr/colorPrimary">
+</android.support.v7.widget.Toolbar>
     <RelativeLayout
+        android:layout_below="@+id/toolbar2"
         android:id="@+id/rlUserHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true">
+
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -88,9 +99,8 @@
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp"
             fab:menu_animationDelayPerItem="55"
-            fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="#da3c2f"
+            fab:menu_colorNormal="@color/colorPrimaryLight"
             fab:menu_colorPressed="#dc4b3f"
             fab:menu_colorRipple="#99d4d4d4"
             fab:menu_fab_size="normal"
@@ -121,7 +131,9 @@
                 android:id="@+id/material_design_floating_action_menu_sender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/ic_add_white"
+                fab:fab_colorNormal="@color/colorPrimaryLight"
                 fab:fab_label="Send a Package"
                 fab:fab_size="mini" />
 
@@ -129,8 +141,10 @@
                 android:id="@+id/material_design_floating_action_menu_courier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
+                fab:fab_colorNormal="@color/colorPrimaryLight"
+                android:src="@drawable/ic_add_white"
                 fab:fab_label="Enter a New Trip"
+
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
@@ -140,12 +154,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="136dp"
+            android:layout_marginStart="134dp"
             android:text="Name"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="82dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
@@ -153,7 +167,7 @@
             android:id="@+id/tvTagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="40dp"
             android:text="Tagline"
             android:textSize="12sp"
             android:layout_below="@+id/tvName"

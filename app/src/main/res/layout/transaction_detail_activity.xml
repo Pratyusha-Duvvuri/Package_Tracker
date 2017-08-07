@@ -31,15 +31,15 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/white" />
 
-        <ImageView
-            android:id="@+id/ivArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:foregroundGravity="center"
-            android:src="@mipmap/if_arrow_right_392525"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            <ImageView
+                android:id="@+id/ivArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:foregroundGravity="center"
+                android:src="@mipmap/if_arrow_right_392525"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/tvTo"
@@ -339,17 +339,17 @@
                     android:textSize="13sp" />
 
                 <!--<ImageView-->
-                    <!--android:id="@+id/divCourierReceiver"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="35dp"-->
+                <!--android:id="@+id/divCourierReceiver"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="35dp"-->
 
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerVertical="true"-->
 
-                    <!--android:layout_marginLeft="5dp"-->
-                    <!--android:layout_toLeftOf="@id/ivReceiver"-->
-                    <!--fab:srcCompat="@drawable/vertical_line" />-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:layout_toLeftOf="@id/ivReceiver"-->
+                <!--fab:srcCompat="@drawable/vertical_line" />-->
 
 
 
@@ -441,15 +441,15 @@
                     />
 
                 <!--<ImageView-->
-                    <!--android:id="@+id/divSenderCourier"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_marginRight="2dp"-->
-                    <!--android:layout_toLeftOf="@id/ivCourier"-->
-                    <!--fab:srcCompat="@drawable/vertical_line" />-->
+                <!--android:id="@+id/divSenderCourier"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="2dp"-->
+                <!--android:layout_toLeftOf="@id/ivCourier"-->
+                <!--fab:srcCompat="@drawable/vertical_line" />-->
             </RelativeLayout>
             <View
                 android:id="@+id/view8"
@@ -486,7 +486,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/email"
+        fab:menu_backgroundColor="@color/colorPrimaryLight"
         fab:fab_label="Chat To Arrange Your Transaction"
+        fab:fab_colorNormal="@color/colorPrimary"
         fab:fab_size="normal"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
@@ -494,4 +496,3 @@
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
-
