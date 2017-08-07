@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
-        android:text="Where Are You Traveling?"
+        android:text="Mention Your Arrival and Departure Destinations"
         android:textSize="16sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -130,7 +136,7 @@
         android:layout_below="@+id/locations"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="16dp"
-        android:text="When?"
+        android:text="Mention Travel Date Range"
         android:textSize="16sp" />
     <RelativeLayout
         android:id="@+id/rlDates"
@@ -244,29 +250,199 @@
 
     </RelativeLayout>
 
-
-
-    <Button
-        android:id="@+id/next"
-
+    <View
+        android:id="@+id/view8"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-
-        android:layout_alignParentEnd="true"
-        android:layout_weight="4.33"
-        android:background="@drawable/buttonshape"
-        android:onClick="nextLayout"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="0"
-        android:text="NEXT"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
-
-
+        android:layout_height="1dp"
+        android:layout_below="@id/rlDates"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/darker_gray" />
 
 
 </RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvPackageSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:background="@color/white"
+            android:paddingTop="20dp"
+            android:layout_marginTop="9dp"
+            android:layout_below="@+id/tvPackageSize"
+            android:layout_centerHorizontal="true">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/rgSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbKey"
+                            style="@style/KeyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbPhone"
+                            style="@style/ElectronicsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbBook"
+                            style="@style/BooksButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/rbFishBowl"
+                            style="@style/FishBowlButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/llSizeTitles"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvKey"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Key Sized" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Phone Sized" />
+
+                        <TextView
+                            android:id="@+id/tvBook"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Book Sized" />
+
+                        <TextView
+                            android:id="@+id/tvFishBowl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Fish Bowl Sized" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </android.support.v7.widget.CardView>
+
+
+
+            <RelativeLayout
+                android:layout_width="347dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/cvPackageSize"
+                >
+
+                <TextView
+                    android:id="@+id/tvlbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lbs"
+                    android:paddingRight="20dp"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/etWeight"
+                    android:layout_marginStart="12dp" />
+
+                <EditText
+                    android:id="@+id/etWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="e.g. 5.5"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/tvWeight"
+                    android:layout_marginStart="16dp" />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tvWeightTrue"
+                    android:layout_toStartOf="@+id/etWeightTrue"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="20dp"
+                    android:text="Enter Package Weight: "
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                     />
+
+            </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvPackageSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="5dp"
+            android:text="Enter Package Size Below"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            android:layout_below="@+id/tvTitle"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="31dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btConfirm"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="4.33"
+        android:background="@drawable/buttonshape"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="Confirm"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 </LinearLayout>
+</ScrollView>

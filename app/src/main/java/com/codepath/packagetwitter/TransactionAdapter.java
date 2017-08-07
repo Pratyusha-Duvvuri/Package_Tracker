@@ -65,7 +65,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.tvTitle.setText(transaction.getString("title"));
 
 
-
         String status = "";
         switch (transaction.getTransactionState()) {
 
@@ -79,6 +78,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 status = "Awaiting Match";
                 holder.ivStatus.setImageResource(R.drawable.yellow_dot);
                 holder.ivMessage.setVisibility(View.GONE);
+
 
                 break;
             case 2:
@@ -98,6 +98,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 holder.tvTitle.setText("From: " + transaction.getSenderLoc() +"\nTo: " + transaction.getReceiverLoc());
                 holder.tvTitle.setTextSize(13);
                 holder.ivMessage.setVisibility(View.GONE);
+                holder.ArrowTrans.setVisibility(View.GONE);
+
 
                 break;
             default:
@@ -136,6 +138,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public ImageView ivPackageImage;
         public TextView tvStatus;
         public ImageView ivStatus;
+        public ImageView ArrowTrans;
         public TextView tvTitle;
 
         public  ViewHolder (View itemView) {
@@ -144,6 +147,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             itemView.setOnClickListener(this);
             tvStatus = (TextView) itemView.findViewById(R.id.tvStatus);
             ivPackageImage = (ImageView) itemView.findViewById(R.id.ivPackageImage);
+            ArrowTrans = (ImageView) itemView.findViewById(R.id.arrow_trans);
             ivStatus = (ImageView) itemView.findViewById(R.id.ivStatus);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             ivMessage = itemView.findViewById(R.id.ivMessage);
