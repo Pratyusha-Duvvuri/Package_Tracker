@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -87,8 +88,8 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
         ignore = true;
         setContentView(R.layout.activity_profile);
-        ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
-
+        ivProfileImage = (ImageButton) findViewById(R.id.ivProfileImage);
+        ivProfileImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         final FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
@@ -143,12 +144,12 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         tabLayout.setupWithViewPager(vpPager);
 
 
-        // Iterate over all tabs and set the custom view
-//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-//            TabLayout.Tab tab = tabLayout.getTabAt(i);
-//            tab.setCustomView(pagerAdapter.getTabView(i));
-//        }
-        setupDivider(tabLayout);
+         //Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(pagerAdapter.getTabView(i));
+        }
+        //setupDivider(tabLayout);
         //if (((PendingTransactionFragment)pagerAdapter.getItem(vpPager.getCurrentItem())).getTransactions().size() == 0)
         //Floating action button code
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
