@@ -135,17 +135,17 @@
                 android:id="@+id/material_design_floating_action_menu_sender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/ic_add_white"
                 fab:fab_label="Send a Package"
-                fab:fab_colorNormal="@color/colorPrimaryLight"
+                fab:fab_colorNormal="@color/colorPrimary"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/material_design_floating_action_menu_courier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/colorPrimaryLight"
-                android:src="@drawable/ic_add"
+                fab:fab_colorNormal="@color/colorPrimary"
+                android:src="@drawable/ic_add_white"
                 fab:fab_label="Enter a New Trip"
                 fab:fab_size="mini" />
 
