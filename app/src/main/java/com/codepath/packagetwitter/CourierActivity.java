@@ -67,7 +67,6 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.rlEnd)RelativeLayout endDate;
 
 
-    @BindView(R.id.next)Button btnNext;
 
     Button confirm;
     ParselTransaction transaction;
@@ -99,7 +98,6 @@ public class CourierActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         view1 = getLayoutInflater().inflate(R.layout.activity_courier, null);
-        view2 = getLayoutInflater().inflate(R.layout.activity_courier_2, null);
         setContentView(view1);
         ButterKnife.bind(this);
         context = this;
@@ -108,7 +106,20 @@ public class CourierActivity extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         startLocation.setText(parseUser.getString("location"));
 
+        llSizeTitles = view1.findViewById(R.id.llSizeTitles);
+        tvKey = view1.findViewById(R.id.tvKey);
+        tvPhone = view1.findViewById(R.id.tvKey);
+        tvFish =view1.findViewById(R.id.tvFishBowl);
+        rgSize = view1.findViewById(R.id.rgSize);
+
+
+        confirm = (Button) findViewById(R.id.btConfirm);
+
+
+
         date = cal.get(Calendar.DATE);
+        showDialogButtonClick();
+        setRadioGroup();
         showDialogButtonClick();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar6);
@@ -153,30 +164,17 @@ public class CourierActivity extends AppCompatActivity {
 
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
-
-                startAddress =  startLocation.getText().toString();
-                endAddress =  locationEnd.getText().toString();
-
-                setContentView(view2);
-
-                llSizeTitles = view2.findViewById(R.id.llSizeTitles);
-                tvKey = view2.findViewById(R.id.tvKey);
-                tvPhone = view2.findViewById(R.id.tvKey);
-                tvFish =view2.findViewById(R.id.tvFishBowl);
-                rgSize = view2.findViewById(R.id.rgSize);
 
 
-                confirm = (Button) findViewById(R.id.btConfirm);
-
-                setRadioGroup();
-
-                showDialogButtonClick();
 
 
                 confirm.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
+
+                        startAddress =  startLocation.getText().toString();
+                        endAddress =  locationEnd.getText().toString();
+
+
 
                         try {
                             weightAvailable = Double.parseDouble(((EditText) findViewById(R.id.etWeight)).getText().toString());
@@ -191,12 +189,6 @@ public class CourierActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
-
-            }
-        });
 
 
 
