@@ -7,8 +7,20 @@
     tools:context="com.codepath.packagetwitter.ProfileActivity">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:titleTextColor="@android:color/white"
+
+        android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/rlUserHeader"
+        android:layout_below="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -25,19 +37,7 @@
             android:foreground="@drawable/gradient"
             android:src="@mipmap/ic_image_placeholder" />
 
-        <!--<de.hdodenhof.circleimageview.CircleImageView-->
-            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--android:layout_width="75dp"-->
-            <!--android:layout_height="75dp"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:id="@+id/ivProfileImage"-->
-            <!--app:civ_border_width="0.5dp"-->
-            <!--app:civ_border_color="#FF000000"-->
-            <!--android:layout_marginBottom="28dp"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_centerHorizontal="true" />-->
+
 
     </RelativeLayout>
 
@@ -104,7 +104,7 @@
             fab:menu_animationDelayPerItem="55"
             fab:menu_backgroundColor="@android:color/transparent"
             fab:menu_buttonSpacing="0dp"
-            fab:menu_colorNormal="#da3c2f"
+            fab:menu_colorNormal="@color/colorPrimary"
             fab:menu_colorPressed="#dc4b3f"
             fab:menu_colorRipple="#99d4d4d4"
             fab:menu_fab_size="normal"
@@ -137,41 +137,21 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add"
                 fab:fab_label="Send a Package"
+                fab:fab_colorNormal="@color/colorPrimaryLight"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/material_design_floating_action_menu_courier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorPrimaryLight"
                 android:src="@drawable/ic_add"
                 fab:fab_label="Enter a New Trip"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
 
-        <!--<TextView-->
-            <!--android:id="@+id/tvName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
 
-            <!--android:layout_marginStart="136dp"-->
-            <!--android:text="Name"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="16sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:layout_marginTop="31dp"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvTagline"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="18dp"-->
-            <!--android:text="Tagline"-->
-            <!--android:textSize="12sp"-->
-            <!--android:layout_below="@+id/tvName"-->
-            <!--android:layout_alignStart="@+id/tvName" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,21 +86,27 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
+        toolbar.setTitle("PACK'D");
+        toolbar.setBackgroundColor(Color.parseColor("#009CA0"));
+
 
         ignore = true;
-        setContentView(R.layout.activity_profile);
         ivProfileImage = (ImageButton) findViewById(R.id.ivProfileImage);
         ivProfileImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         final FloatingActionMenu materialDesignFAM;
         com.github.clans.fab.FloatingActionButton floatingActionButton1;
         com.github.clans.fab.FloatingActionButton floatingActionButton2;
-        //user = User.getRandomUser(this);
         tvUsername = (TextView) findViewById(R.id.tvName);
         tvHandle = (TextView) findViewById(R.id.tvTagline);
         tvTagline = (TextView) findViewById(R.id.tvTagline);
         tvTransaction = (TextView) findViewById(R.id.tvTransaction);
-
-
 
         fm = getSupportFragmentManager();
         String parseUserId = getIntent().getStringExtra("PARSEUSER");
@@ -432,7 +439,9 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
+
             getMenuInflater().inflate(R.menu.timeline_menu, menu);
+
 
         return true;
     }
