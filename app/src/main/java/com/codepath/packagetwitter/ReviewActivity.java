@@ -1,12 +1,14 @@
 package com.codepath.packagetwitter;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -76,6 +78,11 @@ public class ReviewActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.mipmap.ic_white_plane);
         getSupportActionBar().setTitle("Review Information");
         toolbar.setBackgroundColor(getColor(R.color.colorPrimary));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
 
 
         fl.setOnTouchListener(new OnSwipeTouchListener(this) {
