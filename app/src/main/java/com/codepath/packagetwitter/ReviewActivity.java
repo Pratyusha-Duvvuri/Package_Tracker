@@ -87,8 +87,8 @@ public class ReviewActivity extends AppCompatActivity {
                     Review_frag_two fragment =  Review_frag_two.newInstance(image,title,description, type, volume, weight, fragile);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                    page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
-                    page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
 
             }
 
@@ -100,8 +100,8 @@ public class ReviewActivity extends AppCompatActivity {
                     Review_frag fragment = Review_frag.newInstance(startAddress, endAddress, receiver, startDate, endDate);
                     ft.replace(R.id.flContainer, fragment);
                     ft.commit();
-                    page1.setImageDrawable(getDrawable(R.drawable.dot_filled));
-                    page2.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
+                    page2.setImageDrawable(getDrawable(R.drawable.dot_filled));
+                    page1.setImageDrawable(getDrawable(R.drawable.dot_unfilled));
 
             }
         });
