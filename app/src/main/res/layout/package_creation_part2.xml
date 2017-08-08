@@ -66,10 +66,10 @@
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="301dp"
+                    android:inputType="textCapWords"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:hint="ex. Clothes for my sister"
-                    android:inputType="text"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -480,9 +480,9 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:layout_weight="0.14"
-
+            android:foreground="@drawable/ripple_accept"
             android:background="@drawable/buttonshape"
-            android:text="CONFIRM" />
+            android:text="Proceed to confirmation" />
 
 
     </LinearLayout>

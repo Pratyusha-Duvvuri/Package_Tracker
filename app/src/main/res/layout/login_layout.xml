@@ -96,6 +96,7 @@
             android:padding="3dp"
             android:text="@string/login"
             android:textColor="@color/colorPrimary"
+            android:foreground="@drawable/ripple_accept"
             android:textSize="17sp"
             android:textStyle="bold" />
     </LinearLayout>

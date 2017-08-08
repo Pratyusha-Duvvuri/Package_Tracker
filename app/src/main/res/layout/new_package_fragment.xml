@@ -33,7 +33,7 @@
             android:id="@+id/btnAccept"
             android:layout_width="196dp"
             android:layout_height="29dp"
-
+            android:foreground="@drawable/ripple_accept"
             android:background="@drawable/buttonshape"
             android:text="OK"
             android:textColor="@color/white" />

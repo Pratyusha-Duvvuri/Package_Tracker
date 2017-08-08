@@ -425,7 +425,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 //        user.setPassword(bFacebookData.getString("idFacebook"));
         user.setPassword("x");
         user.setEmail(bFacebookData.getString("email"));
-        user.put("fullName", bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name"));
+        user.put("fullName", bFacebookData.getString("first_name"));
         if(user_location!=null)
         user.put("location", getLocationFromLatLong(user_location.getLatitude(), user_location.getLongitude()));
         else

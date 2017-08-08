@@ -111,7 +111,7 @@
             fab:menu_fab_size="normal"
             fab:menu_icon="@drawable/fab_add"
             fab:menu_labels_colorNormal="@color/colorPrimary"
-            fab:menu_labels_colorPressed="@color/colorPrimary"
+            fab:menu_labels_colorPressed="@color/colorPrimaryDark"
             fab:menu_labels_colorRipple="@color/colorPrimary"
             fab:menu_labels_cornerRadius="3dp"
             fab:menu_labels_ellipsize="none"
@@ -139,6 +139,7 @@
                 android:src="@drawable/ic_add_white"
                 fab:fab_label="Send a Package"
                 fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -148,11 +149,10 @@
                 fab:fab_colorNormal="@color/colorPrimary"
                 android:src="@drawable/ic_add_white"
                 fab:fab_label="Enter a New Trip"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
-
-
 
         <LinearLayout
             android:layout_width="wrap_content"

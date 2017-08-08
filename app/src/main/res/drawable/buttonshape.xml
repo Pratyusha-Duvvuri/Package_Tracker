@@ -16,5 +16,10 @@
         android:width="270dp"
         android:height="20dp"
         />
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="?android:colorAccent" />
+        </shape>
+    </item>
 
 </shape>

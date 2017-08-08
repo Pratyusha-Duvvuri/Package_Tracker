@@ -363,8 +363,6 @@
             </HorizontalScrollView>
         </android.support.v7.widget.CardView>
 
-
-
             <RelativeLayout
                 android:layout_width="347dp"
                 android:layout_height="60dp"
@@ -446,6 +444,7 @@
         android:shadowDy="0"
         android:shadowRadius="0"
         android:text="Confirm"
+        android:foreground="@drawable/ripple_accept"
         android:textColor="@color/white"
         android:textSize="16sp" />
 </LinearLayout>

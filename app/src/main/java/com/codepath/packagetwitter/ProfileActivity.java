@@ -277,6 +277,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
 
 
+
     public void setParametersOfView() {
         tvTagline.setText("Current Location: "+parseUser.getString("location"));
         tvUsername.setText(parseUser.getString("fullName"));

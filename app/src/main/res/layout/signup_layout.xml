@@ -160,6 +160,7 @@
         android:padding="3dp"
         android:text="@string/signUp"
         android:textColor="@color/colorPrimary"
+        android:foreground="@drawable/ripple_accept"
         android:textSize="17sp"
         android:textStyle="bold" />
 
