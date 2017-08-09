@@ -104,21 +104,19 @@ public class Algorithm {
             e.printStackTrace();
         }
 
-        Boolean a = courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate);
-        Boolean b = courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate);
-        Boolean c = transaction.getWeight() <= weightAvailable;
-        Boolean d = transaction.getVolume() <= volumeAvailable;
-        Boolean e = transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc);
+        Boolean senderDateCheck = courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate);
+        Boolean receiverDateCheck = courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate);
+        Boolean weightCheck = transaction.getWeight() <= weightAvailable;
+        Boolean volumeCheck = transaction.getVolume() <= volumeAvailable;
+        Boolean locationCheck = transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc);
 
-        if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
-                && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
-                && transaction.getWeight() <= weightAvailable && transaction.getVolume() <= volumeAvailable
-                && transaction.getSenderLoc().equals(courierStartLoc) && transaction.getReceiverLoc().equals(courierEndLoc)) {//TODO change volume into 0-5
-
-
+        if (senderDateCheck // if courier start date btwn sender start date and end date
+                && receiverDateCheck // if courier end date btwn receiver start date and end date
+                && weightCheck && volumeCheck
+                && locationCheck) {//TODO change volume into 0-5
             return true; // if everything is in order, returns true
         } else {
-            return false; //o
+            return false;
         }
     }
 
@@ -143,7 +141,6 @@ public class Algorithm {
         if (courierStartDate.after(senderStartDate) && courierStartDate.before(senderEndDate) // if courier start date btwn sender start date and end date
                 && courierEndDate.after(receiverStartDate) && courierEndDate.before(receiverEndDate) // if courier end date btwn receiver start date and end date
                 && mail.getWeight() <= courier.getWeightAvailable() && mail.getVolume() <= courier.getVolumeAvailable()) {//TODO change volume into 0-5
-
 
             return true; // if everything is in order, returns true
         } else {

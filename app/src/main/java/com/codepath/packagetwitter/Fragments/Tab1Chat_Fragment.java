@@ -88,7 +88,7 @@ public class Tab1Chat_Fragment extends Fragment {
 
                 if (e == null) {
                         thisUser1 = itemList.get(0);
-                    ChatActivity.loadImageBoi(0);
+                    ChatActivity.loadHeaderImage(0);
 
                 } else {
                     Log.d("ParseApplicationError",e.toString());

@@ -22,8 +22,6 @@ public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter implemen
     CardDetail2 cardDetail2;
     Context context;
 
-
-
     public CardFragmentPagerAdapter(FragmentManager fm, float baseElevation,Context contextt) {
         super(fm);
         mBaseElevation = baseElevation;

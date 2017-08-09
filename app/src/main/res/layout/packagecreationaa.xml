@@ -9,8 +9,6 @@
     android:layout_weight="0.04">
 
 
-
-
     <Button
         android:id="@+id/next"
         android:foreground="@drawable/ripple_accept"
@@ -212,9 +210,6 @@
                     android:textSize="20dp"
                     android:layout_toEndOf="@+id/whoIcon" />
             </RelativeLayout>
-
-
-
 
     </RelativeLayout>
 

@@ -111,7 +111,7 @@ public class ChatActivity extends AppCompatActivity {
                         tabTitles_main[1]="Receiver - "+LoginActivity.dictionary_name.get(receiver_main).toString();
                         tabTitles_main[2]=courier_main;
                     }
-                        setUpStuff();
+                        setUpTabs();
                 }
                 else {
                     Toast.makeText(ChatActivity.this, "Can't access user",
@@ -124,10 +124,9 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public void setUpStuff(){
+    public void setUpTabs(){
 
-
-        //this code is to set up the transactions for the three tabs
+        //set up the transactions for the two tabs
         pagerAdapter = new ChatPagerAdapter(getSupportFragmentManager(), this);
         //get the View pager
         vpPager = (ViewPager) findViewById(R.id.viewpager2);
@@ -139,7 +138,7 @@ public class ChatActivity extends AppCompatActivity {
 
             public void onPageSelected(int position) {
                 if(goOn)
-                        loadImageBoi(position);
+                        loadHeaderImage(position);
             }
         });
         //setup tablayout to use the view pager
@@ -154,7 +153,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public static void loadImageBoi(int pos){
+    public static void loadHeaderImage(int pos){
 
         if(pos==0) {
             postImage = thisUser1.getParseFile("ImageFile");
@@ -168,15 +167,10 @@ public class ChatActivity extends AppCompatActivity {
         }
         String imageUrl = postImage.getUrl();//live url
         imageUri = Uri.parse(imageUrl);
-        loadImage();
 
-    }
-
-    public static void loadImage(){
         Glide.with(context)
                 .load(imageUri.toString())
                 .into(ivProfileImage);
-
     }
 
 }

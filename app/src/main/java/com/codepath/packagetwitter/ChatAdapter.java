@@ -35,7 +35,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         tabNo=tabNum;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -56,8 +55,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Uri imageUri;
         if (isMe) {
             postImage = parseUser.getParseFile("ImageFile");
-//            holder.imageMe.setVisibility(View.GONE);
-//            holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
             holder.body2.setVisibility(View.VISIBLE);
             holder.body2.setText(message.getBody());
@@ -66,15 +63,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             String imageUrl = postImage.getUrl();//live url
              imageUri = Uri.parse(imageUrl);
 
-            //put my image from parse user
-        } else {
+        }
+        else {
             if(tabNo==0)
                 postImage = thisUser1.getParseFile("ImageFile");
             else
                 postImage = thisUser2.getParseFile("ImageFile");
             holder.body.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.VISIBLE);
-//            holder.imageMe.setVisibility(View.GONE);
             holder.body.setText(message.getBody());
             holder.body2.setVisibility(View.GONE);
 
@@ -84,12 +80,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
              imageUri = Uri.parse(imageUrl);
         }
         //change this code to reflect user now
+        //TODO what does this peice of code do
         final ImageView profileView = holder.imageOther;
         Glide.with(holder.imageOther.getContext()).load(imageUri.toString()).into(profileView);
-//        holder.body.setText(message.getBody());
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -98,14 +92,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageOther;
-//        ImageView imageMe;
         TextView body;
         TextView body2;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
-//            imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
             body = (TextView)itemView.findViewById(R.id.tvBody);
             body2 = (TextView)itemView.findViewById(R.id.tvBody2);
         }

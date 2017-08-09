@@ -437,8 +437,6 @@ public class CourierActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
     public void onSubmit(){
