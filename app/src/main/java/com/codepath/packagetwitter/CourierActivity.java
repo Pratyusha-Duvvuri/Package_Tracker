@@ -64,7 +64,6 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.tvStartDate)TextView displaySenderStart;
     @BindView(R.id.tvEndDate)TextView displaySenderEnd;
 
-
     @BindView(R.id.rlStart)RelativeLayout startDate;
     @BindView(R.id.rlEnd)RelativeLayout endDate;
 
@@ -87,7 +86,7 @@ public class CourierActivity extends AppCompatActivity {
     int volumes;
     String startAddress;
     String endAddress;
-    private View view1, view2;
+    private View view1;
     RadioGroup rgSize;
 
     Context context;

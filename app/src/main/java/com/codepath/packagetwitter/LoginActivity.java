@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         AppEventsLogger.activateApp(this);
 
-
         setContentView(R.layout.activity_login);
         userListMain = getResources().getStringArray(R.array.users_array);
 
@@ -65,13 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frameContainer, login_fragment);
         transaction.commit();
-
     }
+
     public void checkPermission(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ){//Can add more as per requirement
-
+                ){
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
                     123);
@@ -99,10 +97,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
-
                  else {
                     Log.d("ParseApplicationError",e.toString());
-                    // something went wrong
                 }
             }
         });
@@ -118,9 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                signUp_fragment.location.setText(place.getName());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
-                // TODO: Handle the error.
                 Log.i("LoginActivity", status.getStatusMessage());
-
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }
@@ -144,15 +138,12 @@ public class LoginActivity extends AppCompatActivity {
     {
         super.onResume();
         loginButton.setVisibility(View.VISIBLE);
-//        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
     }
     @Override
     protected void onPause()
     {
         super.onPause();
         overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
-
-//        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
     }
 
 }

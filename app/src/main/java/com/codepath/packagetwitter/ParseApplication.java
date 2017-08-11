@@ -23,8 +23,6 @@ public class ParseApplication extends Application {
         // Add your initialization code here
       //  Parse.initialize(this, "7zBztvyG4hYQ9XghgfqYxfRcL3SMBYWAj0GUL", "iZWhgJRu6yKm3iNMbTaguLcNCV3qedijWL");
 
-
-
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
@@ -42,23 +40,8 @@ public class ParseApplication extends Application {
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("HowCanAndroidBeSoMuchFun") // should correspond to APP_ID env variable
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
-
                 .clientBuilder(builder)
                 .server("https://packagetrackerr.herokuapp.com/parse/").build());
 
-
-        // New test creation of object below
-//        ParseObject testObject = new ParseObject("TestObject");
-//        testObject.put("foo", "bar");
-//        testObject.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    Log.d("ParseApplication", "Ok");
-//                } else {
-//                    Log.d("ParseApplication", "Error: " + e.toString());
-//                }
-//            }
-//        });
     }
 }

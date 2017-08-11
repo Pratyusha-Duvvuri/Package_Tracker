@@ -63,9 +63,7 @@
 			android:name=".PackageCreationPart2Activity"
 			android:theme="@style/AppTheme.NoActionBar"
 			android:windowSoftInputMode="stateHidden"/>
-		<activity android:name=".ReceiverActivity"
-			 />
-		<activity android:name=".ReviewActivity"
+        <activity android:name=".ReviewActivity"
 			android:theme="@style/AppTheme.NoActionBar"/>
 
 		<meta-data
@@ -76,7 +74,6 @@
 			android:value="@integer/google_play_services_version" />
 
 		<activity android:name=".SearchPlaceActivity" />
-		<!--<activity android:name=".test"></activity>-->
 		<meta-data android:name="com.facebook.sdk.ApplicationId"
 			android:value="@string/facebook_app_id"/>
 

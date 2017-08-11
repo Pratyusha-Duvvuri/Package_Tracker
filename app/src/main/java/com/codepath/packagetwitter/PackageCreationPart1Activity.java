@@ -52,8 +52,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     public static int idd;
     public String sendStart,sendEnd;
     ParselTransaction transaction;
-    Boolean proceed;
-    //these are for the locations
     @BindView(R.id.etsenderStartLocationB) TextView senderLocationB;
     @BindView(R.id.rlStart) RelativeLayout rlStart;
     @BindView(R.id.rlEnd) RelativeLayout rlEnd;
@@ -74,7 +72,7 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.packagecreationaa);
+        setContentView(R.layout.package_creation_part1);
 
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
@@ -88,8 +86,6 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         date = cal.get(Calendar.DATE);
-
-        proceed=false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -212,8 +208,8 @@ public class PackageCreationPart1Activity extends AppCompatActivity {
     public void returnToProfileActivity(){
 
         Intent data = new Intent();
-        setResult(RESULT_OK, data); // set result code and bundle data for response
-        finish(); // closes the activity, pass data to parent
+        setResult(RESULT_OK, data);
+        finish();
     }
 
     public void showDialogButtonClick() {

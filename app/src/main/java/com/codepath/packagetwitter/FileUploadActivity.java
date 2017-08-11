@@ -98,7 +98,6 @@ public class FileUploadActivity extends Activity {
                     parseUser.put("fullName", fullName);
                 }
 
-
                 String location_text = location.getText().toString();
                 if (!location_text.equals("")) {
                     parseUser.put("location", otherString);
@@ -151,7 +150,6 @@ public class FileUploadActivity extends Activity {
                     parseUser.setEmail( email_text);
 
                 }
-
                     saveUser();
 
             }
@@ -200,8 +198,6 @@ public class FileUploadActivity extends Activity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                  updated_image = stream.toByteArray();
 
-
-
                 // Create the ParseFile
                 file = new ParseFile(parseUser.getString("username"), updated_image);
 
@@ -209,10 +205,9 @@ public class FileUploadActivity extends Activity {
                     @Override
                     public void done(ParseException e1) {
                         if (e1 == null) {
-                            Toast.makeText(FileUploadActivity.this, "Image Saved",
-                                    Toast.LENGTH_SHORT).show();
-
-                            dunk();
+                            newPictureTaken=true;
+                            parseUser.put("ImageFile", file);
+                            Log.d("ParseApplication", "Image Saved");
 
                         } else {
                             Log.d("ParseApplicationError",e1.toString());
@@ -222,7 +217,6 @@ public class FileUploadActivity extends Activity {
                     }
                 });
 
-
             }
 
             }
@@ -231,7 +225,6 @@ public class FileUploadActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(FileUploadActivity.this, data);
                 otherString= place.getName().toString();
-//                location.setText("Update your current location - "+otherString);
                 location.setText(otherString);
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
@@ -246,34 +239,25 @@ public class FileUploadActivity extends Activity {
 
 
         }
-    public void dunk(){
-        newPictureTaken=true;
-        parseUser.put("ImageFile", file);
-    }
+
 
     public void saveUser(){
             parseUser.saveInBackground(new SaveCallback(){
                 @Override
                 public void done(ParseException e1) {
                     if (e1 == null) {
-                        Log.d("FOR THE LOVE OF GOD","yass");
-
                         Intent i = new Intent(FileUploadActivity.this, ProfileActivity.class);
-                        //here the old one is getting deplayed
-
-                        setResult(RESULT_OK, i); // set result code and bundle data for response
-                        finish(); // closes the activity, pass data to parent
+                        setResult(RESULT_OK, i);
+                        finish();
                     } else {
-                        Log.d("UMM","THEFISH");
                         Log.d("ParseApplicationError",e1.toString());
-                        Toast.makeText(FileUploadActivity.this, "NOT Uploaded",
+                        Toast.makeText(FileUploadActivity.this, "Not Uploaded",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
         }
-
 
     @Override
     protected void onResume()
@@ -289,4 +273,3 @@ public class FileUploadActivity extends Activity {
     }
 
 }
-

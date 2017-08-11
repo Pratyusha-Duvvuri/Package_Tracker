@@ -7,7 +7,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -32,7 +31,6 @@ import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.ParselTransaction;
-import com.codepath.packagetwitter.Models.User;
 import com.facebook.login.LoginManager;
 import com.github.clans.fab.FloatingActionMenu;
 import com.parse.FindCallback;
@@ -41,8 +39,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -57,7 +53,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     private static final int PACKAGE_CREATION =76 ;
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
-    User user;
     public TextView tvUsername;
     public TextView tvTagline;
     public ImageView ivProfileImage;
@@ -68,20 +63,13 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public final static int TRANSACTION_DETAIL_CODE = 50;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
-    private static com.facebook.login.widget.LoginButton loginButtonProfile;
     public TextView tvTransaction;
 
 
     public final int IMAGE_REQUEST_CODE =40;
 
-    public FloatingActionButton floatingActionButton1;
-    public FloatingActionButton floatingActionButton2;
-    public com.github.clans.fab.FloatingActionButton floatingActionButton3;
-    public com.github.clans.fab.FloatingActionButton floatingActionButton4;
     public Boolean ignore;
     public Boolean reload;
-    private final int DELAY = 5000;
-
     FragmentManager fm;
 
 
@@ -170,10 +158,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
             public void onClick(View v) {
                 if (!ignore) {
                     Intent i = new Intent(ProfileActivity.this, CourierActivity.class);
-
-                    i.putExtra("courier", Parcels.wrap(user));
-                    i.putExtra("USER", Parcels.wrap(user));
-
                     startActivityForResult(i, COURRIER_REQUEST_CODE);
                     materialDesignFAM.close(true);
 
@@ -204,18 +188,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public void onFinishEditDialogThis() {
 
     }
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
-//    }
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-////        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-//    }
 
     public  void setupDivider(TabLayout tabLayout){
 
@@ -243,8 +215,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
                     for (int i = 0; i < itemList.size(); i++) {
                         //for every parsel transaction
                         currentRejected = itemList.get(i);
-
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
 
                         builder.setMessage("Your package was rejected");    //set message

@@ -1,7 +1,6 @@
 package com.codepath.packagetwitter;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -36,7 +35,7 @@ import permissions.dispatcher.NeedsPermission;
 
 
 public class PackageCreationPart2Activity extends AppCompatActivity {
-    byte[] YOIMG;
+    byte[] package_image;
     public static final int REVIEW_REQUEST=90;
 
     //Binds Views to the layout file
@@ -117,9 +116,9 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Context context = this;
+        //Context for this activity
+        //final Context context = this;
 
-        // Get the view from activity_file_upload.xml_file_upload.xml
         setContentView(R.layout.package_creation_part2);
         ButterKnife.bind(this);
 
@@ -335,7 +334,8 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 title = etTitle.getText().toString();
                 description = etDescription.getText().toString();
                 weight = Double.parseDouble(etWeight.getText().toString());
-                int id = rgFragile.getCheckedRadioButtonId();
+                //int id = rgFragile.getCheckedRadioButtonId();
+                //commented in case the id has to be used at some point
 
 
                 if (rgFragile.getCheckedRadioButtonId() == R.id.rbYes) {
@@ -372,7 +372,6 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 }
                 else
                     type = "Other";
-
 
                 if (rgSize.getCheckedRadioButtonId() == R.id.rbKey) {
                     volume = 0;
@@ -412,9 +411,7 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 review.putExtra("type", type);
                 review.putExtra("volume", volume);
                 review.putExtra("volume_string", volume_string);
-                review.putExtra("package_image", YOIMG);
-
-
+                review.putExtra("package_image", package_image);
                 startActivityForResult(review, REVIEW_REQUEST);
 
             }
@@ -454,7 +451,7 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                YOIMG = stream.toByteArray();
+                package_image = stream.toByteArray();
 
 
                 // Show a simple toast message
@@ -466,10 +463,10 @@ public class PackageCreationPart2Activity extends AppCompatActivity {
     }
 
     public void onSubmit() {
-//  return to part 1
+        //return to package creation part1
         Intent data = new Intent();
-        setResult(RESULT_OK, data); // set result code and bundle data for response
-        finish(); // closes the activity, pass data to parent
+        setResult(RESULT_OK, data);
+        finish();
     }
 
 
