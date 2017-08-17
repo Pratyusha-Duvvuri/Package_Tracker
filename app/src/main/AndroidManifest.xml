@@ -42,16 +42,14 @@
 		<activity
 			android:name=".TransactionDetailActivity"
 			android:theme="@style/AppTheme.NoActionBar" />
-		<activity
-			android:name=".TransactionDetailTest"
-			android:theme="@style/AppTheme.NoActionBar" />
+
 		<activity android:name=".CourierActivity"
 			android:theme="@style/AppTheme.NoActionBar"
 			android:windowSoftInputMode="stateHidden"/>
 		<activity android:name=".ProfileActivity"
 			android:theme="@style/AppTheme.NoActionBar"
 			/>
-		<activity android:name=".UploadPackageImageActivity" />
+
 
 		<activity android:name=".AfterSenderConfirmation"
 			android:theme="@style/AppTheme.NoActionBar"/>
