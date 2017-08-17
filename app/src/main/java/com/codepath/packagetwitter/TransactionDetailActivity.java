@@ -69,10 +69,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
 
     @BindView(R.id.tvCourierTitle) TextView tvCourierTitle;
 
-//    @BindView(R.id.vpCards) ViewPager mViewPager;
-
-    CardFragmentPagerAdapter mfragmentCardAdapter;
-    ShadowTransformer mshadowTransformer;
     VerticalStepperFormLayout verticalStepperForm;
     public SharedPreferences sharedPref;
     int transaction_state;
@@ -102,28 +98,6 @@ public class TransactionDetailActivity extends AppCompatActivity implements Vert
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
-
-
-
-//        This block of code was used when we were using viewpager fragments in the activity
-
-        //To pass parsel ID to view pager
-        // Create object of SharedPreferences.
-//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        //now get Editor
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        //put your value
-//        editor.putString("ParselID", parselTransactionId);
-//        //commits your edits
-//        editor.commit();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        mfragmentCardAdapter = new CardFragmentPagerAdapter(fragmentManager, dpToPixels(2, this),this);
-//        mViewPager.setAdapter(mfragmentCardAdapter);
-//        mshadowTransformer = new ShadowTransformer(mViewPager, mfragmentCardAdapter);
-//
-//        mViewPager.setPageTransformer(false, mshadowTransformer);
-//        mViewPager.setOffscreenPageLimit(3);
 
         ParseQuery<ParselTransaction> transactionQuery = ParseQuery.getQuery(ParselTransaction.class);
         // First try to find from the cache and only then go to network

@@ -24,6 +24,7 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private List<Message> mMessages;
+    //if needed at some point
     private Context mContext;
     private String mUserId;
     private Integer tabNo;

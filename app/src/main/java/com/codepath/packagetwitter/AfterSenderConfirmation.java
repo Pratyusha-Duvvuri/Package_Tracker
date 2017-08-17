@@ -62,9 +62,6 @@ public class AfterSenderConfirmation extends AppCompatActivity{
         page2  = (ImageView)findViewById(R.id.page2);
 
         ButterKnife.bind(this);
-        ParseUser parseUser = ParseUser.getCurrentUser();
-        ParseQuery<ParselTransaction> query = ParseQuery.getQuery(ParselTransaction.class);
-
         transaction= ProfileActivity.currentReceive;
         confirm.setOnClickListener(new View.OnClickListener() {
                                        @Override

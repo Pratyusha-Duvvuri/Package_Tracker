@@ -63,12 +63,8 @@ public class CourierActivity extends AppCompatActivity {
     @BindView(R.id.etLocationEnd)TextView locationEnd;
     @BindView(R.id.tvStartDate)TextView displaySenderStart;
     @BindView(R.id.tvEndDate)TextView displaySenderEnd;
-
-
     @BindView(R.id.rlStart)RelativeLayout startDate;
     @BindView(R.id.rlEnd)RelativeLayout endDate;
-
-
 
     Button confirm;
     ParselTransaction transaction;
@@ -319,17 +315,12 @@ public class CourierActivity extends AppCompatActivity {
             month = Month+1;
             date= Date;
             if(idd == 1){
-                //start date
-
-//                sendStart = s1 + "/" + s2+"/"+s3;
                 tripStart = month+"/"+Date+"/"+Year;
 
                 displaySenderStart.setText(tripStart);
 
             }
             else{
-                //end date
-//                sendEnd= S1 + "/" + S2+"/"+S3;
                 tripEnd = month+"/"+Date+"/"+Year;
                 displaySenderEnd.setText(tripEnd);
 
@@ -338,8 +329,6 @@ public class CourierActivity extends AppCompatActivity {
         }
     };
     public void onVerifyAction() {
-
-
 
         //queries all pending transactions
 

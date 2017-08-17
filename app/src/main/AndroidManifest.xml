@@ -61,8 +61,7 @@
 			android:name=".PackageCreationPart2Activity"
 			android:theme="@style/AppTheme.NoActionBar"
 			android:windowSoftInputMode="stateHidden"/>
-		<activity android:name=".ReceiverActivity"
-			 />
+
 		<activity android:name=".ReviewActivity"
 			android:theme="@style/AppTheme.NoActionBar"/>
 
