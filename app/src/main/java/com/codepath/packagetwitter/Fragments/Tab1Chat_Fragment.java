@@ -42,16 +42,12 @@ import static com.codepath.packagetwitter.ProfileActivity.parseUser;
 
 public class Tab1Chat_Fragment extends Fragment {
 
-    private static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
     // Keep track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
     String transactionid;
-//    static final String TAG = ChatActivity.class.getSimpleName();
-    static final String USER_ID_KEY = "userId";
-    static final String BODY_KEY = "body";
     EditText etMessage;
     ImageButton btSend;
     public static ParseUser thisUser1;
