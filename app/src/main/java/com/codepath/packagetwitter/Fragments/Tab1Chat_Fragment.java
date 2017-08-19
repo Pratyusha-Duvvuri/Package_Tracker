@@ -146,11 +146,13 @@ public class Tab1Chat_Fragment extends Fragment {
         ParseQuery myQuery1 = new ParseQuery("Message");
         myQuery1.whereEqualTo(FROM, parseUser.getString("username"));
         myQuery1.whereEqualTo(TO, messages_main[0]);
+        myQuery1.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
         //From first to me
         ParseQuery myQuery2 = new ParseQuery("Message");
         myQuery2.whereEqualTo(FROM, messages_main[0]);
         myQuery2.whereEqualTo(TO, parseUser.getString("username"));
+        myQuery2.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
         //add all queries
         List<ParseQuery<Message>> queries = new ArrayList<ParseQuery<Message>>();
@@ -159,7 +161,6 @@ public class Tab1Chat_Fragment extends Fragment {
 
 
         ParseQuery<Message> parseQuery = ParseQuery.or(queries);
-        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
         parseQuery.orderByDescending("createdAt");
 
 
@@ -218,7 +219,6 @@ public class Tab1Chat_Fragment extends Fragment {
                 message.setBody(data);
                 message.setUserId(parseUser.getObjectId());
                 message.setUserName(parseUser.getString("username"));
-//                message.setPicture(parseUser.getParseFile("ImageFile"));
                 message.setTransactionId(transactionid);
                 message.setTo(messages_main[0]);
                 message.setFrom(parseUser.getString("username"));
@@ -226,6 +226,7 @@ public class Tab1Chat_Fragment extends Fragment {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
+                            //user has successfully created a message
                             refreshMessages();}
                         else{
                             Log.d("Message  error",e.toString());
@@ -276,8 +277,5 @@ public class Tab1Chat_Fragment extends Fragment {
             }
         });
     }
-
-
-
 
 }

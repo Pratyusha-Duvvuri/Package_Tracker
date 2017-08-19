@@ -139,11 +139,13 @@ public class Tab2Chat_Fragment extends Fragment {
         ParseQuery myQuery1 = new ParseQuery("Message");
         myQuery1.whereEqualTo(FROM, parseUser.getString("username"));
         myQuery1.whereEqualTo(TO, messages_main[1]);
+        myQuery1.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
         //From first to me
         ParseQuery myQuery2 = new ParseQuery("Message");
         myQuery2.whereEqualTo(FROM, messages_main[1]);
         myQuery2.whereEqualTo(TO, parseUser.getString("username"));
+        myQuery2.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
 
         //add all queries
         List<ParseQuery<Message>> queries = new ArrayList<ParseQuery<Message>>();
@@ -152,7 +154,6 @@ public class Tab2Chat_Fragment extends Fragment {
 
 
         ParseQuery<Message> parseQuery = ParseQuery.or(queries);
-        parseQuery.whereEqualTo(TRANSACTION_ID_KEY, transactionid);
         parseQuery.orderByDescending("createdAt");
 
 
@@ -218,8 +219,7 @@ public class Tab2Chat_Fragment extends Fragment {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
-//                            Toast.makeText(ChatActivity.this, "Successfully created message on Parse",
-//                                    Toast.LENGTH_SHORT).show();
+                            //user has successfully created a message
                             refreshMessages();}
                         else{
                             Log.d("Message  error",e.toString());

@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.codepath.packagetwitter.Fragments.LogoutFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.ParselTransaction;
@@ -50,30 +49,30 @@ import static com.codepath.packagetwitter.Fragments.Login_Fragment.throughFacebo
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener{
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener {
+    public static ParselTransaction currentRejected;
+    public static ParselTransaction currentReceive;
 
-    private static final int PACKAGE_CREATION =76 ;
     TransactionsPagerAdapter pagerAdapter;
     ViewPager vpPager;
     User user;
+
+    public static ParseUser parseUser;
+
     public TextView tvUsername;
     public TextView tvTagline;
     public ImageView ivProfileImage;
     public TextView tvHandle;
-    public static ParseUser parseUser;
+    public TextView tvTransaction;
+
     public final int COURRIER_REQUEST_CODE = 20;
     public final int RECEIVER_CODE = 30;
     public final static int TRANSACTION_DETAIL_CODE = 50;
-    public static ParselTransaction currentRejected;
-    public static ParselTransaction currentReceive;
-    public TextView tvTransaction;
-
-
     public final int IMAGE_REQUEST_CODE =40;
+    private static final int PACKAGE_CREATION =76 ;
 
     public Boolean ignore;
     public Boolean reload;
-    private final int DELAY = 5000;
 
     FragmentManager fm;
 
@@ -281,7 +280,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
 
                 if (e == null) {
 
-
                     for (int i = 0; i < itemList.size(); i++) {
                         //for every parsel transaction
                         currentReceive= itemList.get(i);
@@ -323,13 +321,6 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         else{
 
         }
-    }
-
-    public void onFinishEditDialog(){
-        ParseUser.logOut();
-        Intent i= new Intent(this, LoginActivity.class);
-        startActivityForResult(i,0);
-
     }
 
 

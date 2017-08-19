@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -36,7 +35,6 @@ public class CurrentTransactionFragment extends Fragment {
     public ArrayList<ParselTransaction> transactions;
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
-    public static int page;
     public Context context;
 
 
@@ -44,8 +42,6 @@ public class CurrentTransactionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         transactions = new ArrayList<>();
-        // init the array list (data source)
-        //construct the adapter form this datasource
         transactionAdapter = new TransactionAdapter(transactions);
 //        this.context = context;
         populateTimeline();
@@ -61,8 +57,6 @@ public class CurrentTransactionFragment extends Fragment {
         rvTransactions =  v.findViewById(R.id.rvTransactions);
         //find swipe containerview
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
-        //RecyclerView setup ( layout manager, use adapter)
-        //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvTransactions.setLayoutManager(llayout);
 
@@ -83,24 +77,8 @@ public class CurrentTransactionFragment extends Fragment {
     }
 
 
-        //this is for the intermediate progress bar
-    MenuItem miActionProgressItem;
-   // ProgressBar v;
-
-    public void showProgressBar() {
-        // Show progress item
-        miActionProgressItem.setVisible(true);
-    }
-
-    public void hideProgressBar() {
-        // Hide progress item
-        miActionProgressItem.setVisible(false);
-    }
-
 
     public void populateTimeline(){
-
-//        parseUser = ParseUser.getCurrentUser();
         if (parseUser != null) {
             transactions.clear();
             transactionAdapter.notifyDataSetChanged();
@@ -174,7 +152,6 @@ public class CurrentTransactionFragment extends Fragment {
     public void addItems(ParselTransaction transaction) {
 
         transactions.add(transaction);
-        //transactionAdapter.notifyItemInserted(transactions.size() - 1);
         transactionAdapter.notifyDataSetChanged();
 
     }
