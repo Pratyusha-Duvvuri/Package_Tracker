@@ -57,7 +57,6 @@ public class PendingTransactionFragment extends Fragment {
         Log.d("on create", "in current");
         View v = inflater.inflate(R.layout.fragments_transactions_list, container, false);
 
-
         //find the recycler view and swipe containerview
         rvTransactions =  v.findViewById(R.id.rvTransactions);
         RecyclerView.ItemDecoration itemDecoration = new
@@ -150,7 +149,6 @@ public class PendingTransactionFragment extends Fragment {
     }
 
     public void populateTimeline() {
-        ArrayList<ParselTransaction> pendingTransactions;
         try {
             parseUser = ParseUser.getCurrentUser().fetch();
         } catch (com.parse.ParseException e) {
@@ -173,7 +171,6 @@ public class PendingTransactionFragment extends Fragment {
 
     public void addItems(ParselTransaction transaction) {
         transactions.add(transaction);
-        //transactionAdapter.notifyItemInserted(transactions.size() - 1);
         transactionAdapter.notifyDataSetChanged();
     }
 

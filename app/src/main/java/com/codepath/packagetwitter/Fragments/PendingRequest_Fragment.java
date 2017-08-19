@@ -7,14 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.codepath.packagetwitter.Models.Mail;
-import com.codepath.packagetwitter.Models.Receiver;
-import com.codepath.packagetwitter.Models.Sender;
 import com.codepath.packagetwitter.R;
 
 /**
@@ -23,25 +17,9 @@ import com.codepath.packagetwitter.R;
 
 public class PendingRequest_Fragment extends DialogFragment {
 
-
-
-    Mail mail;
-    Sender sender;
-    Receiver receiver;
     Boolean proceed;
-    private final int RESULT_OK = 10;
-    private EditText mEditText;
-    public TextView characterCount;
-    public long num;
     public Button accept;
-    public Button reject;
-    public FrameLayout flForm;
-    public EditText receiverLocation;
-    public EditText receiverEndDate;
     boolean pendingRequest = true;
-    public LinearLayout llRequest;
-
-
 
 
     // 1. Defines the listener interface with a method passing back data result.
@@ -51,19 +29,10 @@ public class PendingRequest_Fragment extends DialogFragment {
 
 
     public PendingRequest_Fragment() {
-
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
     }
 
-//    public static PendingRequest_Fragment newInstance(Mail mail, Sender sender) {
-//        PendingRequest_Fragment frag = new PendingRequest_Fragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("sender", Parcels.wrap(sender));
-//        bundle.putParcelable("mail", Parcels.wrap(mail));
-//        frag.setArguments(bundle);
-//        return frag;
-//    }
 
     public static PendingRequest_Fragment newInstance(String message) {
         PendingRequest_Fragment frag = new PendingRequest_Fragment();

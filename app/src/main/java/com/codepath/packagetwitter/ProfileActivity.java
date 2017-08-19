@@ -7,7 +7,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -29,7 +28,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.codepath.packagetwitter.Fragments.LogoutFragment;
 import com.codepath.packagetwitter.Fragments.PendingRequest_Fragment;
-import com.codepath.packagetwitter.Fragments.RejectedRequestFragment;
 import com.codepath.packagetwitter.Fragments.TransactionsPagerAdapter;
 import com.codepath.packagetwitter.Models.ParselTransaction;
 import com.codepath.packagetwitter.Models.User;
@@ -52,7 +50,7 @@ import static com.codepath.packagetwitter.Fragments.Login_Fragment.throughFacebo
  * Created by michaunp on 7/13/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener, RejectedRequestFragment.SendResultListener {
+public class ProfileActivity extends AppCompatActivity implements PendingRequest_Fragment.SendResultListener , LogoutFragment.SendDialogListener{
 
     private static final int PACKAGE_CREATION =76 ;
     TransactionsPagerAdapter pagerAdapter;
@@ -68,16 +66,11 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
     public final static int TRANSACTION_DETAIL_CODE = 50;
     public static ParselTransaction currentRejected;
     public static ParselTransaction currentReceive;
-    private static com.facebook.login.widget.LoginButton loginButtonProfile;
     public TextView tvTransaction;
 
 
     public final int IMAGE_REQUEST_CODE =40;
 
-    public FloatingActionButton floatingActionButton1;
-    public FloatingActionButton floatingActionButton2;
-    public com.github.clans.fab.FloatingActionButton floatingActionButton3;
-    public com.github.clans.fab.FloatingActionButton floatingActionButton4;
     public Boolean ignore;
     public Boolean reload;
     private final int DELAY = 5000;
@@ -200,22 +193,7 @@ public class ProfileActivity extends AppCompatActivity implements PendingRequest
         });
     }
 
-    @Override
-    public void onFinishEditDialogThis() {
 
-    }
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        overridePendingTransition(R.anim.fadein_animation, R.anim.fadeout_animation);
-//    }
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-////        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-//    }
 
     public  void setupDivider(TabLayout tabLayout){
 

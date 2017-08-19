@@ -20,7 +20,6 @@ import static com.codepath.packagetwitter.ChatActivity.type;
  */
 
 public class ChatPagerAdapter extends FragmentPagerAdapter {
-    //private String tabTitles[] = new String[] {"Person1","Person2"};
     private Context context;
     public Tab1Chat_Fragment tab1Chat_fragment;
     public Tab2Chat_Fragment tab2Chat_fragment;
@@ -57,8 +56,6 @@ public class ChatPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         //get the username of sender
-        //if(ProfileActivity.parseUser.getUsername().equals(OtherChatActivity.transaction_id))
-
         return tabTitles_main[position];
 
     }

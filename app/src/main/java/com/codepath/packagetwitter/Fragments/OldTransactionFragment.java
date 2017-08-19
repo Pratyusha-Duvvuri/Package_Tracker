@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,8 +38,6 @@ public class OldTransactionFragment extends Fragment {
     ArrayList<ParselTransaction> transactions;
     RecyclerView rvTransactions;
     SwipeRefreshLayout swipeContainer;
-    //TwitterClient client;
-    public static int page;
     TextView tvTransaction;
 
 
@@ -61,11 +58,7 @@ public class OldTransactionFragment extends Fragment {
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         tvTransaction = (TextView) v.findViewById(R.id.tvTransaction);
         transactions = new ArrayList<>();
-        // init the array list (data source)
-        //construct the adapter form this datasource
         transactionAdapter = new TransactionAdapter(transactions);
-        //RecyclerView setup ( layout manager, use adapter)
-        //llayout= new LinearLayoutManager(getContext()) ;
         LinearLayoutManager llayout = new LinearLayoutManager(getContext());
         rvTransactions.setLayoutManager(llayout);
 
@@ -86,27 +79,7 @@ public class OldTransactionFragment extends Fragment {
         return v;
     }
 
-
-
-
-
-    //    //this is for the intermediate progress bar
-    MenuItem miActionProgressItem;
-    // ProgressBar v;
-
-    public void showProgressBar() {
-        // Show progress item
-        miActionProgressItem.setVisible(true);
-    }
-
-    public void hideProgressBar() {
-        // Hide progress item
-        miActionProgressItem.setVisible(false);
-    }
-
-
     public void populateTimeline(){
-        ArrayList<ParselTransaction> pendingTransactions;
         try {
             parseUser = ParseUser.getCurrentUser().fetch();
             }
@@ -211,15 +184,10 @@ public class OldTransactionFragment extends Fragment {
 
     }
 
-
-
-
     public void addItems(ParselTransaction transaction) {
-
 
         transactions.add(transaction);
         transactionAdapter.notifyItemInserted(transactions.size() - 1);
-
 
     }
 

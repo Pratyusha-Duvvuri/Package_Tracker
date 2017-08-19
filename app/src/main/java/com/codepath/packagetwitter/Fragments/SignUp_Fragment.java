@@ -48,9 +48,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static CheckBox terms_conditions;
     private static FragmentManager fragmentManager;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 989;
-//    private static com.facebook.login.widget.LoginButton loginButton2;
-//    CallbackManager callbackManager;
-//    public Bundle bFacebookData;
 
     public SignUp_Fragment() {
 
@@ -67,9 +64,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Initialize all views
     private void initViews() {
-//        loginButton2 = (LoginButton) view.findViewById(R.id.login_button2);
-//        loginButton2.setFragment(this);
-
 
         fragmentManager = getActivity().getSupportFragmentManager();
         fullName = (EditText) view.findViewById(R.id.fullName);
@@ -106,10 +100,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 
-//            case R.id.login_button2:
-//                onFbLogin();
-//                break;
-
             case R.id.signUpBtn:
 
                 // Call checkValidation method
@@ -133,8 +123,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
             case R.id.already_user:
 
-                // Replace login fragment
-                //new MainActivity().replaceLoginFragment();
 
                 fragmentManager
                         .beginTransaction()
@@ -255,8 +243,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         }
 
     }
-
-
 
 
 }

@@ -90,7 +90,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public static SignUp_Fragment signUp_fragment;
     public ParseUser parseUser;
     public static Boolean throughFacebook;
-    private String TAG = "Google Places API";
     private static Button regular_login_button;
     CallbackManager callbackManager;
     public Bundle bFacebookData;
